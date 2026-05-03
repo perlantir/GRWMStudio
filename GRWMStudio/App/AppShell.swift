@@ -49,11 +49,16 @@ struct AppShell: View {
 
                 CaptureFAB(
                     mode: mirrorCaptureMode,
-                    onTap: mirrorViewModel.onCaptureTap,
-                    onLongPressBegan: mirrorViewModel.onCaptureLongPressBegan
-                ) { duration in
-                    mirrorViewModel.onCaptureLongPressEnded(duration: duration)
-                }
+                    onTap: {
+                        Task { @MainActor in
+                            await mirrorViewModel.capturePhoto()
+                        }
+                    },
+                    onLongPressBegan: mirrorViewModel.onCaptureLongPressBegan,
+                    onLongPressEnded: { duration in
+                        mirrorViewModel.onCaptureLongPressEnded(duration: duration)
+                    }
+                )
                 .accessibilityIdentifier("capture-fab")
                 .offset(y: -34)
             }

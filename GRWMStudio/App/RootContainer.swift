@@ -48,6 +48,14 @@ struct RootContainer: View {
             PermissionsDeniedView()
         case .app:
             AppShell()
+        case .preview:
+            if let asset = coordinator.previewAsset {
+                PreviewPlaceholderView(asset: asset) {
+                    coordinator.dismissPreview()
+                }
+            } else {
+                placeholder("Preview unavailable")
+            }
         case .parentalGate(let reason):
             placeholder("Parental Gate: \(String(describing: reason))")
         case .paywall(let source):

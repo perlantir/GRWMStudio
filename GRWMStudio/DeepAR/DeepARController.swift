@@ -83,6 +83,7 @@ public final class DeepARController {
 
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
+    @ObservationIgnored var screenshotContinuation: CheckedContinuation<UIImage, Error>?
     @ObservationIgnored var videoContinuation: CheckedContinuation<URL, Error>?
     @ObservationIgnored var recordingProgressTask: Task<Void, Never>?
     @ObservationIgnored var loadEffectContinuations: [EffectSlot: CheckedContinuation<Void, Error>] = [:]

@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import OSLog
+import UIKit
 
 @MainActor
 @Observable
@@ -20,6 +21,8 @@ final class MirrorViewModel {
     var eyesSubCategory: EyesSubCategory = .shadow
     var activeCaptureMode: CaptureMode = .idle
     var lastCaptureEvent: CaptureEvent?
+    var pendingPreviewAsset: CapturedAsset?
+    var previewRouteID: UUID?
     var activeTraySlot: EffectSlot? {
         activeCategory?.slot
     }
@@ -34,18 +37,21 @@ final class MirrorViewModel {
     @ObservationIgnored let currentDate: () -> Date
     @ObservationIgnored var capturePressStartedAt: Date?
     @ObservationIgnored var captureTickTask: Task<Void, Never>?
+    @ObservationIgnored let photoCapture: (@MainActor () async throws -> UIImage)?
 
     init(
         controller: DeepARController = DeepARController(),
         catalog: EffectCatalog = .shared,
         licenseLoader: @escaping () throws -> String = { try DeepARLicense.key() },
         usesSimulatorPlaceholder: Bool = MirrorViewModel.defaultUsesSimulatorPlaceholder,
-        currentDate: @escaping () -> Date = Date.init
+        currentDate: @escaping () -> Date = Date.init,
+        photoCapture: (@MainActor () async throws -> UIImage)? = nil
     ) {
         self.controller = controller
         self.catalog = catalog
         self.licenseLoader = licenseLoader
         self.usesSimulatorPlaceholder = usesSimulatorPlaceholder
+        self.photoCapture = photoCapture
         self.currentDate = currentDate
     }
 
@@ -112,6 +118,8 @@ final class MirrorViewModel {
         captureTickTask = nil
         capturePressStartedAt = nil
         activeCaptureMode = .idle
+        pendingPreviewAsset = nil
+        previewRouteID = nil
         isFaceDetected = false
 
         if state == .running || state == .starting {

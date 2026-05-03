@@ -1,4 +1,5 @@
 import OSLog
+import UIKit
 
 extension MirrorViewModel {
     var captureMode: CaptureMode {
@@ -30,6 +31,51 @@ extension MirrorViewModel {
         }
     }
 
+    func capturePhoto() async {
+        guard state == .running else {
+            return
+        }
+
+        captureTickTask?.cancel()
+        captureTickTask = nil
+        capturePressStartedAt = nil
+        lastError = nil
+        activeCaptureMode = .photoFiring
+        lastCaptureEvent = .photoCapture
+        flashEnabled = true
+        DHHaptics.heavy()
+        Sounds.shutter.play()
+        Logger.mirror.info("Capture event: photoCapture")
+
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .milliseconds(100))
+            self?.flashEnabled = false
+            guard self?.activeCaptureMode == .photoFiring else {
+                return
+            }
+            self?.activeCaptureMode = .idle
+        }
+
+        do {
+            let image: UIImage
+            if ProcessInfo.processInfo.shouldForcePhotoCaptureFailure {
+                throw DeepARController.SetupError.captureFailed(reason: "Debug forced photo capture failure")
+            } else if let photoCapture {
+                image = try await photoCapture()
+            } else {
+                image = try await PhotoCaptureCoordinator(controller: controller)
+                    .capturePhoto(allowSimulatorPlaceholder: shouldSkipControllerCallsForSimulator)
+            }
+
+            pendingPreviewAsset = .photo(image)
+            previewRouteID = UUID()
+        } catch {
+            activeCaptureMode = .idle
+            lastError = .recFail
+            Logger.mirror.error("Photo capture failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
     func onCaptureLongPressBegan() {
         guard state == .running else {
             return
@@ -40,6 +86,14 @@ extension MirrorViewModel {
         DHHaptics.tapMedium()
         Logger.mirror.info("Capture event: videoCapture began")
         startCaptureTickTask()
+    }
+
+    func dismissCaptureFailureBanner() {
+        guard lastError == .recFail else {
+            return
+        }
+
+        lastError = nil
     }
 
     func onCaptureLongPressEnded() {
@@ -77,5 +131,15 @@ extension MirrorViewModel {
                 try? await Task.sleep(for: .milliseconds(100))
             }
         }
+    }
+}
+
+private extension ProcessInfo {
+    var shouldForcePhotoCaptureFailure: Bool {
+        #if DEBUG
+        arguments.contains("-GRWMDebugPhotoCaptureFail")
+        #else
+        false
+        #endif
     }
 }

@@ -38,6 +38,41 @@ extension DeepARController {
         }
     }
 
+    /// Captures the current DeepAR preview and returns the raw screenshot image.
+    public func captureScreenshotImage() async throws -> UIImage {
+        guard recordingClient(method: "captureScreenshotImage") != nil else {
+            throw SetupError.captureFailed(reason: "DeepAR not ready")
+        }
+
+        do {
+            return try await withTimeout(.seconds(4)) { [weak self] in
+                try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<UIImage, Error>) in
+                    Task { @MainActor in
+                        guard let self else {
+                            continuation.resume(throwing: SetupError.captureFailed(reason: "Controller deallocated"))
+                            return
+                        }
+
+                        guard let client = self._client else {
+                            continuation.resume(throwing: SetupError.captureFailed(reason: "Missing DeepAR instance"))
+                            return
+                        }
+
+                        self.screenshotContinuation = continuation
+                        client.takeScreenshot()
+                    }
+                }
+            }
+        } catch is TimeoutError {
+            screenshotContinuation?.resume(throwing: SetupError.captureFailed(reason: "Timeout"))
+            screenshotContinuation = nil
+            throw SetupError.captureFailed(reason: "Timeout")
+        } catch {
+            screenshotContinuation = nil
+            throw error
+        }
+    }
+
     /// Starts video recording for the current DeepAR preview.
     public func startVideoRecording(maxDuration: TimeInterval) async throws {
         guard let client = recordingClient(method: "startVideoRecording") else {
@@ -89,6 +124,12 @@ extension DeepARController {
     }
 
     func completePhotoCapture(with screenshot: UIImage) {
+        if let screenshotContinuation {
+            screenshotContinuation.resume(returning: screenshot)
+            self.screenshotContinuation = nil
+            return
+        }
+
         do {
             let url = try CaptureService.writeImage(screenshot)
             photoContinuation?.resume(returning: url)
@@ -122,6 +163,8 @@ extension DeepARController {
         videoContinuation = nil
         photoContinuation?.resume(throwing: SetupError.captureFailed(reason: reason))
         photoContinuation = nil
+        screenshotContinuation?.resume(throwing: SetupError.captureFailed(reason: reason))
+        screenshotContinuation = nil
     }
 
     private func recordingClient(method: String) -> (any DeepARClient)? {

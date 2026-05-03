@@ -12,6 +12,7 @@ final class RootCoordinator {
         case onboardingPermissions
         case onboardingPermissionsDenied
         case app
+        case preview
         case parentalGate(reason: GateReason)
         case paywall(source: PaywallSource)
         case error(ErrorVariant)
@@ -55,6 +56,7 @@ final class RootCoordinator {
     }
 
     var route: Route = .onboardingSplash
+    var previewAsset: CapturedAsset?
     private(set) var overlay: Overlay?
 
     func advanceFromSplash() {
@@ -96,6 +98,16 @@ final class RootCoordinator {
 
     func presentError(_ variant: ErrorVariant) {
         route = .error(variant)
+    }
+
+    func showPreview(asset: CapturedAsset) {
+        previewAsset = asset
+        route = .preview
+    }
+
+    func dismissPreview() {
+        previewAsset = nil
+        route = .app
     }
 
     func startParentGate(intent: ParentGateIntent) {

@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /// Thin facade over DeepAR photo and video capture.
 @MainActor
@@ -18,6 +19,11 @@ public final class RecordingService {
     /// Takes a photo and returns the saved local file URL.
     public func takePhoto() async throws -> URL {
         try await controller.capturePhoto()
+    }
+
+    /// Takes a photo and returns the in-memory screenshot image.
+    public func takeScreenshot() async throws -> UIImage {
+        try await controller.captureScreenshotImage()
     }
 
     /// Starts video recording and optionally reports duration ticks.

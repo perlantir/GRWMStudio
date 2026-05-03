@@ -40,6 +40,7 @@ struct MirrorView: View {
             )
 
             effectFailureOverlay
+            captureFailureOverlay
             flashOverlay
         }
         .preferredColorScheme(.light)
@@ -68,6 +69,15 @@ struct MirrorView: View {
 
             coordinator.startParentGate(intent: .paywall)
             viewModel.lastError = nil
+        }
+        .onChange(of: viewModel.previewRouteID) { _, newValue in
+            guard newValue != nil, let asset = viewModel.pendingPreviewAsset else {
+                return
+            }
+
+            coordinator.showPreview(asset: asset)
+            viewModel.pendingPreviewAsset = nil
+            viewModel.previewRouteID = nil
         }
         .onDisappear {
             noFaceTipTask?.cancel()
@@ -106,6 +116,21 @@ struct MirrorView: View {
             } onDismiss: {
                 Task { @MainActor in
                     viewModel.dismissEffectFailureBanner()
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 80)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .transition(.opacity.combined(with: .move(edge: .top)))
+        }
+    }
+
+    @ViewBuilder
+    private var captureFailureOverlay: some View {
+        if viewModel.state == .running, viewModel.lastError == .recFail {
+            CaptureFailureBanner {
+                Task { @MainActor in
+                    viewModel.dismissCaptureFailureBanner()
                 }
             }
             .padding(.horizontal, 14)

@@ -71,6 +71,19 @@ final class DeepARControllerRecordingTests: XCTestCase {
         XCTAssertTrue(mock.didStartVideoRecording)
         XCTAssertTrue(mock.didFinishVideoRecording)
     }
+
+    func testRecordingServiceTakeScreenshotReturnsDelegateImage() async throws {
+        let mock = RecordingMockDeepARClient(autoInitialize: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        let service = RecordingService(controller: controller)
+
+        try await controller.bootstrap(licenseKey: "test-license")
+        let image = try await service.takeScreenshot()
+
+        XCTAssertTrue(mock.didTakeScreenshot)
+        XCTAssertEqual(image.size.width, 8)
+        XCTAssertEqual(image.size.height, 8)
+    }
 }
 
 @MainActor
