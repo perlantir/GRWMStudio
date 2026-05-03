@@ -28,11 +28,15 @@ type_name:
 
 identifier_name:
   excluded:
+    - id
     - sm
     - md
     - lg
     - xl
     - bg
+    - _deepAR
+    - _arView
+    - _delegateProxy
 
 force_unwrapping:
   severity: warning
