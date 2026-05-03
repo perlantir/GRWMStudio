@@ -66,9 +66,9 @@ public final class DeepARController {
     /// Effect IDs currently loaded by slot.
     public private(set) var loadedEffects: [EffectSlot: EffectFile.ID] = [:]
     /// Whether video recording is active.
-    public private(set) var isRecordingVideo = false
+    public internal(set) var isRecordingVideo = false
     /// Current video recording duration.
-    public private(set) var recordingDuration: TimeInterval = 0
+    public internal(set) var recordingDuration: TimeInterval = 0
 
     /// UIKit rendering view hosted by `DeepARView`.
     public var arView: UIView? { _arView }
@@ -82,6 +82,7 @@ public final class DeepARController {
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
     @ObservationIgnored var videoContinuation: CheckedContinuation<URL, Error>?
+    @ObservationIgnored var recordingProgressTask: Task<Void, Never>?
     @ObservationIgnored var loadEffectContinuations: [EffectSlot: CheckedContinuation<Void, Error>] = [:]
     @ObservationIgnored private var loadEffectRequestIDs: [EffectSlot: UUID] = [:]
     @ObservationIgnored private let clientFactory: @MainActor () -> any DeepARClient
@@ -259,20 +260,6 @@ public final class DeepARController {
         }
     }
 
-    /// Captures the current DeepAR preview to a temporary file.
-    public func capturePhoto() async throws -> URL {
-        throw SetupError.notImplementedYet
-    }
-
-    /// Starts video recording for the current DeepAR preview.
-    public func startVideoRecording(maxDuration: TimeInterval) async throws {
-        throw SetupError.notImplementedYet
-    }
-
-    /// Stops video recording and returns the recorded file URL.
-    public func stopVideoRecording() async throws -> URL {
-        throw SetupError.notImplementedYet
-    }
 }
 
 extension DeepARController {

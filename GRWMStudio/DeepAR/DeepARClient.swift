@@ -24,6 +24,12 @@ protocol DeepARClient: AnyObject {
     func createARView(frame: CGRect) -> UIView
     /// Switches or clears an effect for a slot.
     func switchEffect(withSlot slot: String, path: String?)
+    /// Captures the current SDK frame.
+    func takeScreenshot()
+    /// Starts SDK video recording.
+    func startVideoRecording(outputWidth: Int32, outputHeight: Int32)
+    /// Finishes SDK video recording.
+    func finishVideoRecording()
     /// Applies a Vector4 runtime parameter.
     func setVectorParameter(
         _ gameObject: String,
@@ -40,6 +46,12 @@ protocol DeepARClient: AnyObject {
 }
 
 extension DeepARClient {
+    func takeScreenshot() {}
+
+    func startVideoRecording(outputWidth: Int32, outputHeight: Int32) {}
+
+    func finishVideoRecording() {}
+
     func setVectorParameter(
         _ gameObject: String,
         component: String,
@@ -79,6 +91,18 @@ final class LiveDeepARClient: DeepARClient {
 
     func switchEffect(withSlot slot: String, path: String?) {
         sdk.switchEffect(withSlot: slot, path: path)
+    }
+
+    func takeScreenshot() {
+        sdk.takeScreenshot()
+    }
+
+    func startVideoRecording(outputWidth: Int32, outputHeight: Int32) {
+        sdk.startVideoRecording(withOutputWidth: outputWidth, outputHeight: outputHeight)
+    }
+
+    func finishVideoRecording() {
+        sdk.finishVideoRecording()
     }
 
     func setVectorParameter(

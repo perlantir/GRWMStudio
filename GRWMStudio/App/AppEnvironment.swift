@@ -3,7 +3,7 @@ import SwiftUI
 final class AppEnvironment {
     let deepAR: any DeepARService
     let catalog: any EffectCatalogService
-    let captures: any CaptureService
+    let captures: CaptureService
     let permissions: any PermissionsService
     let storeKit: any StoreKitService
     let proEntitlement: any ProEntitlementService
@@ -14,7 +14,7 @@ final class AppEnvironment {
     init(
         deepAR: any DeepARService = StubDeepARService(),
         catalog: any EffectCatalogService = StubEffectCatalogService(),
-        captures: any CaptureService = StubCaptureService(),
+        captures: CaptureService = CaptureService(),
         permissions: any PermissionsService = DefaultPermissionsService(),
         storeKit: any StoreKitService = StubStoreKitService(),
         proEntitlement: any ProEntitlementService = StubProEntitlementService(),
@@ -39,9 +39,6 @@ struct StubDeepARService: DeepARService {}
 
 protocol EffectCatalogService: Sendable {}
 struct StubEffectCatalogService: EffectCatalogService {}
-
-protocol CaptureService: Sendable {}
-struct StubCaptureService: CaptureService {}
 
 protocol StoreKitService: Sendable {}
 struct StubStoreKitService: StoreKitService {}

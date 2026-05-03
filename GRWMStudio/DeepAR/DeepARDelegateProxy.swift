@@ -11,7 +11,15 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
         super.init()
     }
 
-    func didTakeScreenshot(_ screenshot: UIImage) {}
+    func didTakeScreenshot(_ screenshot: UIImage) {
+        Logger.deepAR.info("didTakeScreenshot")
+        Task { @MainActor [weak controller] in
+            guard let controller else {
+                return
+            }
+            controller.completePhotoCapture(with: screenshot)
+        }
+    }
 
     func didInitialize() {
         Logger.deepAR.info("DeepAR didInitialize")
@@ -44,13 +52,25 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
 
     func animationTransitioned(toState state: String) {}
 
-    func didStartVideoRecording() {}
+    func didStartVideoRecording() {
+        Logger.deepAR.info("didStartVideoRecording")
+    }
 
     func didFinishPreparingForVideoRecording() {}
 
-    func didFinishVideoRecording(_ videoFilePath: String) {}
+    func didFinishVideoRecording(_ videoFilePath: String) {
+        Logger.deepAR.info("didFinishVideoRecording: \(videoFilePath, privacy: .public)")
+        Task { @MainActor [weak controller] in
+            await controller?.completeVideoRecording(sourcePath: videoFilePath)
+        }
+    }
 
-    func recordingFailedWithError(_ error: Error) {}
+    func recordingFailedWithError(_ error: Error) {
+        Logger.deepAR.error("recordingFailedWithError: \(error.localizedDescription, privacy: .public)")
+        Task { @MainActor [weak controller] in
+            controller?.failCaptureAndRecording(reason: error.localizedDescription)
+        }
+    }
 
     func onError(withCode code: ARErrorType, error: String) {
         Logger.deepAR.error("DeepAR error \(String(describing: code), privacy: .public): \(error, privacy: .public)")
