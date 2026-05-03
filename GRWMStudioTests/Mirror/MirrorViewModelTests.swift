@@ -104,6 +104,55 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "s_texLut" })
     }
 
+    func testEyeSubCategoriesApplyAdditiveParametersOnSharedSlot() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        let shadow = try XCTUnwrap(Shade.eyeshadowShades.first(where: { $0.id == "eyeshadow.pink" }))
+        let liner = try XCTUnwrap(Shade.eyelinerShades.first(where: { $0.id == "eyeliner.classic" }))
+
+        viewModel.eyesSubCategory = .shadow
+        await viewModel.selectShade(in: .eyes, shade: shadow)
+        viewModel.eyesSubCategory = .liner
+        await viewModel.selectShade(in: .eyes, shade: liner)
+
+        XCTAssertEqual(viewModel.selectedEyeShadeID(for: .shadow), shadow.id)
+        XCTAssertEqual(viewModel.selectedEyeShadeID(for: .liner), liner.id)
+        XCTAssertEqual(viewModel.selections[.eyes], SlotSelection(effectID: "baseBeauty", shadeID: liner.id, isPro: false))
+        XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.eyes.rawValue }.count, 1)
+        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "u_color" })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "s_texMask" })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && $0.value })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "s_texColor" })
+    }
+
+    func testProEyeShadeWithoutEntitlementSetsLicenseError() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        let environment = AppEnvironment(
+            permissions: MirrorPermissionsStub(camera: .granted),
+            proEntitlement: MirrorProEntitlementStub(hasPro: false)
+        )
+        await viewModel.start(env: environment)
+
+        viewModel.eyesSubCategory = .liner
+        let winged = try XCTUnwrap(Shade.eyelinerShades.first(where: { $0.id == "eyeliner.winged" }))
+
+        await viewModel.selectShade(in: .eyes, shade: winged)
+
+        XCTAssertNil(viewModel.selections[.eyes])
+        XCTAssertNil(viewModel.eyeSelections[.liner])
+        XCTAssertEqual(viewModel.lastError, .license)
+        XCTAssertTrue(mock.switches.isEmpty)
+    }
+
     func testProShadeWithoutEntitlementDoesNotLoadEffect() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))

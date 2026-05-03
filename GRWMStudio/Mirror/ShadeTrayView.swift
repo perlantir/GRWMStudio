@@ -9,19 +9,19 @@ struct ShadeTrayView: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 clearChip
 
                 ForEach(shades) { shade in
                     swatch(shade)
                 }
             }
-            .padding(.horizontal, 14)
+            .padding(.horizontal, 8)
             .padding(.vertical, 10)
             .scrollTargetLayout()
         }
         .scrollTargetBehavior(.viewAligned)
-        .frame(height: 104)
+        .frame(height: 112)
         .background {
             RoundedRectangle(cornerRadius: DH.Radius.card)
                 .fill(.white.opacity(0.92))
@@ -48,8 +48,11 @@ struct ShadeTrayView: View {
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.72)
+                    .multilineTextAlignment(.center)
             }
-            .frame(width: 64, height: 82)
+            .frame(width: 64, height: 86)
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Clear \(category.label) filter")
@@ -74,6 +77,17 @@ struct ShadeTrayView: View {
                             .font(.system(size: 22, weight: .heavy))
                             .foregroundStyle(.white)
                     }
+
+                    if shade.isPro {
+                        ZStack {
+                            StickerStar(size: 22, fill: DH.butter, stroke: .white, strokeWidth: 3)
+
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 8, weight: .heavy))
+                                .foregroundStyle(DH.ink)
+                        }
+                        .offset(x: 22, y: -22)
+                    }
                 }
                 .scaleEffect(active ? 1.1 : 1)
                 .animation(.bouncy(duration: 0.22), value: active)
@@ -83,8 +97,12 @@ struct ShadeTrayView: View {
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.68)
+                    .multilineTextAlignment(.center)
+                    .frame(height: 26)
             }
-            .frame(width: 64, height: 82)
+            .frame(width: 64, height: 86)
         }
         .buttonStyle(.plain)
         .accessibilityLabel("\(shade.name) \(category.label) shade\(shade.isPro ? ", Pro" : "")")

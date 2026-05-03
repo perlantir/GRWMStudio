@@ -71,6 +71,56 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects/luts
+      - path: GRWMStudio/Resources/Effects/textures/eyeshadow_basic.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyeshadow_smokey.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyeliner_none.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyeliner_classic.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyeliner_winged.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyeliner_double_flick.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyelashes_none.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyelashes_natural.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyelashes_doll.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/eyelashes_drama.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
       - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
         buildPhase:
           copyFiles:

@@ -11,9 +11,11 @@ final class MirrorViewModel {
 
     private(set) var state: MirrorState = .idle
     private(set) var selections: [EffectSlot: SlotSelection] = [:]
+    private(set) var eyeSelections: [EyesSubCategory: String] = [:]
     private(set) var isFaceDetected = false
     private(set) var lastError: ErrorVariant?
     var activeCategory: FilterCategory?
+    var eyesSubCategory: EyesSubCategory = .shadow
     var activeTraySlot: EffectSlot? {
         activeCategory?.slot
     }
@@ -192,6 +194,9 @@ extension MirrorViewModel {
             }
 
             selections[slot] = SlotSelection(effectID: effect.id, shadeID: shade.id, isPro: isPro)
+            if slot == .eyes {
+                eyeSelections[eyesSubCategory] = shade.id
+            }
         } catch {
             lastError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
@@ -228,10 +233,28 @@ extension MirrorViewModel {
             await controller.clearEffect(slot: slot)
         }
         selections[slot] = nil
+        if slot == .eyes {
+            eyeSelections.removeAll()
+        }
     }
 
     func selectedShadeID(for slot: EffectSlot) -> String? {
         selections[slot]?.shadeID
+    }
+
+    func selectedEyeShadeID(for subCategory: EyesSubCategory) -> String? {
+        if let shadeID = eyeSelections[subCategory] {
+            return shadeID
+        }
+
+        switch subCategory {
+        case .shadow:
+            return nil
+        case .liner:
+            return "eyeliner.none"
+        case .lashes:
+            return "eyelashes.none"
+        }
     }
 
     private func effect(
@@ -337,10 +360,17 @@ extension MirrorViewModel {
             return image
         }
 
-        guard let url = Bundle.main.url(forResource: assetName, withExtension: "png", subdirectory: "Effects/luts") else {
-            return nil
+        let resourceName = (assetName as NSString).deletingPathExtension
+        let resourceExtension = (assetName as NSString).pathExtension.isEmpty ? "png" : (assetName as NSString).pathExtension
+
+        for subdirectory in ["Effects/luts", "Effects/textures"] {
+            if let url = Bundle.main.url(forResource: resourceName, withExtension: resourceExtension, subdirectory: subdirectory),
+               let image = UIImage(contentsOfFile: url.path) {
+                return image
+            }
         }
-        return UIImage(contentsOfFile: url.path)
+
+        return nil
     }
 }
 

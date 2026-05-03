@@ -62,6 +62,10 @@ struct MirrorView: View {
                     }
                     .padding(.bottom, 186)
                     .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                } else if viewModel.activeCategory == .eyes {
+                    EyesTrayView(viewModel: viewModel)
+                        .padding(.bottom, 186)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
                 }
 
                 FilterRailView(viewModel: viewModel)
