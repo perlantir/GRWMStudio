@@ -1,0 +1,10 @@
+$ git rev-parse HEAD
+e19da1eabf686b4ac27e21a0235e8d8ed8f8b1f6
+$ xcodebuild -quiet test -scheme GRWMStudio -destination 'id=BFD7E422-B789-4380-9588-B952559B6A92' CODE_SIGNING_ALLOWED=NO
+2026-05-03 00:14:28.028 xcodebuild[64178:9203720] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-05-03 00:14:28.028 xcodebuild[64178:9203720] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-05-03 00:14:33.095 xcodebuild[64178:9203720] [MT] IDETestOperationsObserverDebug: 13.286 elapsed -- Testing started completed.
+2026-05-03 00:14:33.095 xcodebuild[64178:9203720] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 00:14:33.095 xcodebuild[64178:9203720] [MT] IDETestOperationsObserverDebug: 13.286 sec, +13.286 sec -- end
+Testing started
+PASS xcodebuild test

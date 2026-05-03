@@ -1,0 +1,4 @@
+$ git rev-parse HEAD
+e19da1eabf686b4ac27e21a0235e8d8ed8f8b1f6
+$ ./Scripts/verify-deepar-isolation.sh
+PASS deepar isolation
