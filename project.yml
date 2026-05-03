@@ -44,6 +44,15 @@ targets:
         DeepARLicenseKey: $(DEEPAR_LICENSE_KEY)
         UILaunchStoryboardName: LaunchScreen
         UIRequiresFullScreen: true
+        UIAppFonts:
+          - Fredoka-Regular.ttf
+          - Fredoka-Medium.ttf
+          - Fredoka-SemiBold.ttf
+          - Fredoka-Bold.ttf
+          - Quicksand-Regular.ttf
+          - Quicksand-Medium.ttf
+          - Quicksand-SemiBold.ttf
+          - Quicksand-Bold.ttf
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UIUserInterfaceStyle: Light

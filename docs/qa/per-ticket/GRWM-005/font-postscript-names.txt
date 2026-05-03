@@ -1,0 +1,24 @@
+Fredoka-Bold.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Fredoka-Bold
+Fredoka-Medium.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Fredoka-Medium
+Fredoka-Regular.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Fredoka-Regular
+Fredoka-SemiBold.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Fredoka-SemiBold
+Quicksand-Bold.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Quicksand-Bold
+Quicksand-Medium.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Quicksand-Medium
+Quicksand-Regular.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Quicksand-Regular
+Quicksand-SemiBold.ttf
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      Quicksand-SemiBold

@@ -1,0 +1,11 @@
+  "UIAppFonts" => [
+    0 => "Fredoka-Regular.ttf"
+    1 => "Fredoka-Medium.ttf"
+    2 => "Fredoka-SemiBold.ttf"
+    3 => "Fredoka-Bold.ttf"
+    4 => "Quicksand-Regular.ttf"
+    5 => "Quicksand-Medium.ttf"
+    6 => "Quicksand-SemiBold.ttf"
+    7 => "Quicksand-Bold.ttf"
+  ]
+  "UILaunchStoryboardName" => "LaunchScreen"

@@ -1,0 +1,8 @@
+Fredoka-Bold.ttf
+Fredoka-Medium.ttf
+Fredoka-Regular.ttf
+Fredoka-SemiBold.ttf
+Quicksand-Bold.ttf
+Quicksand-Medium.ttf
+Quicksand-Regular.ttf
+Quicksand-SemiBold.ttf

@@ -26,6 +26,17 @@
 	<string>GRWM Studio records sound when you make a video so you can talk and sing along!</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Save your favorite looks to your photos so you can show your friends.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fredoka-Regular.ttf</string>
+		<string>Fredoka-Medium.ttf</string>
+		<string>Fredoka-SemiBold.ttf</string>
+		<string>Fredoka-Bold.ttf</string>
+		<string>Quicksand-Regular.ttf</string>
+		<string>Quicksand-Medium.ttf</string>
+		<string>Quicksand-SemiBold.ttf</string>
+		<string>Quicksand-Bold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiresFullScreen</key>
