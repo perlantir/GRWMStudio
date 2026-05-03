@@ -1,3 +1,4 @@
+import OSLog
 import SwiftUI
 
 struct RootContainer: View {
@@ -10,6 +11,9 @@ struct RootContainer: View {
             routeView
         }
         .preferredColorScheme(.light)
+        .task {
+            await loadEffectCatalog()
+        }
     }
 
     @ViewBuilder
@@ -57,5 +61,15 @@ struct RootContainer: View {
             .tracking(DH.tracking(.headline))
             .foregroundStyle(DH.pinkDeep)
             .padding(24)
+    }
+
+    private func loadEffectCatalog() async {
+        do {
+            _ = try await EffectCatalog.shared.load()
+            Logger.deepAR.info("Effect catalog loaded")
+        } catch {
+            Logger.deepAR.error("Catalog load failed: \(error.localizedDescription)")
+            coordinator.presentError(.effectFail)
+        }
     }
 }

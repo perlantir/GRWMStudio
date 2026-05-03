@@ -51,6 +51,56 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects
+      - path: GRWMStudio/Resources/Effects/manifest.json
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects
+      - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/brows.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/cheeks.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/eyeliner.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/lipstick.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/look_legacy01.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/look_legacy02.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/noFilter.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Effects/thumbnails/shadow.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/thumbnails
     dependencies:
       - package: DeepAR
     info:

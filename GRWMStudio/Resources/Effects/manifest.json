@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "effects": {
+    "skin": [
+      {
+        "id": "baseBeauty",
+        "displayName": "Base Beauty",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/baseBeauty.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "foundationColor", "rgba": [1.0, 1.0, 1.0, 0.0] }
+            ]
+          },
+          {
+            "id": "fair",
+            "displayName": "Fair",
+            "color": "#FFE6D5",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "foundationColor", "rgba": [1.0, 0.902, 0.836, 0.7] }
+            ]
+          },
+          {
+            "id": "light",
+            "displayName": "Light",
+            "color": "#F4D0AC",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "foundationColor", "rgba": [0.957, 0.816, 0.675, 0.7] }
+            ]
+          },
+          {
+            "id": "medium",
+            "displayName": "Medium",
+            "color": "#E8B89A",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "foundationColor", "rgba": [0.91, 0.722, 0.604, 0.7] }
+            ]
+          },
+          {
+            "id": "tan",
+            "displayName": "Tan",
+            "color": "#C58E70",
+            "isPro": true,
+            "parameters": [
+              { "kind": "color", "ref": "foundationColor", "rgba": [0.773, 0.557, 0.439, 0.7] }
+            ]
+          }
+        ]
+      }
+    ],
+    "base": [
+      {
+        "id": "noFilter",
+        "displayName": "Au Naturel",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/noFilter.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "lutEnabled", "value": 0 }
+            ]
+          },
+          {
+            "id": "bright",
+            "displayName": "Bright",
+            "color": "#FFE6F0",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "lutEnabled", "value": 1 },
+              { "kind": "texture", "ref": "lutTexture", "asset": "brightLUT" }
+            ]
+          },
+          {
+            "id": "vivid",
+            "displayName": "Vivid",
+            "color": "#FF6FA0",
+            "isPro": true,
+            "parameters": [
+              { "kind": "bool", "ref": "lutEnabled", "value": 1 },
+              { "kind": "texture", "ref": "lutTexture", "asset": "nashvilleLightLUT" }
+            ]
+          }
+        ]
+      }
+    ],
+    "eyes": [
+      {
+        "id": "shadow",
+        "displayName": "Shadow",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/shadow.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 0 }
+            ]
+          },
+          {
+            "id": "rose",
+            "displayName": "Rose",
+            "color": "#FF8FB8",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "eyeshadowColor", "rgba": [1.0, 0.561, 0.722, 1.0] },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "lilac",
+            "displayName": "Lilac",
+            "color": "#C9A8FF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "eyeshadowColor", "rgba": [0.788, 0.659, 1.0, 1.0] },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "gold",
+            "displayName": "Gold",
+            "color": "#FFD66B",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "eyeshadowColor", "rgba": [1.0, 0.839, 0.42, 1.0] },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "smoke",
+            "displayName": "Smoke",
+            "color": "#3A3A4A",
+            "isPro": true,
+            "parameters": [
+              { "kind": "color", "ref": "eyeshadowColor", "rgba": [0.227, 0.227, 0.29, 1.0] },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "eyeliner",
+        "displayName": "Eyeliner",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/eyeliner.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 0 }
+            ]
+          },
+          {
+            "id": "luxe",
+            "displayName": "Luxe",
+            "color": "#3A0E25",
+            "isPro": false,
+            "parameters": [
+              { "kind": "texture", "ref": "eyelinerTexture", "asset": "luxe" },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "smooth",
+            "displayName": "Smooth",
+            "color": "#7A53C9",
+            "isPro": true,
+            "parameters": [
+              { "kind": "texture", "ref": "eyelinerTexture", "asset": "smooth" },
+              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "brows": [
+      {
+        "id": "brows-placeholder",
+        "displayName": "Brows",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/brows.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "browEnabled", "value": 0 }
+            ]
+          }
+        ]
+      }
+    ],
+    "cheeks": [
+      {
+        "id": "cheeks-placeholder",
+        "displayName": "Cheeks",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/cheeks.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "blushEnabled", "value": 0 }
+            ]
+          }
+        ]
+      }
+    ],
+    "lips": [
+      {
+        "id": "lipstick",
+        "displayName": "Lipstick",
+        "file": "baseBeauty.deepar",
+        "thumbnail": "thumbnails/lipstick.png",
+        "isPro": false,
+        "shades": [
+          {
+            "id": "off",
+            "displayName": "Off",
+            "color": "#FFFFFF",
+            "isPro": false,
+            "parameters": [
+              { "kind": "bool", "ref": "lipsEnabled", "value": 0 }
+            ]
+          },
+          {
+            "id": "bubblegum",
+            "displayName": "Bubblegum",
+            "color": "#FF3DA5",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "lipsColor", "rgba": [1.0, 0.239, 0.647, 0.95] },
+              { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "berry",
+            "displayName": "Berry",
+            "color": "#A12454",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "lipsColor", "rgba": [0.631, 0.141, 0.329, 0.95] },
+              { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "showtime",
+            "displayName": "Showtime",
+            "color": "#FF2D5A",
+            "isPro": false,
+            "parameters": [
+              { "kind": "color", "ref": "lipsColor", "rgba": [1.0, 0.176, 0.353, 0.95] },
+              { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
+            ]
+          },
+          {
+            "id": "vamp",
+            "displayName": "Vamp",
+            "color": "#5A0A2A",
+            "isPro": true,
+            "parameters": [
+              { "kind": "color", "ref": "lipsColor", "rgba": [0.353, 0.039, 0.165, 0.95] },
+              { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "looks": [
+      {
+        "id": "look_legacy01",
+        "displayName": "Bubblegum",
+        "file": "look_legacy01.deepar",
+        "thumbnail": "thumbnails/look_legacy01.png",
+        "tag": "CUTE",
+        "hot": true,
+        "isPro": false,
+        "shades": []
+      },
+      {
+        "id": "look_legacy02",
+        "displayName": "Showtime",
+        "file": "look_legacy02.deepar",
+        "thumbnail": "thumbnails/look_legacy02.png",
+        "tag": "BOLD",
+        "hot": true,
+        "isPro": false,
+        "shades": []
+      }
+    ]
+  }
+}
