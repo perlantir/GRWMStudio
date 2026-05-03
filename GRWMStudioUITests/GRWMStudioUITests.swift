@@ -82,12 +82,72 @@ final class GRWMStudioUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["Video Preview"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["Back to mirror"].exists)
+        XCTAssertTrue(app.buttons["Pause video preview"].exists || app.buttons["Play video preview"].exists)
         XCTAssertTrue(app.buttons["Save"].exists)
 
         app.buttons["Back to mirror"].tap()
 
         XCTAssertFalse(app.staticTexts["Video Preview"].waitForExistence(timeout: 1))
         XCTAssertTrue(app.buttons["Skin filter category"].exists)
+    }
+
+    @MainActor
+    func testVideoPreviewPlaybackControlToggles() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell"]
+        app.launch()
+
+        let videoMode = app.buttons["Video capture mode"]
+        XCTAssertTrue(videoMode.waitForExistence(timeout: 8))
+        videoMode.tap()
+
+        let capture = app.buttons["capture-fab"]
+        XCTAssertTrue(capture.waitForExistence(timeout: 3))
+        capture.tap()
+
+        let stopRecording = app.buttons["Stop video recording"]
+        XCTAssertTrue(stopRecording.waitForExistence(timeout: 3))
+        stopRecording.tap()
+
+        XCTAssertTrue(app.staticTexts["Video Preview"].waitForExistence(timeout: 5))
+
+        let pause = app.buttons["Pause video preview"]
+        let play = app.buttons["Play video preview"]
+        if pause.waitForExistence(timeout: 2) {
+            pause.tap()
+            XCTAssertTrue(play.waitForExistence(timeout: 2))
+        } else {
+            XCTAssertTrue(play.waitForExistence(timeout: 2))
+        }
+
+        play.tap()
+        XCTAssertTrue(app.buttons["Pause video preview"].waitForExistence(timeout: 2))
+
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "video-preview-playback-control"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
+    @MainActor
+    func testPhotoPreviewLayoutControlsVisible() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell"]
+        app.launch()
+
+        let capture = app.buttons["capture-fab"]
+        XCTAssertTrue(capture.waitForExistence(timeout: 8))
+        capture.tap()
+
+        XCTAssertTrue(app.staticTexts["Photo Preview"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["Back to mirror"].exists)
+        XCTAssertTrue(app.buttons["Save"].exists)
+        XCTAssertTrue(app.buttons["Done"].exists)
+
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "photo-preview-layout-controls"
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     @MainActor

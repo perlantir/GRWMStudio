@@ -103,12 +103,14 @@ extension MirrorViewModel {
             }
 
             let baseEffect = try await catalog.effect(byID: "baseBeauty") ?? effect
+            appliedParameterValues.removeAll()
             try await controller.loadEffect(baseEffect, slot: .skin)
             sharedBeautyEffectLoaded = true
             return
         }
 
         if controller.loadedEffects[slot] != effect.id {
+            appliedParameterValues.removeAll()
             try await controller.loadEffect(effect, slot: slot)
         }
     }
@@ -155,6 +157,7 @@ extension MirrorViewModel {
             await controller.clearEffect(slot: slot)
         }
         selections[slot] = nil
+        appliedParameterValues.removeAll()
         if slot == .eyes {
             eyeSelections.removeAll()
         } else if slot == .looks {
@@ -210,70 +213,136 @@ extension MirrorViewModel {
 
     private func applyShadeParameters(_ shade: MakeupShade) async throws {
         for change in shade.parameters {
-            guard let parameter = EffectParameterMap.resolve(change.ref) else {
-                throw MirrorActionError.unresolvedParameter(change.ref)
-            }
-
-            switch change.kind {
-            case .color:
-                guard let rgba = change.rgba, rgba.count == 4 else {
-                    throw MirrorActionError.invalidParameter(change.ref)
-                }
-                let color = UIColor(
-                    red: CGFloat(rgba[0]),
-                    green: CGFloat(rgba[1]),
-                    blue: CGFloat(rgba[2]),
-                    alpha: CGFloat(rgba[3])
-                )
-                await controller.setColor(color, on: parameter)
-            case .texture:
-                guard
-                    let assetName = change.asset,
-                    let image = image(named: assetName)
-                else {
-                    throw MirrorActionError.missingTexture(change.asset ?? change.ref)
-                }
-                await controller.setTexture(image, on: parameter)
-            case .blendshape:
-                guard let value = change.value else {
-                    throw MirrorActionError.invalidParameter(change.ref)
-                }
-                await controller.setBlendshape(Float(value), on: parameter)
-            case .bool:
-                guard let value = change.value else {
-                    throw MirrorActionError.invalidParameter(change.ref)
-                }
-                await controller.setEnabled(value != 0, on: parameter)
-            }
+            try await applyManifestParameter(change)
         }
     }
 
     private func applyShadeParameters(_ parameters: [EffectParam]) async throws {
         for parameterChange in parameters {
-            guard let parameter = EffectParameterMap.resolve(parameterChange.ref) else {
-                throw MirrorActionError.unresolvedParameter(parameterChange.ref)
-            }
-
-            switch parameterChange.value {
-            case .color(let rgba):
-                let color = UIColor(
-                    red: CGFloat(rgba.red),
-                    green: CGFloat(rgba.green),
-                    blue: CGFloat(rgba.blue),
-                    alpha: CGFloat(rgba.alpha)
-                )
-                await controller.setColor(color, on: parameter)
-            case .texture(let assetName):
-                guard let image = image(named: assetName) else {
-                    throw MirrorActionError.missingTexture(assetName)
-                }
-                await controller.setTexture(image, on: parameter)
-            case .blendshape(let value):
-                await controller.setBlendshape(value, on: parameter)
-            case .enabled(let enabled):
-                await controller.setEnabled(enabled, on: parameter)
-            }
+            try await applyTypedParameter(parameterChange)
         }
+    }
+
+    private func applyManifestParameter(_ change: MakeupShade.ParameterChange) async throws {
+        let parameter = try resolvedParameter(for: change.ref)
+
+        switch change.kind {
+        case .color:
+            guard let rgba = change.rgba, rgba.count == 4 else {
+                throw MirrorActionError.invalidParameter(change.ref)
+            }
+            await setColor(rgba, on: parameter)
+        case .texture:
+            guard let assetName = change.asset else {
+                throw MirrorActionError.missingTexture(change.ref)
+            }
+            try await setTexture(assetName, on: parameter)
+        case .blendshape:
+            guard let value = change.value else {
+                throw MirrorActionError.invalidParameter(change.ref)
+            }
+            await setBlendshape(Float(value), on: parameter)
+        case .bool:
+            guard let value = change.value else {
+                throw MirrorActionError.invalidParameter(change.ref)
+            }
+            await setEnabled(value != 0, on: parameter)
+        }
+    }
+
+    private func applyTypedParameter(_ parameterChange: EffectParam) async throws {
+        let parameter = try resolvedParameter(for: parameterChange.ref)
+
+        switch parameterChange.value {
+        case .color(let rgba):
+            await setColor(rgba, on: parameter)
+        case .texture(let assetName):
+            try await setTexture(assetName, on: parameter)
+        case .blendshape(let value):
+            await setBlendshape(value, on: parameter)
+        case .enabled(let enabled):
+            await setEnabled(enabled, on: parameter)
+        }
+    }
+
+    private func resolvedParameter(for ref: String) throws -> EffectParameter {
+        guard let parameter = EffectParameterMap.resolve(ref) else {
+            throw MirrorActionError.unresolvedParameter(ref)
+        }
+        return parameter
+    }
+
+    private func setColor(_ rgba: [Double], on parameter: EffectParameter) async {
+        let color = UIColor(
+            red: CGFloat(rgba[0]),
+            green: CGFloat(rgba[1]),
+            blue: CGFloat(rgba[2]),
+            alpha: CGFloat(rgba[3])
+        )
+        await setColor(
+            color,
+            value: .color(red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3]),
+            on: parameter
+        )
+    }
+
+    private func setColor(_ rgba: RGBA, on parameter: EffectParameter) async {
+        let color = UIColor(
+            red: CGFloat(rgba.red),
+            green: CGFloat(rgba.green),
+            blue: CGFloat(rgba.blue),
+            alpha: CGFloat(rgba.alpha)
+        )
+        await setColor(
+            color,
+            value: .color(red: rgba.red, green: rgba.green, blue: rgba.blue, alpha: rgba.alpha),
+            on: parameter
+        )
+    }
+
+    private func setColor(
+        _ color: UIColor,
+        value: AppliedParameterValue,
+        on parameter: EffectParameter
+    ) async {
+        guard shouldApply(value, on: parameter) else {
+            return
+        }
+        await controller.setColor(color, on: parameter)
+    }
+
+    private func setTexture(_ assetName: String, on parameter: EffectParameter) async throws {
+        guard let image = image(named: assetName) else {
+            throw MirrorActionError.missingTexture(assetName)
+        }
+        guard shouldApply(.texture(assetName), on: parameter) else {
+            return
+        }
+        await controller.setTexture(image, on: parameter)
+    }
+
+    private func setBlendshape(_ value: Float, on parameter: EffectParameter) async {
+        guard shouldApply(.blendshape(value), on: parameter) else {
+            return
+        }
+        await controller.setBlendshape(value, on: parameter)
+    }
+
+    private func setEnabled(_ enabled: Bool, on parameter: EffectParameter) async {
+        guard shouldApply(.enabled(enabled), on: parameter) else {
+            return
+        }
+        await controller.setEnabled(enabled, on: parameter)
+    }
+
+    private func shouldApply(_ value: AppliedParameterValue, on parameter: EffectParameter) -> Bool {
+        let key = EffectParameterKey(parameter)
+        guard appliedParameterValues[key] != value else {
+            return false
+        }
+
+        appliedParameterValues[key] = value
+        return true
     }
 
     private func recordEffectFailure() {
@@ -299,7 +368,12 @@ extension MirrorViewModel {
     }
 
     private func image(named assetName: String) -> UIImage? {
+        if let image = textureImageCache[assetName] {
+            return image
+        }
+
         if let image = UIImage(named: assetName) {
+            textureImageCache[assetName] = image
             return image
         }
 
@@ -313,30 +387,11 @@ extension MirrorViewModel {
                 subdirectory: subdirectory
             ),
                 let image = UIImage(contentsOfFile: url.path) {
+                textureImageCache[assetName] = image
                 return image
             }
         }
 
         return nil
-    }
-}
-
-private enum MirrorActionError: LocalizedError {
-    case effectMissing(String)
-    case invalidParameter(String)
-    case missingTexture(String)
-    case unresolvedParameter(String)
-
-    var errorDescription: String? {
-        switch self {
-        case .effectMissing(let id):
-            "Effect missing for shade \(id)"
-        case .invalidParameter(let ref):
-            "Invalid parameter value for \(ref)"
-        case .missingTexture(let asset):
-            "Missing texture asset \(asset)"
-        case .unresolvedParameter(let ref):
-            "Unresolved parameter \(ref)"
-        }
     }
 }

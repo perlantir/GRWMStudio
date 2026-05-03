@@ -63,8 +63,8 @@ final class MirrorViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: shade)
 
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: effect.id, shade: shade, isPro: false))
-        XCTAssertEqual(controller.loadedEffects[.lips], effect.id)
-        XCTAssertEqual(mock.switches.last?.slot, EffectSlot.lips.rawValue)
+        XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
+        XCTAssertEqual(mock.switches.last?.slot, EffectSlot.skin.rawValue)
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "lips" && $0.parameter == "u_color" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
@@ -123,7 +123,7 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedEyeShadeID(for: .shadow), shadow.id)
         XCTAssertEqual(viewModel.selectedEyeShadeID(for: .liner), liner.id)
         XCTAssertEqual(viewModel.selections[.eyes], SlotSelection(effectID: "baseBeauty", shadeID: liner.id, isPro: false))
-        XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.eyes.rawValue }.count, 1)
+        XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "u_color" })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "s_texMask" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && $0.value })

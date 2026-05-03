@@ -46,6 +46,8 @@ final class MirrorViewModel {
     @ObservationIgnored let videoRecording: any VideoRecordingCoordinating
     @ObservationIgnored var isApplyingSelection = false
     @ObservationIgnored var sharedBeautyEffectLoaded = false
+    @ObservationIgnored var appliedParameterValues: [EffectParameterKey: AppliedParameterValue] = [:]
+    @ObservationIgnored var textureImageCache: [String: UIImage] = [:]
 
     init(
         controller: DeepARController = DeepARController(),
@@ -141,6 +143,7 @@ final class MirrorViewModel {
         recordingProGateRouteID = nil
         isFaceDetected = false
         isApplyingSelection = false
+        appliedParameterValues.removeAll()
 
         if state == .running || state == .starting {
             Task { @MainActor [controller] in
@@ -199,5 +202,44 @@ final class MirrorViewModel {
 
         activeCaptureMode = .videoRecording(secondsElapsed: 5)
         #endif
+    }
+}
+
+struct EffectParameterKey: Hashable {
+    let nodeName: String
+    let component: String
+    let parameter: String
+
+    init(_ parameter: EffectParameter) {
+        nodeName = parameter.nodeName
+        component = parameter.component
+        self.parameter = parameter.parameter
+    }
+}
+
+enum AppliedParameterValue: Equatable {
+    case color(red: Double, green: Double, blue: Double, alpha: Double)
+    case texture(String)
+    case blendshape(Float)
+    case enabled(Bool)
+}
+
+enum MirrorActionError: LocalizedError {
+    case effectMissing(String)
+    case invalidParameter(String)
+    case missingTexture(String)
+    case unresolvedParameter(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .effectMissing(let id):
+            "Effect missing for shade \(id)"
+        case .invalidParameter(let ref):
+            "Invalid parameter value for \(ref)"
+        case .missingTexture(let asset):
+            "Missing texture asset \(asset)"
+        case .unresolvedParameter(let ref):
+            "Unresolved parameter \(ref)"
+        }
     }
 }

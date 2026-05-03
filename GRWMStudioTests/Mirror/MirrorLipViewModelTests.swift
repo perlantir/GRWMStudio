@@ -22,6 +22,27 @@ final class MirrorLipViewModelTests: XCTestCase {
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
 
+    func testLipShadeSelectionSkipsUnchangedTextureAndEnabledParameters() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        let classicRed = try XCTUnwrap(Shade.lipShades.first(where: { $0.id == "lip.classic-red" }))
+        let berry = try XCTUnwrap(Shade.lipShades.first(where: { $0.id == "lip.berry" }))
+
+        await viewModel.selectShade(in: .lips, shade: classicRed)
+        await viewModel.selectShade(in: .lips, shade: berry)
+
+        XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
+        XCTAssertEqual(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.count, 1)
+        XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" }.count, 1)
+        XCTAssertEqual(mock.vectorParameters.filter { $0.gameObject == "lips" && $0.parameter == "u_color" }.count, 2)
+        XCTAssertEqual(viewModel.selectedShadeID(for: .lips), berry.id)
+    }
+
     func testProLipShadeWithoutEntitlementSetsLicenseError() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))

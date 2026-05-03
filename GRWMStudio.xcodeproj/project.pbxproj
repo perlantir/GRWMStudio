@@ -152,6 +152,7 @@
 		E1E0921F0C20DDCD7D17F849 /* DeepARControllerRecordingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A8EC77CF58CA2EE8D5A6A /* DeepARControllerRecordingTests.swift */; };
 		E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
 		E3A28A70055DE0D59E4C5E6C /* eyelashes_doll.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8EBEEA65D673E4619983BBA /* eyelashes_doll.png */; };
+		E48E70C1ABBA0B9C632C3308 /* PhotoLibrarySaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FB09FBE6397A340CD92A9D /* PhotoLibrarySaver.swift */; };
 		E579A26DEE4F300DEA6E4270 /* eyeliner_double_flick.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB7D1FD35AC2DA7FE3A47100 /* eyeliner_double_flick.png */; };
 		E6F66FDDB90BFE67CD070990 /* AppModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */; };
 		E7BE094410428DFB7B961A36 /* CountdownOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E508B38CACB288B78B8B9EDD /* CountdownOverlay.swift */; };
@@ -191,6 +192,18 @@
 		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = Effects/thumbnails;
 			dstSubfolderSpec = 7;
 			files = (
@@ -206,7 +219,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
+		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Effects/textures;
@@ -231,18 +244,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/luts;
-			dstSubfolderSpec = 7;
-			files = (
-				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
-				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
-				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C11C208F764B56B1CC794199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,7 +264,8 @@
 		01B7FE6884AADB7B47AAB7AF /* DeepARLicenseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARLicenseTests.swift; sourceTree = "<group>"; };
 		0223412256CBF5F63222106A /* eyelashes_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_none.png; sourceTree = "<group>"; };
 		04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeshadow_smokey.png; sourceTree = "<group>"; };
-		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; lastKnownFileType = file; path = look_legacy02.deepar; sourceTree = "<group>"; };
+		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
+		05FB09FBE6397A340CD92A9D /* PhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		08F4E6016A9E66CAE4115EDD /* DHCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHCard.swift; sourceTree = "<group>"; };
 		09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Lips.swift"; sourceTree = "<group>"; };
 		0B0B177A0BD49AA82C072DCF /* CaptureMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureMode.swift; sourceTree = "<group>"; };
@@ -299,7 +301,7 @@
 		3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMapTests.swift; sourceTree = "<group>"; };
 		408499017F9D17AED4F1B6A0 /* lut_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glow.png; sourceTree = "<group>"; };
 		41D3EE099B91E0423AECABC5 /* MirrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorState.swift; sourceTree = "<group>"; };
-		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; lastKnownFileType = file; path = look_legacy01.deepar; sourceTree = "<group>"; };
+		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
 		4305B706633CFFF0075CBB45 /* eyeliner_winged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner_winged.png; sourceTree = "<group>"; };
 		44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTests.swift; sourceTree = "<group>"; };
 		4669D85766D2FD7DF42FC964 /* MirrorViewModel+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Selection.swift"; sourceTree = "<group>"; };
@@ -349,7 +351,7 @@
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
 		836AF9B238A751CB43B7643C /* PermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsService.swift; sourceTree = "<group>"; };
 		83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
-		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
 		893009F8C8216D1B11711EF8 /* StickerBow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBow.swift; sourceTree = "<group>"; };
 		89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryTests.swift; sourceTree = "<group>"; };
@@ -387,7 +389,7 @@
 		C80893EB70023EE827A7DD41 /* VideoRecordingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecordingCoordinator.swift; sourceTree = "<group>"; };
 		C864855B4C7D6BF81930D62A /* baseBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseBeauty.png; sourceTree = "<group>"; };
 		C940E22752D3BAC351C71820 /* MirrorEffectFailureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorEffectFailureViewModelTests.swift; sourceTree = "<group>"; };
-		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA1A95064129A2EB93F7502 /* StickerStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerStar.swift; sourceTree = "<group>"; };
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -416,13 +418,13 @@
 		E8EE539AD707663BED29DBAA /* DH+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Color.swift"; sourceTree = "<group>"; };
 		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
 		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
-		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA27149E6906AFA7487B6A8 /* eyeliner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner.png; sourceTree = "<group>"; };
 		F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_gloss.png; sourceTree = "<group>"; };
 		F58CE707234895BA156A2DCB /* EffectCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalogTests.swift; sourceTree = "<group>"; };
 		F81E22F49903D155C25263DE /* lipstick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lipstick.png; sourceTree = "<group>"; };
 		FA09BFAABFA8175D0BA38B55 /* MirrorViewModel+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Reset.swift"; sourceTree = "<group>"; };
-		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; lastKnownFileType = file; path = baseBeauty.deepar; sourceTree = "<group>"; };
+		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
 		FF9CC4EB41EFE8F9E7DFBD47 /* cheeks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheeks.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -709,6 +711,7 @@
 				27404CCB96EE563E725C9A98 /* CaptureService.swift */,
 				E508B38CACB288B78B8B9EDD /* CountdownOverlay.swift */,
 				8D21C51747F3EABB9A45A08C /* PhotoCaptureCoordinator.swift */,
+				05FB09FBE6397A340CD92A9D /* PhotoLibrarySaver.swift */,
 				DB43008B7FD2B449BA1A5D27 /* PreviewPlaceholderView.swift */,
 				C80893EB70023EE827A7DD41 /* VideoRecordingCoordinator.swift */,
 			);
@@ -907,10 +910,15 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					2E1F08A02DDB466A6B9F47FC = {
+						DevelopmentTeam = 84D222Q647;
 						ProvisioningStyle = Automatic;
 					};
 					B9D5AE14F9121C8DAFB2AB5B = {
+						DevelopmentTeam = 84D222Q647;
 						TestTargetID = 2E1F08A02DDB466A6B9F47FC;
+					};
+					C0231A2978FD6F39B4B16797 = {
+						DevelopmentTeam = 84D222Q647;
 					};
 				};
 			};
@@ -1086,6 +1094,7 @@
 				DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */,
 				A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */,
 				357669F4C17040937B6EA1F5 /* PhotoCaptureCoordinator.swift in Sources */,
+				E48E70C1ABBA0B9C632C3308 /* PhotoLibrarySaver.swift in Sources */,
 				517D5C32F1DCB4A37A01F84F /* PreviewPlaceholderView.swift in Sources */,
 				CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */,
 				04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */,
@@ -1144,7 +1153,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GRWMStudio/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1226,7 +1234,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1246,7 +1253,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1333,7 +1339,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GRWMStudio/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -1354,7 +1359,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1374,7 +1378,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7JL22TDB44;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

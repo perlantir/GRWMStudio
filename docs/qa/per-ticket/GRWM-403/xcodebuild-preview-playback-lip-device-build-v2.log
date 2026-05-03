@@ -1,0 +1,5 @@
+/Users/perlantir/Projects/GRWM Studio/GRWMStudio.xcodeproj: error: No Account for Team "84D222Q647". Add a new account in Accounts settings or verify that your accounts have valid credentials. (in target 'GRWMStudio' from project 'GRWMStudio')
+/Users/perlantir/Projects/GRWM Studio/GRWMStudio.xcodeproj: error: No profiles for 'app.grwmstudio.ios' were found: Xcode couldn't find any iOS App Development provisioning profiles matching 'app.grwmstudio.ios'. (in target 'GRWMStudio' from project 'GRWMStudio')
+note: Run script build phase 'SwiftLint' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'GRWMStudio' from project 'GRWMStudio')
+** BUILD FAILED **
+

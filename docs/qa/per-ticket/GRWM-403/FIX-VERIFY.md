@@ -41,5 +41,36 @@ Date: 2026-05-03
 ## Notes
 
 - Simulator photo save verified to `Saved to Photos` after granting `photos-add`.
-- Simulator video save still fails after the Photos permission dialog because the simulator DeepAR placeholder video is not a real video container. The real-device path now records to a `.mov` URL for DeepAR and preserves that extension through capture handoff.
+- The simulator placeholder recording is now generated as a real MP4 in the follow-up below, so preview playback tests can exercise a playable local asset.
 - The fresh build is installed on the connected iPhone and ready for real camera-path save testing once the phone is unlocked.
+
+## Follow-up: Preview Playback + Lip Smoothing
+
+Date: 2026-05-03
+
+### Scope
+
+- Fixed photo preview layout with explicit safe-area metrics so the Mirror button stays above the media and Save / Done stay below it.
+- Replaced the static video preview icon with an `AVKit.VideoPlayer` surface and explicit Play/Pause control.
+- Replaced the simulator placeholder recording with a real generated MP4 so video preview smoke tests exercise playback.
+- Added DeepAR parameter-value deduping and texture caching in `MirrorViewModel` so repeated lipstick shade changes skip unchanged texture/enabled writes and only update changed color values.
+
+### Automated Evidence
+
+- Focused capture/mirror regression tests: `xcodebuild-preview-playback-lip-regression-tests-v3.log`
+- Video preview playback toggle UI test: `xcodebuild-preview-playback-toggle-ui-v3.log`
+- Photo preview layout UI test: `xcodebuild-photo-preview-layout-ui-v2.log`
+- Playback/recording smoke after MP4 writer guard: `xcodebuild-preview-playback-smoke-v4.log`
+- Generic iOS no-sign build: `xcodebuild-preview-playback-lip-generic-ios-nosign-v3.log`
+- SwiftLint: `lint-preview-playback-lip-v4.log`
+- DeepAR import isolation: `verify-deepar-isolation-preview-playback-lip-v4.log`
+
+### Visual Evidence
+
+- Photo preview layout: `simulator-photo-preview-layout-v2.png`
+- Video preview playback control: `simulator-video-preview-player-v3.png`
+
+### Device Evidence
+
+- Signed connected-device build attempted: `xcodebuild-preview-playback-lip-device-build-v2.log`
+- Device build is currently blocked by local Xcode signing state: Xcode reports no account for team `84D222Q647` and no development provisioning profile for `app.grwmstudio.ios`.
