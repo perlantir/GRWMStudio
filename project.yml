@@ -126,6 +126,11 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/blush_mask.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
       - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
         buildPhase:
           copyFiles:

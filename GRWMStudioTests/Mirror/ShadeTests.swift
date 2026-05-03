@@ -97,4 +97,18 @@ final class ShadeTests: XCTestCase {
         XCTAssertTrue(brown.parameters.contains { $0.ref == "browTexture" && $0.value == .texture("brows_natural") })
         XCTAssertTrue(brown.parameters.contains { $0.ref == "browEnabled" && $0.value == .enabled(true) })
     }
+
+    func testCheekShadesAreFreeAndCarryBlushParameters() {
+        XCTAssertEqual(
+            Shade.cheekShades.map(\.id),
+            ["cheek.pink", "cheek.peach", "cheek.coral", "cheek.mauve", "cheek.berry"]
+        )
+        XCTAssertTrue(Shade.cheekShades.allSatisfy { !$0.isPro })
+
+        let coral = Shade.cheekShades[2]
+        XCTAssertEqual(coral.effectID, "blush")
+        XCTAssertTrue(coral.parameters.contains { $0.ref == "blushColor" })
+        XCTAssertTrue(coral.parameters.contains { $0.ref == "blushMask" && $0.value == .texture("blush_mask") })
+        XCTAssertTrue(coral.parameters.contains { $0.ref == "blushEnabled" && $0.value == .enabled(true) })
+    }
 }

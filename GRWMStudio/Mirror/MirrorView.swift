@@ -91,6 +91,31 @@ struct MirrorView: View {
                         .padding(.bottom, 186)
                         .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
                     }
+                } else if viewModel.activeCategory == .cheeks {
+                    if EffectCatalog.shared.containsSync(effectID: "blush") {
+                        ShadeTrayView(
+                            category: .cheeks,
+                            shades: Shade.cheekShades,
+                            selectedID: viewModel.selectedShadeID(for: .cheeks)
+                        ) { shade in
+                            Task { @MainActor in
+                                await viewModel.selectShade(in: .cheeks, shade: shade)
+                            }
+                        } onClear: {
+                            Task { @MainActor in
+                                await viewModel.clear(slot: .cheeks)
+                            }
+                        }
+                        .padding(.bottom, 186)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                    } else {
+                        EmptyShadeTrayView(
+                            category: .cheeks,
+                            message: "Blush coming soon ✨"
+                        )
+                        .padding(.bottom, 186)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                    }
                 }
 
                 FilterRailView(viewModel: viewModel)
