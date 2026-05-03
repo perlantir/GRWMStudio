@@ -66,6 +66,11 @@ struct RootContainer: View {
 
     private func resolveInitialRoute() {
         #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugAppShell") {
+            coordinator.route = .app
+            return
+        }
+
         if ProcessInfo.processInfo.arguments.contains("-GRWMDebugOnboardingFlow") {
             return
         }

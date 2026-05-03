@@ -7,7 +7,7 @@ struct MirrorView: View {
     @State private var viewModel = MirrorViewModel()
 
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack {
             DHWallpaperGradient()
                 .ignoresSafeArea()
 
@@ -21,6 +21,13 @@ struct MirrorView: View {
                     .padding(.top, 12)
 
                 Spacer(minLength: 220)
+            }
+
+            VStack {
+                Spacer()
+
+                FilterRailView(viewModel: viewModel)
+                    .padding(.bottom, 118)
             }
         }
         .preferredColorScheme(.light)

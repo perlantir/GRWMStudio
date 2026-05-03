@@ -13,6 +13,7 @@ final class MirrorViewModel {
     private(set) var selections: [EffectSlot: SlotSelection] = [:]
     private(set) var isFaceDetected = false
     private(set) var lastError: ErrorVariant?
+    var activeCategory: FilterCategory?
 
     @ObservationIgnored private var env: AppEnvironment?
     @ObservationIgnored private var faceTask: Task<Void, Never>?

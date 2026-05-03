@@ -1,5 +1,18 @@
-enum DHHaptics {
-    static func tap() {}
+import UIKit
 
-    static func tapMedium() {}
+enum DHHaptics {
+    @MainActor
+    static func tap() {
+        light()
+    }
+
+    @MainActor
+    static func light() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
+
+    @MainActor
+    static func tapMedium() {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    }
 }
