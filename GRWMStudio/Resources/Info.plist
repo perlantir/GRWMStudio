@@ -18,7 +18,7 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>DeepARLicenseKey</key>
+	<key>DEEPAR_LICENSE_KEY</key>
 	<string>$(DEEPAR_LICENSE_KEY)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>GRWM Studio uses your camera to show you the magic mirror.</string>

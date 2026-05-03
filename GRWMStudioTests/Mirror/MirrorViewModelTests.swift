@@ -23,6 +23,32 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.state, .idle)
     }
 
+    func testMissingLicenseFailsWithLicenseInvalidVariant() async {
+        let viewModel = MirrorViewModel(
+            licenseLoader: { throw DeepARLicense.LoadError.empty }
+        )
+
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        XCTAssertEqual(viewModel.state, .failed(.licenseInvalid))
+        XCTAssertEqual(viewModel.lastError, .licenseInvalid)
+    }
+
+    func testBootstrapTimeoutFailsWithEffectFailVariant() async {
+        let mock = MirrorMockDeepARClient(autoInitialize: false, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .milliseconds(20))
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            licenseLoader: { "test-license" },
+            usesSimulatorPlaceholder: false
+        )
+
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        XCTAssertEqual(viewModel.state, .failed(.effectFail))
+        XCTAssertEqual(viewModel.lastError, .effectFail)
+    }
+
     func testSelectShadeLoadsEffectAppliesParametersAndTracksSelection() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))

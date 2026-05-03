@@ -94,6 +94,8 @@ struct MirrorView: View {
     private func errorMessage(for variant: ErrorVariant) -> String {
         switch variant {
         case .license:
+            "Studio Pro needs a grown-up."
+        case .licenseInvalid:
             "License check needs attention."
         case .effectFail:
             "The mirror effect needs a reset."

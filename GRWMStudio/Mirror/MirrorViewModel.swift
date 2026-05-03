@@ -16,10 +16,19 @@ final class MirrorViewModel {
 
     @ObservationIgnored private var env: AppEnvironment?
     @ObservationIgnored private var faceTask: Task<Void, Never>?
+    @ObservationIgnored private let licenseLoader: () throws -> String
+    @ObservationIgnored private let usesSimulatorPlaceholder: Bool
 
-    init(controller: DeepARController = DeepARController(), catalog: EffectCatalog = .shared) {
+    init(
+        controller: DeepARController = DeepARController(),
+        catalog: EffectCatalog = .shared,
+        licenseLoader: @escaping () throws -> String = { try DeepARLicense.key() },
+        usesSimulatorPlaceholder: Bool = MirrorViewModel.defaultUsesSimulatorPlaceholder
+    ) {
         self.controller = controller
         self.catalog = catalog
+        self.licenseLoader = licenseLoader
+        self.usesSimulatorPlaceholder = usesSimulatorPlaceholder
     }
 
     func start(env: AppEnvironment) async {
@@ -38,26 +47,42 @@ final class MirrorViewModel {
 
         observeFaceVisibility()
 
-        #if targetEnvironment(simulator)
-        state = .running
-        Logger.deepAR.info("Mirror using simulator DeepAR placeholder")
-        return
-        #else
-        state = .starting
+        let licenseKey: String
+        do {
+            licenseKey = try licenseLoader()
+        } catch {
+            state = .failed(.licenseInvalid)
+            lastError = .licenseInvalid
+            Logger.mirror.error("DeepAR license missing or empty")
+            return
+        }
+
+        if usesSimulatorPlaceholder {
+            state = .running
+            Logger.deepAR.info("Mirror using simulator DeepAR placeholder")
+            return
+        }
 
         do {
             if controller.state == .uninitialized {
-                try await controller.bootstrap()
+                try await controller.bootstrap(licenseKey: licenseKey)
             }
 
             try await controller.startCamera(includeAudio: false)
             state = .running
+        } catch DeepARController.SetupError.missingLicenseKey {
+            state = .failed(.licenseInvalid)
+            lastError = .licenseInvalid
+            Logger.mirror.error("DeepAR license rejected as missing during bootstrap")
+        } catch DeepARController.SetupError.sdkInitTimeout {
+            state = .failed(.effectFail)
+            lastError = .effectFail
+            Logger.mirror.error("DeepAR bootstrap timed out")
         } catch {
             state = .failed(.effectFail)
             lastError = .effectFail
             Logger.deepAR.error("Mirror start failed: \(error.localizedDescription)")
         }
-        #endif
     }
 
     func pause() {
@@ -227,6 +252,14 @@ final class MirrorViewModel {
     private var shouldSkipControllerCallsForSimulator: Bool {
         #if targetEnvironment(simulator)
         controller.state != .ready
+        #else
+        false
+        #endif
+    }
+
+    private static var defaultUsesSimulatorPlaceholder: Bool {
+        #if targetEnvironment(simulator)
+        true
         #else
         false
         #endif

@@ -339,6 +339,6 @@ extension DeepARController {
 extension DeepARController {
     /// Reads the DeepAR license key injected into the app Info.plist.
     public static func licenseKeyFromInfoPlist() -> String {
-        Bundle.main.object(forInfoDictionaryKey: "DeepARLicenseKey") as? String ?? ""
+        (try? DeepARLicense.key()) ?? ""
     }
 }

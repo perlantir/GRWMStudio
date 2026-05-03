@@ -1,0 +1,6 @@
+--- Log capture for bundle ID: app.grwmstudio.ios ---
+getpwuid_r did not find a match for uid 503
+Filtering the log data using "subsystem == "app.grwmstudio.ios""
+Timestamp                       Thread     Type        Activity             PID    TTL
+2026-05-03 00:58:13.764301-0500 0x9183df   Info        0x0                  58194  0    GRWMStudio: (GRWMStudio.debug.dylib) [app.grwmstudio.ios:deepar] Effect catalog loaded
+2026-05-03 00:58:13.912662-0500 0x9183df   Error       0x0                  58194  0    GRWMStudio: (GRWMStudio.debug.dylib) [app.grwmstudio.ios:mirror] DeepAR license missing or empty

@@ -35,6 +35,7 @@ final class RootCoordinator {
         case micDenied
         case photoDenied
         case license
+        case licenseInvalid
         case effectFail
         case recFail
         case saveFail
