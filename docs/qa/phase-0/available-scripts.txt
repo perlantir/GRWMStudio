@@ -1,0 +1,2 @@
+Scripts/lint.sh
+Scripts/verify-deepar-isolation.sh
