@@ -1,0 +1,13 @@
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/butter.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/butterDeep.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/cream.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/ink.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/lavender.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/lavenderDeep.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/mint.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/pink.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/pinkDeep.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/pinkLight.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/pinkPaper.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/recRed.colorset
+GRWMStudio/Resources/Assets.xcassets/Colors/DH/recRedDeep.colorset

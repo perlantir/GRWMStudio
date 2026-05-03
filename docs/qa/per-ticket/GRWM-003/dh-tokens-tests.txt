@@ -1,0 +1,28 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+note: Building targets in dependency order
+note: Target dependency graph (3 targets)
+note: Run script build phase 'SwiftLint' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'GRWMStudio' from project 'GRWMStudio')
+[GRWMStudio] Running script SwiftLint
+Signing GRWMStudio.debug.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing __preview.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing GRWMStudio.app (in target 'GRWMStudio' from project 'GRWMStudio')
+[GRWMStudio] Validate GRWMStudio.app
+Test Suite 'Selected tests' started at 2026-05-02 19:56:00.300.
+Test Suite 'GRWMStudioTests.xctest' started at 2026-05-02 19:56:00.300.
+Test Suite 'DHTokensTests' started at 2026-05-02 19:56:00.300.
+    ✔ testColorTokensMatchSpec (0.001 seconds)
+    ✔ testHexInitializersHandleEightDigitValues (0.000 seconds)
+    ✔ testHexInitializersHandleSixDigitValues (0.001 seconds)
+    ✔ testRadiusTokensMatchSpec (0.000 seconds)
+    ✔ testSpacingTokensMatchSpec (0.000 seconds)
+Executed 5 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'GRWMStudioTests.xctest' passed at 2026-05-02 19:56:00.305.
+Executed 5 tests, with 0 failures (0 unexpected) in 0.003 (0.005) seconds
+Executed 5 tests, with 0 failures (0 unexpected) in 0.003 (0.005) seconds
+Test session results: /Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Logs/Test/Test-GRWMStudio-2026.05.02_19-55-57--0500.xcresult
+Test Succeeded
+Testing started

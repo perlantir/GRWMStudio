@@ -8,9 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
+		20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EE539AD707663BED29DBAA /* DH+Color.swift */; };
+		2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */; };
+		3F7455FE0687C449265467D7 /* look_legacy01.deepar in Resources */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
+		90D351796EA2D03619138483 /* baseBeauty.deepar in Resources */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
+		C0A008C2DD8C344D0C7BB51D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67CB30236678D50E4D8BA115 /* Assets.xcassets */; };
+		CC20A3BC85640FB2ADC32079 /* look_legacy02.deepar in Resources */ = {isa = PBXBuildFile; fileRef = 056D9293EAE75780F27C49DB /* look_legacy02.deepar */; };
+		DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */; };
 		EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */; };
+		EDFF469B66D685262FCE81F3 /* DH+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,18 +39,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
+		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
+		5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		67CB30236678D50E4D8BA115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
 		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioTests.swift; sourceTree = "<group>"; };
 		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		E8EE539AD707663BED29DBAA /* DH+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Color.swift"; sourceTree = "<group>"; };
 		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
+		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
 		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0A3AC64F1C029DD5373D4683 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
 		17815A28FB4EA66FD13AEA62 = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +76,15 @@
 				F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */,
 				FB9A548A4C58104381E19DE3 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		29EE459A880492A90D704EBE /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				E8EE539AD707663BED29DBAA /* DH+Color.swift */,
+				EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */,
+			);
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		322DBD4C113A738A4E28F066 /* App */ = {
@@ -67,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */,
+				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
 			);
 			path = GRWMStudioTests;
 			sourceTree = "<group>";
@@ -84,8 +118,30 @@
 			isa = PBXGroup;
 			children = (
 				322DBD4C113A738A4E28F066 /* App */,
+				29EE459A880492A90D704EBE /* DesignSystem */,
+				AA738BCAA887B227C0AA18B5 /* Resources */,
 			);
 			path = GRWMStudio;
+			sourceTree = "<group>";
+		};
+		AA738BCAA887B227C0AA18B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				67CB30236678D50E4D8BA115 /* Assets.xcassets */,
+				5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */,
+				E0B65DF5659ED1DFA0C0A332 /* Effects */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E0B65DF5659ED1DFA0C0A332 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */,
+				42EE7539807C18A27917DF2C /* look_legacy01.deepar */,
+				056D9293EAE75780F27C49DB /* look_legacy02.deepar */,
+			);
+			path = Effects;
 			sourceTree = "<group>";
 		};
 		F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */ = {
@@ -111,11 +167,12 @@
 /* Begin PBXNativeTarget section */
 		2E1F08A02DDB466A6B9F47FC /* GRWMStudio */ = {
 			isa = PBXNativeTarget;
-				buildConfigurationList = 8B84C32CE3DD54986DB91D7D /* Build configuration list for PBXNativeTarget "GRWMStudio" */;
-				buildPhases = (
-					A1B2C3D4E5F60718293A4B5C /* SwiftLint */,
-					9846BBA5142EA350BC38869B /* Sources */,
-				);
+			buildConfigurationList = 8B84C32CE3DD54986DB91D7D /* Build configuration list for PBXNativeTarget "GRWMStudio" */;
+			buildPhases = (
+				581C1B9288C450B253456AE9 /* SwiftLint */,
+				9846BBA5142EA350BC38869B /* Sources */,
+				1490A50B5373B071E599650F /* Resources */,
+			);
 			buildRules = (
 			);
 			dependencies = (
@@ -204,10 +261,25 @@
 				B9D5AE14F9121C8DAFB2AB5B /* GRWMStudioUITests */,
 			);
 		};
-	/* End PBXProject section */
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1490A50B5373B071E599650F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0A008C2DD8C344D0C7BB51D /* Assets.xcassets in Resources */,
+				DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */,
+				90D351796EA2D03619138483 /* baseBeauty.deepar in Resources */,
+				3F7455FE0687C449265467D7 /* look_legacy01.deepar in Resources */,
+				CC20A3BC85640FB2ADC32079 /* look_legacy02.deepar in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A1B2C3D4E5F60718293A4B5C /* SwiftLint */ = {
+		581C1B9288C450B253456AE9 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -216,7 +288,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/.swiftlint.yml",
+				"${SRCROOT}/.swiftlint.yml",
 			);
 			name = SwiftLint;
 			outputFileListPaths = (
@@ -229,11 +301,12 @@
 		};
 /* End PBXShellScriptBuildPhase section */
 
-	/* Begin PBXSourcesBuildPhase section */
+/* Begin PBXSourcesBuildPhase section */
 		869A8ACDA39D94D1842A549B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +316,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */,
+				20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */,
+				EDFF469B66D685262FCE81F3 /* DH+Tokens.swift in Sources */,
 				18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,7 +443,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.tests;
 				PRODUCT_NAME = GRWMStudioTests;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GRWMStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GRWMStudio";
 			};
 			name = Release;
@@ -387,7 +462,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.tests;
 				PRODUCT_NAME = GRWMStudioTests;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GRWMStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GRWMStudio";
 			};
 			name = Debug;
@@ -492,7 +567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.uitests;
 				PRODUCT_NAME = GRWMStudioUITests;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = GRWMStudio;
 			};
 			name = Debug;
@@ -511,7 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.uitests;
 				PRODUCT_NAME = GRWMStudioUITests;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = GRWMStudio;
 			};
 			name = Release;

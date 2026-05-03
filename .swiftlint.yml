@@ -22,6 +22,10 @@ line_length:
   ignores_urls: true
   ignores_comments: true
 
+type_name:
+  excluded:
+    - DH
+
 force_unwrapping:
   severity: warning
 
