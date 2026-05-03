@@ -38,7 +38,7 @@ struct RootContainer: View {
         case .onboardingSplash:
             SplashView()
         case .onboardingWelcome:
-            placeholder("Welcome placeholder")
+            WelcomeView()
         case .onboardingParentInfo:
             placeholder("Parent Info placeholder")
         case .onboardingPermissions:
