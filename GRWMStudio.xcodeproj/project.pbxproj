@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE28718EC19A161B7B6256B8 /* RecordingService.swift */; };
+		08BD9A0040A4702A6E0DA1BA /* Shades+Lips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */; };
 		08F3DD2BC33E2F5C73BF965F /* DHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4E6016A9E66CAE4115EDD /* DHCard.swift */; };
 		095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
 		0D00171D0CF9553190798188 /* eyelashes_natural.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 135CF27B332AB567A935E3F1 /* eyelashes_natural.png */; };
 		0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5D32426D75F1151F9561AC5 /* shadow.png */; };
 		124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CB44E7E81F82BDD61D38E7A /* lut_soft.png */; };
+		14C299B26E9DD987F98C089A /* MirrorLipViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */; };
 		16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C372D46745B2B38661FF3 /* FilterCategory.swift */; };
 		1800B2D637206141971D7418 /* Shade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E973E0B871A21B0A2A52D3 /* Shade.swift */; };
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
@@ -45,6 +47,7 @@
 		4CA779BCA5540FB75C118A8A /* Shades+Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8166C382E2B2372DFAE3B23D /* Shades+Eyes.swift */; };
 		519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C558272F9814E7825BC889 /* PermRow.swift */; };
 		527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79AC2D570879CC7CA211099B /* look_legacy02.png */; };
+		53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
 		60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */; };
@@ -60,6 +63,7 @@
 		79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */; };
 		79F595E03C1BC8032A2BB98D /* eyeliner_none.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00B656B3CF36F3ABC99C855A /* eyeliner_none.png */; };
 		7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */; };
+		7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4D64278E0C4061B17F667183 /* lips_satin.png */; };
 		7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441DC4BB243A8321854669A /* DHWallpaper.swift */; };
 		7EF79EF347D8F95885442153 /* StickerFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */; };
 		7FDE54C8812562F6E58CEC8E /* DeepARLicenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7FE6884AADB7B47AAB7AF /* DeepARLicenseTests.swift */; };
@@ -87,6 +91,7 @@
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
 		A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F08944FAB932F872FCC276 /* PermissionsView.swift */; };
 		AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ED3FC6892310C07240BA42 /* MirrorView.swift */; };
+		ABFD6743A207E5DCECFFACE1 /* lips_gloss.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */; };
 		AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */; };
 		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA57750E522F4B57E9C302 /* WelcomeView.swift */; };
@@ -105,6 +110,7 @@
 		C69E6C6F9CE9E05AF268FE2A /* AppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DE872D8CE0EFD6B557813 /* AppShell.swift */; };
 		CC6F483929F02A1013C47963 /* DeepARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAECB2E29E326501184B58A9 /* DeepARView.swift */; };
 		CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */; };
+		CD92DE08C4C84E90F3E4AE8B /* lips_matte.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767FD9102336E13A4ACC8EE6 /* lips_matte.png */; };
 		D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */; };
 		D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 408499017F9D17AED4F1B6A0 /* lut_glow.png */; };
 		D4011D6B13EB41FC78E7FCCD /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27404CCB96EE563E725C9A98 /* CaptureService.swift */; };
@@ -156,18 +162,13 @@
 		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects/thumbnails;
+			dstPath = Effects;
 			dstSubfolderSpec = 7;
 			files = (
-				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
-				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
-				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
-				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
-				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
-				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
-				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
-				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
-				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
+				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
+				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
+				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
+				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,19 +190,28 @@
 				A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */,
 				38B4C99A41B3D7ADC7EF8042 /* eyeshadow_basic.png in CopyFiles */,
 				60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */,
+				53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */,
+				ABFD6743A207E5DCECFFACE1 /* lips_gloss.png in CopyFiles */,
+				CD92DE08C4C84E90F3E4AE8B /* lips_matte.png in CopyFiles */,
+				7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects;
+			dstPath = Effects/thumbnails;
 			dstSubfolderSpec = 7;
 			files = (
-				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
-				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
-				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
-				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
+				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
+				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
+				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
+				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
+				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
+				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
+				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
+				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
+				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +236,7 @@
 		04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeshadow_smokey.png; sourceTree = "<group>"; };
 		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
 		08F4E6016A9E66CAE4115EDD /* DHCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHCard.swift; sourceTree = "<group>"; };
+		09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Lips.swift"; sourceTree = "<group>"; };
 		0B16955494AFCF013FFD049C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		10ED3FC6892310C07240BA42 /* MirrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorView.swift; sourceTree = "<group>"; };
 		116BFE195EF24C36D83D2276 /* CaptureServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureServiceTests.swift; sourceTree = "<group>"; };
@@ -249,6 +260,7 @@
 		33B4D75786E88E615D6143E3 /* EyesTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyesTrayView.swift; sourceTree = "<group>"; };
 		36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
 		3762331612665796AC7A7637 /* eyelashes_drama.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_drama.png; sourceTree = "<group>"; };
+		37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_glitter.png; sourceTree = "<group>"; };
 		3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Regular.ttf"; sourceTree = "<group>"; };
 		3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMapTests.swift; sourceTree = "<group>"; };
 		408499017F9D17AED4F1B6A0 /* lut_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glow.png; sourceTree = "<group>"; };
@@ -258,6 +270,7 @@
 		44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTests.swift; sourceTree = "<group>"; };
 		4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Medium.ttf"; sourceTree = "<group>"; };
 		4D1839F69BE023409EA86E07 /* FilterRailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRailView.swift; sourceTree = "<group>"; };
+		4D64278E0C4061B17F667183 /* lips_satin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_satin.png; sourceTree = "<group>"; };
 		4D67B9D91B985787DB196F53 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
 		508583F491B70CF60A09098B /* blush_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blush_mask.png; sourceTree = "<group>"; };
@@ -278,6 +291,7 @@
 		72758F600E00EC23E45ABED2 /* OnboardingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingState.swift; sourceTree = "<group>"; };
 		733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerBootstrapTests.swift; sourceTree = "<group>"; };
 		7343E3534A7DE0BCC753B134 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		767FD9102336E13A4ACC8EE6 /* lips_matte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_matte.png; sourceTree = "<group>"; };
 		7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		78C558272F9814E7825BC889 /* PermRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermRow.swift; sourceTree = "<group>"; };
 		79AC2D570879CC7CA211099B /* look_legacy02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy02.png; sourceTree = "<group>"; };
@@ -324,6 +338,7 @@
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		CDDD1ED41FF361FAF2299E81 /* eyeshadow_basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeshadow_basic.png; sourceTree = "<group>"; };
+		CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorLipViewModelTests.swift; sourceTree = "<group>"; };
 		D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concurrency+Extensions.swift"; sourceTree = "<group>"; };
 		D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModel.swift; sourceTree = "<group>"; };
@@ -346,6 +361,7 @@
 		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
 		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA27149E6906AFA7487B6A8 /* eyeliner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner.png; sourceTree = "<group>"; };
+		F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_gloss.png; sourceTree = "<group>"; };
 		F58CE707234895BA156A2DCB /* EffectCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalogTests.swift; sourceTree = "<group>"; };
 		F81E22F49903D155C25263DE /* lipstick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lipstick.png; sourceTree = "<group>"; };
 		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
@@ -395,6 +411,10 @@
 				4305B706633CFFF0075CBB45 /* eyeliner_winged.png */,
 				CDDD1ED41FF361FAF2299E81 /* eyeshadow_basic.png */,
 				04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */,
+				37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */,
+				F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */,
+				767FD9102336E13A4ACC8EE6 /* lips_matte.png */,
+				4D64278E0C4061B17F667183 /* lips_satin.png */,
 			);
 			path = textures;
 			sourceTree = "<group>";
@@ -578,6 +598,7 @@
 				9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */,
 				91F75F769340157BAFF5B011 /* Shades+Cheeks.swift */,
 				8166C382E2B2372DFAE3B23D /* Shades+Eyes.swift */,
+				09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */,
 				573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */,
 				B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */,
 				81BD9E808A5ECF675350EC72 /* SlotSelection.swift */,
@@ -631,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */,
+				CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */,
 				B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */,
 				44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */,
 			);
@@ -894,6 +916,7 @@
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
 				DA1A5E58CC40E2706A08B246 /* FilterCategoryTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
+				14C299B26E9DD987F98C089A /* MirrorLipViewModelTests.swift in Sources */,
 				8BC489AE4C14115066C88E63 /* MirrorViewModelTests.swift in Sources */,
 				D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */,
 				DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */,
@@ -965,6 +988,7 @@
 				9E4E4126FC8ABC0E06F984B1 /* Shades+Brows.swift in Sources */,
 				44B05971C0E0DBB6921D130D /* Shades+Cheeks.swift in Sources */,
 				4CA779BCA5540FB75C118A8A /* Shades+Eyes.swift in Sources */,
+				08BD9A0040A4702A6E0DA1BA /* Shades+Lips.swift in Sources */,
 				FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */,
 				F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */,
 				71337A950998A0A1175144E9 /* SplashView.swift in Sources */,

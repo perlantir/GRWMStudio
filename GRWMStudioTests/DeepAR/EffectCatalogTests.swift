@@ -32,7 +32,7 @@ final class EffectCatalogTests: XCTestCase {
         XCTAssertEqual(eyes.first(where: { $0.id == "shadow" })?.shades.count, 5)
         XCTAssertNotNil(eyes.first(where: { $0.id == "eyeliner" }))
 
-        XCTAssertEqual(root.effects["lips"]?.first(where: { $0.id == "lipstick" })?.shades.count, 5)
+        XCTAssertEqual(root.effects["lips"]?.first(where: { $0.id == "lips" })?.shades.count, 5)
         XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look_legacy01" }))
         XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look_legacy02" }))
     }
@@ -82,7 +82,7 @@ final class EffectCatalogTests: XCTestCase {
 
     func testProShadeFlagsExistForRowsWithPremiumContent() async throws {
         let root = try await EffectCatalog.shared.load()
-        let rows = ["skin": "baseBeauty", "base": "noFilter", "eyes": "shadow", "lips": "lipstick"]
+        let rows = ["skin": "baseBeauty", "base": "noFilter", "eyes": "shadow", "lips": "lips"]
 
         for (category, effectID) in rows {
             let effect = root.effects[category]?.first(where: { $0.id == effectID })

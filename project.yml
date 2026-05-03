@@ -131,6 +131,26 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/lips_matte.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/lips_gloss.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/lips_satin.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/lips_glitter.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
       - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
         buildPhase:
           copyFiles:

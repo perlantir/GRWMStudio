@@ -53,7 +53,15 @@ protocol ProEntitlementService: Sendable {
 }
 
 struct StubProEntitlementService: ProEntitlementService {
-    var hasPro = false
+    var hasPro = defaultHasPro
+
+    private static var defaultHasPro: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-GRWMDebugHasPro")
+        #else
+        false
+        #endif
+    }
 }
 
 protocol AnalyticsService: Sendable {

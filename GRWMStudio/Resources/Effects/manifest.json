@@ -237,7 +237,7 @@
     ],
     "lips": [
       {
-        "id": "lipstick",
+        "id": "lips",
         "displayName": "Lipstick",
         "file": "baseBeauty.deepar",
         "thumbnail": "thumbnails/lipstick.png",

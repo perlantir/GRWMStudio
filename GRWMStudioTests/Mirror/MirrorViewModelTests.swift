@@ -237,7 +237,7 @@ final class MirrorViewModelTests: XCTestCase {
     }
 }
 
-private final class MirrorPermissionsStub: PermissionsService, @unchecked Sendable {
+final class MirrorPermissionsStub: PermissionsService, @unchecked Sendable {
     private let camera: AppPermissionStatus
     private(set) var requestedCamera = false
 
@@ -283,12 +283,12 @@ private final class MirrorPermissionsStub: PermissionsService, @unchecked Sendab
     }
 }
 
-private struct MirrorProEntitlementStub: ProEntitlementService {
+struct MirrorProEntitlementStub: ProEntitlementService {
     let hasPro: Bool
 }
 
 @MainActor
-private final class MirrorMockDeepARClient: DeepARClient {
+final class MirrorMockDeepARClient: DeepARClient {
     struct Switch: Equatable {
         let slot: String
         let path: String?

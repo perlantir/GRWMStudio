@@ -1,0 +1,45 @@
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/DeepAR.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CameraController.h"
+3 |
+
+/Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Build/Products/Release-iphonesimulator/DeepAR.framework/Headers/DeepAR.h:589:79: warning: 'CAEAGLLayer' is deprecated: first deprecated in iOS 12.0 - OpenGLES is deprecated. (Define GLES_SILENCE_DEPRECATION to silence these warnings)
+ 587 |  * - Parameter window: Destination layer where the DeepAR engine will render the frames.
+ 588 |  */
+ 589 | - (void)initializeWithWidth:(NSInteger)width height:(NSInteger)height window:(CAEAGLLayer*)window;
+     |                                                                               `- warning: 'CAEAGLLayer' is deprecated: first deprecated in iOS 12.0 - OpenGLES is deprecated. (Define GLES_SILENCE_DEPRECATION to silence these warnings)
+ 590 | #elif TARGET_OS_OSX
+ 591 | /**
+
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CAEAGLLayer.h:26:12: note: 'CAEAGLLayer' has been explicitly marked deprecated here
+24 | API_AVAILABLE(ios(2.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos, visionos)
+25 | #endif
+26 | @interface CAEAGLLayer : CALayer <EAGLDrawable>
+   |            `- note: 'CAEAGLLayer' has been explicitly marked deprecated here
+27 | {
+28 | @private
+
+<module-includes>:2:9: note: in file included from <module-includes>:2:
+1 | #import "Headers/DeepAR.h"
+2 | #import "Headers/CameraController.h"
+  |         `- note: in file included from <module-includes>:2:
+3 |
+
+2 warnings generated.
+/Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Build/Products/Release-iphonesimulator/DeepAR.framework/Headers/CameraController.h:61:31: warning: 'AVCaptureVideoOrientation' is deprecated: first deprecated in iOS 17.0 - Use AVCaptureDeviceRotationCoordinator instead
+ 59 |  * Should be called with right orientation when the device rotates.
+ 60 |  */
+ 61 | @property (nonatomic, assign) AVCaptureVideoOrientation videoOrientation;
+    |                               `- warning: 'AVCaptureVideoOrientation' is deprecated: first deprecated in iOS 17.0 - Use AVCaptureDeviceRotationCoordinator instead
+ 62 |
+ 63 | /**
+
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVCaptureSession.h:132:28: note: 'AVCaptureVideoOrientation' has been explicitly marked deprecated here
+ 130 |     Indicates that video should be oriented horizontally, home button on the left.
+ 131 |  */
+ 132 | typedef NS_ENUM(NSInteger, AVCaptureVideoOrientation) {
+     |                            `- note: 'AVCaptureVideoOrientation' has been explicitly marked deprecated here
+ 133 |     AVCaptureVideoOrientationPortrait           = 1,
+ 134 |     AVCaptureVideoOrientationPortraitUpsideDown = 2,
+note: Run script build phase 'SwiftLint' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'GRWMStudio' from project 'GRWMStudio')

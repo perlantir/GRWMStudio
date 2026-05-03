@@ -111,4 +111,27 @@ final class ShadeTests: XCTestCase {
         XCTAssertTrue(coral.parameters.contains { $0.ref == "blushMask" && $0.value == .texture("blush_mask") })
         XCTAssertTrue(coral.parameters.contains { $0.ref == "blushEnabled" && $0.value == .enabled(true) })
     }
+
+    func testLipShadesCarryFreeAndProStyles() {
+        XCTAssertEqual(
+            Shade.lipShades.map(\.id),
+            [
+                "lip.classic-red",
+                "lip.petal-pink",
+                "lip.nude",
+                "lip.berry",
+                "lip.coral",
+                "lip.plum",
+                "lip.neon-pink",
+                "lip.disco-brat"
+            ]
+        )
+        XCTAssertEqual(Shade.lipShades.map(\.isPro), [false, false, false, false, false, true, true, true])
+
+        let petal = Shade.lipShades[1]
+        XCTAssertEqual(petal.effectID, "lips")
+        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsColor" })
+        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsTexture" && $0.value == .texture("lips_gloss") })
+        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsEnabled" && $0.value == .enabled(true) })
+    }
 }
