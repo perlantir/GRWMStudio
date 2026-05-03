@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.app
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Lint
+        run: ./Scripts/lint.sh
+      - name: Verify DeepAR isolation
+        run: ./Scripts/verify-deepar-isolation.sh
+      - name: Build & Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -scheme GRWMStudio \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -resultBundlePath TestResults.xcresult \
+            | xcbeautify
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults.xcresult
