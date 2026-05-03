@@ -37,6 +37,19 @@ final class CaptureServiceTests: XCTestCase {
         XCTAssertTrue(FileManager.default.fileExists(atPath: destinationURL.path))
     }
 
+    func testMoveVideoToTemporaryVideoPreservesContainerExtension() throws {
+        let sourceURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID()).mov")
+        try Data([0, 1, 2, 3]).write(to: sourceURL)
+
+        let destinationURL = try CaptureService.moveVideoToTemporaryVideo(from: sourceURL.path)
+        defer { try? FileManager.default.removeItem(at: destinationURL) }
+
+        XCTAssertEqual(destinationURL.pathExtension, "mov")
+        XCTAssertTrue(destinationURL.path.hasPrefix(FileManager.default.temporaryDirectory.path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: sourceURL.path))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: destinationURL.path))
+    }
+
     private func testImage() -> UIImage {
         UIGraphicsImageRenderer(size: CGSize(width: 8, height: 8)).image { context in
             UIColor.red.setFill()

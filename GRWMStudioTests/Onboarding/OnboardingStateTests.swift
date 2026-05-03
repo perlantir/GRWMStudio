@@ -1,4 +1,5 @@
 @testable import GRWMStudio
+import UIKit
 import XCTest
 
 @MainActor
@@ -70,9 +71,33 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertNil(coordinator.overlay)
     }
 
+    func testCoordinatorPreviewOverlayPreservesAppRouteAndDismisses() {
+        let coordinator = RootCoordinator()
+        coordinator.route = .app
+
+        coordinator.showPreview(asset: .photo(Self.testImage()))
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertEqual(coordinator.overlay, .preview)
+        XCTAssertNotNil(coordinator.previewAsset)
+
+        coordinator.dismissPreview()
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertNil(coordinator.overlay)
+        XCTAssertNil(coordinator.previewAsset)
+    }
+
     private func makeDefaults() throws -> UserDefaults {
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
         defaults.removePersistentDomain(forName: suiteName)
         return defaults
+    }
+
+    private static func testImage() -> UIImage {
+        UIGraphicsImageRenderer(size: CGSize(width: 4, height: 4)).image { context in
+            UIColor.systemPink.setFill()
+            context.fill(CGRect(x: 0, y: 0, width: 4, height: 4))
+        }
     }
 }

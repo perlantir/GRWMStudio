@@ -1,4 +1,32 @@
 import Foundation
+import SwiftUI
+
+enum CaptureKind: String, CaseIterable, Identifiable {
+    case photo
+    case video
+
+    var id: String {
+        rawValue
+    }
+
+    var label: String {
+        switch self {
+        case .photo:
+            "Photo"
+        case .video:
+            "Video"
+        }
+    }
+
+    var systemName: String {
+        switch self {
+        case .photo:
+            "camera.fill"
+        case .video:
+            "video.fill"
+        }
+    }
+}
 
 enum CaptureMode: Equatable {
     case idle

@@ -7,6 +7,11 @@ extension MirrorViewModel {
     }
 
     func selectShade(in slot: EffectSlot, effectID: EffectFile.ID?, shade: MakeupShade) async {
+        guard beginSelectionIfPossible(label: shade.id) else {
+            return
+        }
+        defer { endSelection() }
+
         do {
             let effect = try await effect(containing: shade, in: slot, preferredID: effectID)
             let isPro = effect.isPro || (shade.isPro ?? false)
@@ -23,9 +28,7 @@ extension MirrorViewModel {
             }
 
             if !shouldSkipControllerCallsForSimulator {
-                if controller.loadedEffects[slot] != effect.id {
-                    try await controller.loadEffect(effect, slot: slot)
-                }
+                try await ensureEffectReady(effect, requestedSlot: slot)
                 try await applyShadeParameters(shade)
             } else {
                 Logger.mirror.info("Simulator placeholder selected shade without DeepAR load: \(shade.id, privacy: .public)")
@@ -41,6 +44,11 @@ extension MirrorViewModel {
     }
 
     func selectShade(in slot: EffectSlot, shade: Shade) async {
+        guard beginSelectionIfPossible(label: shade.id) else {
+            return
+        }
+        defer { endSelection() }
+
         lastShadeSelection = (slot, shade)
 
         do {
@@ -56,9 +64,7 @@ extension MirrorViewModel {
             }
 
             if !shouldSkipControllerCallsForSimulator {
-                if controller.loadedEffects[slot] != effect.id {
-                    try await controller.loadEffect(effect, slot: slot)
-                }
+                try await ensureEffectReady(effect, requestedSlot: slot)
                 try await applyShadeParameters(shade.parameters)
             } else {
                 Logger.mirror.info("Simulator placeholder selected shade without DeepAR load: \(shade.id, privacy: .public)")
@@ -73,6 +79,37 @@ extension MirrorViewModel {
             recordEffectFailure()
             lastError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    private func beginSelectionIfPossible(label: String) -> Bool {
+        guard !isApplyingSelection else {
+            Logger.mirror.info("Ignored overlapping selection: \(label, privacy: .public)")
+            return false
+        }
+
+        isApplyingSelection = true
+        return true
+    }
+
+    private func endSelection() {
+        isApplyingSelection = false
+    }
+
+    private func ensureEffectReady(_ effect: EffectFile, requestedSlot slot: EffectSlot) async throws {
+        if effect.file == "baseBeauty.deepar" {
+            if sharedBeautyEffectLoaded || controller.loadedEffects.values.contains("baseBeauty") {
+                return
+            }
+
+            let baseEffect = try await catalog.effect(byID: "baseBeauty") ?? effect
+            try await controller.loadEffect(baseEffect, slot: .skin)
+            sharedBeautyEffectLoaded = true
+            return
+        }
+
+        if controller.loadedEffects[slot] != effect.id {
+            try await controller.loadEffect(effect, slot: slot)
         }
     }
 

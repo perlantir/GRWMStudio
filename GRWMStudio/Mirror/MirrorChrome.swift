@@ -4,9 +4,9 @@ enum MirrorChrome {
     @MainActor
     static func top(onReset: @escaping @MainActor () -> Void) -> some View {
         HStack(alignment: .center) {
-            GRWMLogo(layout: .row, size: .md)
-                .padding(.horizontal, 14)
-                .frame(height: 46)
+            GRWMLogo(layout: .row, size: .lg)
+                .padding(.horizontal, 16)
+                .frame(width: 154, height: 54)
                 .background {
                     Capsule()
                         .fill(.white)

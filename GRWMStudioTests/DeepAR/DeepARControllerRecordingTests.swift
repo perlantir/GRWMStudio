@@ -27,6 +27,8 @@ final class DeepARControllerRecordingTests: XCTestCase {
         XCTAssertTrue(controller.isRecordingVideo)
         XCTAssertEqual(mock.videoStartSize?.width, 720)
         XCTAssertEqual(mock.videoStartSize?.height, 1_280)
+        XCTAssertTrue(mock.videoOutputName?.hasPrefix("rec_sdk_") == true)
+        XCTAssertEqual(mock.videoOutputPath, FileManager.default.temporaryDirectory.path)
 
         controller.failCaptureAndRecording(reason: "test cleanup")
     }
@@ -72,6 +74,23 @@ final class DeepARControllerRecordingTests: XCTestCase {
         XCTAssertTrue(mock.didFinishVideoRecording)
     }
 
+    func testRecordingServiceStartAndFinishVideoRecordingReturnsTemporaryMP4() async throws {
+        let mock = RecordingMockDeepARClient(autoInitialize: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        let service = RecordingService(controller: controller)
+
+        try await controller.bootstrap(licenseKey: "test-license")
+        let reservedURL = try await service.startVideoRecording()
+        let finishedURL = try await service.finishVideoRecording()
+        defer { try? FileManager.default.removeItem(at: finishedURL) }
+
+        XCTAssertEqual(reservedURL.pathExtension, "mov")
+        XCTAssertEqual(finishedURL.pathExtension, "mp4")
+        XCTAssertTrue(finishedURL.path.hasPrefix(FileManager.default.temporaryDirectory.path))
+        XCTAssertTrue(mock.didStartVideoRecording)
+        XCTAssertTrue(mock.didFinishVideoRecording)
+    }
+
     func testRecordingServiceTakeScreenshotReturnsDelegateImage() async throws {
         let mock = RecordingMockDeepARClient(autoInitialize: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
@@ -99,6 +118,8 @@ private final class RecordingMockDeepARClient: DeepARClient {
     private(set) var didStartVideoRecording = false
     private(set) var didFinishVideoRecording = false
     private(set) var videoStartSize: VideoSize?
+    private(set) var videoOutputPath: String?
+    private(set) var videoOutputName: String?
 
     init(autoInitialize: Bool) {
         self.autoInitialize = autoInitialize
@@ -130,6 +151,14 @@ private final class RecordingMockDeepARClient: DeepARClient {
         didStartVideoRecording = true
         videoStartSize = VideoSize(width: outputWidth, height: outputHeight)
         delegate?.didStartVideoRecording()
+    }
+
+    func setVideoRecordingOutputPath(_ path: String) {
+        videoOutputPath = path
+    }
+
+    func setVideoRecordingOutputName(_ name: String) {
+        videoOutputName = name
     }
 
     func finishVideoRecording() {

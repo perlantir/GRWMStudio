@@ -3,6 +3,8 @@ import SwiftUI
 struct MirrorTrayHostView: View {
     @Bindable var viewModel: MirrorViewModel
     @Binding var pendingCategoryAfterLook: FilterCategory?
+    private let shadeTrayBottomPadding: CGFloat = 72
+    private let looksTrayBottomPadding: CGFloat = 72
 
     var body: some View {
         VStack {
@@ -28,7 +30,7 @@ struct MirrorTrayHostView: View {
                         }
                     }
                 )
-                .padding(.bottom, 178)
+                .padding(.bottom, 120)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
@@ -56,13 +58,15 @@ struct MirrorTrayHostView: View {
             ) { shade in
                 Task { @MainActor in
                     await viewModel.selectShade(in: .skin, shade: shade)
+                    dismissTray()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .skin)
+                    dismissTray()
                 }
             }
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
 
         case .base:
@@ -77,18 +81,22 @@ struct MirrorTrayHostView: View {
                     } else {
                         await viewModel.selectShade(in: .base, shade: shade)
                     }
+                    dismissTray()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .base)
+                    dismissTray()
                 }
             }
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
 
         case .eyes:
-            EyesTrayView(viewModel: viewModel)
-                .padding(.bottom, 186)
+            EyesTrayView(viewModel: viewModel) {
+                dismissTray()
+            }
+                .padding(.bottom, shadeTrayBottomPadding)
                 .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
 
         case .brows:
@@ -105,18 +113,22 @@ struct MirrorTrayHostView: View {
             ) { shade in
                 Task { @MainActor in
                     await viewModel.selectShade(in: .lips, shade: shade)
+                    dismissTray()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .lips)
+                    dismissTray()
                 }
             }
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
 
         case .looks where pendingCategoryAfterLook == nil:
-            LooksTrayView(viewModel: viewModel)
-                .padding(.bottom, 172)
+            LooksTrayView(viewModel: viewModel) {
+                dismissTray()
+            }
+                .padding(.bottom, looksTrayBottomPadding)
                 .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
 
         case .looks, .none:
@@ -134,20 +146,22 @@ struct MirrorTrayHostView: View {
             ) { shade in
                 Task { @MainActor in
                     await viewModel.selectShade(in: .brows, shade: shade)
+                    dismissTray()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .brows)
+                    dismissTray()
                 }
             }
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
         } else {
             EmptyShadeTrayView(
                 category: .brows,
                 message: "Brows coming soon ✨ — your bigger pack will unlock these!"
             )
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
         }
     }
@@ -162,20 +176,22 @@ struct MirrorTrayHostView: View {
             ) { shade in
                 Task { @MainActor in
                     await viewModel.selectShade(in: .cheeks, shade: shade)
+                    dismissTray()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .cheeks)
+                    dismissTray()
                 }
             }
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
         } else {
             EmptyShadeTrayView(
                 category: .cheeks,
                 message: "Blush coming soon ✨"
             )
-            .padding(.bottom, 186)
+            .padding(.bottom, shadeTrayBottomPadding)
             .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
         }
     }
@@ -190,5 +206,12 @@ struct MirrorTrayHostView: View {
             pendingCategoryAfterLook = category
         }
         return true
+    }
+
+    private func dismissTray() {
+        withAnimation(.bouncy(duration: 0.22)) {
+            viewModel.activeCategory = nil
+            pendingCategoryAfterLook = nil
+        }
     }
 }

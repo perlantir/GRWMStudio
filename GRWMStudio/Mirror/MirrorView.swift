@@ -8,6 +8,7 @@ struct MirrorView: View {
     @State private var pendingCategoryAfterLook: FilterCategory?
     @State private var showNoFaceTip = false
     @State private var noFaceTipTask: Task<Void, Never>?
+    @State private var hasSeenFace = false
 
     var body: some View {
         ZStack {
@@ -41,6 +42,7 @@ struct MirrorView: View {
 
             effectFailureOverlay
             captureFailureOverlay
+            countdownOverlay
             flashOverlay
         }
         .preferredColorScheme(.light)
@@ -49,6 +51,9 @@ struct MirrorView: View {
             updateNoFaceTip(for: viewModel.isFaceDetected)
         }
         .onChange(of: viewModel.isFaceDetected) { _, visible in
+            if visible {
+                hasSeenFace = true
+            }
             updateNoFaceTip(for: visible)
         }
         .onChange(of: viewModel.state) { _, state in
@@ -82,6 +87,20 @@ struct MirrorView: View {
         .onDisappear {
             noFaceTipTask?.cancel()
             viewModel.pause()
+        }
+    }
+
+    @ViewBuilder
+    private var countdownOverlay: some View {
+        if viewModel.captureMode == .videoCountdown {
+            CountdownOverlay {
+                Task { @MainActor in
+                    await viewModel.videoCountdownComplete()
+                }
+            } onCancel: {
+                viewModel.cancelVideoCountdown()
+            }
+            .transition(.opacity)
         }
     }
 
@@ -210,6 +229,14 @@ struct MirrorView: View {
         }
 
         if visible {
+            hasSeenFace = true
+            withAnimation(.easeOut(duration: 0.18)) {
+                showNoFaceTip = false
+            }
+            return
+        }
+
+        guard hasSeenFace else {
             withAnimation(.easeOut(duration: 0.18)) {
                 showNoFaceTip = false
             }
@@ -217,7 +244,7 @@ struct MirrorView: View {
         }
 
         noFaceTipTask = Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(1500))
+            try? await Task.sleep(for: .milliseconds(3000))
             guard !Task.isCancelled else {
                 return
             }

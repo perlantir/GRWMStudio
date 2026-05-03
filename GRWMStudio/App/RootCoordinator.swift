@@ -19,6 +19,7 @@ final class RootCoordinator {
     }
 
     enum Overlay: Hashable {
+        case preview
         case parentGate(intent: ParentGateIntent)
         case paywall
     }
@@ -102,12 +103,16 @@ final class RootCoordinator {
 
     func showPreview(asset: CapturedAsset) {
         previewAsset = asset
-        route = .preview
+        overlay = .preview
     }
 
     func dismissPreview() {
         previewAsset = nil
-        route = .app
+        if overlay == .preview {
+            overlay = nil
+        } else {
+            route = .app
+        }
     }
 
     func startParentGate(intent: ParentGateIntent) {

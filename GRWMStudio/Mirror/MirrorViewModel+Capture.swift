@@ -10,6 +10,28 @@ extension MirrorViewModel {
         return activeCaptureMode
     }
 
+    func captureButtonTapped() async {
+        guard state == .running else {
+            return
+        }
+
+        switch selectedCaptureKind {
+        case .photo:
+            await capturePhoto()
+        case .video:
+            await toggleVideoRecording()
+        }
+    }
+
+    var isAwaitingVideoRelease: Bool {
+        switch activeCaptureMode {
+        case .videoCountdown, .videoRecording:
+            true
+        default:
+            false
+        }
+    }
+
     func onCaptureTap() {
         guard state == .running else {
             return
@@ -81,11 +103,17 @@ extension MirrorViewModel {
             return
         }
 
+        guard activeCaptureMode == .idle else {
+            return
+        }
+
+        captureTickTask?.cancel()
+        captureTickTask = nil
         capturePressStartedAt = currentDate()
-        activeCaptureMode = .videoRecording(secondsElapsed: 0)
+        activeCaptureMode = .videoCountdown
+        lastError = nil
         DHHaptics.tapMedium()
-        Logger.mirror.info("Capture event: videoCapture began")
-        startCaptureTickTask()
+        Logger.mirror.info("Capture event: videoCountdown began")
     }
 
     func dismissCaptureFailureBanner() {
@@ -106,32 +134,141 @@ extension MirrorViewModel {
             return
         }
 
-        let clampedDuration = min(max(0, duration), CapturePressClassifier.maxVideoDuration)
-        captureTickTask?.cancel()
-        captureTickTask = nil
-        capturePressStartedAt = nil
-        activeCaptureMode = .idle
-        lastCaptureEvent = .videoCapture(duration: clampedDuration)
-        Logger.mirror.info("Capture event: videoCapture duration=\(clampedDuration, privacy: .public)")
+        Task { @MainActor [weak self] in
+            await self?.endVideoFlow(force: false)
+        }
     }
 
-    private func startCaptureTickTask() {
-        captureTickTask?.cancel()
-        captureTickTask = Task { @MainActor [weak self] in
-            while let self, !Task.isCancelled {
-                guard let startedAt = self.capturePressStartedAt else {
-                    return
-                }
+    func cancelVideoCountdown() {
+        guard activeCaptureMode == .videoCountdown else {
+            return
+        }
 
-                let elapsed = min(
-                    self.currentDate().timeIntervalSince(startedAt),
-                    CapturePressClassifier.maxVideoDuration
-                )
-                self.activeCaptureMode = .videoRecording(secondsElapsed: elapsed)
-                try? await Task.sleep(for: .milliseconds(100))
+        capturePressStartedAt = nil
+        activeCaptureMode = .idle
+        Logger.mirror.info("Capture event: videoCountdown canceled")
+    }
+
+    func videoCountdownComplete() async {
+        guard state == .running, activeCaptureMode == .videoCountdown else {
+            return
+        }
+
+        do {
+            _ = try await videoRecording.start()
+            recordingStart = currentDate()
+            activeCaptureMode = .videoRecording(secondsElapsed: 0)
+            lastCaptureEvent = nil
+            Logger.mirror.info("Capture event: videoRecording started")
+            startRecordingTimer()
+        } catch {
+            capturePressStartedAt = nil
+            recordingStart = nil
+            activeCaptureMode = .idle
+            lastError = .recFail
+            Logger.mirror.error("Video recording failed to start: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    private func toggleVideoRecording() async {
+        switch activeCaptureMode {
+        case .idle:
+            await startVideoRecordingFromTap()
+        case .videoRecording:
+            await endVideoFlow(force: false)
+        case .videoCountdown:
+            cancelVideoCountdown()
+        case .photoFiring, .disabled:
+            break
+        }
+    }
+
+    private func startVideoRecordingFromTap() async {
+        guard activeCaptureMode == .idle else {
+            return
+        }
+
+        captureTickTask?.cancel()
+        captureTickTask = nil
+        capturePressStartedAt = currentDate()
+        lastError = nil
+        DHHaptics.heavy()
+        Logger.mirror.info("Capture event: videoRecording start tapped")
+
+        do {
+            _ = try await videoRecording.start()
+            recordingStart = currentDate()
+            activeCaptureMode = .videoRecording(secondsElapsed: 0)
+            lastCaptureEvent = nil
+            Logger.mirror.info("Capture event: videoRecording started")
+            startRecordingTimer()
+        } catch {
+            capturePressStartedAt = nil
+            recordingStart = nil
+            activeCaptureMode = .idle
+            lastError = .recFail
+            Logger.mirror.error("Video recording failed to start: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    @discardableResult
+    func endVideoFlow(force _: Bool) async -> URL? {
+        recordingTimer?.invalidate()
+        recordingTimer = nil
+
+        guard case .videoRecording = activeCaptureMode else {
+            if activeCaptureMode == .videoCountdown {
+                cancelVideoCountdown()
+            }
+            return nil
+        }
+
+        let elapsed = currentRecordingElapsed
+        capturePressStartedAt = nil
+        recordingStart = nil
+
+        do {
+            let url = try await videoRecording.finish()
+            activeCaptureMode = .idle
+            lastCaptureEvent = .videoCapture(duration: elapsed)
+            pendingPreviewAsset = .video(url)
+            previewRouteID = UUID()
+
+            Logger.mirror.info("Capture event: videoCapture duration=\(elapsed, privacy: .public)")
+            return url
+        } catch {
+            activeCaptureMode = .idle
+            lastError = .recFail
+            Logger.mirror.error("Video recording failed to finish: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
+
+    private func startRecordingTimer() {
+        recordingTimer?.invalidate()
+        recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                await self?.tickRecording()
             }
         }
     }
+
+    private func tickRecording() async {
+        guard recordingStart != nil else {
+            return
+        }
+
+        activeCaptureMode = .videoRecording(secondsElapsed: currentRecordingElapsed)
+    }
+
+    private var currentRecordingElapsed: TimeInterval {
+        guard let recordingStart else {
+            return 0
+        }
+
+        return max(0, currentDate().timeIntervalSince(recordingStart))
+    }
+
 }
 
 private extension ProcessInfo {

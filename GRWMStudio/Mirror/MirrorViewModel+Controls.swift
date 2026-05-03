@@ -2,7 +2,11 @@ import OSLog
 
 extension MirrorViewModel {
     var isRecording: Bool {
-        controller.isRecordingVideo
+        if case .videoRecording = activeCaptureMode {
+            return true
+        }
+
+        return controller.isRecordingVideo
     }
 
     func flipCamera() async {

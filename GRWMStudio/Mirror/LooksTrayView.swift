@@ -3,6 +3,7 @@ import UIKit
 
 struct LooksTrayView: View {
     @Bindable var viewModel: MirrorViewModel
+    var onSelectionComplete: () -> Void = {}
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -19,6 +20,7 @@ struct LooksTrayView: View {
         .frame(height: 148)
         .padding(.horizontal, 8)
         .transition(.move(edge: .bottom).combined(with: .opacity))
+        .accessibilityIdentifier("looks-tray")
     }
 
     private func lookCard(_ look: LookPreset) -> some View {
@@ -28,6 +30,9 @@ struct LooksTrayView: View {
         return Button {
             Task { @MainActor in
                 await viewModel.selectLook(look)
+                if viewModel.selectedLookEffectID == look.effectID {
+                    onSelectionComplete()
+                }
             }
             DHHaptics.tapMedium()
         } label: {

@@ -1,0 +1,23 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+14:12:52  Acquired tunnel connection to device.
+14:12:53  Enabling developer disk image services.
+14:12:53  Acquired usage assertion.
+15 files:
+Name                                              URL Resources        Size    Modification date
+-----------------------------------------------   ------------------   -----   -----------------
+GRWMStudio-2026-05-03-105914.ips                  Writable, Readable   35 KB   5/3/26, 10:59 AM 
+GRWMStudio-2026-05-03-131501.ips                  Writable, Readable   49 KB   5/3/26, 1:15 PM  
+GRWMStudio-2026-05-03-131510.ips                  Writable, Readable   47 KB   5/3/26, 1:15 PM  
+GRWMStudio-2026-05-03-131643.ips                  Writable, Readable   46 KB   5/3/26, 1:16 PM  
+GRWMStudio-2026-05-03-131747.ips                  Writable, Readable   46 KB   5/3/26, 1:17 PM  
+GRWMStudio-2026-05-03-134212.ips                  Writable, Readable   41 KB   5/3/26, 1:42 PM  
+GRWMStudio-2026-05-03-134232.ips                  Writable, Readable   44 KB   5/3/26, 1:42 PM  
+GRWMStudio-2026-05-03-134256.ips                  Writable, Readable   38 KB   5/3/26, 1:42 PM  
+GRWMStudio-2026-05-03-134327.ips                  Writable, Readable   38 KB   5/3/26, 1:43 PM  
+Retired/GRWM-2026-05-02-084552.ips                Writable, Readable   37 KB   5/2/26, 8:45 AM  
+Retired/GRWM-2026-05-02-084553.ips                Writable, Readable   36 KB   5/2/26, 8:45 AM  
+Retired/GRWM-2026-05-02-084556.ips                Writable, Readable   32 KB   5/2/26, 8:45 AM  
+Retired/GRWM-2026-05-02-125723.ips                Writable, Readable   34 KB   5/2/26, 12:57 PM 
+Retired/GRWM.cpu_resource-2026-04-27-085446.ips   Writable, Readable   73 KB   4/27/26, 8:54 AM 
+Retired/GRWM.cpu_resource-2026-04-27-144542.ips   Writable, Readable   62 KB   4/27/26, 2:45 PM 

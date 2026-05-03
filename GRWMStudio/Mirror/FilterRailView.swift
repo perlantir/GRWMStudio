@@ -20,6 +20,7 @@ struct FilterRailView: View {
         }
         .scrollTargetBehavior(.viewAligned)
         .frame(height: 64)
+        .accessibilityIdentifier("filter-rail")
     }
 
     private func chip(for category: FilterCategory) -> some View {

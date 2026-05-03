@@ -19,15 +19,18 @@ final class MirrorViewModel {
     var activeLookName: String?
     var activeCategory: FilterCategory?
     var eyesSubCategory: EyesSubCategory = .shadow
+    var selectedCaptureKind: CaptureKind = .photo
     var activeCaptureMode: CaptureMode = .idle
     var lastCaptureEvent: CaptureEvent?
     var pendingPreviewAsset: CapturedAsset?
     var previewRouteID: UUID?
+    var pendingRecordingProGateClipURL: URL?
+    var recordingProGateRouteID: UUID?
     var activeTraySlot: EffectSlot? {
         activeCategory?.slot
     }
 
-    @ObservationIgnored private var env: AppEnvironment?
+    @ObservationIgnored var env: AppEnvironment?
     @ObservationIgnored private var faceTask: Task<Void, Never>?
     @ObservationIgnored private let licenseLoader: () throws -> String
     @ObservationIgnored private let usesSimulatorPlaceholder: Bool
@@ -37,7 +40,12 @@ final class MirrorViewModel {
     @ObservationIgnored let currentDate: () -> Date
     @ObservationIgnored var capturePressStartedAt: Date?
     @ObservationIgnored var captureTickTask: Task<Void, Never>?
+    @ObservationIgnored var recordingTimer: Timer?
+    @ObservationIgnored var recordingStart: Date?
     @ObservationIgnored let photoCapture: (@MainActor () async throws -> UIImage)?
+    @ObservationIgnored let videoRecording: any VideoRecordingCoordinating
+    @ObservationIgnored var isApplyingSelection = false
+    @ObservationIgnored var sharedBeautyEffectLoaded = false
 
     init(
         controller: DeepARController = DeepARController(),
@@ -45,7 +53,8 @@ final class MirrorViewModel {
         licenseLoader: @escaping () throws -> String = { try DeepARLicense.key() },
         usesSimulatorPlaceholder: Bool = MirrorViewModel.defaultUsesSimulatorPlaceholder,
         currentDate: @escaping () -> Date = Date.init,
-        photoCapture: (@MainActor () async throws -> UIImage)? = nil
+        photoCapture: (@MainActor () async throws -> UIImage)? = nil,
+        videoRecording: (any VideoRecordingCoordinating)? = nil
     ) {
         self.controller = controller
         self.catalog = catalog
@@ -53,6 +62,10 @@ final class MirrorViewModel {
         self.usesSimulatorPlaceholder = usesSimulatorPlaceholder
         self.photoCapture = photoCapture
         self.currentDate = currentDate
+        self.videoRecording = videoRecording ?? VideoRecordingCoordinator(
+            controller: controller,
+            allowSimulatorPlaceholder: usesSimulatorPlaceholder
+        )
     }
 
     func start(env: AppEnvironment) async {
@@ -116,11 +129,18 @@ final class MirrorViewModel {
         faceTask = nil
         captureTickTask?.cancel()
         captureTickTask = nil
+        recordingTimer?.invalidate()
+        recordingTimer = nil
+        recordingStart = nil
         capturePressStartedAt = nil
         activeCaptureMode = .idle
+        videoRecording.reset()
         pendingPreviewAsset = nil
         previewRouteID = nil
+        pendingRecordingProGateClipURL = nil
+        recordingProGateRouteID = nil
         isFaceDetected = false
+        isApplyingSelection = false
 
         if state == .running || state == .starting {
             Task { @MainActor [controller] in

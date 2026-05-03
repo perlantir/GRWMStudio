@@ -6,6 +6,8 @@ import UIKit
 public final class RecordingService {
     private let controller: DeepARController
     private var tickTask: Task<Void, Never>?
+    /// Temporary URL reserved for the active video recording session.
+    public private(set) var currentVideoURL: URL?
 
     /// Creates a recording service for one DeepAR controller.
     public init(controller: DeepARController) {
@@ -35,11 +37,29 @@ public final class RecordingService {
         startTickForwarder(onTick: onTick)
     }
 
-    /// Stops video recording and returns the saved local file URL.
-    public func stopVideo() async throws -> URL {
+    /// Starts video recording and returns the reserved temporary output URL.
+    public func startVideoRecording() async throws -> URL {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("rec_\(UUID().uuidString).mov")
+        currentVideoURL = url
+
+        try await controller.startVideoRecording(outputURL: url)
+        return url
+    }
+
+    /// Finishes video recording and returns the saved temporary MP4 URL.
+    public func finishVideoRecording() async throws -> URL {
         tickTask?.cancel()
         tickTask = nil
-        return try await controller.stopVideoRecording()
+
+        let finishedURL = try await controller.stopVideoRecording()
+        currentVideoURL = nil
+        return finishedURL
+    }
+
+    /// Stops video recording and returns the saved local file URL.
+    public func stopVideo() async throws -> URL {
+        try await finishVideoRecording()
     }
 
     private func startTickForwarder(onTick: (@MainActor @Sendable (TimeInterval) -> Void)?) {

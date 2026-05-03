@@ -1,0 +1,12 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+14:51:49  Acquired tunnel connection to device.
+14:51:49  Enabling developer disk image services.
+14:51:49  Acquired usage assertion.
+App installed:
+• bundleID: app.grwmstudio.ios
+• installationURL: file:///private/var/containers/Bundle/Application/7218FB93-A95C-42FF-9A3F-392C370CCA18/GRWMStudio.app/
+• launchServicesIdentifier: unknown
+• databaseUUID: 6C821C3C-7732-420E-ACA3-C0013F4C7D9C
+• databaseSequenceNumber: 28032
+• options: 

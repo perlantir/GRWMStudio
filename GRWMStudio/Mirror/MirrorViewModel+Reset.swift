@@ -11,6 +11,7 @@ extension MirrorViewModel {
         }
         selections.removeAll()
         eyeSelections.removeAll()
+        sharedBeautyEffectLoaded = false
         activeLookName = nil
         activeCategory = nil
         eyesSubCategory = .shadow

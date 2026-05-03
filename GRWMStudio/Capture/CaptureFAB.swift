@@ -2,40 +2,45 @@ import SwiftUI
 
 struct CaptureFAB: View {
     let mode: CaptureMode
-    let onTap: () -> Void
-    let onLongPressBegan: () -> Void
-    let onLongPressEnded: (Double) -> Void
-
-    @State private var pressStart: Date?
-    @State private var pressDuration: Double = 0
-    @State private var didBeginLongPress = false
-    @State private var isLongPressActive = false
-    @State private var progressTask: Task<Void, Never>?
-
-    private let classifier = CapturePressClassifier()
+    let kind: CaptureKind
+    let action: () -> Void
 
     var body: some View {
-        ZStack {
-            buttonShape
-            progressRing
+        Button {
+            guard mode.isInteractive else {
+                return
+            }
+
+            action()
+        } label: {
+            ZStack {
+                buttonShape
+                progressRing
+                centerIcon
+            }
         }
+        .buttonStyle(.plain)
         .frame(width: 104, height: 104)
         .scaleEffect(pulseScale)
         .animation(recordingPulse, value: isRecording)
         .contentShape(Circle())
-        .gesture(combinedGesture)
         .allowsHitTesting(mode.isInteractive)
         .disabled(mode == .disabled)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityAddTraits(.isButton)
-        .onDisappear(perform: cancelPressTracking)
+        .accessibilityIdentifier("capture-fab")
     }
 
     @ViewBuilder
     private var buttonShape: some View {
         switch visualMode {
         case .idle:
-            circularButton(fill: DH.pinkDeep, shadow: DH.pinkDeep, ring: .white)
+            switch kind {
+            case .photo:
+                circularButton(fill: DH.pinkDeep, shadow: DH.pinkDeep, ring: .white)
+            case .video:
+                circularButton(fill: DH.recRed, shadow: DH.recRedDeep, ring: .white)
+            }
 
         case .photoFiring:
             circularButton(fill: .white, shadow: DH.pinkDeep, ring: DH.pinkDeep)
@@ -51,11 +56,9 @@ struct CaptureFAB: View {
 
     @ViewBuilder
     private var progressRing: some View {
-        if progressValue > 0 {
+        if case .videoRecording(let secondsElapsed) = visualMode, secondsElapsed > 0 {
             Circle()
-                .trim(from: 0, to: progressValue)
                 .stroke(DH.butter, style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                .rotationEffect(.degrees(-90))
                 .frame(width: 96, height: 96)
                 .accessibilityHidden(true)
         }
@@ -80,43 +83,30 @@ struct CaptureFAB: View {
         .frame(width: 88, height: 88)
     }
 
-    private var progressValue: CGFloat {
-        let seconds: Double
+    @ViewBuilder
+    private var centerIcon: some View {
         switch visualMode {
-        case .videoRecording(let secondsElapsed):
-            seconds = secondsElapsed
-        default:
-            seconds = pressStart == nil ? 0 : pressDuration
+        case .idle:
+            Image(systemName: kind.systemName)
+                .font(.system(size: 28, weight: .heavy))
+                .foregroundStyle(.white)
+        case .photoFiring:
+            Image(systemName: "camera.fill")
+                .font(.system(size: 28, weight: .heavy))
+                .foregroundStyle(DH.pinkDeep)
+        case .videoCountdown:
+            Image(systemName: "timer")
+                .font(.system(size: 28, weight: .heavy))
+                .foregroundStyle(.white)
+        case .videoRecording:
+            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                .fill(.white)
+                .frame(width: 28, height: 28)
+        case .disabled:
+            Image(systemName: "camera.fill")
+                .font(.system(size: 28, weight: .heavy))
+                .foregroundStyle(DH.pinkDeep.opacity(0.45))
         }
-
-        guard seconds > 0 else {
-            return 0
-        }
-
-        return CGFloat(min(seconds / CapturePressClassifier.maxVideoDuration, 1))
-    }
-
-    private var combinedGesture: some Gesture {
-        let longPress = LongPressGesture(minimumDuration: CapturePressClassifier.longPressThreshold)
-            .onEnded { _ in
-                guard mode.isInteractive else {
-                    return
-                }
-
-                didBeginLongPress = true
-                isLongPressActive = true
-                onLongPressBegan()
-            }
-
-        let drag = DragGesture(minimumDistance: 0)
-            .onChanged { _ in
-                beginPressIfNeeded()
-            }
-            .onEnded { _ in
-                finishPress()
-            }
-
-        return longPress.simultaneously(with: drag)
     }
 
     private var isRecording: Bool {
@@ -137,24 +127,20 @@ struct CaptureFAB: View {
     private var accessibilityLabel: String {
         switch visualMode {
         case .idle:
-            "Capture. Tap for photo, hold for video"
+            kind == .photo ? "Take photo" : "Start video recording"
         case .photoFiring:
             "Capturing photo"
         case .videoCountdown:
             "Get ready, recording starts in a moment"
         case .videoRecording:
-            "Recording video, release to stop"
+            "Stop video recording"
         case .disabled:
             "Capture button disabled"
         }
     }
 
     private var visualMode: CaptureMode {
-        guard isLongPressActive else {
-            return mode
-        }
-
-        return .videoRecording(secondsElapsed: pressDuration)
+        mode
     }
 
     private func circularButton(fill: Color, shadow: Color, ring: Color) -> some View {
@@ -171,71 +157,18 @@ struct CaptureFAB: View {
                 .overlay {
                     Circle()
                         .strokeBorder(ring, lineWidth: 4)
-                }
+            }
         }
         .frame(width: 88, height: 88)
-    }
-
-    private func beginPressIfNeeded() {
-        guard mode.isInteractive, pressStart == nil else {
-            return
-        }
-
-        pressStart = Date()
-        pressDuration = 0
-        didBeginLongPress = false
-        startProgressTask()
-    }
-
-    private func finishPress() {
-        guard mode.isInteractive, let pressStart else {
-            cancelPressTracking()
-            return
-        }
-
-        let duration = min(Date().timeIntervalSince(pressStart), CapturePressClassifier.maxVideoDuration)
-        let event = classifier.event(for: duration)
-
-        switch event {
-        case .photoCapture:
-            onTap()
-        case .videoCapture(let duration):
-            if !didBeginLongPress {
-                onLongPressBegan()
-            }
-            onLongPressEnded(duration)
-        }
-
-        cancelPressTracking()
-    }
-
-    private func startProgressTask() {
-        progressTask?.cancel()
-        progressTask = Task { @MainActor in
-            while !Task.isCancelled {
-                if let pressStart {
-                    pressDuration = min(Date().timeIntervalSince(pressStart), CapturePressClassifier.maxVideoDuration)
-                }
-                try? await Task.sleep(for: .milliseconds(33))
-            }
-        }
-    }
-
-    private func cancelPressTracking() {
-        progressTask?.cancel()
-        progressTask = nil
-        pressStart = nil
-        pressDuration = 0
-        didBeginLongPress = false
-        isLongPressActive = false
     }
 }
 
 #Preview("Capture FAB") {
     HStack(spacing: 24) {
-        CaptureFAB(mode: .idle) {} onLongPressBegan: {} onLongPressEnded: { _ in }
-        CaptureFAB(mode: .videoRecording(secondsElapsed: 5)) {} onLongPressBegan: {} onLongPressEnded: { _ in }
-        CaptureFAB(mode: .disabled) {} onLongPressBegan: {} onLongPressEnded: { _ in }
+        CaptureFAB(mode: .idle, kind: .photo) {}
+        CaptureFAB(mode: .idle, kind: .video) {}
+        CaptureFAB(mode: .videoRecording(secondsElapsed: 5), kind: .video) {}
+        CaptureFAB(mode: .disabled, kind: .photo) {}
     }
     .padding(32)
     .background(DH.pinkPaper)

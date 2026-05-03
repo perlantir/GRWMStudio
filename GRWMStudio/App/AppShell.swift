@@ -47,19 +47,19 @@ struct AppShell: View {
             ZStack {
                 DHTabBar(selected: $selected, onFABTap: routeToFreshMirror, showsDefaultFAB: false)
 
+                if mirrorViewModel.state == .running, !mirrorViewModel.isRecording {
+                    CaptureKindPicker(selection: $mirrorViewModel.selectedCaptureKind)
+                        .offset(y: -174)
+                }
+
                 CaptureFAB(
                     mode: mirrorCaptureMode,
-                    onTap: {
-                        Task { @MainActor in
-                            await mirrorViewModel.capturePhoto()
-                        }
-                    },
-                    onLongPressBegan: mirrorViewModel.onCaptureLongPressBegan,
-                    onLongPressEnded: { duration in
-                        mirrorViewModel.onCaptureLongPressEnded(duration: duration)
+                    kind: mirrorViewModel.selectedCaptureKind
+                ) {
+                    Task { @MainActor in
+                        await mirrorViewModel.captureButtonTapped()
                     }
-                )
-                .accessibilityIdentifier("capture-fab")
+                }
                 .offset(y: -34)
             }
             .padding(.horizontal, 14)
@@ -125,6 +125,50 @@ struct AppShell: View {
     private func routeToFreshMirror() {
         env.mirrorCreateNewIntent = true
         selected = .mirror
+    }
+}
+
+private struct CaptureKindPicker: View {
+    @Binding var selection: CaptureKind
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(CaptureKind.allCases) { kind in
+                Button {
+                    withAnimation(.bouncy(duration: 0.22)) {
+                        selection = kind
+                    }
+                    DHHaptics.light()
+                } label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: kind.systemName)
+                            .font(.system(size: 12, weight: .heavy))
+
+                        Text(kind.label)
+                            .font(DH.font(.microLabel))
+                            .tracking(DH.tracking(.microLabel))
+                    }
+                    .foregroundStyle(selection == kind ? .white : DH.pinkDeep)
+                    .padding(.horizontal, 10)
+                    .frame(height: 30)
+                    .background {
+                        Capsule()
+                            .fill(selection == kind ? DH.pinkDeep : .white)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(kind.label) capture mode")
+                .accessibilityIdentifier("capture-mode-\(kind.rawValue)")
+                .accessibilityAddTraits(selection == kind ? [.isSelected] : [])
+            }
+        }
+        .padding(4)
+        .background {
+            Capsule()
+                .fill(DH.cream.opacity(0.96))
+                .chunkyShadow(.sm(deep: DH.pinkDeep), shape: Capsule())
+        }
+        .accessibilityIdentifier("capture-mode-picker")
     }
 }
 

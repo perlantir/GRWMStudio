@@ -19,6 +19,7 @@ enum EyesSubCategory: String, CaseIterable, Sendable {
 
 struct EyesTrayView: View {
     @Bindable var viewModel: MirrorViewModel
+    var onSelectionComplete: () -> Void = {}
 
     var body: some View {
         VStack(spacing: 8) {
@@ -31,10 +32,12 @@ struct EyesTrayView: View {
             ) { shade in
                 Task { @MainActor in
                     await viewModel.selectShade(in: .eyes, shade: shade)
+                    onSelectionComplete()
                 }
             } onClear: {
                 Task { @MainActor in
                     await viewModel.clear(slot: .eyes)
+                    onSelectionComplete()
                 }
             }
         }

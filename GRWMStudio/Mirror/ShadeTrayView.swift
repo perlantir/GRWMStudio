@@ -29,6 +29,7 @@ struct ShadeTrayView: View {
         }
         .padding(.horizontal, 12)
         .transition(.move(edge: .bottom).combined(with: .opacity))
+        .accessibilityIdentifier("shade-tray-\(category.rawValue)")
     }
 
     private var clearChip: some View {

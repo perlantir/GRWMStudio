@@ -28,6 +28,10 @@ protocol DeepARClient: AnyObject {
     func takeScreenshot()
     /// Starts SDK video recording.
     func startVideoRecording(outputWidth: Int32, outputHeight: Int32)
+    /// Sets the directory where the SDK should write video recordings.
+    func setVideoRecordingOutputPath(_ path: String)
+    /// Sets the SDK output file name without extension.
+    func setVideoRecordingOutputName(_ name: String)
     /// Finishes SDK video recording.
     func finishVideoRecording()
     /// Applies a Vector4 runtime parameter.
@@ -49,6 +53,10 @@ extension DeepARClient {
     func takeScreenshot() {}
 
     func startVideoRecording(outputWidth: Int32, outputHeight: Int32) {}
+
+    func setVideoRecordingOutputPath(_ path: String) {}
+
+    func setVideoRecordingOutputName(_ name: String) {}
 
     func finishVideoRecording() {}
 
@@ -99,6 +107,14 @@ final class LiveDeepARClient: DeepARClient {
 
     func startVideoRecording(outputWidth: Int32, outputHeight: Int32) {
         sdk.startVideoRecording(withOutputWidth: outputWidth, outputHeight: outputHeight)
+    }
+
+    func setVideoRecordingOutputPath(_ path: String) {
+        sdk.setVideoRecordingOutputPath(path)
+    }
+
+    func setVideoRecordingOutputName(_ name: String) {
+        sdk.setVideoRecordingOutputName(name)
     }
 
     func finishVideoRecording() {

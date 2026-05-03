@@ -1,0 +1,7 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+14:14:37  Acquired tunnel connection to device.
+14:14:37  Enabling developer disk image services.
+14:14:37  Acquired usage assertion.
+File received from Device
+/Users/perlantir/Projects/GRWM Studio/docs/qa/per-ticket/GRWM-403/crashlogs/GRWMStudio-2026-05-03-134327.ips

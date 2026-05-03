@@ -79,6 +79,14 @@ struct RootContainer: View {
     private var overlayView: some View {
         if let overlay = coordinator.overlay {
             switch overlay {
+            case .preview:
+                if let asset = coordinator.previewAsset {
+                    PreviewPlaceholderView(asset: asset) {
+                        coordinator.dismissPreview()
+                    }
+                    .transition(.opacity)
+                }
+
             case .parentGate(let intent):
                 PlaceholderParentGateView(intent: intent) {
                     switch intent {

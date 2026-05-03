@@ -75,6 +75,13 @@ extension DeepARController {
 
     /// Starts video recording for the current DeepAR preview.
     public func startVideoRecording(maxDuration: TimeInterval) async throws {
+        let outputURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("rec_sdk_\(UUID().uuidString).mov")
+        try await startVideoRecording(outputURL: outputURL, maxDuration: maxDuration)
+    }
+
+    /// Starts video recording for the current DeepAR preview at a specific SDK output location.
+    public func startVideoRecording(outputURL: URL, maxDuration: TimeInterval? = nil) async throws {
         guard let client = recordingClient(method: "startVideoRecording") else {
             throw SetupError.recordingFailed(reason: "DeepAR not ready")
         }
@@ -82,11 +89,16 @@ extension DeepARController {
             return
         }
 
+        client.setVideoRecordingOutputPath(outputURL.deletingLastPathComponent().path)
+        client.setVideoRecordingOutputName(outputURL.deletingPathExtension().lastPathComponent)
         client.startVideoRecording(outputWidth: 720, outputHeight: 1_280)
         isRecordingVideo = true
         recordingDuration = 0
-        Logger.deepAR.info("Started video recording (max: \(maxDuration)s)")
-        startRecordingProgressTimer(maxDuration: maxDuration)
+        Logger.deepAR.info("Started video recording")
+
+        if let maxDuration {
+            startRecordingProgressTimer(maxDuration: maxDuration)
+        }
     }
 
     /// Stops video recording and returns the saved local file URL.
@@ -145,7 +157,7 @@ extension DeepARController {
         recordingProgressTask = nil
 
         do {
-            let url = try CaptureService.moveVideo(from: sourcePath)
+            let url = try CaptureService.moveVideoToTemporaryVideo(from: sourcePath)
             videoContinuation?.resume(returning: url)
         } catch {
             videoContinuation?.resume(throwing: SetupError.recordingFailed(reason: error.localizedDescription))

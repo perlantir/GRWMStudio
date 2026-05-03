@@ -30,6 +30,21 @@ public actor CaptureService {
         try FileManager.default.moveItem(at: sourceURL, to: destinationURL)
         return destinationURL
     }
+
+    /// Moves a recorded video into temporary storage and preserves its container extension.
+    @discardableResult
+    public static func moveVideoToTemporaryVideo(from sourcePath: String) throws -> URL {
+        let sourceURL = URL(fileURLWithPath: sourcePath)
+        guard FileManager.default.fileExists(atPath: sourceURL.path) else {
+            throw CaptureServiceError.videoFileMissing(sourcePath)
+        }
+
+        let sourceExtension = sourceURL.pathExtension.isEmpty ? "mov" : sourceURL.pathExtension
+        let destinationURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("rec_\(UUID().uuidString).\(sourceExtension)")
+        try FileManager.default.moveItem(at: sourceURL, to: destinationURL)
+        return destinationURL
+    }
 }
 
 /// Capture persistence failures.
