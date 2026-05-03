@@ -12,6 +12,8 @@ opt_in_rules:
   - prefer_self_type_over_type_of_self
   - redundant_nil_coalescing
   - sorted_imports
+
+analyzer_rules:
   - unused_import
 
 line_length:
