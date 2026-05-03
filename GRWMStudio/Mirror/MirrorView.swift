@@ -5,6 +5,7 @@ struct MirrorView: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
     @State private var viewModel = MirrorViewModel()
+    @State private var pendingCategoryAfterLook: FilterCategory?
 
     var body: some View {
         ZStack {
@@ -132,9 +133,37 @@ struct MirrorView: View {
                     }
                     .padding(.bottom, 186)
                     .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                } else if viewModel.activeCategory == .looks, pendingCategoryAfterLook == nil {
+                    LooksTrayView(viewModel: viewModel)
+                        .padding(.bottom, 172)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
                 }
 
-                FilterRailView(viewModel: viewModel)
+                if let pendingCategoryAfterLook, let activeLookName = viewModel.activeLookName {
+                    LookSwitchConfirmationView(
+                        lookName: activeLookName,
+                        onConfirm: {
+                            Task { @MainActor in
+                                await viewModel.clear(slot: .looks)
+                                withAnimation(.bouncy(duration: 0.22)) {
+                                    viewModel.activeCategory = pendingCategoryAfterLook
+                                    self.pendingCategoryAfterLook = nil
+                                }
+                            }
+                        },
+                        onCancel: {
+                            withAnimation(.bouncy(duration: 0.22)) {
+                                self.pendingCategoryAfterLook = nil
+                            }
+                        }
+                    )
+                        .padding(.bottom, 178)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
+                FilterRailView(viewModel: viewModel) { category in
+                    handleCategoryTap(category)
+                }
                     .padding(.bottom, 118)
             }
         }
@@ -206,30 +235,18 @@ struct MirrorView: View {
         .accessibilityLabel("Tap to allow camera")
     }
 
-    private func errorMessage(for variant: ErrorVariant) -> String {
-        switch variant {
-        case .license:
-            "Studio Pro needs a grown-up."
-        case .licenseInvalid:
-            "License check needs attention."
-        case .effectFail:
-            "The mirror effect needs a reset."
-        case .camDenied:
-            "Camera access is off."
-        case .micDenied:
-            "Microphone access is off."
-        case .photoDenied:
-            "Photos access is off."
-        case .recFail:
-            "Recording needs a reset."
-        case .saveFail:
-            "Saving needs a reset."
-        case .noFace:
-            "Move your face into the mirror."
-        case .lowStorage:
-            "This phone needs more free space."
+    private func handleCategoryTap(_ category: FilterCategory) -> Bool {
+        guard viewModel.activeLookName != nil, category != .looks else {
+            pendingCategoryAfterLook = nil
+            return false
         }
+
+        withAnimation(.bouncy(duration: 0.22)) {
+            pendingCategoryAfterLook = category
+        }
+        return true
     }
+
 }
 
 #Preview("Mirror View") {

@@ -175,7 +175,7 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertTrue(mock.switches.isEmpty)
     }
 
-    func testSelectingLookClearsOtherSlotSelections() async throws {
+    func testSelectingLookPreservesOtherSlotSelections() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
@@ -190,8 +190,9 @@ final class MirrorViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: lipShade)
         try await viewModel.selectLook(look)
 
-        XCTAssertNil(viewModel.selections[.lips])
+        XCTAssertNotNil(viewModel.selections[.lips])
         XCTAssertEqual(viewModel.selections[.looks], SlotSelection(effectID: look.id, shade: nil, isPro: false))
+        XCTAssertEqual(viewModel.activeLookName, look.displayName)
         XCTAssertEqual(mock.switches.last?.slot, EffectSlot.looks.rawValue)
     }
 

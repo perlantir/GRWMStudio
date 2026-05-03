@@ -13,7 +13,8 @@ final class MirrorViewModel {
     private(set) var selections: [EffectSlot: SlotSelection] = [:]
     private(set) var eyeSelections: [EyesSubCategory: String] = [:]
     private(set) var isFaceDetected = false
-    private(set) var lastError: ErrorVariant?
+    var lastError: ErrorVariant?
+    var activeLookName: String?
     var activeCategory: FilterCategory?
     var eyesSubCategory: EyesSubCategory = .shadow
     var activeTraySlot: EffectSlot? {
@@ -210,13 +211,6 @@ extension MirrorViewModel {
             return
         }
 
-        for other in EffectSlot.allCases where other != .looks {
-            selections[other] = nil
-            if !shouldSkipControllerCallsForSimulator {
-                await controller.clearEffect(slot: other)
-            }
-        }
-
         if !shouldSkipControllerCallsForSimulator {
             if controller.loadedEffects[.looks] != effect.id {
                 try await controller.loadEffect(effect, slot: .looks)
@@ -226,6 +220,7 @@ extension MirrorViewModel {
         }
 
         selections[.looks] = SlotSelection(effectID: effect.id, shade: nil, isPro: effect.isPro)
+        activeLookName = effect.displayName
     }
 
     func clear(slot: EffectSlot) async {
@@ -235,11 +230,17 @@ extension MirrorViewModel {
         selections[slot] = nil
         if slot == .eyes {
             eyeSelections.removeAll()
+        } else if slot == .looks {
+            activeLookName = nil
         }
     }
 
     func selectedShadeID(for slot: EffectSlot) -> String? {
         selections[slot]?.shadeID
+    }
+
+    var selectedLookEffectID: EffectFile.ID? {
+        selections[.looks]?.effectID
     }
 
     func selectedEyeShadeID(for subCategory: EyesSubCategory) -> String? {
@@ -280,7 +281,7 @@ extension MirrorViewModel {
         return effect
     }
 
-    private func canUseProContent(isPro: Bool) -> Bool {
+    func canUseProContent(isPro: Bool) -> Bool {
         guard isPro else {
             return true
         }

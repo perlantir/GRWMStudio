@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FilterRailView: View {
     @Bindable var viewModel: MirrorViewModel
+    var onCategoryTap: (FilterCategory) -> Bool = { _ in false }
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -25,6 +26,11 @@ struct FilterRailView: View {
         let active = viewModel.activeCategory == category
 
         return Button {
+            guard !onCategoryTap(category) else {
+                DHHaptics.light()
+                return
+            }
+
             withAnimation(.bouncy(duration: 0.22)) {
                 viewModel.activeCategory = category
             }

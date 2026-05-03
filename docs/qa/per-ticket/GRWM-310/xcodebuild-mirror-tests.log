@@ -1,0 +1,6 @@
+2026-05-03 02:22:44.684 xcodebuild[19199:10281255] [MT] IDETestOperationsObserverDebug: 3.471 elapsed -- Testing started completed.
+2026-05-03 02:22:44.684 xcodebuild[19199:10281255] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 02:22:44.684 xcodebuild[19199:10281255] [MT] IDETestOperationsObserverDebug: 3.471 sec, +3.471 sec -- end
+Testing started
+
+PASS: MirrorViewModelTests exited 0

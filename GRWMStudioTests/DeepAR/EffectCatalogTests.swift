@@ -33,8 +33,8 @@ final class EffectCatalogTests: XCTestCase {
         XCTAssertNotNil(eyes.first(where: { $0.id == "eyeliner" }))
 
         XCTAssertEqual(root.effects["lips"]?.first(where: { $0.id == "lips" })?.shades.count, 5)
-        XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look_legacy01" }))
-        XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look_legacy02" }))
+        XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look1" }))
+        XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look2" }))
     }
 
     func testContainsSyncUsesManifestEffectIdentifiers() {

@@ -297,6 +297,26 @@
     ],
     "looks": [
       {
+        "id": "look1",
+        "displayName": "Sunday Best",
+        "file": "look_legacy01.deepar",
+        "thumbnail": "thumbnails/look_legacy01.png",
+        "tag": "CUTE",
+        "hot": true,
+        "isPro": false,
+        "shades": []
+      },
+      {
+        "id": "look2",
+        "displayName": "School Day",
+        "file": "look_legacy02.deepar",
+        "thumbnail": "thumbnails/look_legacy02.png",
+        "tag": "BOLD",
+        "hot": true,
+        "isPro": false,
+        "shades": []
+      },
+      {
         "id": "look_legacy01",
         "displayName": "Bubblegum",
         "file": "look_legacy01.deepar",
