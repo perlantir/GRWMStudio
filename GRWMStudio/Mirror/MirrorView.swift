@@ -38,6 +38,8 @@ struct MirrorView: View {
                 viewModel: viewModel,
                 pendingCategoryAfterLook: $pendingCategoryAfterLook
             )
+
+            flashOverlay
         }
         .preferredColorScheme(.light)
         .task {
@@ -69,6 +71,18 @@ struct MirrorView: View {
         .onDisappear {
             noFaceTipTask?.cancel()
             viewModel.pause()
+        }
+    }
+
+    @ViewBuilder
+    private var flashOverlay: some View {
+        if viewModel.flashEnabled {
+            Color.white
+                .opacity(0.5)
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+                .transition(.opacity)
         }
     }
 

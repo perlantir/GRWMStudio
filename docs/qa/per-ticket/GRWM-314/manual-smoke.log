@@ -1,0 +1,6 @@
+Manual smoke: PASS
+Simulator launched with build_run_sim.
+Default: two 44pt bottom-left controls render above the filter rail without blocking categories.
+Flash: tapped bolt at simulator point (106,566); full-screen 50% white overlay appeared and bolt rendered yellow under the overlay.
+Flip: tapped camera control at simulator point (60,566); simulator placeholder cannot switch a physical camera, but the VM toggled in focused unit tests and the device path calls DeepARController.switchCamera(toFront:).
+Recording-hide: verified by unit test using controller.isRecordingVideo=true; no visible recording trigger exists until GRWM-403.

@@ -63,6 +63,8 @@ public final class DeepARController {
     public private(set) var state: State = .uninitialized
     /// Whether DeepAR currently sees a tracked face.
     public private(set) var trackedFace = false
+    /// Whether the active or next camera session should use the front camera.
+    public private(set) var cameraIsFront = true
     /// Effect IDs currently loaded by slot.
     public private(set) var loadedEffects: [EffectSlot: EffectFile.ID] = [:]
     /// Whether video recording is active.
@@ -205,6 +207,11 @@ public final class DeepARController {
     }
 
     /// Switches between front and rear cameras.
+    public func switchCamera() async throws {
+        try await switchCamera(toFront: !cameraIsFront)
+    }
+
+    /// Switches to a specific camera position.
     public func switchCamera(toFront: Bool) async throws {
         guard state == .ready else {
             throw SetupError.recordingFailed(reason: "DeepAR not ready")
@@ -214,6 +221,7 @@ public final class DeepARController {
         }
 
         cameraController.position = toFront ? .front : .back
+        cameraIsFront = toFront
         trackedFace = false
         Logger.deepAR.info("Camera switched (front: \(toFront))")
     }

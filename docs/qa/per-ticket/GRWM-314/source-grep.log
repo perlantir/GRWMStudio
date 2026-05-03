@@ -1,0 +1,23 @@
+GRWMStudioTests/Mirror/MirrorControlsViewModelTests.swift:9:        XCTAssertTrue(viewModel.cameraIsFront)
+GRWMStudioTests/Mirror/MirrorControlsViewModelTests.swift:13:        XCTAssertFalse(viewModel.cameraIsFront)
+GRWMStudioTests/Mirror/MirrorControlsViewModelTests.swift:19:        XCTAssertFalse(viewModel.flashEnabled)
+GRWMStudioTests/Mirror/MirrorControlsViewModelTests.swift:22:        XCTAssertTrue(viewModel.flashEnabled)
+GRWMStudioTests/Mirror/MirrorControlsViewModelTests.swift:25:        XCTAssertFalse(viewModel.flashEnabled)
+GRWMStudio/Mirror/MirrorView.swift:79:        if viewModel.flashEnabled {
+GRWMStudio/Mirror/MirrorViewModel.swift:16:    var cameraIsFront = true
+GRWMStudio/Mirror/MirrorViewModel.swift:17:    var flashEnabled = false
+GRWMStudio/Mirror/MirrorTrayHostView.swift:36:                MirrorBottomControls(viewModel: viewModel)
+GRWMStudio/Mirror/MirrorViewModel+Controls.swift:9:        cameraIsFront.toggle()
+GRWMStudio/Mirror/MirrorViewModel+Controls.swift:13:            try await controller.switchCamera(toFront: cameraIsFront)
+GRWMStudio/Mirror/MirrorViewModel+Controls.swift:20:        flashEnabled.toggle()
+GRWMStudio/Mirror/MirrorBottomControls.swift:3:struct MirrorBottomControls: View {
+GRWMStudio/Mirror/MirrorBottomControls.swift:8:            ControlButton(systemName: "arrow.triangle.2.circlepath.camera", tint: DH.pinkDeep) {
+GRWMStudio/Mirror/MirrorBottomControls.swift:16:                systemName: viewModel.flashEnabled ? "bolt.fill" : "bolt",
+GRWMStudio/Mirror/MirrorBottomControls.swift:17:                tint: viewModel.flashEnabled ? DH.butter : DH.pinkDeep
+GRWMStudio/Mirror/MirrorBottomControls.swift:21:            .accessibilityLabel(viewModel.flashEnabled ? "Flash on" : "Flash off")
+GRWMStudio/Mirror/MirrorBottomControls.swift:53:        MirrorBottomControls(viewModel: viewModel)
+GRWMStudio/DeepAR/DeepARController.swift:67:    public private(set) var cameraIsFront = true
+GRWMStudio/DeepAR/DeepARController.swift:210:    public func switchCamera() async throws {
+GRWMStudio/DeepAR/DeepARController.swift:211:        try await switchCamera(toFront: !cameraIsFront)
+GRWMStudio/DeepAR/DeepARController.swift:215:    public func switchCamera(toFront: Bool) async throws {
+GRWMStudio/DeepAR/DeepARController.swift:224:        cameraIsFront = toFront

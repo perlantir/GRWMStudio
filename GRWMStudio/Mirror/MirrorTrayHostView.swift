@@ -32,6 +32,12 @@ struct MirrorTrayHostView: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
+            if !viewModel.isRecording {
+                MirrorBottomControls(viewModel: viewModel)
+                    .padding(.bottom, 8)
+                    .transition(.opacity.combined(with: .move(edge: .bottom)))
+            }
+
             FilterRailView(viewModel: viewModel) { category in
                 handleCategoryTap(category)
             }

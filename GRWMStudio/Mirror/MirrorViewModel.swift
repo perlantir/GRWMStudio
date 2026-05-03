@@ -13,6 +13,8 @@ final class MirrorViewModel {
     var selections: [EffectSlot: SlotSelection] = [:]
     var eyeSelections: [EyesSubCategory: String] = [:]
     private(set) var isFaceDetected = false
+    var cameraIsFront = true
+    var flashEnabled = false
     var lastError: ErrorVariant?
     var activeLookName: String?
     var activeCategory: FilterCategory?
