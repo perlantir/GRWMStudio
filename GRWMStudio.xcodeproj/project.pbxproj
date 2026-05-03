@@ -17,7 +17,6 @@
 		325AEE52E2D29C862240479A /* StickerHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D57AA91FC9E5D20190631 /* StickerHeart.swift */; };
 		33E0F275925F0FB81DEF741C /* StickerStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1A95064129A2EB93F7502 /* StickerStar.swift */; };
 		3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67B9D91B985787DB196F53 /* AppEnvironment.swift */; };
-		3F7455FE0687C449265467D7 /* look_legacy01.deepar in Resources */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
 		40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B043BD930A105B118373369 /* Logger+GRWM.swift */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
@@ -33,7 +32,6 @@
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
 		8C6A5E39EEA2D590B81F35A2 /* DeepAR in Frameworks */ = {isa = PBXBuildFile; productRef = 9DEF67174A07A925B0EF59D6 /* DeepAR */; };
 		8F59D2B2DD31FE2D189FA9FD /* StickerBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893009F8C8216D1B11711EF8 /* StickerBow.swift */; };
-		90D351796EA2D03619138483 /* baseBeauty.deepar in Resources */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
 		921B72EC7927E48F6BFB9DE1 /* MakeupCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */; };
 		9415F7FE3A9E019D25477E0E /* DeepARController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3129266168088884925A7CC4 /* DeepARController.swift */; };
 		98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */; };
@@ -45,10 +43,11 @@
 		BA3619294D02D6F9E5873AF9 /* Fredoka-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */; };
 		C0A008C2DD8C344D0C7BB51D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67CB30236678D50E4D8BA115 /* Assets.xcassets */; };
 		C4E4C6AB8EB1F7FDF14337FF /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */; };
-		CC20A3BC85640FB2ADC32079 /* look_legacy02.deepar in Resources */ = {isa = PBXBuildFile; fileRef = 056D9293EAE75780F27C49DB /* look_legacy02.deepar */; };
 		D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */; };
 		D9058B2A6584BDC9E6B71B48 /* Fredoka-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */; };
 		DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */; };
+		DC57D49E81A1F266FA0E7236 /* DeepARControllerEffectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */; };
+		DC7401855E755DF103C6E5F1 /* Effects in Resources */ = {isa = PBXBuildFile; fileRef = C3080EBF10CBB39901F3831F /* Effects */; };
 		DCEFD5C9D85346DF5C80D167 /* DeepARDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */; };
 		E98942651A6E054EDBA27D74 /* StickerSparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52100C15AC1F3AD6747329A /* StickerSparkle.swift */; };
 		EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */; };
@@ -75,7 +74,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
 		08F4E6016A9E66CAE4115EDD /* DHCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHCard.swift; sourceTree = "<group>"; };
 		0B16955494AFCF013FFD049C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		13D211B2767AFF359F546874 /* DHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHButton.swift; sourceTree = "<group>"; };
@@ -85,10 +83,10 @@
 		3129266168088884925A7CC4 /* DeepARController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARController.swift; sourceTree = "<group>"; };
 		36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
 		3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Regular.ttf"; sourceTree = "<group>"; };
-		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
 		4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Medium.ttf"; sourceTree = "<group>"; };
 		4D67B9D91B985787DB196F53 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
+		5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerEffectTests.swift; sourceTree = "<group>"; };
 		5E938A290AC30DF1198A2F2A /* EffectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFile.swift; sourceTree = "<group>"; };
 		5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		610FEB616B3436F330D5B37C /* EffectSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectSlot.swift; sourceTree = "<group>"; };
@@ -111,6 +109,7 @@
 		A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioTests.swift; sourceTree = "<group>"; };
 		AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupCategory.swift; sourceTree = "<group>"; };
 		AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
+		C3080EBF10CBB39901F3831F /* Effects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Effects; path = GRWMStudio/Resources/Effects; sourceTree = SOURCE_ROOT; };
 		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA1A95064129A2EB93F7502 /* StickerStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerStar.swift; sourceTree = "<group>"; };
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +125,6 @@
 		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
 		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
 		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,8 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				67CB30236678D50E4D8BA115 /* Assets.xcassets */,
+				C3080EBF10CBB39901F3831F /* Effects */,
 				5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */,
-				E0B65DF5659ED1DFA0C0A332 /* Effects */,
 				F05ED27ECE889EFBC98C74D8 /* Fonts */,
 			);
 			path = Resources;
@@ -267,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */,
+				5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */,
 			);
 			path = DeepAR;
 			sourceTree = "<group>";
@@ -282,16 +281,6 @@
 				CAA1A95064129A2EB93F7502 /* StickerStar.swift */,
 			);
 			path = Stickers;
-			sourceTree = "<group>";
-		};
-		E0B65DF5659ED1DFA0C0A332 /* Effects */ = {
-			isa = PBXGroup;
-			children = (
-				FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */,
-				42EE7539807C18A27917DF2C /* look_legacy01.deepar */,
-				056D9293EAE75780F27C49DB /* look_legacy02.deepar */,
-			);
-			path = Effects;
 			sourceTree = "<group>";
 		};
 		F05ED27ECE889EFBC98C74D8 /* Fonts */ = {
@@ -439,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0A008C2DD8C344D0C7BB51D /* Assets.xcassets in Resources */,
+				DC7401855E755DF103C6E5F1 /* Effects in Resources */,
 				D9058B2A6584BDC9E6B71B48 /* Fredoka-Bold.ttf in Resources */,
 				632B44213189DB33DEA376EE /* Fredoka-Medium.ttf in Resources */,
 				BA3619294D02D6F9E5873AF9 /* Fredoka-Regular.ttf in Resources */,
@@ -448,9 +438,6 @@
 				98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */,
 				C4E4C6AB8EB1F7FDF14337FF /* Quicksand-Regular.ttf in Resources */,
 				B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */,
-				90D351796EA2D03619138483 /* baseBeauty.deepar in Resources */,
-				3F7455FE0687C449265467D7 /* look_legacy01.deepar in Resources */,
-				CC20A3BC85640FB2ADC32079 /* look_legacy02.deepar in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +473,7 @@
 			files = (
 				2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */,
 				1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */,
+				DC57D49E81A1F266FA0E7236 /* DeepARControllerEffectTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,7 +34,11 @@ targets:
         excludes:
           - "**/.gitkeep"
           - "Resources/Info.plist"
+          - "Resources/Effects/**"
           - "Resources/Effects/_source/**"
+      - path: GRWMStudio/Resources/Effects
+        type: folder
+        buildPhase: resources
     dependencies:
       - package: DeepAR
     info:

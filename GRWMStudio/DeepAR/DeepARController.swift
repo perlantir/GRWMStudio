@@ -82,21 +82,27 @@ public final class DeepARController {
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
     @ObservationIgnored var videoContinuation: CheckedContinuation<URL, Error>?
+    @ObservationIgnored var loadEffectContinuations: [EffectSlot: CheckedContinuation<Void, Error>] = [:]
+    @ObservationIgnored private var loadEffectRequestIDs: [EffectSlot: UUID] = [:]
     @ObservationIgnored private let clientFactory: @MainActor () -> any DeepARClient
     @ObservationIgnored private let bootstrapTimeout: Duration
+    @ObservationIgnored private let effectLoadTimeout: Duration
 
     /// Creates an uninitialized DeepAR controller.
     public init() {
         clientFactory = { LiveDeepARClient() }
         bootstrapTimeout = .seconds(8)
+        effectLoadTimeout = .seconds(4)
     }
 
     init(
         clientFactory: @escaping @MainActor () -> any DeepARClient,
-        bootstrapTimeout: Duration = .seconds(8)
+        bootstrapTimeout: Duration = .seconds(8),
+        effectLoadTimeout: Duration = .seconds(4)
     ) {
         self.clientFactory = clientFactory
         self.bootstrapTimeout = bootstrapTimeout
+        self.effectLoadTimeout = effectLoadTimeout
     }
 
     func updateTrackedFace(_ isTracked: Bool) {
@@ -195,11 +201,56 @@ public final class DeepARController {
 
     /// Loads an effect into a DeepAR slot.
     public func loadEffect(_ effect: EffectFile, slot: EffectSlot) async throws {
-        throw SetupError.notImplementedYet
+        guard state == .ready else {
+            throw SetupError.effectLoadFailed(slot: slot, reason: "DeepAR not ready")
+        }
+        guard _client != nil else {
+            throw SetupError.effectLoadFailed(slot: slot, reason: "Missing DeepAR instance")
+        }
+
+        let url = try effect.bundleURL()
+        let requestID = UUID()
+        let effectPath = url.path
+        Logger.deepAR.info("Loading effect \(effect.id) into \(slot.rawValue)")
+
+        do {
+            try await withTimeout(effectLoadTimeout) { [weak self] in
+                try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+                    Task { @MainActor in
+                        guard let self else {
+                            continuation.resume()
+                            return
+                        }
+                        self.beginEffectLoad(
+                            slot: slot,
+                            path: effectPath,
+                            requestID: requestID,
+                            continuation: continuation
+                        )
+                    }
+                }
+            }
+            loadedEffects[slot] = effect.id
+        } catch is TimeoutError {
+            clearEffectLoadIfCurrent(slot: slot, requestID: requestID, reason: "Timeout")
+            throw SetupError.effectLoadFailed(slot: slot, reason: "Timeout")
+        } catch {
+            clearEffectLoadIfCurrent(slot: slot, requestID: requestID, reason: nil)
+            throw error
+        }
     }
 
     /// Clears an effect from a DeepAR slot.
-    public func clearEffect(slot: EffectSlot) async {}
+    public func clearEffect(slot: EffectSlot) async {
+        Logger.deepAR.info("Clearing effect from \(slot.rawValue)")
+        _client?.switchEffect(withSlot: slot.rawValue, path: nil)
+        loadedEffects[slot] = nil
+        loadEffectContinuations[slot]?.resume(
+            throwing: SetupError.effectLoadFailed(slot: slot, reason: "Cleared")
+        )
+        loadEffectContinuations[slot] = nil
+        loadEffectRequestIDs[slot] = nil
+    }
 
     /// Clears every GRWM Studio effect slot.
     public func clearAllEffects() async {
@@ -237,6 +288,62 @@ public final class DeepARController {
 }
 
 extension DeepARController {
+    func completeEffectLoad(slotRawValue: String) {
+        Logger.deepAR.info("didSwitchEffect: \(slotRawValue)")
+        guard let slot = EffectSlot(rawValue: slotRawValue) else {
+            return
+        }
+        loadEffectContinuations[slot]?.resume()
+        loadEffectContinuations[slot] = nil
+        loadEffectRequestIDs[slot] = nil
+    }
+
+    func failPendingEffectLoads(reason: String) {
+        for (slot, continuation) in loadEffectContinuations {
+            continuation.resume(throwing: SetupError.effectLoadFailed(slot: slot, reason: reason))
+        }
+        loadEffectContinuations.removeAll()
+        loadEffectRequestIDs.removeAll()
+    }
+
+    fileprivate func beginEffectLoad(
+        slot: EffectSlot,
+        path: String,
+        requestID: UUID,
+        continuation: CheckedContinuation<Void, Error>
+    ) {
+        guard let client = _client else {
+            continuation.resume(
+                throwing: SetupError.effectLoadFailed(slot: slot, reason: "Missing DeepAR instance")
+            )
+            return
+        }
+
+        if let existing = loadEffectContinuations[slot] {
+            existing.resume(
+                throwing: SetupError.effectLoadFailed(slot: slot, reason: "Cancelled by new load")
+            )
+        }
+        loadEffectContinuations[slot] = continuation
+        loadEffectRequestIDs[slot] = requestID
+        client.switchEffect(withSlot: slot.rawValue, path: path)
+    }
+
+    fileprivate func clearEffectLoadIfCurrent(slot: EffectSlot, requestID: UUID, reason: String?) {
+        guard loadEffectRequestIDs[slot] == requestID else {
+            return
+        }
+        if let reason {
+            loadEffectContinuations[slot]?.resume(
+                throwing: SetupError.effectLoadFailed(slot: slot, reason: reason)
+            )
+        }
+        loadEffectContinuations[slot] = nil
+        loadEffectRequestIDs[slot] = nil
+    }
+}
+
+extension DeepARController {
     /// Reads the DeepAR license key injected into the app Info.plist.
     public static func licenseKeyFromInfoPlist() -> String {
         Bundle.main.object(forInfoDictionaryKey: "DeepARLicenseKey") as? String ?? ""
@@ -248,6 +355,7 @@ protocol DeepARClient: AnyObject {
     func setLicenseKey(_ licenseKey: String)
     func setDelegate(_ delegate: DeepARDelegateProxy)
     func createARView(frame: CGRect) -> UIView
+    func switchEffect(withSlot slot: String, path: String?)
 }
 
 @MainActor
@@ -268,5 +376,9 @@ final class LiveDeepARClient: DeepARClient {
 
     func createARView(frame: CGRect) -> UIView {
         sdk.createARView(withFrame: frame)
+    }
+
+    func switchEffect(withSlot slot: String, path: String?) {
+        sdk.switchEffect(withSlot: slot, path: path)
     }
 }

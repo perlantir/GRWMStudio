@@ -36,7 +36,11 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
 
     func imageVisibilityChanged(_ gameObjectName: String, imageVisible: Bool) {}
 
-    func didSwitchEffect(_ slot: String) {}
+    func didSwitchEffect(_ slot: String) {
+        Task { [weak controller] in
+            await controller?.completeEffectLoad(slotRawValue: slot)
+        }
+    }
 
     func animationTransitioned(toState state: String) {}
 
@@ -48,5 +52,10 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
 
     func recordingFailedWithError(_ error: Error) {}
 
-    func onError(withCode code: ARErrorType, error: String) {}
+    func onError(withCode code: ARErrorType, error: String) {
+        Logger.deepAR.error("DeepAR error \(String(describing: code), privacy: .public): \(error, privacy: .public)")
+        Task { [weak controller] in
+            await controller?.failPendingEffectLoads(reason: error)
+        }
+    }
 }

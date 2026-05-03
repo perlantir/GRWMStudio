@@ -95,4 +95,6 @@ private final class MockDeepARClient: DeepARClient {
         }
         return view
     }
+
+    func switchEffect(withSlot slot: String, path: String?) {}
 }
