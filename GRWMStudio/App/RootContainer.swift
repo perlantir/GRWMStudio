@@ -16,7 +16,7 @@ struct RootContainer: View {
     private var routeView: some View {
         switch coordinator.route {
         case .onboardingSplash:
-            placeholder("Splash placeholder")
+            SplashView()
         case .onboardingWelcome:
             placeholder("Welcome placeholder")
         case .onboardingParentInfo:

@@ -4,12 +4,15 @@ struct DHWallpaperStripes: View {
     var primary: Color = DH.pinkPaper
     var secondary: Color = DH.cream
     var stripeWidth: CGFloat = 24
+    var secondaryStripeWidth: CGFloat?
     var opacity: Double = 0.7
 
     var body: some View {
         Canvas { context, size in
             let bounds = CGRect(origin: .zero, size: size)
             let diagonal = sqrt(size.width * size.width + size.height * size.height)
+            let secondaryWidth = secondaryStripeWidth ?? stripeWidth
+            let period = stripeWidth + secondaryWidth
 
             context.fill(Path(bounds), with: .color(primary))
             context.translateBy(x: size.width / 2, y: size.height / 2)
@@ -20,11 +23,11 @@ struct DHWallpaperStripes: View {
                 let band = CGRect(
                     x: stripeX + stripeWidth,
                     y: -diagonal,
-                    width: stripeWidth,
+                    width: secondaryWidth,
                     height: diagonal * 2
                 )
                 context.fill(Path(band), with: .color(secondary))
-                stripeX += stripeWidth * 2
+                stripeX += period
             }
         }
         .opacity(opacity)
