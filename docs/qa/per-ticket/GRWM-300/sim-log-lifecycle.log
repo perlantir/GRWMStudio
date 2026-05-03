@@ -1,0 +1,6 @@
+--- Log capture for bundle ID: app.grwmstudio.ios ---
+Filtering the log data using "subsystem == "app.grwmstudio.ios""
+2026-05-03 00:35:36.762519-0500 GRWMStudio [app.grwmstudio.ios:deepar] Effect catalog loaded
+2026-05-03 00:35:36.773620-0500 GRWMStudio [app.grwmstudio.ios:deepar] Mirror using simulator DeepAR placeholder
+2026-05-03 00:36:01.787230-0500 GRWMStudio [app.grwmstudio.ios:deepar] Camera stopped
+2026-05-03 00:36:13.689805-0500 GRWMStudio [app.grwmstudio.ios:deepar] Mirror using simulator DeepAR placeholder

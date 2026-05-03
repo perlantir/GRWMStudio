@@ -51,6 +51,7 @@
 		7EF79EF347D8F95885442153 /* StickerFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */; };
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
 		8047AC02F4BB590FA56B5FD2 /* DHTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A387D41CC593F23F0463A /* DHTabBar.swift */; };
+		8BC489AE4C14115066C88E63 /* MirrorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */; };
 		8C6A5E39EEA2D590B81F35A2 /* DeepAR in Frameworks */ = {isa = PBXBuildFile; productRef = 9DEF67174A07A925B0EF59D6 /* DeepAR */; };
 		8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5689FD3614E6CE1BB6C0C8C3 /* noFilter.png */; };
 		8F59D2B2DD31FE2D189FA9FD /* StickerBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893009F8C8216D1B11711EF8 /* StickerBow.swift */; };
@@ -64,9 +65,11 @@
 		A3EDB25296FCAA64B884DCF7 /* EffectCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */; };
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
 		A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F08944FAB932F872FCC276 /* PermissionsView.swift */; };
+		AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ED3FC6892310C07240BA42 /* MirrorView.swift */; };
 		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA57750E522F4B57E9C302 /* WelcomeView.swift */; };
 		B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */; };
+		B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */; };
 		B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E938A290AC30DF1198A2F2A /* EffectFile.swift */; };
 		B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */; };
 		B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 056D9293EAE75780F27C49DB /* look_legacy02.deepar */; };
@@ -94,6 +97,7 @@
 		E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E71D00F40AEDBE5021960897 /* brows.png */; };
 		EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */; };
 		EDFF469B66D685262FCE81F3 /* DH+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */; };
+		EE65D90F35B9641BE5708449 /* MirrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */; };
 		F4DFC1A552907B2F58E8153A /* DH+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A16D5E83B67577C1380959 /* DH+Fonts.swift */; };
 		F99AF7FE261407C5A3AA42BE /* DHChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7106DD365B22C90F28A98A3B /* DHChip.swift */; };
 		FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */; };
@@ -154,6 +158,7 @@
 		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
 		08F4E6016A9E66CAE4115EDD /* DHCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHCard.swift; sourceTree = "<group>"; };
 		0B16955494AFCF013FFD049C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		10ED3FC6892310C07240BA42 /* MirrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorView.swift; sourceTree = "<group>"; };
 		116BFE195EF24C36D83D2276 /* CaptureServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureServiceTests.swift; sourceTree = "<group>"; };
 		1393CC36E6316BE411EB860A /* ProfileRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecordTests.swift; sourceTree = "<group>"; };
 		13D211B2767AFF359F546874 /* DHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHButton.swift; sourceTree = "<group>"; };
@@ -164,6 +169,7 @@
 		27404CCB96EE563E725C9A98 /* CaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureService.swift; sourceTree = "<group>"; };
 		28A3BFFA4F5506B71E3C510C /* DeepARController+Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Recording.swift"; sourceTree = "<group>"; };
 		2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerFlower.swift; sourceTree = "<group>"; };
+		2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorChrome.swift; sourceTree = "<group>"; };
 		2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy01.png; sourceTree = "<group>"; };
 		30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPermissionsService.swift; sourceTree = "<group>"; };
 		30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalog.swift; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 		AAECB2E29E326501184B58A9 /* DeepARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARView.swift; sourceTree = "<group>"; };
 		AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupCategory.swift; sourceTree = "<group>"; };
 		AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
+		B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModelTests.swift; sourceTree = "<group>"; };
 		B4234637D1D41F546D13863E /* DeepARViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARViewTests.swift; sourceTree = "<group>"; };
 		B43DE872D8CE0EFD6B557813 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
 		B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
@@ -225,6 +232,7 @@
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concurrency+Extensions.swift"; sourceTree = "<group>"; };
+		D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModel.swift; sourceTree = "<group>"; };
 		D5A16D5E83B67577C1380959 /* DH+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Fonts.swift"; sourceTree = "<group>"; };
 		D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARDelegateProxy.swift; sourceTree = "<group>"; };
 		D5FED8DFC90B6D62C5B39367 /* URL+Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Documents.swift"; sourceTree = "<group>"; };
@@ -361,6 +369,7 @@
 				573077F4EEC4B2F01A980BBF /* Capture */,
 				D2F6467826E99E8C1A10F2B5 /* DeepAR */,
 				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
+				D37CFD7D5B6C385F4FB5D846 /* Mirror */,
 				0F48319150D1E6ED27568D31 /* Onboarding */,
 				EA5CD952999A93C7679C2A59 /* Permissions */,
 				BAB671FBF528DC5C74EAD7D1 /* Persistence */,
@@ -416,6 +425,7 @@
 				BC45D209D14BA80AA9A3ABE3 /* Capture */,
 				1856E43C21F0DE495D560864 /* DeepAR */,
 				29EE459A880492A90D704EBE /* DesignSystem */,
+				806952685AB83A501CB7EB0F /* Mirror */,
 				3DE1D7572561F9470B143F08 /* Onboarding */,
 				F3D8926139F1F430A18E8150 /* Permissions */,
 				DC09C75263DE4AEECC51545B /* Persistence */,
@@ -423,6 +433,16 @@
 				51CB23B090FC06420E2B62A7 /* Utilities */,
 			);
 			path = GRWMStudio;
+			sourceTree = "<group>";
+		};
+		806952685AB83A501CB7EB0F /* Mirror */ = {
+			isa = PBXGroup;
+			children = (
+				2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */,
+				10ED3FC6892310C07240BA42 /* MirrorView.swift */,
+				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
+			);
+			path = Mirror;
 			sourceTree = "<group>";
 		};
 		AA738BCAA887B227C0AA18B5 /* Resources */ = {
@@ -464,6 +484,14 @@
 				3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */,
 			);
 			path = DeepAR;
+			sourceTree = "<group>";
+		};
+		D37CFD7D5B6C385F4FB5D846 /* Mirror */ = {
+			isa = PBXGroup;
+			children = (
+				B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */,
+			);
+			path = Mirror;
 			sourceTree = "<group>";
 		};
 		D92A5EA8E2B1EE81CECA336E /* Stickers */ = {
@@ -717,6 +745,7 @@
 				2553F93440BF12F3280B5F54 /* EffectCatalogTests.swift in Sources */,
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
+				8BC489AE4C14115066C88E63 /* MirrorViewModelTests.swift in Sources */,
 				D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */,
 				DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */,
 				D483121AF654372FF86840ED /* ProfileRecordTests.swift in Sources */,
@@ -761,6 +790,9 @@
 				40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */,
 				921B72EC7927E48F6BFB9DE1 /* MakeupCategory.swift in Sources */,
 				D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */,
+				B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */,
+				AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */,
+				EE65D90F35B9641BE5708449 /* MirrorViewModel.swift in Sources */,
 				95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */,
 				FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */,
 				519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */,

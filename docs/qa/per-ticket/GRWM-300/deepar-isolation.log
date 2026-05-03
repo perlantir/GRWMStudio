@@ -1,0 +1,2 @@
+$ ./Scripts/verify-deepar-isolation.sh
+PASS deepar isolation

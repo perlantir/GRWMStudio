@@ -1,0 +1,6 @@
+$ xcodebuild -quiet test -scheme GRWMStudio -destination 'id=BFD7E422-B789-4380-9588-B952559B6A92' CODE_SIGNING_ALLOWED=NO -only-testing:GRWMStudioTests/MirrorViewModelTests
+2026-05-03 00:34:07.666 xcodebuild[81667:9363199] [MT] IDETestOperationsObserverDebug: 3.253 elapsed -- Testing started completed.
+2026-05-03 00:34:07.666 xcodebuild[81667:9363199] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 00:34:07.667 xcodebuild[81667:9363199] [MT] IDETestOperationsObserverDebug: 3.253 sec, +3.253 sec -- end
+Testing started
+PASS MirrorViewModelTests

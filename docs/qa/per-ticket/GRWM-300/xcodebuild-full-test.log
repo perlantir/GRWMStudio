@@ -1,0 +1,8 @@
+$ xcodebuild -quiet test -scheme GRWMStudio -destination 'id=BFD7E422-B789-4380-9588-B952559B6A92' CODE_SIGNING_ALLOWED=NO
+2026-05-03 00:38:35.740 xcodebuild[89202:9377559] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-05-03 00:38:35.740 xcodebuild[89202:9377559] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-05-03 00:38:40.462 xcodebuild[89202:9377559] [MT] IDETestOperationsObserverDebug: 13.234 elapsed -- Testing started completed.
+2026-05-03 00:38:40.462 xcodebuild[89202:9377559] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 00:38:40.462 xcodebuild[89202:9377559] [MT] IDETestOperationsObserverDebug: 13.234 sec, +13.234 sec -- end
+Testing started
+PASS full xcodebuild test

@@ -10,7 +10,7 @@ struct AppShell: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selected) {
-                placeholder("Mirror Tab - wired in GRWM-300")
+                MirrorView()
                     .tag(DHTab.mirror)
 
                 placeholder("Looks Library - wired in GRWM-500")
@@ -33,23 +33,6 @@ struct AppShell: View {
             }
             .padding(.horizontal, 14)
             .padding(.bottom, 18)
-
-            #if DEBUG
-            VStack {
-                HStack {
-                    Spacer()
-                    DHButton(title: "Reset Onboarding", kind: .ghost, size: .sm) {
-                        env.onboarding.reset()
-                        coordinator.route = .onboardingSplash
-                    }
-                    .accessibilityLabel("Reset onboarding")
-                }
-                .padding(.top, 12)
-                .padding(.trailing, 18)
-
-                Spacer()
-            }
-            #endif
         }
         .preferredColorScheme(.light)
         .onAppear(perform: restoreSelectedTab)
@@ -72,6 +55,23 @@ struct AppShell: View {
                 .foregroundStyle(DH.pinkDeep)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
+
+            #if DEBUG
+            VStack {
+                HStack {
+                    Spacer()
+                    DHButton(title: "Reset Onboarding", kind: .ghost, size: .sm) {
+                        env.onboarding.reset()
+                        coordinator.route = .onboardingSplash
+                    }
+                    .accessibilityLabel("Reset onboarding")
+                }
+                .padding(.top, 72)
+                .padding(.trailing, 18)
+
+                Spacer()
+            }
+            #endif
         }
         .ignoresSafeArea()
     }
