@@ -4,6 +4,14 @@ import Foundation
 public actor EffectCatalog {
     /// Shared catalog used by app startup and mirror view models.
     public static let shared = EffectCatalog()
+    private static let syncManifestSnapshot: ManifestRoot? = {
+        guard let url = Bundle.main.url(forResource: "manifest", withExtension: "json", subdirectory: "Effects"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode(ManifestRoot.self, from: data) else {
+            return nil
+        }
+        return decoded
+    }()
 
     private var cache: ManifestRoot?
 
@@ -40,6 +48,11 @@ public actor EffectCatalog {
         }
         return nil
     }
+
+    /// Synchronous manifest lookup for SwiftUI visibility decisions.
+    public nonisolated func containsSync(effectID: EffectFile.ID) -> Bool {
+        Self.syncManifestSnapshot?.contains(effectID: effectID) == true
+    }
 }
 
 /// Top-level decoded manifest.
@@ -59,6 +72,13 @@ public struct ManifestRoot: Decodable, Sendable {
                     }
                 }
             }
+        }
+    }
+
+    /// Returns true when any category includes the requested effect identifier.
+    public func contains(effectID: EffectFile.ID) -> Bool {
+        effects.values.contains { list in
+            list.contains { $0.id == effectID }
         }
     }
 }

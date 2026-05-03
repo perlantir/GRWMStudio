@@ -83,4 +83,18 @@ final class ShadeTests: XCTestCase {
             }
         )
     }
+
+    func testBrowShadesAreFreeAndCarryNaturalShapeParameters() {
+        XCTAssertEqual(
+            Shade.browShades.map(\.id),
+            ["brow.blonde", "brow.brown", "brow.darkBrown", "brow.black", "brow.softPink"]
+        )
+        XCTAssertTrue(Shade.browShades.allSatisfy { !$0.isPro })
+
+        let brown = Shade.browShades[1]
+        XCTAssertEqual(brown.effectID, "brows")
+        XCTAssertTrue(brown.parameters.contains { $0.ref == "browColor" })
+        XCTAssertTrue(brown.parameters.contains { $0.ref == "browTexture" && $0.value == .texture("brows_natural") })
+        XCTAssertTrue(brown.parameters.contains { $0.ref == "browEnabled" && $0.value == .enabled(true) })
+    }
 }

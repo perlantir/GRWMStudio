@@ -65,6 +65,7 @@
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
 		8047AC02F4BB590FA56B5FD2 /* DHTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A387D41CC593F23F0463A /* DHTabBar.swift */; };
 		8427AF7F1AD2BAAAA2372024 /* DeepARLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DDE32365C12B30732193AA /* DeepARLicense.swift */; };
+		8A496BFB5859F564663EFAD9 /* EmptyShadeTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D1A0641F04DB5487BE9B2 /* EmptyShadeTrayView.swift */; };
 		8BC489AE4C14115066C88E63 /* MirrorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */; };
 		8C6A5E39EEA2D590B81F35A2 /* DeepAR in Frameworks */ = {isa = PBXBuildFile; productRef = 9DEF67174A07A925B0EF59D6 /* DeepAR */; };
 		8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5689FD3614E6CE1BB6C0C8C3 /* noFilter.png */; };
@@ -76,7 +77,9 @@
 		95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72758F600E00EC23E45ABED2 /* OnboardingState.swift */; };
 		98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */; };
 		9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA1EFDAE8487082E1A023FF /* RootContainer.swift */; };
+		9BFE821DADE7DC109CCB0A75 /* brows_natural.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D6ED4920FF5E4E0116F07CA /* brows_natural.png */; };
 		9DB0B0E618A1C82A298F7564 /* Fredoka-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */; };
+		9E4E4126FC8ABC0E06F984B1 /* Shades+Brows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */; };
 		A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4305B706633CFFF0075CBB45 /* eyeliner_winged.png */; };
 		A3EDB25296FCAA64B884DCF7 /* EffectCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */; };
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
@@ -182,21 +185,10 @@
 		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects/luts;
-			dstSubfolderSpec = 7;
-			files = (
-				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
-				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
-				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C11C208F764B56B1CC794199 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = Effects/textures;
 			dstSubfolderSpec = 7;
 			files = (
+				9BFE821DADE7DC109CCB0A75 /* brows_natural.png in CopyFiles */,
 				E3A28A70055DE0D59E4C5E6C /* eyelashes_doll.png in CopyFiles */,
 				C3B16D6FBE113D25D9C3D470 /* eyelashes_drama.png in CopyFiles */,
 				0D00171D0CF9553190798188 /* eyelashes_natural.png in CopyFiles */,
@@ -207,6 +199,18 @@
 				A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */,
 				38B4C99A41B3D7ADC7EF8042 /* eyeshadow_basic.png in CopyFiles */,
 				60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11C208F764B56B1CC794199 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +238,7 @@
 		2CB44E7E81F82BDD61D38E7A /* lut_soft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_soft.png; sourceTree = "<group>"; };
 		2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerFlower.swift; sourceTree = "<group>"; };
 		2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorChrome.swift; sourceTree = "<group>"; };
+		2D6ED4920FF5E4E0116F07CA /* brows_natural.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brows_natural.png; sourceTree = "<group>"; };
 		2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy01.png; sourceTree = "<group>"; };
 		30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPermissionsService.swift; sourceTree = "<group>"; };
 		30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalog.swift; sourceTree = "<group>"; };
@@ -287,6 +292,7 @@
 		8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedView.swift; sourceTree = "<group>"; };
 		9B043BD930A105B118373369 /* Logger+GRWM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+GRWM.swift"; sourceTree = "<group>"; };
 		9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMap.swift; sourceTree = "<group>"; };
+		9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Brows.swift"; sourceTree = "<group>"; };
 		A06EF686867E7FA7B9D66550 /* DHHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHHaptics.swift; sourceTree = "<group>"; };
 		A07C372D46745B2B38661FF3 /* FilterCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategory.swift; sourceTree = "<group>"; };
 		A1DDE32365C12B30732193AA /* DeepARLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARLicense.swift; sourceTree = "<group>"; };
@@ -319,6 +325,7 @@
 		D5A16D5E83B67577C1380959 /* DH+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Fonts.swift"; sourceTree = "<group>"; };
 		D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARDelegateProxy.swift; sourceTree = "<group>"; };
 		D5FED8DFC90B6D62C5B39367 /* URL+Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Documents.swift"; sourceTree = "<group>"; };
+		D67D1A0641F04DB5487BE9B2 /* EmptyShadeTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyShadeTrayView.swift; sourceTree = "<group>"; };
 		DA5E801A42C2F3996FAEC8AF /* eyeliner_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner_classic.png; sourceTree = "<group>"; };
 		DE28718EC19A161B7B6256B8 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -371,6 +378,7 @@
 		1543995EBC351ABED275A51F /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				2D6ED4920FF5E4E0116F07CA /* brows_natural.png */,
 				E8EBEEA65D673E4619983BBA /* eyelashes_doll.png */,
 				3762331612665796AC7A7637 /* eyelashes_drama.png */,
 				135CF27B332AB567A935E3F1 /* eyelashes_natural.png */,
@@ -551,6 +559,7 @@
 		806952685AB83A501CB7EB0F /* Mirror */ = {
 			isa = PBXGroup;
 			children = (
+				D67D1A0641F04DB5487BE9B2 /* EmptyShadeTrayView.swift */,
 				33B4D75786E88E615D6143E3 /* EyesTrayView.swift */,
 				A07C372D46745B2B38661FF3 /* FilterCategory.swift */,
 				4D1839F69BE023409EA86E07 /* FilterRailView.swift */,
@@ -560,6 +569,7 @@
 				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
 				81E973E0B871A21B0A2A52D3 /* Shade.swift */,
 				BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */,
+				9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */,
 				8166C382E2B2372DFAE3B23D /* Shades+Eyes.swift */,
 				573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */,
 				B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */,
@@ -919,6 +929,7 @@
 				5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */,
 				30F16AA226DEB8D74E821564 /* EffectParameterMap.swift in Sources */,
 				6F30CCFE4C5EB81EC03859D9 /* EffectSlot.swift in Sources */,
+				8A496BFB5859F564663EFAD9 /* EmptyShadeTrayView.swift in Sources */,
 				1E8A7EFB01EFA649A0EF3BC3 /* EyesTrayView.swift in Sources */,
 				16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */,
 				ADCFC682D7389A7A554D208A /* FilterRailView.swift in Sources */,
@@ -944,6 +955,7 @@
 				1800B2D637206141971D7418 /* Shade.swift in Sources */,
 				AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */,
 				1B209F1B9C86C0624787BBAF /* Shades+Base.swift in Sources */,
+				9E4E4126FC8ABC0E06F984B1 /* Shades+Brows.swift in Sources */,
 				4CA779BCA5540FB75C118A8A /* Shades+Eyes.swift in Sources */,
 				FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */,
 				F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */,

@@ -37,6 +37,12 @@ final class EffectCatalogTests: XCTestCase {
         XCTAssertNotNil(root.effects["looks"]?.first(where: { $0.id == "look_legacy02" }))
     }
 
+    func testContainsSyncUsesManifestEffectIdentifiers() {
+        XCTAssertTrue(EffectCatalog.shared.containsSync(effectID: "baseBeauty"))
+        XCTAssertFalse(EffectCatalog.shared.containsSync(effectID: "brows"))
+        XCTAssertFalse(EffectCatalog.shared.containsSync(effectID: "blush"))
+    }
+
     func testEveryParameterRefResolves() async throws {
         let root = try await EffectCatalog.shared.load()
 

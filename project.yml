@@ -121,6 +121,11 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects/textures
+      - path: GRWMStudio/Resources/Effects/textures/brows_natural.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/textures
       - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
         buildPhase:
           copyFiles:

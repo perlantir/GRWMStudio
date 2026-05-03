@@ -66,6 +66,31 @@ struct MirrorView: View {
                     EyesTrayView(viewModel: viewModel)
                         .padding(.bottom, 186)
                         .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                } else if viewModel.activeCategory == .brows {
+                    if EffectCatalog.shared.containsSync(effectID: "brows") {
+                        ShadeTrayView(
+                            category: .brows,
+                            shades: Shade.browShades,
+                            selectedID: viewModel.selectedShadeID(for: .brows)
+                        ) { shade in
+                            Task { @MainActor in
+                                await viewModel.selectShade(in: .brows, shade: shade)
+                            }
+                        } onClear: {
+                            Task { @MainActor in
+                                await viewModel.clear(slot: .brows)
+                            }
+                        }
+                        .padding(.bottom, 186)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                    } else {
+                        EmptyShadeTrayView(
+                            category: .brows,
+                            message: "Brows coming soon ✨ — your bigger pack will unlock these!"
+                        )
+                        .padding(.bottom, 186)
+                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                    }
                 }
 
                 FilterRailView(viewModel: viewModel)
