@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 @main
@@ -11,6 +12,7 @@ struct GRWMStudioApp: App {
             RootContainer()
                 .environment(\.appEnvironment, environment)
                 .environment(\.rootCoordinator, coordinator)
+                .modelContainer(AppModelContainer.container)
                 .preferredColorScheme(.light)
         }
     }

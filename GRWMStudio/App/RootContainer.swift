@@ -40,7 +40,7 @@ struct RootContainer: View {
         case .onboardingWelcome:
             WelcomeView()
         case .onboardingParentInfo:
-            placeholder("Parent Info placeholder")
+            ParentInfoView()
         case .onboardingPermissions:
             placeholder("Permissions placeholder")
         case .onboardingPermissionsDenied:
