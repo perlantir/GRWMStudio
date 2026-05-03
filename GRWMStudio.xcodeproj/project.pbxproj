@@ -39,6 +39,7 @@
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
 		6091042F28F1BD50A2500A52 /* CaptureServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BFE195EF24C36D83D2276 /* CaptureServiceTests.swift */; };
 		632B44213189DB33DEA376EE /* Fredoka-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */; };
+		66D296E3E80B25DE4A682848 /* PermissionsDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */; };
 		6C052DD2E427A6C2B4F5366B /* DHHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EF686867E7FA7B9D66550 /* DHHaptics.swift */; };
 		6F30CCFE4C5EB81EC03859D9 /* EffectSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610FEB616B3436F330D5B37C /* EffectSlot.swift */; };
 		71337A950998A0A1175144E9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B16955494AFCF013FFD049C /* SplashView.swift */; };
@@ -198,6 +199,7 @@
 		88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
 		893009F8C8216D1B11711EF8 /* StickerBow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBow.swift; sourceTree = "<group>"; };
 		8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-SemiBold.ttf"; sourceTree = "<group>"; };
+		8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedView.swift; sourceTree = "<group>"; };
 		9B043BD930A105B118373369 /* Logger+GRWM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+GRWM.swift"; sourceTree = "<group>"; };
 		9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMap.swift; sourceTree = "<group>"; };
 		A06EF686867E7FA7B9D66550 /* DHHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHHaptics.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 			children = (
 				72758F600E00EC23E45ABED2 /* OnboardingState.swift */,
 				E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */,
+				8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */,
 				C6F08944FAB932F872FCC276 /* PermissionsView.swift */,
 				78C558272F9814E7825BC889 /* PermRow.swift */,
 				0B16955494AFCF013FFD049C /* SplashView.swift */,
@@ -753,6 +756,7 @@
 				95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */,
 				FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */,
 				519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */,
+				66D296E3E80B25DE4A682848 /* PermissionsDeniedView.swift in Sources */,
 				DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */,
 				A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */,
 				CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */,

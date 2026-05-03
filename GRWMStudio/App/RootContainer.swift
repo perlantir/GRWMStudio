@@ -44,7 +44,7 @@ struct RootContainer: View {
         case .onboardingPermissions:
             PermissionsView()
         case .onboardingPermissionsDenied:
-            placeholder("Permissions Denied placeholder")
+            PermissionsDeniedView()
         case .app:
             appPlaceholder
         case .parentalGate(let reason):
@@ -81,6 +81,12 @@ struct RootContainer: View {
     }
 
     private func resolveInitialRoute() {
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugOnboardingFlow") {
+            return
+        }
+        #endif
+
         if env.onboarding.hasCompletedOnboarding {
             coordinator.route = .app
         } else if coordinator.route == .app {
