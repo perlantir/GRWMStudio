@@ -1,3 +1,4 @@
+import AVFoundation
 import DeepAR
 import Foundation
 import Observation
@@ -76,6 +77,7 @@ public final class DeepARController {
     @ObservationIgnored var _arView: UIView?
     @ObservationIgnored var _delegateProxy: DeepARDelegateProxy?
     @ObservationIgnored var _client: (any DeepARClient)?
+    @ObservationIgnored private var _cameraController: CameraController?
 
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
@@ -155,15 +157,40 @@ public final class DeepARController {
 
     /// Starts the camera pipeline.
     public func startCamera(includeAudio: Bool) async throws {
-        throw SetupError.notImplementedYet
+        guard state == .ready else {
+            throw SetupError.recordingFailed(reason: "DeepAR not ready")
+        }
+        guard let deepAR = _deepAR else {
+            throw SetupError.recordingFailed(reason: "Missing DeepAR instance")
+        }
+
+        if _cameraController == nil {
+            _cameraController = CameraController(deepAR: deepAR)
+        }
+        _cameraController?.startCamera(withAudio: includeAudio)
+        Logger.deepAR.info("Camera started (audio: \(includeAudio))")
     }
 
     /// Stops the camera pipeline.
-    public func stopCamera() async {}
+    public func stopCamera() async {
+        _cameraController?.stopCamera()
+        _cameraController = nil
+        trackedFace = false
+        Logger.deepAR.info("Camera stopped")
+    }
 
     /// Switches between front and rear cameras.
     public func switchCamera(toFront: Bool) async throws {
-        throw SetupError.notImplementedYet
+        guard state == .ready else {
+            throw SetupError.recordingFailed(reason: "DeepAR not ready")
+        }
+        guard let cameraController = _cameraController else {
+            throw SetupError.recordingFailed(reason: "Camera not started")
+        }
+
+        cameraController.position = toFront ? .front : .back
+        trackedFace = false
+        Logger.deepAR.info("Camera switched (front: \(toFront))")
     }
 
     /// Loads an effect into a DeepAR slot.
