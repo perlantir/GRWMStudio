@@ -26,6 +26,24 @@ struct MirrorView: View {
             VStack {
                 Spacer()
 
+                if viewModel.activeCategory == .skin {
+                    ShadeTrayView(
+                        category: .skin,
+                        shades: Shade.skinShades,
+                        selectedID: viewModel.selectedShadeID(for: .skin)
+                    ) { shade in
+                        Task { @MainActor in
+                            await viewModel.selectShade(in: .skin, shade: shade)
+                        }
+                    } onClear: {
+                        Task { @MainActor in
+                            await viewModel.clear(slot: .skin)
+                        }
+                    }
+                    .padding(.bottom, 186)
+                    .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                }
+
                 FilterRailView(viewModel: viewModel)
                     .padding(.bottom, 118)
             }

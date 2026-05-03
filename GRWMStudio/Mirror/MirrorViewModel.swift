@@ -14,6 +14,9 @@ final class MirrorViewModel {
     private(set) var isFaceDetected = false
     private(set) var lastError: ErrorVariant?
     var activeCategory: FilterCategory?
+    var activeTraySlot: EffectSlot? {
+        activeCategory?.slot
+    }
 
     @ObservationIgnored private var env: AppEnvironment?
     @ObservationIgnored private var faceTask: Task<Void, Never>?
@@ -99,6 +102,38 @@ final class MirrorViewModel {
         }
     }
 
+    private func observeFaceVisibility() {
+        faceTask?.cancel()
+        let stream = controller.faceVisibilityStream
+        isFaceDetected = controller.trackedFace
+        faceTask = Task { @MainActor [weak self] in
+            for await visible in stream {
+                guard let self else {
+                    return
+                }
+                self.isFaceDetected = visible
+            }
+        }
+    }
+
+    private var shouldSkipControllerCallsForSimulator: Bool {
+        #if targetEnvironment(simulator)
+        controller.state != .ready
+        #else
+        false
+        #endif
+    }
+
+    private static var defaultUsesSimulatorPlaceholder: Bool {
+        #if targetEnvironment(simulator)
+        true
+        #else
+        false
+        #endif
+    }
+}
+
+extension MirrorViewModel {
     func selectShade(in slot: EffectSlot, shade: MakeupShade) async {
         await selectShade(in: slot, effectID: nil, shade: shade)
     }
@@ -128,6 +163,35 @@ final class MirrorViewModel {
             }
 
             selections[slot] = SlotSelection(effectID: effect.id, shade: shade, isPro: isPro)
+        } catch {
+            lastError = .effectFail
+            Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    func selectShade(in slot: EffectSlot, shade: Shade) async {
+        do {
+            guard let effect = try await catalog.effect(byID: shade.effectID) else {
+                throw MirrorActionError.effectMissing(shade.effectID)
+            }
+
+            let isPro = effect.isPro || shade.isPro
+            guard canUseProContent(isPro: isPro) else {
+                lastError = .license
+                Logger.mirror.info("Blocked pro shade without entitlement: \(shade.id, privacy: .public)")
+                return
+            }
+
+            if !shouldSkipControllerCallsForSimulator {
+                if controller.loadedEffects[slot] != effect.id {
+                    try await controller.loadEffect(effect, slot: slot)
+                }
+                try await applyShadeParameters(shade.parameters)
+            } else {
+                Logger.mirror.info("Simulator placeholder selected shade without DeepAR load: \(shade.id, privacy: .public)")
+            }
+
+            selections[slot] = SlotSelection(effectID: effect.id, shadeID: shade.id, isPro: isPro)
         } catch {
             lastError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
@@ -166,18 +230,8 @@ final class MirrorViewModel {
         selections[slot] = nil
     }
 
-    private func observeFaceVisibility() {
-        faceTask?.cancel()
-        let stream = controller.faceVisibilityStream
-        isFaceDetected = controller.trackedFace
-        faceTask = Task { @MainActor [weak self] in
-            for await visible in stream {
-                guard let self else {
-                    return
-                }
-                self.isFaceDetected = visible
-            }
-        }
+    func selectedShadeID(for slot: EffectSlot) -> String? {
+        selections[slot]?.shadeID
     }
 
     private func effect(
@@ -250,20 +304,32 @@ final class MirrorViewModel {
         }
     }
 
-    private var shouldSkipControllerCallsForSimulator: Bool {
-        #if targetEnvironment(simulator)
-        controller.state != .ready
-        #else
-        false
-        #endif
-    }
+    private func applyShadeParameters(_ parameters: [EffectParam]) async throws {
+        for parameterChange in parameters {
+            guard let parameter = EffectParameterMap.resolve(parameterChange.ref) else {
+                throw MirrorActionError.unresolvedParameter(parameterChange.ref)
+            }
 
-    private static var defaultUsesSimulatorPlaceholder: Bool {
-        #if targetEnvironment(simulator)
-        true
-        #else
-        false
-        #endif
+            switch parameterChange.value {
+            case .color(let rgba):
+                let color = UIColor(
+                    red: CGFloat(rgba.red),
+                    green: CGFloat(rgba.green),
+                    blue: CGFloat(rgba.blue),
+                    alpha: CGFloat(rgba.alpha)
+                )
+                await controller.setColor(color, on: parameter)
+            case .texture(let assetName):
+                guard let image = UIImage(named: assetName) else {
+                    throw MirrorActionError.missingTexture(assetName)
+                }
+                await controller.setTexture(image, on: parameter)
+            case .blendshape(let value):
+                await controller.setBlendshape(value, on: parameter)
+            case .enabled(let enabled):
+                await controller.setEnabled(enabled, on: parameter)
+            }
+        }
     }
 }
 

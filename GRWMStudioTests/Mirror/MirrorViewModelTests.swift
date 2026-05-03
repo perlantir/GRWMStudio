@@ -69,6 +69,24 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
 
+    func testSelectTypedShadeLoadsEffectAppliesParametersAndTracksSelectionID() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        let shade = try XCTUnwrap(Shade.skinShades.first(where: { $0.id == "skin.medium" }))
+
+        await viewModel.selectShade(in: .skin, shade: shade)
+
+        XCTAssertEqual(viewModel.selectedShadeID(for: .skin), shade.id)
+        XCTAssertEqual(viewModel.selections[.skin], SlotSelection(effectID: "baseBeauty", shadeID: shade.id, isPro: false))
+        XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
+        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "u_color" })
+    }
+
     func testProShadeWithoutEntitlementDoesNotLoadEffect() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))

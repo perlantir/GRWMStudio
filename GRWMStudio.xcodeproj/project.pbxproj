@@ -12,6 +12,7 @@
 		095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
 		0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5D32426D75F1151F9561AC5 /* shadow.png */; };
 		16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C372D46745B2B38661FF3 /* FilterCategory.swift */; };
+		1800B2D637206141971D7418 /* Shade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E973E0B871A21B0A2A52D3 /* Shade.swift */; };
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
 		1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */; };
 		1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */; };
@@ -70,12 +71,14 @@
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
 		A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F08944FAB932F872FCC276 /* PermissionsView.swift */; };
 		AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ED3FC6892310C07240BA42 /* MirrorView.swift */; };
+		AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */; };
 		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA57750E522F4B57E9C302 /* WelcomeView.swift */; };
 		ADCFC682D7389A7A554D208A /* FilterRailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1839F69BE023409EA86E07 /* FilterRailView.swift */; };
 		B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */; };
 		B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */; };
 		B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E938A290AC30DF1198A2F2A /* EffectFile.swift */; };
+		B87512D4385601B554F5C640 /* ShadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */; };
 		B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */; };
 		B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 056D9293EAE75780F27C49DB /* look_legacy02.deepar */; };
 		BA3619294D02D6F9E5873AF9 /* Fredoka-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */; };
@@ -108,6 +111,7 @@
 		F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD9E808A5ECF675350EC72 /* SlotSelection.swift */; };
 		F99AF7FE261407C5A3AA42BE /* DHChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7106DD365B22C90F28A98A3B /* DHChip.swift */; };
 		FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */; };
+		FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,12 +191,14 @@
 		3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMapTests.swift; sourceTree = "<group>"; };
 		41D3EE099B91E0423AECABC5 /* MirrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorState.swift; sourceTree = "<group>"; };
 		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
+		44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTests.swift; sourceTree = "<group>"; };
 		4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Medium.ttf"; sourceTree = "<group>"; };
 		4D1839F69BE023409EA86E07 /* FilterRailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRailView.swift; sourceTree = "<group>"; };
 		4D67B9D91B985787DB196F53 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
 		54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARClient.swift; sourceTree = "<group>"; };
 		5689FD3614E6CE1BB6C0C8C3 /* noFilter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noFilter.png; sourceTree = "<group>"; };
+		573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Skin.swift"; sourceTree = "<group>"; };
 		5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerEffectTests.swift; sourceTree = "<group>"; };
 		5E938A290AC30DF1198A2F2A /* EffectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFile.swift; sourceTree = "<group>"; };
 		5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Parameters.swift"; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 		79AC2D570879CC7CA211099B /* look_legacy02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy02.png; sourceTree = "<group>"; };
 		7B5A8EC77CF58CA2EE8D5A6A /* DeepARControllerRecordingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerRecordingTests.swift; sourceTree = "<group>"; };
 		81BD9E808A5ECF675350EC72 /* SlotSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotSelection.swift; sourceTree = "<group>"; };
+		81E973E0B871A21B0A2A52D3 /* Shade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shade.swift; sourceTree = "<group>"; };
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
 		836AF9B238A751CB43B7643C /* PermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsService.swift; sourceTree = "<group>"; };
 		83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
@@ -234,6 +241,7 @@
 		AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupCategory.swift; sourceTree = "<group>"; };
 		AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModelTests.swift; sourceTree = "<group>"; };
+		B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTrayView.swift; sourceTree = "<group>"; };
 		B4234637D1D41F546D13863E /* DeepARViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARViewTests.swift; sourceTree = "<group>"; };
 		B43DE872D8CE0EFD6B557813 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
 		B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
@@ -459,6 +467,9 @@
 				41D3EE099B91E0423AECABC5 /* MirrorState.swift */,
 				10ED3FC6892310C07240BA42 /* MirrorView.swift */,
 				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
+				81E973E0B871A21B0A2A52D3 /* Shade.swift */,
+				573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */,
+				B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */,
 				81BD9E808A5ECF675350EC72 /* SlotSelection.swift */,
 			);
 			path = Mirror;
@@ -511,6 +522,7 @@
 			children = (
 				89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */,
 				B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */,
+				44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */,
 			);
 			path = Mirror;
 			sourceTree = "<group>";
@@ -772,6 +784,7 @@
 				D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */,
 				DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */,
 				D483121AF654372FF86840ED /* ProfileRecordTests.swift in Sources */,
+				B87512D4385601B554F5C640 /* ShadeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +843,9 @@
 				04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */,
 				9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */,
 				7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */,
+				1800B2D637206141971D7418 /* Shade.swift in Sources */,
+				AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */,
+				FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */,
 				F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */,
 				71337A950998A0A1175144E9 /* SplashView.swift in Sources */,
 				8F59D2B2DD31FE2D189FA9FD /* StickerBow.swift in Sources */,
