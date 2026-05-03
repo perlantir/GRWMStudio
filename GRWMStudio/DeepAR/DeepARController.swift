@@ -75,21 +75,82 @@ public final class DeepARController {
     @ObservationIgnored var _deepAR: DeepAR?
     @ObservationIgnored var _arView: UIView?
     @ObservationIgnored var _delegateProxy: DeepARDelegateProxy?
+    @ObservationIgnored var _client: (any DeepARClient)?
 
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
     @ObservationIgnored var videoContinuation: CheckedContinuation<URL, Error>?
+    @ObservationIgnored private let clientFactory: @MainActor () -> any DeepARClient
+    @ObservationIgnored private let bootstrapTimeout: Duration
 
     /// Creates an uninitialized DeepAR controller.
-    public init() {}
+    public init() {
+        clientFactory = { LiveDeepARClient() }
+        bootstrapTimeout = .seconds(8)
+    }
+
+    init(
+        clientFactory: @escaping @MainActor () -> any DeepARClient,
+        bootstrapTimeout: Duration = .seconds(8)
+    ) {
+        self.clientFactory = clientFactory
+        self.bootstrapTimeout = bootstrapTimeout
+    }
 
     func updateTrackedFace(_ isTracked: Bool) {
         trackedFace = isTracked
     }
 
+    func completeBootstrapFromDelegate() {
+        bootstrapContinuation?.resume()
+        bootstrapContinuation = nil
+    }
+
     /// Bootstraps the DeepAR SDK.
-    public func bootstrap(licenseKey: String) async throws {
-        throw SetupError.notImplementedYet
+    public func bootstrap(licenseKey: String = DeepARController.licenseKeyFromInfoPlist()) async throws {
+        if state != .uninitialized {
+            throw SetupError.alreadyInitialized
+        }
+        guard !licenseKey.isEmpty else {
+            state = .failed(reason: "Missing license key")
+            throw SetupError.missingLicenseKey
+        }
+        state = .initializing
+        Logger.deepAR.info("Bootstrapping DeepAR")
+
+        do {
+            try await withTimeout(bootstrapTimeout) { [weak self] in
+                try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+                    Task { @MainActor in
+                        guard let self else {
+                            continuation.resume()
+                            return
+                        }
+
+                        self.bootstrapContinuation = continuation
+                        let client = self.clientFactory()
+                        client.setLicenseKey(licenseKey)
+                        let proxy = DeepARDelegateProxy(controller: self)
+                        client.setDelegate(proxy)
+                        self._client = client
+                        self._deepAR = (client as? LiveDeepARClient)?.sdk
+                        self._delegateProxy = proxy
+                        self._arView = client.createARView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+                    }
+                }
+            }
+            state = .ready
+            Logger.deepAR.info("DeepAR bootstrap complete (state: ready)")
+        } catch is TimeoutError {
+            state = .failed(reason: "SDK init timeout")
+            bootstrapContinuation?.resume(throwing: SetupError.sdkInitTimeout)
+            bootstrapContinuation = nil
+            throw SetupError.sdkInitTimeout
+        } catch {
+            state = .failed(reason: error.localizedDescription)
+            bootstrapContinuation = nil
+            throw error
+        }
     }
 
     /// Starts the camera pipeline.
@@ -145,5 +206,40 @@ public final class DeepARController {
     /// Stops video recording and returns the recorded file URL.
     public func stopVideoRecording() async throws -> URL {
         throw SetupError.notImplementedYet
+    }
+}
+
+extension DeepARController {
+    /// Reads the DeepAR license key injected into the app Info.plist.
+    public static func licenseKeyFromInfoPlist() -> String {
+        Bundle.main.object(forInfoDictionaryKey: "DeepARLicenseKey") as? String ?? ""
+    }
+}
+
+@MainActor
+protocol DeepARClient: AnyObject {
+    func setLicenseKey(_ licenseKey: String)
+    func setDelegate(_ delegate: DeepARDelegateProxy)
+    func createARView(frame: CGRect) -> UIView
+}
+
+@MainActor
+final class LiveDeepARClient: DeepARClient {
+    let sdk: DeepAR
+
+    init(sdk: DeepAR = DeepAR()) {
+        self.sdk = sdk
+    }
+
+    func setLicenseKey(_ licenseKey: String) {
+        sdk.setLicenseKey(licenseKey)
+    }
+
+    func setDelegate(_ delegate: DeepARDelegateProxy) {
+        sdk.delegate = delegate
+    }
+
+    func createARView(frame: CGRect) -> UIView {
+        sdk.createARView(withFrame: frame)
     }
 }

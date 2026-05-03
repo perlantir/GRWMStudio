@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08F3DD2BC33E2F5C73BF965F /* DHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4E6016A9E66CAE4115EDD /* DHCard.swift */; };
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
+		1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */; };
 		1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */; };
 		20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EE539AD707663BED29DBAA /* DH+Color.swift */; };
 		2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */; };
@@ -24,6 +25,7 @@
 		6C052DD2E427A6C2B4F5366B /* DHHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EF686867E7FA7B9D66550 /* DHHaptics.swift */; };
 		6F30CCFE4C5EB81EC03859D9 /* EffectSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610FEB616B3436F330D5B37C /* EffectSlot.swift */; };
 		71337A950998A0A1175144E9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B16955494AFCF013FFD049C /* SplashView.swift */; };
+		75702078CD900D5C85A583B6 /* Concurrency+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */; };
 		79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */; };
 		7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */; };
 		7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441DC4BB243A8321854669A /* DHWallpaper.swift */; };
@@ -94,6 +96,7 @@
 		67DE9D864F5CD4ADAC6B687B /* GRWMLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMLogo.swift; sourceTree = "<group>"; };
 		7106DD365B22C90F28A98A3B /* DHChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHChip.swift; sourceTree = "<group>"; };
 		71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupShade.swift; sourceTree = "<group>"; };
+		733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerBootstrapTests.swift; sourceTree = "<group>"; };
 		7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
 		83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 		CAA1A95064129A2EB93F7502 /* StickerStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerStar.swift; sourceTree = "<group>"; };
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concurrency+Extensions.swift"; sourceTree = "<group>"; };
 		D5A16D5E83B67577C1380959 /* DH+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Fonts.swift"; sourceTree = "<group>"; };
 		D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARDelegateProxy.swift; sourceTree = "<group>"; };
 		DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */,
+				D2F6467826E99E8C1A10F2B5 /* DeepAR */,
 				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
 			);
 			path = GRWMStudioTests;
@@ -219,6 +224,7 @@
 		51CB23B090FC06420E2B62A7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */,
 				9B043BD930A105B118373369 /* Logger+GRWM.swift */,
 			);
 			path = Utilities;
@@ -255,6 +261,14 @@
 				F05ED27ECE889EFBC98C74D8 /* Fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2F6467826E99E8C1A10F2B5 /* DeepAR */ = {
+			isa = PBXGroup;
+			children = (
+				733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */,
+			);
+			path = DeepAR;
 			sourceTree = "<group>";
 		};
 		D92A5EA8E2B1EE81CECA336E /* Stickers */ = {
@@ -471,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */,
+				1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +496,7 @@
 			files = (
 				8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */,
 				3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */,
+				75702078CD900D5C85A583B6 /* Concurrency+Extensions.swift in Sources */,
 				79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */,
 				20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */,
 				F4DFC1A552907B2F58E8153A /* DH+Fonts.swift in Sources */,

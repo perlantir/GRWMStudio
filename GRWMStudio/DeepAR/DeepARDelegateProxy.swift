@@ -15,6 +15,9 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
 
     func didInitialize() {
         Logger.deepAR.info("DeepAR didInitialize")
+        Task { [weak controller] in
+            await controller?.completeBootstrapFromDelegate()
+        }
     }
 
     func faceVisiblityDidChange(_ faceVisible: Bool) {

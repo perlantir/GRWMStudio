@@ -37,6 +37,7 @@ identifier_name:
     - _deepAR
     - _arView
     - _delegateProxy
+    - _client
 
 force_unwrapping:
   severity: warning
