@@ -56,6 +56,21 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects
+      - path: GRWMStudio/Resources/Effects/luts/lut_soft.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/luts
+      - path: GRWMStudio/Resources/Effects/luts/lut_glow.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/luts
+      - path: GRWMStudio/Resources/Effects/luts/lut_glam.png
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects/luts
       - path: GRWMStudio/Resources/Effects/thumbnails/baseBeauty.png
         buildPhase:
           copyFiles:

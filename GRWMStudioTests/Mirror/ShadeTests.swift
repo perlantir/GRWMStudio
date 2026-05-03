@@ -18,4 +18,20 @@ final class ShadeTests: XCTestCase {
             }
         )
     }
+
+    func testBaseShadesAreFreeAndNoneIsDefaultFirst() {
+        XCTAssertEqual(
+            Shade.baseShades.map(\.id),
+            ["base.none", "base.soft", "base.glow", "base.glam"]
+        )
+        XCTAssertTrue(Shade.baseShades.allSatisfy { !$0.isPro })
+        XCTAssertEqual(Shade.baseShades[0].name, "None")
+    }
+
+    func testBaseShadesCarryLUTParameters() {
+        let glow = Shade.baseShades[2]
+
+        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutEnabled" && $0.value == .enabled(true) })
+        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutTexture" && $0.value == .texture("lut_glow") })
+    }
 }

@@ -87,6 +87,23 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "u_color" })
     }
 
+    func testSelectBaseShadeAppliesLUTParameters() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        let shade = try XCTUnwrap(Shade.baseShades.first(where: { $0.id == "base.glow" }))
+
+        await viewModel.selectShade(in: .base, shade: shade)
+
+        XCTAssertEqual(viewModel.selectedShadeID(for: .base), shade.id)
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "PostprocessLUT" && $0.value })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "s_texLut" })
+    }
+
     func testProShadeWithoutEntitlementDoesNotLoadEffect() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
@@ -240,12 +257,18 @@ private final class MirrorMockDeepARClient: DeepARClient {
         let value: Bool
     }
 
+    struct ImageParameter {
+        let gameObject: String
+        let parameter: String
+    }
+
     private let autoInitialize: Bool
     private let autoSwitchEffect: Bool
     private(set) var delegate: DeepARDelegateProxy?
     private(set) var switches: [Switch] = []
     private(set) var vectorParameters: [VectorParameter] = []
     private(set) var boolParameters: [BoolParameter] = []
+    private(set) var imageParameters: [ImageParameter] = []
 
     init(autoInitialize: Bool, autoSwitchEffect: Bool) {
         self.autoInitialize = autoInitialize
@@ -287,5 +310,9 @@ private final class MirrorMockDeepARClient: DeepARClient {
 
     func setBoolParameter(_ gameObject: String, component: String, parameter: String, value: Bool) {
         boolParameters.append(BoolParameter(gameObject: gameObject, parameter: parameter, value: value))
+    }
+
+    func setImageParameter(_ gameObject: String, component: String, parameter: String, image: UIImage) {
+        imageParameters.append(ImageParameter(gameObject: gameObject, parameter: parameter))
     }
 }

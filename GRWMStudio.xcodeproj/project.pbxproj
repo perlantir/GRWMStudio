@@ -11,9 +11,11 @@
 		08F3DD2BC33E2F5C73BF965F /* DHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4E6016A9E66CAE4115EDD /* DHCard.swift */; };
 		095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
 		0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5D32426D75F1151F9561AC5 /* shadow.png */; };
+		124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CB44E7E81F82BDD61D38E7A /* lut_soft.png */; };
 		16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C372D46745B2B38661FF3 /* FilterCategory.swift */; };
 		1800B2D637206141971D7418 /* Shade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E973E0B871A21B0A2A52D3 /* Shade.swift */; };
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
+		1B209F1B9C86C0624787BBAF /* Shades+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */; };
 		1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */; };
 		1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */; };
 		1F78799D16F460476BD2912F /* DefaultPermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */; };
@@ -62,6 +64,7 @@
 		8F59D2B2DD31FE2D189FA9FD /* StickerBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893009F8C8216D1B11711EF8 /* StickerBow.swift */; };
 		921B72EC7927E48F6BFB9DE1 /* MakeupCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */; };
 		9415F7FE3A9E019D25477E0E /* DeepARController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3129266168088884925A7CC4 /* DeepARController.swift */; };
+		949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = BD65C7021428380739D34C9B /* lut_glam.png */; };
 		94E4E5FE229210AB8C3E5413 /* DeepARViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4234637D1D41F546D13863E /* DeepARViewTests.swift */; };
 		95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72758F600E00EC23E45ABED2 /* OnboardingState.swift */; };
 		98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */; };
@@ -89,6 +92,7 @@
 		CC6F483929F02A1013C47963 /* DeepARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAECB2E29E326501184B58A9 /* DeepARView.swift */; };
 		CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */; };
 		D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */; };
+		D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 408499017F9D17AED4F1B6A0 /* lut_glow.png */; };
 		D4011D6B13EB41FC78E7FCCD /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27404CCB96EE563E725C9A98 /* CaptureService.swift */; };
 		D483121AF654372FF86840ED /* ProfileRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393CC36E6316BE411EB860A /* ProfileRecordTests.swift */; };
 		D9058B2A6584BDC9E6B71B48 /* Fredoka-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */; };
@@ -132,7 +136,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects;
+			dstSubfolderSpec = 7;
+			files = (
+				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
+				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
+				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
+				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11C208F764B56B1CC794199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Effects/thumbnails;
@@ -147,19 +176,6 @@
 				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
 				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
 				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C11C208F764B56B1CC794199 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects;
-			dstSubfolderSpec = 7;
-			files = (
-				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
-				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
-				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
-				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +196,7 @@
 		221A387D41CC593F23F0463A /* DHTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTabBar.swift; sourceTree = "<group>"; };
 		27404CCB96EE563E725C9A98 /* CaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureService.swift; sourceTree = "<group>"; };
 		28A3BFFA4F5506B71E3C510C /* DeepARController+Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Recording.swift"; sourceTree = "<group>"; };
+		2CB44E7E81F82BDD61D38E7A /* lut_soft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_soft.png; sourceTree = "<group>"; };
 		2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerFlower.swift; sourceTree = "<group>"; };
 		2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorChrome.swift; sourceTree = "<group>"; };
 		2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy01.png; sourceTree = "<group>"; };
@@ -189,6 +206,7 @@
 		36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
 		3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Regular.ttf"; sourceTree = "<group>"; };
 		3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMapTests.swift; sourceTree = "<group>"; };
+		408499017F9D17AED4F1B6A0 /* lut_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glow.png; sourceTree = "<group>"; };
 		41D3EE099B91E0423AECABC5 /* MirrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorState.swift; sourceTree = "<group>"; };
 		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
 		44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTests.swift; sourceTree = "<group>"; };
@@ -245,6 +263,8 @@
 		B4234637D1D41F546D13863E /* DeepARViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARViewTests.swift; sourceTree = "<group>"; };
 		B43DE872D8CE0EFD6B557813 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
 		B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
+		BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Base.swift"; sourceTree = "<group>"; };
+		BD65C7021428380739D34C9B /* lut_glam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glam.png; sourceTree = "<group>"; };
 		C5D32426D75F1151F9561AC5 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		C6F08944FAB932F872FCC276 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		C864855B4C7D6BF81930D62A /* baseBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseBeauty.png; sourceTree = "<group>"; };
@@ -441,6 +461,16 @@
 			path = Capture;
 			sourceTree = "<group>";
 		};
+		748D406B1C5333F2F3D372C3 /* luts */ = {
+			isa = PBXGroup;
+			children = (
+				BD65C7021428380739D34C9B /* lut_glam.png */,
+				408499017F9D17AED4F1B6A0 /* lut_glow.png */,
+				2CB44E7E81F82BDD61D38E7A /* lut_soft.png */,
+			);
+			path = luts;
+			sourceTree = "<group>";
+		};
 		7E9DBC102265BA95053F104A /* GRWMStudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +498,7 @@
 				10ED3FC6892310C07240BA42 /* MirrorView.swift */,
 				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
 				81E973E0B871A21B0A2A52D3 /* Shade.swift */,
+				BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */,
 				573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */,
 				B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */,
 				81BD9E808A5ECF675350EC72 /* SlotSelection.swift */,
@@ -556,6 +587,7 @@
 				42EE7539807C18A27917DF2C /* look_legacy01.deepar */,
 				056D9293EAE75780F27C49DB /* look_legacy02.deepar */,
 				7343E3534A7DE0BCC753B134 /* manifest.json */,
+				748D406B1C5333F2F3D372C3 /* luts */,
 				1887E0BF8A2E5C4085F5C364 /* thumbnails */,
 			);
 			path = Effects;
@@ -624,6 +656,7 @@
 				1490A50B5373B071E599650F /* Resources */,
 				5636A5E3EE25C7DA09823075 /* CopyFiles */,
 				C11C208F764B56B1CC794199 /* CopyFiles */,
+				55C0C51020105DF8215B6E87 /* CopyFiles */,
 				03DDFC5EB91AF5605CB92CEC /* Frameworks */,
 			);
 			buildRules = (
@@ -845,6 +878,7 @@
 				7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */,
 				1800B2D637206141971D7418 /* Shade.swift in Sources */,
 				AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */,
+				1B209F1B9C86C0624787BBAF /* Shades+Base.swift in Sources */,
 				FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */,
 				F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */,
 				71337A950998A0A1175144E9 /* SplashView.swift in Sources */,

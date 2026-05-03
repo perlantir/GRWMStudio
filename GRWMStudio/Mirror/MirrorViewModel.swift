@@ -285,7 +285,7 @@ extension MirrorViewModel {
             case .texture:
                 guard
                     let assetName = change.asset,
-                    let image = UIImage(named: assetName)
+                    let image = image(named: assetName)
                 else {
                     throw MirrorActionError.missingTexture(change.asset ?? change.ref)
                 }
@@ -320,7 +320,7 @@ extension MirrorViewModel {
                 )
                 await controller.setColor(color, on: parameter)
             case .texture(let assetName):
-                guard let image = UIImage(named: assetName) else {
+                guard let image = image(named: assetName) else {
                     throw MirrorActionError.missingTexture(assetName)
                 }
                 await controller.setTexture(image, on: parameter)
@@ -330,6 +330,17 @@ extension MirrorViewModel {
                 await controller.setEnabled(enabled, on: parameter)
             }
         }
+    }
+
+    private func image(named assetName: String) -> UIImage? {
+        if let image = UIImage(named: assetName) {
+            return image
+        }
+
+        guard let url = Bundle.main.url(forResource: assetName, withExtension: "png", subdirectory: "Effects/luts") else {
+            return nil
+        }
+        return UIImage(contentsOfFile: url.path)
     }
 }
 
