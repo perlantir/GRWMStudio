@@ -12,6 +12,7 @@ final class AppEnvironment {
     let analytics: any AnalyticsService
     let feed: any FeedService
     let parentalGate: any ParentalGateService
+    var mirrorCreateNewIntent = false
 
     init(
         deepAR: any DeepARService = StubDeepARService(),

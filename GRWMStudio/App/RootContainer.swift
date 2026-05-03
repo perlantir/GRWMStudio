@@ -46,7 +46,7 @@ struct RootContainer: View {
         case .onboardingPermissionsDenied:
             PermissionsDeniedView()
         case .app:
-            appPlaceholder
+            AppShell()
         case .parentalGate(let reason):
             placeholder("Parental Gate: \(String(describing: reason))")
         case .paywall(let source):
@@ -62,22 +62,6 @@ struct RootContainer: View {
             .tracking(DH.tracking(.headline))
             .foregroundStyle(DH.pinkDeep)
             .padding(24)
-    }
-
-    @ViewBuilder
-    private var appPlaceholder: some View {
-        #if DEBUG
-        VStack(spacing: 16) {
-            placeholder("App placeholder")
-            DHButton(title: "Reset Onboarding", kind: .ghost, size: .sm) {
-                env.onboarding.reset()
-                coordinator.route = .onboardingSplash
-            }
-            .accessibilityLabel("Reset onboarding")
-        }
-        #else
-        placeholder("App placeholder")
-        #endif
     }
 
     private func resolveInitialRoute() {
