@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>GRWM Studio — App Flow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  body { margin:0; background:#FFE5F2; font-family: 'Fredoka', system-ui, sans-serif; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="grwm-shared.jsx"></script>
+<script type="text/babel" src="v01-mirror.jsx"></script>
+<script type="text/babel" src="dh-screens-1.jsx"></script>
+<script type="text/babel" src="dh-screens-2.jsx"></script>
+<script type="text/babel" src="dh-screens-3.jsx"></script>
+<script type="text/babel" src="dh-screens-4.jsx"></script>
+<script type="text/babel" src="dh-screens-5.jsx"></script>
+<script type="text/babel" src="dh-screens-6.jsx"></script>
+<script type="text/babel" src="dh-screens-7.jsx"></script>
+<script type="text/babel" src="dh-screens-8.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+const { DesignCanvas, DCSection, DCArtboard } = window;
+const W = 402, H = 874;
+
+function App() {
+  return (
+    <DesignCanvas title="GRWM Studio" subtitle="Full app flow · iPhone 14 Pro · 402 × 874">
+
+      <DCSection id="onboard" title="① Onboarding">
+        <DCArtboard id="splash"      label="Splash"             width={W} height={H}><DHSplash/></DCArtboard>
+        <DCArtboard id="welcome"     label="Welcome"            width={W} height={H}><DHWelcome/></DCArtboard>
+        <DCArtboard id="parent-info" label="Parent info"        width={W} height={H}><DHParentInfo/></DCArtboard>
+        <DCArtboard id="perms"       label="Permissions ask"    width={W} height={H}><DHPermissions/></DCArtboard>
+        <DCArtboard id="perms-deny"  label="Permissions denied" width={W} height={H}><DHPermissionsDenied/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="core" title="② Mirror & Capture">
+        <DCArtboard id="mirror"      label="Mirror — live"      width={W} height={H}><V01Dreamhouse/></DCArtboard>
+        <DCArtboard id="countdown"   label="Mirror — countdown" width={W} height={H}><DHMirrorCountdown/></DCArtboard>
+        <DCArtboard id="recording"   label="Mirror — recording" width={W} height={H}><DHMirrorRecording/></DCArtboard>
+        <DCArtboard id="pro-gate"    label="Mirror — Pro gate"  width={W} height={H}><DHMirrorProGate/></DCArtboard>
+        <DCArtboard id="prev-idle"   label="Preview"            width={W} height={H}><DHPreviewIdle/></DCArtboard>
+        <DCArtboard id="prev-saved"  label="Preview — saved"    width={W} height={H}><DHPreviewSaved/></DCArtboard>
+        <DCArtboard id="save"        label="Save & Share"       width={W} height={H}><DHSaveShare/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="lib" title="③ Library & You">
+        <DCArtboard id="looks"        label="Looks library"     width={W} height={H}><DHLooks/></DCArtboard>
+        <DCArtboard id="saved-empty"  label="Saved — empty"     width={W} height={H}><DHSavedEmpty/></DCArtboard>
+        <DCArtboard id="saved-limit"  label="Saved — at limit"  width={W} height={H}><DHSavedAtLimit/></DCArtboard>
+        <DCArtboard id="detail"       label="Look detail"       width={W} height={H}><DHLookDetail/></DCArtboard>
+        <DCArtboard id="profile"      label="Profile"           width={W} height={H}><DHProfile/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="social" title="④ Social & Learn">
+        <DCArtboard id="feed"     label="Feed"     width={W} height={H}><DHFeed/></DCArtboard>
+        <DCArtboard id="tutorial" label="Tutorial" width={W} height={H}><DHTutorial/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="commerce" title="⑤ Parental Gate & Paywall">
+        <DCArtboard id="gate-math"       label="Gate — math"        width={W} height={H}><DHParentMathIdle/></DCArtboard>
+        <DCArtboard id="gate-math-wrong" label="Gate — wrong"       width={W} height={H}><DHParentMathWrong/></DCArtboard>
+        <DCArtboard id="gate-hold"       label="Gate — press & hold" width={W} height={H}><DHParentHold/></DCArtboard>
+        <DCArtboard id="paywall"         label="Paywall"            width={W} height={H}><DHPaywall/></DCArtboard>
+        <DCArtboard id="settings"        label="Settings"           width={W} height={H}><DHSettings/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="errors" title="⑥ Empty & Error states">
+        <DCArtboard id="err-cam"     label="Camera denied"   width={W} height={H}><DHError variant="cam-denied"/></DCArtboard>
+        <DCArtboard id="err-mic"     label="Mic denied"      width={W} height={H}><DHError variant="mic-denied"/></DCArtboard>
+        <DCArtboard id="err-photo"   label="Photos denied"   width={W} height={H}><DHError variant="photo-denied"/></DCArtboard>
+        <DCArtboard id="err-license" label="Pro shade locked" width={W} height={H}><DHError variant="license"/></DCArtboard>
+        <DCArtboard id="err-effect"  label="Effect failed"   width={W} height={H}><DHError variant="effect-fail"/></DCArtboard>
+        <DCArtboard id="err-rec"     label="Recording failed" width={W} height={H}><DHError variant="rec-fail"/></DCArtboard>
+        <DCArtboard id="err-save"    label="Save failed"     width={W} height={H}><DHError variant="save-fail"/></DCArtboard>
+        <DCArtboard id="err-noface"  label="No face"         width={W} height={H}><DHError variant="no-face"/></DCArtboard>
+        <DCArtboard id="err-storage" label="Low storage"     width={W} height={H}><DHError variant="low-storage"/></DCArtboard>
+      </DCSection>
+
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
