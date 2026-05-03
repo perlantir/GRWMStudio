@@ -13,6 +13,11 @@ enum DHHaptics {
 
     @MainActor
     static func tapMedium() {
+        medium()
+    }
+
+    @MainActor
+    static func medium() {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 

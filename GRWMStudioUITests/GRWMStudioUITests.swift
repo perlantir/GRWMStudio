@@ -24,4 +24,19 @@ final class GRWMStudioUITests: XCTestCase {
         eyes.tap()
         XCTAssertTrue(eyes.isSelected)
     }
+
+    @MainActor
+    func testCountdownCancelStopsBeforeCompletion() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugCountdownOverlay", "-GRWMDebugCountdownSlow"]
+        app.launch()
+
+        let cancelButton = app.buttons["countdown-cancel-button"]
+        XCTAssertTrue(cancelButton.waitForExistence(timeout: 5))
+        cancelButton.tap()
+
+        let status = app.staticTexts["countdown-debug-status"]
+        XCTAssertTrue(status.waitForExistence(timeout: 2))
+        XCTAssertEqual(status.label, "Canceled")
+    }
 }

@@ -21,7 +21,9 @@ struct RootContainer: View {
     @ViewBuilder
     private var routeView: some View {
         #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugDeepARViewInitializing") {
+        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugCountdownOverlay") {
+            CountdownOverlayDebugScreen()
+        } else if ProcessInfo.processInfo.arguments.contains("-GRWMDebugDeepARViewInitializing") {
             DeepARViewDebugScreen(mode: .initializing)
         } else if ProcessInfo.processInfo.arguments.contains("-GRWMDebugDeepARView") {
             DeepARViewDebugScreen()
