@@ -26,6 +26,7 @@
 		7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441DC4BB243A8321854669A /* DHWallpaper.swift */; };
 		7EF79EF347D8F95885442153 /* StickerFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */; };
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
+		8C6A5E39EEA2D590B81F35A2 /* DeepAR in Frameworks */ = {isa = PBXBuildFile; productRef = 9DEF67174A07A925B0EF59D6 /* DeepAR */; };
 		8F59D2B2DD31FE2D189FA9FD /* StickerBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893009F8C8216D1B11711EF8 /* StickerBow.swift */; };
 		90D351796EA2D03619138483 /* baseBeauty.deepar in Resources */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
 		98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */; };
@@ -107,6 +108,17 @@
 		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03DDFC5EB91AF5605CB92CEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C6A5E39EEA2D590B81F35A2 /* DeepAR in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0A3AC64F1C029DD5373D4683 /* DesignSystem */ = {
@@ -271,6 +283,7 @@
 				581C1B9288C450B253456AE9 /* SwiftLint */,
 				9846BBA5142EA350BC38869B /* Sources */,
 				1490A50B5373B071E599650F /* Resources */,
+				03DDFC5EB91AF5605CB92CEC /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,6 +291,7 @@
 			);
 			name = GRWMStudio;
 			packageProductDependencies = (
+				9DEF67174A07A925B0EF59D6 /* DeepAR */,
 			);
 			productName = GRWMStudio;
 			productReference = EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */;
@@ -350,6 +364,9 @@
 			);
 			mainGroup = 17815A28FB4EA66FD13AEA62;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				89511AE3E9D1F05A5798D280 /* XCRemoteSwiftPackageReference "swift-deepar" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FB9A548A4C58104381E19DE3 /* Products */;
 			projectDirPath = "";
@@ -755,6 +772,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89511AE3E9D1F05A5798D280 /* XCRemoteSwiftPackageReference "swift-deepar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DeepARSDK/swift-deepar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.22;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9DEF67174A07A925B0EF59D6 /* DeepAR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89511AE3E9D1F05A5798D280 /* XCRemoteSwiftPackageReference "swift-deepar" */;
+			productName = DeepAR;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A2025FA7C86AC19AB26FB6BE /* Project object */;
 }

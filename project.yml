@@ -19,6 +19,10 @@ settings:
     SDKROOT: iphoneos
     SWIFT_VERSION: "6.0"
     TARGETED_DEVICE_FAMILY: "1"
+packages:
+  DeepAR:
+    url: https://github.com/DeepARSDK/swift-deepar
+    from: 5.6.22
 targets:
   GRWMStudio:
     type: application
@@ -30,6 +34,8 @@ targets:
           - "**/.gitkeep"
           - "Resources/Info.plist"
           - "Resources/Effects/_source/**"
+    dependencies:
+      - package: DeepAR
     info:
       path: GRWMStudio/Resources/Info.plist
       properties:
