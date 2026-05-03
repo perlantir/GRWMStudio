@@ -1,0 +1,7 @@
+GRWMStudio/Mirror/MirrorView.swift:78:            NoFaceTipView()
+GRWMStudio/Mirror/NoFaceTipView.swift:4:struct NoFaceTipView: View {
+GRWMStudio/Mirror/NoFaceTipView.swift:5:    private let announcement = "I can't see your face! Move into the light, or come a little closer."
+GRWMStudio/Mirror/NoFaceTipView.swift:39:            UIAccessibility.post(notification: .announcement, argument: announcement)
+GRWMStudio/Mirror/NoFaceTipView.swift:47:        NoFaceTipView()
+
+PASS: announcement code evidence present

@@ -1,0 +1,10 @@
+2026-05-03 03:28:43.702 xcodebuild[12466:10678419] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-05-03 03:28:43.702 xcodebuild[12466:10678419] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-05-03 03:28:51.801 xcodebuild[12466:10678419] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-05-03 03:28:51.801 xcodebuild[12466:10678419] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-05-03 03:28:56.861 xcodebuild[12466:10678419] [MT] IDETestOperationsObserverDebug: 43.321 elapsed -- Testing started completed.
+2026-05-03 03:28:56.862 xcodebuild[12466:10678419] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 03:28:56.862 xcodebuild[12466:10678419] [MT] IDETestOperationsObserverDebug: 43.321 sec, +43.321 sec -- end
+Testing started
+
+PASS: full GRWMStudioTests exited 0

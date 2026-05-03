@@ -6,6 +6,8 @@ struct MirrorView: View {
     @Environment(\.rootCoordinator) private var coordinator
     @State private var viewModel = MirrorViewModel()
     @State private var pendingCategoryAfterLook: FilterCategory?
+    @State private var showNoFaceTip = false
+    @State private var noFaceTipTask: Task<Void, Never>?
 
     var body: some View {
         ZStack {
@@ -23,158 +25,38 @@ struct MirrorView: View {
                     .padding(.top, 8)
 
                 cameraRegion
+                    .overlay(alignment: .top) {
+                        noFaceOverlay
+                    }
                     .padding(.horizontal, 14)
                     .padding(.top, 12)
 
                 Spacer(minLength: 220)
             }
 
-            VStack {
-                Spacer()
-
-                if viewModel.activeCategory == .skin {
-                    ShadeTrayView(
-                        category: .skin,
-                        shades: Shade.skinShades,
-                        selectedID: viewModel.selectedShadeID(for: .skin)
-                    ) { shade in
-                        Task { @MainActor in
-                            await viewModel.selectShade(in: .skin, shade: shade)
-                        }
-                    } onClear: {
-                        Task { @MainActor in
-                            await viewModel.clear(slot: .skin)
-                        }
-                    }
-                    .padding(.bottom, 186)
-                    .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                } else if viewModel.activeCategory == .base {
-                    ShadeTrayView(
-                        category: .base,
-                        shades: Shade.baseShades,
-                        selectedID: viewModel.selectedShadeID(for: .base) ?? "base.none"
-                    ) { shade in
-                        Task { @MainActor in
-                            if shade.id == "base.none" {
-                                await viewModel.clear(slot: .base)
-                            } else {
-                                await viewModel.selectShade(in: .base, shade: shade)
-                            }
-                        }
-                    } onClear: {
-                        Task { @MainActor in
-                            await viewModel.clear(slot: .base)
-                        }
-                    }
-                    .padding(.bottom, 186)
-                    .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                } else if viewModel.activeCategory == .eyes {
-                    EyesTrayView(viewModel: viewModel)
-                        .padding(.bottom, 186)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                } else if viewModel.activeCategory == .brows {
-                    if EffectCatalog.shared.containsSync(effectID: "brows") {
-                        ShadeTrayView(
-                            category: .brows,
-                            shades: Shade.browShades,
-                            selectedID: viewModel.selectedShadeID(for: .brows)
-                        ) { shade in
-                            Task { @MainActor in
-                                await viewModel.selectShade(in: .brows, shade: shade)
-                            }
-                        } onClear: {
-                            Task { @MainActor in
-                                await viewModel.clear(slot: .brows)
-                            }
-                        }
-                        .padding(.bottom, 186)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                    } else {
-                        EmptyShadeTrayView(
-                            category: .brows,
-                            message: "Brows coming soon ✨ — your bigger pack will unlock these!"
-                        )
-                        .padding(.bottom, 186)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                    }
-                } else if viewModel.activeCategory == .cheeks {
-                    if EffectCatalog.shared.containsSync(effectID: "blush") {
-                        ShadeTrayView(
-                            category: .cheeks,
-                            shades: Shade.cheekShades,
-                            selectedID: viewModel.selectedShadeID(for: .cheeks)
-                        ) { shade in
-                            Task { @MainActor in
-                                await viewModel.selectShade(in: .cheeks, shade: shade)
-                            }
-                        } onClear: {
-                            Task { @MainActor in
-                                await viewModel.clear(slot: .cheeks)
-                            }
-                        }
-                        .padding(.bottom, 186)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                    } else {
-                        EmptyShadeTrayView(
-                            category: .cheeks,
-                            message: "Blush coming soon ✨"
-                        )
-                        .padding(.bottom, 186)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                    }
-                } else if viewModel.activeCategory == .lips {
-                    ShadeTrayView(
-                        category: .lips,
-                        shades: Shade.lipShades,
-                        selectedID: viewModel.selectedShadeID(for: .lips)
-                    ) { shade in
-                        Task { @MainActor in
-                            await viewModel.selectShade(in: .lips, shade: shade)
-                        }
-                    } onClear: {
-                        Task { @MainActor in
-                            await viewModel.clear(slot: .lips)
-                        }
-                    }
-                    .padding(.bottom, 186)
-                    .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                } else if viewModel.activeCategory == .looks, pendingCategoryAfterLook == nil {
-                    LooksTrayView(viewModel: viewModel)
-                        .padding(.bottom, 172)
-                        .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
-                }
-
-                if let pendingCategoryAfterLook, let activeLookName = viewModel.activeLookName {
-                    LookSwitchConfirmationView(
-                        lookName: activeLookName,
-                        onConfirm: {
-                            Task { @MainActor in
-                                await viewModel.clear(slot: .looks)
-                                withAnimation(.bouncy(duration: 0.22)) {
-                                    viewModel.activeCategory = pendingCategoryAfterLook
-                                    self.pendingCategoryAfterLook = nil
-                                }
-                            }
-                        },
-                        onCancel: {
-                            withAnimation(.bouncy(duration: 0.22)) {
-                                self.pendingCategoryAfterLook = nil
-                            }
-                        }
-                    )
-                        .padding(.bottom, 178)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-
-                FilterRailView(viewModel: viewModel) { category in
-                    handleCategoryTap(category)
-                }
-                    .padding(.bottom, 118)
-            }
+            MirrorTrayHostView(
+                viewModel: viewModel,
+                pendingCategoryAfterLook: $pendingCategoryAfterLook
+            )
         }
         .preferredColorScheme(.light)
         .task {
             await viewModel.start(env: env)
+            updateNoFaceTip(for: viewModel.isFaceDetected)
+        }
+        .onChange(of: viewModel.isFaceDetected) { _, visible in
+            updateNoFaceTip(for: visible)
+        }
+        .onChange(of: viewModel.state) { _, state in
+            guard state == .running else {
+                noFaceTipTask?.cancel()
+                withAnimation(.easeOut(duration: 0.18)) {
+                    showNoFaceTip = false
+                }
+                return
+            }
+
+            updateNoFaceTip(for: viewModel.isFaceDetected)
         }
         .onChange(of: viewModel.lastError) { _, newValue in
             guard newValue == .license else {
@@ -185,7 +67,17 @@ struct MirrorView: View {
             viewModel.lastError = nil
         }
         .onDisappear {
+            noFaceTipTask?.cancel()
             viewModel.pause()
+        }
+    }
+
+    @ViewBuilder
+    private var noFaceOverlay: some View {
+        if showNoFaceTip {
+            NoFaceTipView()
+                .padding(.top, 18)
+                .transition(.opacity.combined(with: .move(edge: .top)))
         }
     }
 
@@ -248,18 +140,34 @@ struct MirrorView: View {
         .accessibilityLabel("Tap to allow camera")
     }
 
-    private func handleCategoryTap(_ category: FilterCategory) -> Bool {
-        guard viewModel.activeLookName != nil, category != .looks else {
-            pendingCategoryAfterLook = nil
-            return false
+    private func updateNoFaceTip(for visible: Bool) {
+        noFaceTipTask?.cancel()
+
+        guard viewModel.state == .running else {
+            withAnimation(.easeOut(duration: 0.18)) {
+                showNoFaceTip = false
+            }
+            return
         }
 
-        withAnimation(.bouncy(duration: 0.22)) {
-            pendingCategoryAfterLook = category
+        if visible {
+            withAnimation(.easeOut(duration: 0.18)) {
+                showNoFaceTip = false
+            }
+            return
         }
-        return true
+
+        noFaceTipTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(1500))
+            guard !Task.isCancelled else {
+                return
+            }
+
+            withAnimation(.bouncy(duration: 0.28)) {
+                showNoFaceTip = true
+            }
+        }
     }
-
 }
 
 #Preview("Mirror View") {

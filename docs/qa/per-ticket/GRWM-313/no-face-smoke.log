@@ -1,0 +1,7 @@
+Manual simulator smoke:
+- Installed and launched the GRWM-313 build on iPhone 16 Pro simulator.
+- Captured immediate screenshot before the 1.5s debounce completed; no tip was visible.
+- Waited 2s with simulator placeholder face detection false; no-face tip appeared over the upper camera region.
+- Tapped Skin rail while tip was visible; Skin tray opened, proving the tip did not block the rail.
+- Simulator cannot provide a real face-return event; face-return behavior is covered by the DeepAR face stream test and remains pending real-device cover/uncover.
+PASS: no-face simulator smoke completed

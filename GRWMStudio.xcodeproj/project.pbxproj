@@ -54,6 +54,7 @@
 		527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79AC2D570879CC7CA211099B /* look_legacy02.png */; };
 		53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
+		5E085A2B9D09F6CBEA552306 /* MirrorTrayHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ED1842B1FD5FD7B794F566 /* MirrorTrayHostView.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
 		60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */; };
 		6091042F28F1BD50A2500A52 /* CaptureServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BFE195EF24C36D83D2276 /* CaptureServiceTests.swift */; };
@@ -69,6 +70,7 @@
 		79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */; };
 		79F595E03C1BC8032A2BB98D /* eyeliner_none.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00B656B3CF36F3ABC99C855A /* eyeliner_none.png */; };
 		7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */; };
+		7B764DC07634CA7F076EABC4 /* NoFaceTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */; };
 		7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4D64278E0C4061B17F667183 /* lips_satin.png */; };
 		7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441DC4BB243A8321854669A /* DHWallpaper.swift */; };
 		7EF79EF347D8F95885442153 /* StickerFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */; };
@@ -170,34 +172,17 @@
 		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects/luts;
+			dstPath = Effects;
 			dstSubfolderSpec = 7;
 			files = (
-				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
-				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
-				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
+				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
+				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
+				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/thumbnails;
-			dstSubfolderSpec = 7;
-			files = (
-				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
-				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
-				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
-				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
-				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
-				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
-				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
-				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
-				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Effects/textures;
@@ -222,16 +207,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C11C208F764B56B1CC794199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects;
+			dstPath = Effects/thumbnails;
 			dstSubfolderSpec = 7;
 			files = (
-				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
-				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
-				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
-				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
+				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
+				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
+				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
+				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
+				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
+				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
+				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
+				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
+				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +253,7 @@
 		135CF27B332AB567A935E3F1 /* eyelashes_natural.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_natural.png; sourceTree = "<group>"; };
 		1393CC36E6316BE411EB860A /* ProfileRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecordTests.swift; sourceTree = "<group>"; };
 		13D211B2767AFF359F546874 /* DHButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHButton.swift; sourceTree = "<group>"; };
+		140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFaceTipView.swift; sourceTree = "<group>"; };
 		1540F04B748F26E1D4FC9B5D /* Looks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 		18BA57750E522F4B57E9C302 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		1AA1EFDAE8487082E1A023FF /* RootContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainer.swift; sourceTree = "<group>"; };
@@ -305,6 +308,7 @@
 		733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerBootstrapTests.swift; sourceTree = "<group>"; };
 		7343E3534A7DE0BCC753B134 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		754F901F9A72AD868534B1E9 /* LookSwitchConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookSwitchConfirmationView.swift; sourceTree = "<group>"; };
+		75ED1842B1FD5FD7B794F566 /* MirrorTrayHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorTrayHostView.swift; sourceTree = "<group>"; };
 		767FD9102336E13A4ACC8EE6 /* lips_matte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_matte.png; sourceTree = "<group>"; };
 		7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		78C558272F9814E7825BC889 /* PermRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermRow.swift; sourceTree = "<group>"; };
@@ -610,11 +614,13 @@
 				754F901F9A72AD868534B1E9 /* LookSwitchConfirmationView.swift */,
 				2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */,
 				41D3EE099B91E0423AECABC5 /* MirrorState.swift */,
+				75ED1842B1FD5FD7B794F566 /* MirrorTrayHostView.swift */,
 				10ED3FC6892310C07240BA42 /* MirrorView.swift */,
 				636E68467C0C2659F9EEBC8F /* MirrorView+Errors.swift */,
 				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
 				56C006B8AB5336EA4E8E26EF /* MirrorViewModel+Looks.swift */,
 				FA09BFAABFA8175D0BA38B55 /* MirrorViewModel+Reset.swift */,
+				140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */,
 				81E973E0B871A21B0A2A52D3 /* Shade.swift */,
 				BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */,
 				9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */,
@@ -999,11 +1005,13 @@
 				D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */,
 				B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */,
 				7328FEE722FD4A566C5D1A17 /* MirrorState.swift in Sources */,
+				5E085A2B9D09F6CBEA552306 /* MirrorTrayHostView.swift in Sources */,
 				34F701731F9A9AFCC0D5F5EF /* MirrorView+Errors.swift in Sources */,
 				AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */,
 				1EAC6745C361E552BC925C81 /* MirrorViewModel+Looks.swift in Sources */,
 				6262BA8B791E9B13DEE85538 /* MirrorViewModel+Reset.swift in Sources */,
 				EE65D90F35B9641BE5708449 /* MirrorViewModel.swift in Sources */,
+				7B764DC07634CA7F076EABC4 /* NoFaceTipView.swift in Sources */,
 				95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */,
 				FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */,
 				519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */,
