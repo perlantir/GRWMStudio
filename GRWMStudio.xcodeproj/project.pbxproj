@@ -13,6 +13,7 @@
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
 		1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */; };
 		1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */; };
+		1F78799D16F460476BD2912F /* DefaultPermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */; };
 		20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EE539AD707663BED29DBAA /* DH+Color.swift */; };
 		23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C864855B4C7D6BF81930D62A /* baseBeauty.png */; };
 		2553F93440BF12F3280B5F54 /* EffectCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58CE707234895BA156A2DCB /* EffectCatalogTests.swift */; };
@@ -21,6 +22,7 @@
 		2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */; };
 		2DF1C76511E729B61F5E41ED /* GRWMLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE9D864F5CD4ADAC6B687B /* GRWMLogo.swift */; };
 		30F16AA226DEB8D74E821564 /* EffectParameterMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */; };
+		31CFFF8BC1D5F80F1D8FCF02 /* AppPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75252126C4F475FEF381B01 /* AppPermissionStatus.swift */; };
 		325AEE52E2D29C862240479A /* StickerHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D57AA91FC9E5D20190631 /* StickerHeart.swift */; };
 		33E0F275925F0FB81DEF741C /* StickerStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1A95064129A2EB93F7502 /* StickerStar.swift */; };
 		3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67B9D91B985787DB196F53 /* AppEnvironment.swift */; };
@@ -66,6 +68,8 @@
 		D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */; };
 		D9058B2A6584BDC9E6B71B48 /* Fredoka-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */; };
 		DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */; };
+		DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836AF9B238A751CB43B7643C /* PermissionsService.swift */; };
+		DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D467971A6379875D90F32 /* PermissionsServiceTests.swift */; };
 		DC57D49E81A1F266FA0E7236 /* DeepARControllerEffectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */; };
 		DCEFD5C9D85346DF5C80D167 /* DeepARDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */; };
 		E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
@@ -137,6 +141,7 @@
 		1E1D57AA91FC9E5D20190631 /* StickerHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerHeart.swift; sourceTree = "<group>"; };
 		2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerFlower.swift; sourceTree = "<group>"; };
 		2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy01.png; sourceTree = "<group>"; };
+		30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPermissionsService.swift; sourceTree = "<group>"; };
 		30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalog.swift; sourceTree = "<group>"; };
 		3129266168088884925A7CC4 /* DeepARController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARController.swift; sourceTree = "<group>"; };
 		36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 		7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		79AC2D570879CC7CA211099B /* look_legacy02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy02.png; sourceTree = "<group>"; };
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
+		836AF9B238A751CB43B7643C /* PermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsService.swift; sourceTree = "<group>"; };
 		83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 		9B043BD930A105B118373369 /* Logger+GRWM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+GRWM.swift"; sourceTree = "<group>"; };
 		9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMap.swift; sourceTree = "<group>"; };
 		A06EF686867E7FA7B9D66550 /* DHHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHHaptics.swift; sourceTree = "<group>"; };
+		A26D467971A6379875D90F32 /* PermissionsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsServiceTests.swift; sourceTree = "<group>"; };
 		A52100C15AC1F3AD6747329A /* StickerSparkle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerSparkle.swift; sourceTree = "<group>"; };
 		A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameter.swift; sourceTree = "<group>"; };
 		A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioTests.swift; sourceTree = "<group>"; };
@@ -192,6 +199,7 @@
 		DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+ChunkyShadow.swift"; sourceTree = "<group>"; };
 		E441DC4BB243A8321854669A /* DHWallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHWallpaper.swift; sourceTree = "<group>"; };
 		E71D00F40AEDBE5021960897 /* brows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brows.png; sourceTree = "<group>"; };
+		E75252126C4F475FEF381B01 /* AppPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissionStatus.swift; sourceTree = "<group>"; };
 		E8EE539AD707663BED29DBAA /* DH+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Color.swift"; sourceTree = "<group>"; };
 		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
 		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
@@ -304,6 +312,7 @@
 				A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */,
 				D2F6467826E99E8C1A10F2B5 /* DeepAR */,
 				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
+				EA5CD952999A93C7679C2A59 /* Permissions */,
 			);
 			path = GRWMStudioTests;
 			sourceTree = "<group>";
@@ -341,6 +350,7 @@
 				1856E43C21F0DE495D560864 /* DeepAR */,
 				29EE459A880492A90D704EBE /* DesignSystem */,
 				3DE1D7572561F9470B143F08 /* Onboarding */,
+				F3D8926139F1F430A18E8150 /* Permissions */,
 				AA738BCAA887B227C0AA18B5 /* Resources */,
 				51CB23B090FC06420E2B62A7 /* Utilities */,
 			);
@@ -396,6 +406,14 @@
 			path = Effects;
 			sourceTree = "<group>";
 		};
+		EA5CD952999A93C7679C2A59 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				A26D467971A6379875D90F32 /* PermissionsServiceTests.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
 		F05ED27ECE889EFBC98C74D8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +427,16 @@
 				AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F3D8926139F1F430A18E8150 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				E75252126C4F475FEF381B01 /* AppPermissionStatus.swift */,
+				30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */,
+				836AF9B238A751CB43B7643C /* PermissionsService.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */ = {
@@ -593,6 +621,7 @@
 				2553F93440BF12F3280B5F54 /* EffectCatalogTests.swift in Sources */,
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
+				DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +631,7 @@
 			files = (
 				8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */,
 				3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */,
+				31CFFF8BC1D5F80F1D8FCF02 /* AppPermissionStatus.swift in Sources */,
 				75702078CD900D5C85A583B6 /* Concurrency+Extensions.swift in Sources */,
 				79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */,
 				20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */,
@@ -617,6 +647,7 @@
 				9415F7FE3A9E019D25477E0E /* DeepARController.swift in Sources */,
 				DCEFD5C9D85346DF5C80D167 /* DeepARDelegateProxy.swift in Sources */,
 				CC6F483929F02A1013C47963 /* DeepARView.swift in Sources */,
+				1F78799D16F460476BD2912F /* DefaultPermissionsService.swift in Sources */,
 				A3EDB25296FCAA64B884DCF7 /* EffectCatalog.swift in Sources */,
 				B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */,
 				5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */,
@@ -627,6 +658,7 @@
 				40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */,
 				921B72EC7927E48F6BFB9DE1 /* MakeupCategory.swift in Sources */,
 				D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */,
+				DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */,
 				9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */,
 				7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */,
 				71337A950998A0A1175144E9 /* SplashView.swift in Sources */,

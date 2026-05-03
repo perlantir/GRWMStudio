@@ -15,7 +15,7 @@ final class AppEnvironment {
         deepAR: any DeepARService = StubDeepARService(),
         catalog: any EffectCatalogService = StubEffectCatalogService(),
         captures: any CaptureService = StubCaptureService(),
-        permissions: any PermissionsService = StubPermissionsService(),
+        permissions: any PermissionsService = DefaultPermissionsService(),
         storeKit: any StoreKitService = StubStoreKitService(),
         proEntitlement: any ProEntitlementService = StubProEntitlementService(),
         analytics: any AnalyticsService = NoOpAnalyticsService(),
@@ -42,9 +42,6 @@ struct StubEffectCatalogService: EffectCatalogService {}
 
 protocol CaptureService: Sendable {}
 struct StubCaptureService: CaptureService {}
-
-protocol PermissionsService: Sendable {}
-struct StubPermissionsService: PermissionsService {}
 
 protocol StoreKitService: Sendable {}
 struct StubStoreKitService: StoreKitService {}
