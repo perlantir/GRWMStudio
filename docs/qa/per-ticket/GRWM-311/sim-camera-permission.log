@@ -1,0 +1,6 @@
+Camera permission smoke:
+- Revoked simulator camera permission with xcrun simctl privacy ... revoke camera app.grwmstudio.ios.
+- Relaunched app and verified permission-card state with reset button visible.
+- Tapped Reset everything and app stayed stable.
+- Restored simulator camera permission with xcrun simctl privacy ... grant camera app.grwmstudio.ios.
+PASS: camera-off reset smoke completed

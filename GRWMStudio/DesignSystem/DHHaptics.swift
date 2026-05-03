@@ -15,4 +15,9 @@ enum DHHaptics {
     static func tapMedium() {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
+
+    @MainActor
+    static func heavy() {
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    }
 }

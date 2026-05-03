@@ -10,8 +10,8 @@ final class MirrorViewModel {
     let catalog: EffectCatalog
 
     private(set) var state: MirrorState = .idle
-    private(set) var selections: [EffectSlot: SlotSelection] = [:]
-    private(set) var eyeSelections: [EyesSubCategory: String] = [:]
+    var selections: [EffectSlot: SlotSelection] = [:]
+    var eyeSelections: [EyesSubCategory: String] = [:]
     private(set) var isFaceDetected = false
     var lastError: ErrorVariant?
     var activeLookName: String?

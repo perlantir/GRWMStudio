@@ -13,7 +13,12 @@ struct MirrorView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                MirrorChrome.top()
+                MirrorChrome.top {
+                    Task { @MainActor in
+                        await viewModel.resetAll()
+                        pendingCategoryAfterLook = nil
+                    }
+                }
                     .padding(.horizontal, 18)
                     .padding(.top, 8)
 
