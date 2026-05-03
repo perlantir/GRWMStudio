@@ -32,6 +32,7 @@ identifier_name:
     - md
     - lg
     - xl
+    - bg
 
 force_unwrapping:
   severity: warning
