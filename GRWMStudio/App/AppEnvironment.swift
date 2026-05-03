@@ -1,10 +1,12 @@
 import SwiftUI
 
+@MainActor
 final class AppEnvironment {
     let deepAR: any DeepARService
     let catalog: any EffectCatalogService
     let captures: CaptureService
     let permissions: any PermissionsService
+    let onboarding: OnboardingState
     let storeKit: any StoreKitService
     let proEntitlement: any ProEntitlementService
     let analytics: any AnalyticsService
@@ -16,6 +18,7 @@ final class AppEnvironment {
         catalog: any EffectCatalogService = StubEffectCatalogService(),
         captures: CaptureService = CaptureService(),
         permissions: any PermissionsService = DefaultPermissionsService(),
+        onboarding: OnboardingState = OnboardingState(),
         storeKit: any StoreKitService = StubStoreKitService(),
         proEntitlement: any ProEntitlementService = StubProEntitlementService(),
         analytics: any AnalyticsService = NoOpAnalyticsService(),
@@ -26,6 +29,7 @@ final class AppEnvironment {
         self.catalog = catalog
         self.captures = captures
         self.permissions = permissions
+        self.onboarding = onboarding
         self.storeKit = storeKit
         self.proEntitlement = proEntitlement
         self.analytics = analytics
@@ -61,5 +65,14 @@ protocol ParentalGateService: Sendable {}
 struct StubParentalGateService: ParentalGateService {}
 
 extension EnvironmentValues {
-    @Entry var appEnvironment: AppEnvironment = AppEnvironment()
+    var appEnvironment: AppEnvironment {
+        get { self[AppEnvironmentKey.self] }
+        set { self[AppEnvironmentKey.self] = newValue }
+    }
+}
+
+private struct AppEnvironmentKey: EnvironmentKey {
+    static let defaultValue = MainActor.assumeIsolated {
+        AppEnvironment()
+    }
 }

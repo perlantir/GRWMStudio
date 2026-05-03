@@ -127,7 +127,7 @@ struct SplashView: View {
         Task {
             try? await Task.sleep(for: .milliseconds(1_800))
             await MainActor.run {
-                guard !hasAdvanced else {
+                guard !hasAdvanced, coordinator.route == .onboardingSplash else {
                     return
                 }
 

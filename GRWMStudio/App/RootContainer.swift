@@ -12,6 +12,7 @@ struct RootContainer: View {
         }
         .preferredColorScheme(.light)
         .task {
+            resolveInitialRoute()
             await loadEffectCatalog()
         }
     }
@@ -45,7 +46,7 @@ struct RootContainer: View {
         case .onboardingPermissionsDenied:
             placeholder("Permissions Denied placeholder")
         case .app:
-            placeholder("App placeholder")
+            appPlaceholder
         case .parentalGate(let reason):
             placeholder("Parental Gate: \(String(describing: reason))")
         case .paywall(let source):
@@ -61,6 +62,30 @@ struct RootContainer: View {
             .tracking(DH.tracking(.headline))
             .foregroundStyle(DH.pinkDeep)
             .padding(24)
+    }
+
+    @ViewBuilder
+    private var appPlaceholder: some View {
+        #if DEBUG
+        VStack(spacing: 16) {
+            placeholder("App placeholder")
+            DHButton(title: "Reset Onboarding", kind: .ghost, size: .sm) {
+                env.onboarding.reset()
+                coordinator.route = .onboardingSplash
+            }
+            .accessibilityLabel("Reset onboarding")
+        }
+        #else
+        placeholder("App placeholder")
+        #endif
+    }
+
+    private func resolveInitialRoute() {
+        if env.onboarding.hasCompletedOnboarding {
+            coordinator.route = .app
+        } else if coordinator.route == .app {
+            coordinator.route = .onboardingSplash
+        }
     }
 
     private func loadEffectCatalog() async {

@@ -68,6 +68,11 @@ final class RootCoordinator {
         route = .app
     }
 
+    func completeOnboarding(env: AppEnvironment) {
+        env.onboarding.hasCompletedOnboarding = true
+        enterApp()
+    }
+
     func presentParentalGate(reason: GateReason) {
         route = .parentalGate(reason: reason)
     }
