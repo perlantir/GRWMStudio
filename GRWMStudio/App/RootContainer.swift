@@ -42,7 +42,7 @@ struct RootContainer: View {
         case .onboardingParentInfo:
             ParentInfoView()
         case .onboardingPermissions:
-            placeholder("Permissions placeholder")
+            PermissionsView()
         case .onboardingPermissionsDenied:
             placeholder("Permissions Denied placeholder")
         case .app:

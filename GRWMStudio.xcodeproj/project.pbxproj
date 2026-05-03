@@ -33,6 +33,7 @@
 		46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */; };
 		475FF88D8F84A1891F82084B /* DeepARControllerParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */; };
 		48A1BF761FFDFD8C5ABADF39 /* DeepARController+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */; };
+		519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C558272F9814E7825BC889 /* PermRow.swift */; };
 		527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79AC2D570879CC7CA211099B /* look_legacy02.png */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
@@ -60,6 +61,7 @@
 		9DB0B0E618A1C82A298F7564 /* Fredoka-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */; };
 		A3EDB25296FCAA64B884DCF7 /* EffectCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */; };
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
+		A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F08944FAB932F872FCC276 /* PermissionsView.swift */; };
 		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA57750E522F4B57E9C302 /* WelcomeView.swift */; };
 		B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */; };
@@ -115,6 +117,19 @@
 		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = Effects;
+			dstSubfolderSpec = 7;
+			files = (
+				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
+				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
+				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
+				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11C208F764B56B1CC794199 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = Effects/thumbnails;
 			dstSubfolderSpec = 7;
 			files = (
@@ -127,19 +142,6 @@
 				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
 				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
 				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C11C208F764B56B1CC794199 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects;
-			dstSubfolderSpec = 7;
-			files = (
-				E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */,
-				095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */,
-				B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */,
-				26187129797773F0E04EAD72 /* manifest.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +188,7 @@
 		733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerBootstrapTests.swift; sourceTree = "<group>"; };
 		7343E3534A7DE0BCC753B134 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		78C558272F9814E7825BC889 /* PermRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermRow.swift; sourceTree = "<group>"; };
 		79AC2D570879CC7CA211099B /* look_legacy02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy02.png; sourceTree = "<group>"; };
 		7B5A8EC77CF58CA2EE8D5A6A /* DeepARControllerRecordingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerRecordingTests.swift; sourceTree = "<group>"; };
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
@@ -208,6 +211,7 @@
 		B4234637D1D41F546D13863E /* DeepARViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARViewTests.swift; sourceTree = "<group>"; };
 		B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
 		C5D32426D75F1151F9561AC5 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		C6F08944FAB932F872FCC276 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		C864855B4C7D6BF81930D62A /* baseBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseBeauty.png; sourceTree = "<group>"; };
 		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA1A95064129A2EB93F7502 /* StickerStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerStar.swift; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 			children = (
 				72758F600E00EC23E45ABED2 /* OnboardingState.swift */,
 				E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */,
+				C6F08944FAB932F872FCC276 /* PermissionsView.swift */,
+				78C558272F9814E7825BC889 /* PermRow.swift */,
 				0B16955494AFCF013FFD049C /* SplashView.swift */,
 				18BA57750E522F4B57E9C302 /* WelcomeView.swift */,
 			);
@@ -746,7 +752,9 @@
 				D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */,
 				95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */,
 				FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */,
+				519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */,
 				DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */,
+				A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */,
 				CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */,
 				04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */,
 				9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */,
