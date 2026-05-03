@@ -4,7 +4,7 @@ import SwiftUI
 struct MirrorView: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
-    @State private var viewModel = MirrorViewModel()
+    @Bindable var viewModel: MirrorViewModel
     @State private var pendingCategoryAfterLook: FilterCategory?
     @State private var showNoFaceTip = false
     @State private var noFaceTipTask: Task<Void, Never>?
@@ -205,7 +205,7 @@ struct MirrorView: View {
 }
 
 #Preview("Mirror View") {
-    MirrorView()
+    MirrorView(viewModel: MirrorViewModel())
         .environment(\.appEnvironment, AppEnvironment())
         .environment(\.rootCoordinator, RootCoordinator())
 }

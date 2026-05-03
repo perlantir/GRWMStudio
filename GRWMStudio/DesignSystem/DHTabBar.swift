@@ -45,12 +45,32 @@ enum DHTab: String, CaseIterable, Hashable, Identifiable {
 struct DHTabBar: View {
     @Binding var selected: DHTab
     let onFABTap: () -> Void
+    private let showsDefaultFAB: Bool
+    private let centerContent: (() -> AnyView)?
+
+    init(selected: Binding<DHTab>, onFABTap: @escaping () -> Void, showsDefaultFAB: Bool = true) {
+        self._selected = selected
+        self.onFABTap = onFABTap
+        self.showsDefaultFAB = showsDefaultFAB
+        self.centerContent = nil
+    }
+
+    init<CenterContent: View>(
+        selected: Binding<DHTab>,
+        onFABTap: @escaping () -> Void,
+        @ViewBuilder centerContent: @escaping () -> CenterContent
+    ) {
+        self._selected = selected
+        self.onFABTap = onFABTap
+        self.showsDefaultFAB = true
+        self.centerContent = { AnyView(centerContent()) }
+    }
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             tabButton(.mirror)
             tabButton(.looks)
-            fabButton
+            centerSlot
             tabButton(.feed)
             tabButton(.locker)
         }
@@ -89,6 +109,22 @@ struct DHTabBar: View {
         .buttonStyle(.plain)
         .accessibilityLabel(tab.title)
         .accessibilityAddTraits(selected == tab ? .isSelected : [])
+    }
+
+    @ViewBuilder
+    private var centerSlot: some View {
+        if let centerContent {
+            centerContent()
+                .offset(y: -34)
+                .frame(maxWidth: .infinity)
+        } else if showsDefaultFAB {
+            fabButton
+        } else {
+            Color.clear
+                .frame(maxWidth: .infinity)
+                .frame(height: 58)
+                .accessibilityHidden(true)
+        }
     }
 
     private var fabButton: some View {

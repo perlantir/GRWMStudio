@@ -18,6 +18,8 @@ final class MirrorViewModel {
     var activeLookName: String?
     var activeCategory: FilterCategory?
     var eyesSubCategory: EyesSubCategory = .shadow
+    var activeCaptureMode: CaptureMode = .idle
+    var lastCaptureEvent: CaptureEvent?
     var activeTraySlot: EffectSlot? {
         activeCategory?.slot
     }
@@ -30,6 +32,8 @@ final class MirrorViewModel {
     @ObservationIgnored var effectFailureCount = 0
     @ObservationIgnored var effectFailureWindowStart: Date?
     @ObservationIgnored let currentDate: () -> Date
+    @ObservationIgnored var capturePressStartedAt: Date?
+    @ObservationIgnored var captureTickTask: Task<Void, Never>?
 
     init(
         controller: DeepARController = DeepARController(),
@@ -73,6 +77,7 @@ final class MirrorViewModel {
 
         if usesSimulatorPlaceholder {
             state = .running
+            applyDebugCaptureModeIfNeeded()
             Logger.deepAR.info("Mirror using simulator DeepAR placeholder")
             return
         }
@@ -84,6 +89,7 @@ final class MirrorViewModel {
 
             try await controller.startCamera(includeAudio: false)
             state = .running
+            applyDebugCaptureModeIfNeeded()
         } catch DeepARController.SetupError.missingLicenseKey {
             state = .failed(.licenseInvalid)
             lastError = .licenseInvalid
@@ -102,6 +108,10 @@ final class MirrorViewModel {
     func pause() {
         faceTask?.cancel()
         faceTask = nil
+        captureTickTask?.cancel()
+        captureTickTask = nil
+        capturePressStartedAt = nil
+        activeCaptureMode = .idle
         isFaceDetected = false
 
         if state == .running || state == .starting {
@@ -150,6 +160,16 @@ final class MirrorViewModel {
         true
         #else
         false
+        #endif
+    }
+
+    private func applyDebugCaptureModeIfNeeded() {
+        #if DEBUG
+        guard ProcessInfo.processInfo.arguments.contains("-GRWMDebugCaptureRecording") else {
+            return
+        }
+
+        activeCaptureMode = .videoRecording(secondsElapsed: 5)
         #endif
     }
 }

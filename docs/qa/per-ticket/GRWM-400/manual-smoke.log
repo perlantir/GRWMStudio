@@ -1,0 +1,19 @@
+GRWM-400 manual smoke via XcodeBuildMCP + Computer Use
+Date: 2026-05-03
+Simulator: iPhone 16 Pro iOS 18.3.1 (BFD7E422-B789-4380-9588-B952559B6A92)
+
+Observed:
+- Simulator.app was visible on screen.
+- App launched into Mirror with the capture FAB occupying the bottom center slot, replacing the previous center plus on Mirror.
+- Initial overlap bug was captured in layout-overlap-before.jpg and fixed by moving the FAB to AppShell's center tab slot.
+- Normal idle state captured in capture-fab-idle.jpg.
+- DEBUG-only recording visual state captured in capture-fab-recording-debug.jpg using -GRWMDebugCaptureRecording.
+- Tap at simulator coordinate (201, 760) fired photoCapture.
+- Long press at simulator coordinate (201, 760) for 5000ms fired videoCapture began and ended with a 5.078939s duration.
+
+Structured log excerpt from XcodeBuildMCP capture:
+2026-05-03 05:07:18.618500-0500 [app.grwmstudio.ios:deepar] Effect catalog loaded
+2026-05-03 05:07:18.841768-0500 [app.grwmstudio.ios:deepar] Mirror using simulator DeepAR placeholder
+2026-05-03 05:07:32.801307-0500 [app.grwmstudio.ios:mirror] Capture event: photoCapture
+2026-05-03 05:07:45.104117-0500 [app.grwmstudio.ios:mirror] Capture event: videoCapture began
+2026-05-03 05:07:49.880458-0500 [app.grwmstudio.ios:mirror] Capture event: videoCapture duration=5.078939

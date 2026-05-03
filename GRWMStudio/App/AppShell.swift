@@ -4,13 +4,14 @@ struct AppShell: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
     @State private var selected: DHTab = .mirror
+    @State private var mirrorViewModel = MirrorViewModel()
 
     private let lastTabKey = "dh_last_tab"
 
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selected) {
-                MirrorView()
+                MirrorView(viewModel: mirrorViewModel)
                     .tag(DHTab.mirror)
 
                 placeholder("Looks Library - wired in GRWM-500")
@@ -27,12 +28,7 @@ struct AppShell: View {
             }
             .toolbar(.hidden, for: .tabBar)
 
-            DHTabBar(selected: $selected) {
-                env.mirrorCreateNewIntent = true
-                selected = .mirror
-            }
-            .padding(.horizontal, 14)
-            .padding(.bottom, 18)
+            tabBar
         }
         .preferredColorScheme(.light)
         .onAppear(perform: restoreSelectedTab)
@@ -43,6 +39,39 @@ struct AppShell: View {
 
             UserDefaults.standard.set(newValue.rawValue, forKey: lastTabKey)
         }
+    }
+
+    @ViewBuilder
+    private var tabBar: some View {
+        if selected == .mirror {
+            ZStack {
+                DHTabBar(selected: $selected, onFABTap: routeToFreshMirror, showsDefaultFAB: false)
+
+                CaptureFAB(
+                    mode: mirrorCaptureMode,
+                    onTap: mirrorViewModel.onCaptureTap,
+                    onLongPressBegan: mirrorViewModel.onCaptureLongPressBegan
+                ) { duration in
+                    mirrorViewModel.onCaptureLongPressEnded(duration: duration)
+                }
+                .accessibilityIdentifier("capture-fab")
+                .offset(y: -34)
+            }
+            .padding(.horizontal, 14)
+            .padding(.bottom, 18)
+        } else {
+            DHTabBar(selected: $selected, onFABTap: routeToFreshMirror)
+                .padding(.horizontal, 14)
+                .padding(.bottom, 18)
+        }
+    }
+
+    private var mirrorCaptureMode: CaptureMode {
+        guard mirrorViewModel.state == .running else {
+            return .disabled
+        }
+
+        return mirrorViewModel.activeCaptureMode
     }
 
     private func placeholder(_ title: String) -> some View {
@@ -86,6 +115,11 @@ struct AppShell: View {
         }
 
         selected = tab
+    }
+
+    private func routeToFreshMirror() {
+        env.mirrorCreateNewIntent = true
+        selected = .mirror
     }
 }
 
