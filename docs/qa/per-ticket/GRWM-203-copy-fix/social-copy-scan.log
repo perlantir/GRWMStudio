@@ -1,0 +1,6 @@
+$ rg -n "show your friends" GRWMStudio project.yml 05-DEEPAR-INTEGRATION.md docs/DEEPAR-INTEGRATION.md 07-Phased\ Plan.md
+PASS old photos prompt copy absent
+$ rg -n "NSPhotoLibraryAddUsageDescription" project.yml GRWMStudio/Resources/Info.plist
+project.yml:134:        NSPhotoLibraryAddUsageDescription: GRWM Studio adds saved looks to Photos only when you tap Save.
+GRWMStudio/Resources/Info.plist:27:	<key>NSPhotoLibraryAddUsageDescription</key>
+GRWMStudio/Resources/Info.plist:28:	<string>GRWM Studio adds saved looks to Photos only when you tap Save.</string>

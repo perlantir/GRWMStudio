@@ -101,7 +101,7 @@ Wire the existing Config/Debug.xcconfig as the Debug build configuration's xccon
 Set these Info.plist keys:
 - NSCameraUsageDescription = "GRWM Studio uses your camera to show you the magic mirror."
 - NSMicrophoneUsageDescription = "GRWM Studio records sound when you make a video so you can talk and sing along!"
-- NSPhotoLibraryAddUsageDescription = "Save your favorite looks to your photos so you can show your friends."
+- NSPhotoLibraryAddUsageDescription = "GRWM Studio adds saved looks to Photos only when you tap Save."
 - DeepARLicenseKey = $(DEEPAR_LICENSE_KEY)
 - UIRequiresFullScreen = YES
 - UISupportedInterfaceOrientations = (UIInterfaceOrientationPortrait only)
@@ -12153,4 +12153,3 @@ Phase summary:
 - Phase 10 Polish (8): a11y, haptics, sounds, animation, perf, empty states, l10n, visual QA
 - Phase 11 Testing (7): unit, UI, snapshot, perf, a11y, l10n, manual matrix
 - Phase 12 Launch (8): privacy manifest, kids compliance, ASC metadata, telemetry, TestFlight, review prep, smoke, submit
-

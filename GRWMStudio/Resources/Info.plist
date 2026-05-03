@@ -25,7 +25,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>GRWM Studio records sound when you make a video so you can talk and sing along!</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save your favorite looks to your photos so you can show your friends.</string>
+	<string>GRWM Studio adds saved looks to Photos only when you tap Save.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Fredoka-Regular.ttf</string>

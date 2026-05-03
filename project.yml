@@ -131,7 +131,7 @@ targets:
         UIUserInterfaceStyle: Light
         NSCameraUsageDescription: GRWM Studio uses your camera to show you the magic mirror.
         NSMicrophoneUsageDescription: GRWM Studio records sound when you make a video so you can talk and sing along!
-        NSPhotoLibraryAddUsageDescription: Save your favorite looks to your photos so you can show your friends.
+        NSPhotoLibraryAddUsageDescription: GRWM Studio adds saved looks to Photos only when you tap Save.
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: app.grwmstudio.ios

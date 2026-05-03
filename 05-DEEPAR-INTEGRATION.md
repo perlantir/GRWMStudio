@@ -62,7 +62,7 @@ Per the iOS getting-started docs:
 <string>GRWM Studio records sound when you make a video so you can talk and sing along!</string>
 
 <key>NSPhotoLibraryAddUsageDescription</key>
-<string>Save your favorite looks to your photos so you can show your friends.</string>
+<string>GRWM Studio adds saved looks to Photos only when you tap Save.</string>
 
 <key>DeepARLicenseKey</key>
 <string>$(DEEPAR_LICENSE_KEY)</string>
