@@ -26,6 +26,13 @@ type_name:
   excluded:
     - DH
 
+identifier_name:
+  excluded:
+    - sm
+    - md
+    - lg
+    - xl
+
 force_unwrapping:
   severity: warning
 
