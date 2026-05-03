@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
+		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
+		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
+		EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5EA33C961619590F3B33C1E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2025FA7C86AC19AB26FB6BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E1F08A02DDB466A6B9F47FC;
+			remoteInfo = GRWMStudio;
+		};
+		AF85EC2919CE439D4716A05E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2025FA7C86AC19AB26FB6BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E1F08A02DDB466A6B9F47FC;
+			remoteInfo = GRWMStudio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
+		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioTests.swift; sourceTree = "<group>"; };
+		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
+		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		17815A28FB4EA66FD13AEA62 = {
+			isa = PBXGroup;
+			children = (
+				535FCD7580A705C9C432658F /* Config */,
+				7E9DBC102265BA95053F104A /* GRWMStudio */,
+				35691EE1D805C8B885C40010 /* GRWMStudioTests */,
+				F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */,
+				FB9A548A4C58104381E19DE3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		322DBD4C113A738A4E28F066 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */,
+				503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		35691EE1D805C8B885C40010 /* GRWMStudioTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */,
+			);
+			path = GRWMStudioTests;
+			sourceTree = "<group>";
+		};
+		535FCD7580A705C9C432658F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */,
+				CD0278E1339612085DDDEBE0 /* Release.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		7E9DBC102265BA95053F104A /* GRWMStudio */ = {
+			isa = PBXGroup;
+			children = (
+				322DBD4C113A738A4E28F066 /* App */,
+			);
+			path = GRWMStudio;
+			sourceTree = "<group>";
+		};
+		F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */,
+			);
+			path = GRWMStudioUITests;
+			sourceTree = "<group>";
+		};
+		FB9A548A4C58104381E19DE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */,
+				C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */,
+				86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2E1F08A02DDB466A6B9F47FC /* GRWMStudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B84C32CE3DD54986DB91D7D /* Build configuration list for PBXNativeTarget "GRWMStudio" */;
+			buildPhases = (
+				9846BBA5142EA350BC38869B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GRWMStudio;
+			packageProductDependencies = (
+			);
+			productName = GRWMStudio;
+			productReference = EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B9D5AE14F9121C8DAFB2AB5B /* GRWMStudioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71829CC610789A5FD23FC2C2 /* Build configuration list for PBXNativeTarget "GRWMStudioUITests" */;
+			buildPhases = (
+				D6C310171F33AB457671A0E1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				91D8AF8A892A939518EDAFB9 /* PBXTargetDependency */,
+			);
+			name = GRWMStudioUITests;
+			packageProductDependencies = (
+			);
+			productName = GRWMStudioUITests;
+			productReference = 86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		C0231A2978FD6F39B4B16797 /* GRWMStudioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4DD6DFF2749E91D0C651DB3 /* Build configuration list for PBXNativeTarget "GRWMStudioTests" */;
+			buildPhases = (
+				869A8ACDA39D94D1842A549B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112ED13C2486D56C7AA9AB4F /* PBXTargetDependency */,
+			);
+			name = GRWMStudioTests;
+			packageProductDependencies = (
+			);
+			productName = GRWMStudioTests;
+			productReference = C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2025FA7C86AC19AB26FB6BE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2E1F08A02DDB466A6B9F47FC = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					B9D5AE14F9121C8DAFB2AB5B = {
+						DevelopmentTeam = "";
+						TestTargetID = 2E1F08A02DDB466A6B9F47FC;
+					};
+					C0231A2978FD6F39B4B16797 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 6714271872FAD029F5492DFA /* Build configuration list for PBXProject "GRWMStudio" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 17815A28FB4EA66FD13AEA62;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FB9A548A4C58104381E19DE3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2E1F08A02DDB466A6B9F47FC /* GRWMStudio */,
+				C0231A2978FD6F39B4B16797 /* GRWMStudioTests */,
+				B9D5AE14F9121C8DAFB2AB5B /* GRWMStudioUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		869A8ACDA39D94D1842A549B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9846BBA5142EA350BC38869B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */,
+				18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6C310171F33AB457671A0E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		112ED13C2486D56C7AA9AB4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E1F08A02DDB466A6B9F47FC /* GRWMStudio */;
+			targetProxy = 5EA33C961619590F3B33C1E9 /* PBXContainerItemProxy */;
+		};
+		91D8AF8A892A939518EDAFB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E1F08A02DDB466A6B9F47FC /* GRWMStudio */;
+			targetProxy = AF85EC2919CE439D4716A05E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0D4C9C42A69F1875DC3E8CEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GRWMStudio/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios;
+				PRODUCT_NAME = GRWMStudio;
+				SDKROOT = iphoneos;
+				SUPPORTED_INTERFACE_ORIENTATIONS = UIInterfaceOrientationPortrait;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3EE61BC4F2B7A80EDAA3D4C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD0278E1339612085DDDEBE0 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		5342E7353418E27B0C34FCC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.tests;
+				PRODUCT_NAME = GRWMStudioTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GRWMStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GRWMStudio";
+			};
+			name = Release;
+		};
+		78C7E4DA0F8F36CFE59BC5FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.tests;
+				PRODUCT_NAME = GRWMStudioTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GRWMStudio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GRWMStudio";
+			};
+			name = Debug;
+		};
+		D0CB035158BA0BBBDFB0BC8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		DA6E7D0C2A470E73C5D32B0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GRWMStudio/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios;
+				PRODUCT_NAME = GRWMStudio;
+				SDKROOT = iphoneos;
+				SUPPORTED_INTERFACE_ORIENTATIONS = UIInterfaceOrientationPortrait;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E1EB416FD398384B4AF97BF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.uitests;
+				PRODUCT_NAME = GRWMStudioUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GRWMStudio;
+			};
+			name = Debug;
+		};
+		FA3C93F3D7BA7D66C678A87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.grwmstudio.ios.uitests;
+				PRODUCT_NAME = GRWMStudioUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GRWMStudio;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6714271872FAD029F5492DFA /* Build configuration list for PBXProject "GRWMStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0CB035158BA0BBBDFB0BC8B /* Debug */,
+				3EE61BC4F2B7A80EDAA3D4C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		71829CC610789A5FD23FC2C2 /* Build configuration list for PBXNativeTarget "GRWMStudioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1EB416FD398384B4AF97BF2 /* Debug */,
+				FA3C93F3D7BA7D66C678A87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8B84C32CE3DD54986DB91D7D /* Build configuration list for PBXNativeTarget "GRWMStudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA6E7D0C2A470E73C5D32B0E /* Debug */,
+				0D4C9C42A69F1875DC3E8CEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F4DD6DFF2749E91D0C651DB3 /* Build configuration list for PBXNativeTarget "GRWMStudioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78C7E4DA0F8F36CFE59BC5FB /* Debug */,
+				5342E7353418E27B0C34FCC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2025FA7C86AC19AB26FB6BE /* Project object */;
+}

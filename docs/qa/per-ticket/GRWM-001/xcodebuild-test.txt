@@ -1,0 +1,41 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+note: Building targets in dependency order
+note: Target dependency graph (3 targets)
+Signing GRWMStudio.debug.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing __preview.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing GRWMStudio.app (in target 'GRWMStudio' from project 'GRWMStudio')
+[GRWMStudio] Validate GRWMStudio.app
+[GRWMStudioUITests] Compiling GRWMStudioUITests.swift
+[GRWMStudioUITests] Compiling GRWMStudioUITests.swift
+[GRWMStudioUITests] Copy arm64-apple-ios-simulator.abi.json -> GRWMStudioUITests.abi.json
+[GRWMStudioUITests] Copy arm64-apple-ios-simulator.swiftmodule -> GRWMStudioUITests.swiftmodule
+[GRWMStudioUITests] Copy arm64-apple-ios-simulator.swiftsourceinfo -> GRWMStudioUITests.swiftsourceinfo
+[GRWMStudioUITests] Linking GRWMStudioUITests
+[GRWMStudioUITests] Extract App Intents Metadata
+Signing GRWMStudioUITests.xctest (in target 'GRWMStudioUITests' from project 'GRWMStudio')
+Signing GRWMStudioUITests-Runner.app (in target 'GRWMStudioUITests' from project 'GRWMStudio')
+Test Suite 'All tests' started at 2026-05-02 19:45:39.881.
+Test Suite 'GRWMStudioTests.xctest' started at 2026-05-02 19:45:39.881.
+Test Suite 'GRWMStudioTests' started at 2026-05-02 19:45:39.881.
+    ✔ testPlaceholder (0.001 seconds)
+Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'GRWMStudioTests.xctest' passed at 2026-05-02 19:45:39.883.
+Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'All tests' passed at 2026-05-02 19:45:39.883.
+Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'All tests' started at 2026-05-02 19:45:41.303.
+Test Suite 'GRWMStudioUITests.xctest' started at 2026-05-02 19:45:41.304.
+Test Suite 'GRWMStudioUITests' started at 2026-05-02 19:45:41.304.
+    ✔ testLaunches (2.417 seconds)
+Executed 1 test, with 0 failures (0 unexpected) in 2.417 (2.418) seconds
+Test Suite 'GRWMStudioUITests.xctest' passed at 2026-05-02 19:45:43.723.
+Executed 1 test, with 0 failures (0 unexpected) in 2.417 (2.419) seconds
+Test Suite 'All tests' passed at 2026-05-02 19:45:43.723.
+Executed 1 test, with 0 failures (0 unexpected) in 2.417 (2.420) seconds
+Test session results: /Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Logs/Test/Test-GRWMStudio-2026.05.02_19-45-37--0500.xcresult
+Test Succeeded
+Testing started

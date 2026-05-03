@@ -1,0 +1,19 @@
+
+----- xcbeautify -----
+Version: 3.2.1
+----------------------
+
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+[GRWMStudio] Processing Info.plist
+[GRWMStudio] Linking GRWMStudio.debug.dylib
+note: Using stub executor library with Swift entry point. (in target 'GRWMStudio' from project 'GRWMStudio')
+[GRWMStudio] Linking GRWMStudio
+[GRWMStudio] Extract App Intents Metadata
+Signing GRWMStudio.debug.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing __preview.dylib (in target 'GRWMStudio' from project 'GRWMStudio')
+Signing GRWMStudio.app (in target 'GRWMStudio' from project 'GRWMStudio')
+[GRWMStudio] Validate GRWMStudio.app
+note: Removed stale file '/Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Build/Products/Debug-iphonesimulator/GRWMStudio.app/Frameworks'
+note: Removed stale file '/Users/perlantir/Library/Developer/Xcode/DerivedData/GRWMStudio-gaekqbidenxyijcvejwmtvkrtuoa/Build/Products/Debug-iphonesimulator/GRWMStudio.app/PlugIns'
+Build Succeeded
