@@ -1,0 +1,6 @@
+--- Log capture for bundle ID: app.grwmstudio.ios ---
+getpwuid_r did not find a match for uid 503
+Filtering the log data using "subsystem == "app.grwmstudio.ios""
+Timestamp                       Thread     Type        Activity             PID    TTL
+2026-05-03 00:52:07.756407-0500 0x90b630   Info        0x0                  29061  0    GRWMStudio: (GRWMStudio.debug.dylib) [app.grwmstudio.ios:deepar] Camera stopped
+2026-05-03 00:52:14.136424-0500 0x90b630   Info        0x0                  29061  0    GRWMStudio: (GRWMStudio.debug.dylib) [app.grwmstudio.ios:deepar] Mirror using simulator DeepAR placeholder

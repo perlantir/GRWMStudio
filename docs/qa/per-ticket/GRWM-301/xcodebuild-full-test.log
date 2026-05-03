@@ -1,0 +1,9 @@
+Writing result bundle at path:
+	/Users/perlantir/Projects/GRWM Studio/docs/qa/per-ticket/GRWM-301/FullTests.xcresult
+
+2026-05-03 00:51:19.133 xcodebuild[23801:9476803] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-05-03 00:51:19.133 xcodebuild[23801:9476803] [MT] IDELaunchParametersSnapshot: no debugger version
+2026-05-03 00:51:23.959 xcodebuild[23801:9476803] [MT] IDETestOperationsObserverDebug: 12.470 elapsed -- Testing started completed.
+2026-05-03 00:51:23.959 xcodebuild[23801:9476803] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 00:51:23.959 xcodebuild[23801:9476803] [MT] IDETestOperationsObserverDebug: 12.470 sec, +12.470 sec -- end
+Testing started

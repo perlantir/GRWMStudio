@@ -48,8 +48,13 @@ struct StubEffectCatalogService: EffectCatalogService {}
 protocol StoreKitService: Sendable {}
 struct StubStoreKitService: StoreKitService {}
 
-protocol ProEntitlementService: Sendable {}
-struct StubProEntitlementService: ProEntitlementService {}
+protocol ProEntitlementService: Sendable {
+    var hasPro: Bool { get }
+}
+
+struct StubProEntitlementService: ProEntitlementService {
+    var hasPro = false
+}
 
 protocol AnalyticsService: Sendable {
     func track(_ event: String, properties: [String: Any]?)

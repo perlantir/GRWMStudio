@@ -6,6 +6,7 @@ DerivedData/
 xcuserdata/
 *.swp
 .DS_Store
+*.xcresult
 
 # CocoaPods (we don't use them but just in case)
 Pods/

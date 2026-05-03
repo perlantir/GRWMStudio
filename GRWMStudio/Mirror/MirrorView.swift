@@ -49,7 +49,7 @@ struct MirrorView: View {
         case .needsPermission:
             permissionCard
 
-        case .failed(let reason):
+        case .failed(let variant):
             DHCard(bg: DH.cream, deep: DH.pink, cornerRadius: DH.Radius.bigCard, padding: 20) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Mirror needs a restart")
@@ -57,7 +57,7 @@ struct MirrorView: View {
                         .tracking(DH.tracking(.headline))
                         .foregroundStyle(DH.pinkDeep)
 
-                    Text(reason)
+                    Text(errorMessage(for: variant))
                         .font(DH.font(.body))
                         .foregroundStyle(DH.ink.opacity(0.72))
                         .lineLimit(2)
@@ -89,6 +89,29 @@ struct MirrorView: View {
         }
         .accessibilityAddTraits(.isButton)
         .accessibilityLabel("Tap to allow camera")
+    }
+
+    private func errorMessage(for variant: ErrorVariant) -> String {
+        switch variant {
+        case .license:
+            "License check needs attention."
+        case .effectFail:
+            "The mirror effect needs a reset."
+        case .camDenied:
+            "Camera access is off."
+        case .micDenied:
+            "Microphone access is off."
+        case .photoDenied:
+            "Photos access is off."
+        case .recFail:
+            "Recording needs a reset."
+        case .saveFail:
+            "Saving needs a reset."
+        case .noFace:
+            "Move your face into the mirror."
+        case .lowStorage:
+            "This phone needs more free space."
+        }
     }
 }
 
