@@ -36,9 +36,21 @@ targets:
           - "Resources/Info.plist"
           - "Resources/Effects/**"
           - "Resources/Effects/_source/**"
-      - path: GRWMStudio/Resources/Effects
-        type: folder
-        buildPhase: resources
+      - path: GRWMStudio/Resources/Effects/baseBeauty.deepar
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects
+      - path: GRWMStudio/Resources/Effects/look_legacy01.deepar
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects
+      - path: GRWMStudio/Resources/Effects/look_legacy02.deepar
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Effects
     dependencies:
       - package: DeepAR
     info:
