@@ -17,6 +17,17 @@ final class RootCoordinator {
         case error(ErrorVariant)
     }
 
+    enum Overlay: Hashable {
+        case parentGate(intent: ParentGateIntent)
+        case paywall
+    }
+
+    enum ParentGateIntent: Hashable {
+        case paywall
+        case settings
+        case deletion
+    }
+
     enum GateReason: Hashable {
         case paywall
         case externalLink(URL)
@@ -44,6 +55,7 @@ final class RootCoordinator {
     }
 
     var route: Route = .onboardingSplash
+    private(set) var overlay: Overlay?
 
     func advanceFromSplash() {
         route = .onboardingWelcome
@@ -84,6 +96,18 @@ final class RootCoordinator {
 
     func presentError(_ variant: ErrorVariant) {
         route = .error(variant)
+    }
+
+    func startParentGate(intent: ParentGateIntent) {
+        overlay = .parentGate(intent: intent)
+    }
+
+    func paywallShown() {
+        overlay = .paywall
+    }
+
+    func dismissOverlay() {
+        overlay = nil
     }
 }
 

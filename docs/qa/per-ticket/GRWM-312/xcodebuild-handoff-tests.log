@@ -1,0 +1,6 @@
+2026-05-03 03:02:45.736 xcodebuild[36232:10563915] [MT] IDETestOperationsObserverDebug: 5.571 elapsed -- Testing started completed.
+2026-05-03 03:02:45.737 xcodebuild[36232:10563915] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-05-03 03:02:45.737 xcodebuild[36232:10563915] [MT] IDETestOperationsObserverDebug: 5.571 sec, +5.571 sec -- end
+Testing started
+
+PASS: handoff-focused tests exited 0

@@ -176,6 +176,14 @@ struct MirrorView: View {
         .task {
             await viewModel.start(env: env)
         }
+        .onChange(of: viewModel.lastError) { _, newValue in
+            guard newValue == .license else {
+                return
+            }
+
+            coordinator.startParentGate(intent: .paywall)
+            viewModel.lastError = nil
+        }
         .onDisappear {
             viewModel.pause()
         }

@@ -50,6 +50,26 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertEqual(coordinator.route, .app)
     }
 
+    func testCoordinatorParentGatePaywallOverlaySequencePreservesAppRoute() {
+        let coordinator = RootCoordinator()
+        coordinator.route = .app
+
+        coordinator.startParentGate(intent: .paywall)
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertEqual(coordinator.overlay, .parentGate(intent: .paywall))
+
+        coordinator.paywallShown()
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertEqual(coordinator.overlay, .paywall)
+
+        coordinator.dismissOverlay()
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertNil(coordinator.overlay)
+    }
+
     private func makeDefaults() throws -> UserDefaults {
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
         defaults.removePersistentDomain(forName: suiteName)

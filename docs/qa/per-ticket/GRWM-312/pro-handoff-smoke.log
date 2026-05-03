@@ -1,0 +1,10 @@
+Manual simulator smoke:
+- Launched with -GRWMDebugAppShell and no Pro entitlement.
+- Opened Lips, scrolled to Disco Brat, tapped Pro swatch.
+- Parent gate placeholder appeared.
+- Tapped Done and paywall placeholder appeared.
+- Tapped Done and returned to Lips tray; Disco Brat was not selected.
+- Terminated app and relaunched with -GRWMDebugAppShell -GRWMDebugHasPro.
+- Opened Lips, scrolled to Disco Brat, tapped Pro swatch.
+- Disco Brat selected directly with no parent gate.
+PASS: Pro handoff smoke completed
