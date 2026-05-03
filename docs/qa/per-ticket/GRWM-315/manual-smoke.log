@@ -1,0 +1,7 @@
+Manual smoke: PARTIAL PASS
+Temporarily changed the first manifest effect id from baseBeauty to baseBeauty-broken, built and launched with build_run_sim, opened Skin, and tapped Fair.
+Observed the mint effect-fail banner over the camera region with visible title, body copy, sparkle, chunky shadow, and Try again CTA.
+Moved the banner to a top-level overlay during implementation so it renders above tray chrome; final screenshot reflects that layout.
+Waited beyond 4 seconds and observed the banner auto-dismiss back to the no-face tip/tray state.
+Retry and third-failure escalation are covered by MirrorEffectFailureViewModelTests; simulator coordinate timing still did not provide a reliable retry-button screenshot before auto-dismiss.
+Restored manifest id to baseBeauty before final checks.

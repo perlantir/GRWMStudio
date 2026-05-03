@@ -26,7 +26,7 @@ struct MirrorView: View {
 
                 cameraRegion
                     .overlay(alignment: .top) {
-                        noFaceOverlay
+                        cameraTopOverlay
                     }
                     .padding(.horizontal, 14)
                     .padding(.top, 12)
@@ -39,6 +39,7 @@ struct MirrorView: View {
                 pendingCategoryAfterLook: $pendingCategoryAfterLook
             )
 
+            effectFailureOverlay
             flashOverlay
         }
         .preferredColorScheme(.light)
@@ -87,11 +88,30 @@ struct MirrorView: View {
     }
 
     @ViewBuilder
-    private var noFaceOverlay: some View {
-        if showNoFaceTip {
+    private var cameraTopOverlay: some View {
+        if showNoFaceTip, viewModel.lastError != .effectFail {
             NoFaceTipView()
                 .padding(.top, 18)
                 .transition(.opacity.combined(with: .move(edge: .top)))
+        }
+    }
+
+    @ViewBuilder
+    private var effectFailureOverlay: some View {
+        if viewModel.state == .running, viewModel.lastError == .effectFail {
+            EffectFailureBanner {
+                Task { @MainActor in
+                    await viewModel.retryLastSelection()
+                }
+            } onDismiss: {
+                Task { @MainActor in
+                    viewModel.dismissEffectFailureBanner()
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.top, 80)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .transition(.opacity.combined(with: .move(edge: .top)))
         }
     }
 

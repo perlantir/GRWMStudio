@@ -1,0 +1,35 @@
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:13:        XCTAssertEqual(viewModel.effectFailureCount, 1)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:21:        await viewModel.retryLastSelection()
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:24:        XCTAssertEqual(viewModel.effectFailureCount, 2)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:31:        await viewModel.retryLastSelection()
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:32:        await viewModel.retryLastSelection()
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:34:        XCTAssertEqual(viewModel.effectFailureCount, 3)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:46:        await viewModel.retryLastSelection()
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:48:        XCTAssertEqual(viewModel.effectFailureCount, 1)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:49:        XCTAssertEqual(viewModel.effectFailureWindowStart, now)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:60:        viewModel.effectFailureCount = 2
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:61:        viewModel.effectFailureWindowStart = Date(timeIntervalSince1970: 0)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:66:        XCTAssertEqual(viewModel.effectFailureCount, 0)
+GRWMStudioTests/Mirror/MirrorEffectFailureViewModelTests.swift:67:        XCTAssertNil(viewModel.effectFailureWindowStart)
+GRWMStudio/Mirror/EffectFailureBanner.swift:3:struct EffectFailureBanner: View {
+GRWMStudio/Mirror/EffectFailureBanner.swift:10:        DHCard(bg: DH.mint, deep: DH.mintDeep, cornerRadius: DH.Radius.card, padding: 12) {
+GRWMStudio/Mirror/EffectFailureBanner.swift:12:                StickerSparkle(size: 22, fill: DH.mintDeep, stroke: .white, strokeWidth: 2)
+GRWMStudio/Mirror/EffectFailureBanner.swift:15:                    Text("That sparkle didn't load")
+GRWMStudio/Mirror/EffectFailureBanner.swift:39:        .accessibilityLabel("That sparkle didn't load. Tap to try again.")
+GRWMStudio/Mirror/EffectFailureBanner.swift:66:            EffectFailureBanner {} onDismiss: {}
+GRWMStudio/Mirror/MirrorView.swift:102:            EffectFailureBanner {
+GRWMStudio/Mirror/MirrorView.swift:104:                    await viewModel.retryLastSelection()
+GRWMStudio/Mirror/MirrorView.swift:108:                    viewModel.dismissEffectFailureBanner()
+GRWMStudio/Mirror/MirrorViewModel.swift:30:    @ObservationIgnored var effectFailureCount = 0
+GRWMStudio/Mirror/MirrorViewModel.swift:31:    @ObservationIgnored var effectFailureWindowStart: Date?
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:79:    func retryLastSelection() async {
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:89:    func dismissEffectFailureBanner() {
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:244:        if let start = effectFailureWindowStart, now.timeIntervalSince(start) <= 60 {
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:245:            effectFailureCount += 1
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:247:            effectFailureCount = 1
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:248:            effectFailureWindowStart = now
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:251:        if effectFailureCount >= 3 {
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:257:        effectFailureCount = 0
+GRWMStudio/Mirror/MirrorViewModel+Selection.swift:258:        effectFailureWindowStart = nil
+GRWMStudioTests/DesignSystem/DHTokensTests.swift:18:        assertColor(DH.mintDeep, .rgb(0x5D, 0xBD, 0x8E))
+GRWMStudio/DesignSystem/DH+Tokens.swift:14:    static let mintDeep = Color(hex: 0x5DBD8E)

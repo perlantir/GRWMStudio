@@ -15,6 +15,7 @@ final class DHTokensTests: XCTestCase {
         assertColor(DH.lavender, .rgb(0xC9, 0xA8, 0xFF))
         assertColor(DH.lavenderDeep, .rgb(0x7A, 0x53, 0xC9))
         assertColor(DH.mint, .rgb(0xA8, 0xE8, 0xC8))
+        assertColor(DH.mintDeep, .rgb(0x5D, 0xBD, 0x8E))
         assertColor(DH.ink, .rgb(0x3A, 0x0E, 0x25))
         assertColor(DH.recRed, .rgb(0xFF, 0x2D, 0x5A))
         assertColor(DH.recRedDeep, .rgb(0xB4, 0x15, 0x40))

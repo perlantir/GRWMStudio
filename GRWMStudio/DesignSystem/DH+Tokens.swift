@@ -11,6 +11,7 @@ enum DH {
     static let lavender = Color(hex: 0xC9A8FF)
     static let lavenderDeep = Color(hex: 0x7A53C9)
     static let mint = Color(hex: 0xA8E8C8)
+    static let mintDeep = Color(hex: 0x5DBD8E)
     static let ink = Color(hex: 0x3A0E25)
     static let recRed = Color(hex: 0xFF2D5A)
     static let recRedDeep = Color(hex: 0xB41540)
