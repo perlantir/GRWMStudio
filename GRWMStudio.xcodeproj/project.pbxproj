@@ -20,6 +20,8 @@
 		33E0F275925F0FB81DEF741C /* StickerStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1A95064129A2EB93F7502 /* StickerStar.swift */; };
 		3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67B9D91B985787DB196F53 /* AppEnvironment.swift */; };
 		40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B043BD930A105B118373369 /* Logger+GRWM.swift */; };
+		475FF88D8F84A1891F82084B /* DeepARControllerParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */; };
+		48A1BF761FFDFD8C5ABADF39 /* DeepARController+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
 		632B44213189DB33DEA376EE /* Fredoka-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */; };
@@ -40,6 +42,7 @@
 		9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA1EFDAE8487082E1A023FF /* RootContainer.swift */; };
 		9DB0B0E618A1C82A298F7564 /* Fredoka-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */; };
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
+		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */; };
 		B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E938A290AC30DF1198A2F2A /* EffectFile.swift */; };
 		B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */; };
@@ -108,10 +111,13 @@
 		4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Medium.ttf"; sourceTree = "<group>"; };
 		4D67B9D91B985787DB196F53 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
+		54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARClient.swift; sourceTree = "<group>"; };
 		5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerEffectTests.swift; sourceTree = "<group>"; };
 		5E938A290AC30DF1198A2F2A /* EffectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFile.swift; sourceTree = "<group>"; };
+		5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Parameters.swift"; sourceTree = "<group>"; };
 		5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		610FEB616B3436F330D5B37C /* EffectSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectSlot.swift; sourceTree = "<group>"; };
+		62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerParameterTests.swift; sourceTree = "<group>"; };
 		67CB30236678D50E4D8BA115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67DE9D864F5CD4ADAC6B687B /* GRWMLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMLogo.swift; sourceTree = "<group>"; };
 		7106DD365B22C90F28A98A3B /* DHChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHChip.swift; sourceTree = "<group>"; };
@@ -184,7 +190,9 @@
 		1856E43C21F0DE495D560864 /* DeepAR */ = {
 			isa = PBXGroup;
 			children = (
+				54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */,
 				3129266168088884925A7CC4 /* DeepARController.swift */,
+				5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */,
 				D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */,
 				5E938A290AC30DF1198A2F2A /* EffectFile.swift */,
 				A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */,
@@ -290,6 +298,7 @@
 			children = (
 				733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */,
 				5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */,
+				62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */,
 				3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */,
 			);
 			path = DeepAR;
@@ -509,6 +518,7 @@
 				2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */,
 				1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */,
 				DC57D49E81A1F266FA0E7236 /* DeepARControllerEffectTests.swift in Sources */,
+				475FF88D8F84A1891F82084B /* DeepARControllerParameterTests.swift in Sources */,
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
 			);
@@ -530,6 +540,8 @@
 				F99AF7FE261407C5A3AA42BE /* DHChip.swift in Sources */,
 				6C052DD2E427A6C2B4F5366B /* DHHaptics.swift in Sources */,
 				7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */,
+				AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */,
+				48A1BF761FFDFD8C5ABADF39 /* DeepARController+Parameters.swift in Sources */,
 				9415F7FE3A9E019D25477E0E /* DeepARController.swift in Sources */,
 				DCEFD5C9D85346DF5C80D167 /* DeepARDelegateProxy.swift in Sources */,
 				B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */,

@@ -259,18 +259,6 @@ public final class DeepARController {
         }
     }
 
-    /// Sets a color parameter on the active DeepAR scene.
-    public func setColor(_ color: UIColor, on parameter: EffectParameter) async {}
-
-    /// Sets a texture parameter on the active DeepAR scene.
-    public func setTexture(_ image: UIImage, on parameter: EffectParameter) async {}
-
-    /// Sets a blendshape parameter on the active DeepAR scene.
-    public func setBlendshape(_ value: Float, on parameter: EffectParameter) async {}
-
-    /// Sets an enabled-state parameter on the active DeepAR scene.
-    public func setEnabled(_ enabled: Bool, on parameter: EffectParameter) async {}
-
     /// Captures the current DeepAR preview to a temporary file.
     public func capturePhoto() async throws -> URL {
         throw SetupError.notImplementedYet
@@ -347,38 +335,5 @@ extension DeepARController {
     /// Reads the DeepAR license key injected into the app Info.plist.
     public static func licenseKeyFromInfoPlist() -> String {
         Bundle.main.object(forInfoDictionaryKey: "DeepARLicenseKey") as? String ?? ""
-    }
-}
-
-@MainActor
-protocol DeepARClient: AnyObject {
-    func setLicenseKey(_ licenseKey: String)
-    func setDelegate(_ delegate: DeepARDelegateProxy)
-    func createARView(frame: CGRect) -> UIView
-    func switchEffect(withSlot slot: String, path: String?)
-}
-
-@MainActor
-final class LiveDeepARClient: DeepARClient {
-    let sdk: DeepAR
-
-    init(sdk: DeepAR = DeepAR()) {
-        self.sdk = sdk
-    }
-
-    func setLicenseKey(_ licenseKey: String) {
-        sdk.setLicenseKey(licenseKey)
-    }
-
-    func setDelegate(_ delegate: DeepARDelegateProxy) {
-        sdk.delegate = delegate
-    }
-
-    func createARView(frame: CGRect) -> UIView {
-        sdk.createARView(withFrame: frame)
-    }
-
-    func switchEffect(withSlot slot: String, path: String?) {
-        sdk.switchEffect(withSlot: slot, path: path)
     }
 }
