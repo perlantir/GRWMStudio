@@ -1,0 +1,7 @@
+Phase 3 manual smoke: PARTIAL PASS
+Launched restored main build with build_run_sim on iPhone 16 Pro simulator.
+Baseline mirror: no-face tip appears after simulator placeholder no-face debounce; bottom controls and rail remain tappable.
+Skin tray: opened Skin category and captured skin-tray.jpg; tray renders above the rail with clear chip and swatches.
+Eyes tray: opened Eyes category and captured eyes-tray.jpg; sub-rail and shade row render together.
+Per-ticket evidence covers Base, Brows fallback, Cheeks fallback, Lips, Looks, Reset, Pro shade handoff, Flash, and Effect-fail banner.
+Simulator limitations: real DeepAR camera switching, real face return, and physical retry-button capture remain real-device QA items; focused tests cover state/retry/escalation.
