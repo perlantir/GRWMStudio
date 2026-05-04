@@ -131,7 +131,7 @@ final class ShadeTests: XCTestCase {
         let petal = Shade.lipShades[1]
         XCTAssertEqual(petal.effectID, "lips")
         XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsColor" })
-        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsTexture" && $0.value == .texture("lips_gloss") })
+        XCTAssertFalse(petal.parameters.contains { $0.ref == "lipsTexture" })
         XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsEnabled" && $0.value == .enabled(true) })
     }
 }
