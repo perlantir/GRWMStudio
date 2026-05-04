@@ -11,14 +11,14 @@ final class DeepARControllerParameterTests: XCTestCase {
         try await controller.bootstrap(licenseKey: "test-license")
         await controller.setColor(
             UIColor(red: 0.25, green: 0.5, blue: 0.75, alpha: 0.8),
-            on: EffectParameterMap.lipsColor
+            on: EffectParameterMap.eyeshadowColor
         )
 
         guard case .vector(let target, let value) = mock.calls.first else {
             XCTFail("Expected vector parameter call")
             return
         }
-        XCTAssertEqual(target, ParameterTarget(EffectParameterMap.lipsColor))
+        XCTAssertEqual(target, ParameterTarget(EffectParameterMap.eyeshadowColor))
         XCTAssertEqual(value.red, 0.25, accuracy: 0.001)
         XCTAssertEqual(value.green, 0.5, accuracy: 0.001)
         XCTAssertEqual(value.blue, 0.75, accuracy: 0.001)
@@ -63,7 +63,7 @@ final class DeepARControllerParameterTests: XCTestCase {
         let mock = ParameterMockDeepARClient(autoInitialize: false)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
 
-        await controller.setColor(.red, on: EffectParameterMap.lipsColor)
+        await controller.setColor(.red, on: EffectParameterMap.eyeshadowColor)
         await controller.setTexture(UIImage(), on: EffectParameterMap.lipsTexture)
         await controller.setBlendshape(0.3, on: EffectParameterMap.foundationColor)
         await controller.setEnabled(true, on: EffectParameterMap.lipsEnabled)

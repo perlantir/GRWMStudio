@@ -8,6 +8,7 @@ final class EffectParameterMapTests: XCTestCase {
             "foundationMask",
             "lutEnabled",
             "lutTexture",
+            "lutAmount",
             "eyeshadowColor",
             "eyeshadowMask",
             "eyelinerTexture",
@@ -20,7 +21,6 @@ final class EffectParameterMapTests: XCTestCase {
             "blushColor",
             "blushMask",
             "blushEnabled",
-            "lipsColor",
             "lipsTexture",
             "lipsEnabled"
         ]

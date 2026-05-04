@@ -31,7 +31,7 @@ final class ShadeTests: XCTestCase {
     func testBaseShadesCarryLUTParameters() {
         let glow = Shade.baseShades[2]
 
-        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutEnabled" && $0.value == .enabled(true) })
+        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutAmount" && $0.value == .blendshape(0.62) })
         XCTAssertTrue(glow.parameters.contains { $0.ref == "lutTexture" && $0.value == .texture("lut_glow") })
     }
 
@@ -130,8 +130,8 @@ final class ShadeTests: XCTestCase {
 
         let petal = Shade.lipShades[1]
         XCTAssertEqual(petal.effectID, "lips")
-        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsColor" })
-        XCTAssertFalse(petal.parameters.contains { $0.ref == "lipsTexture" })
+        XCTAssertFalse(petal.parameters.contains { $0.ref == "lipsColor" })
+        XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsTexture" && $0.value == .texture("lips_gloss") })
         XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsEnabled" && $0.value == .enabled(true) })
     }
 }

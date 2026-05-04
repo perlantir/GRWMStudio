@@ -17,8 +17,8 @@ final class MirrorLipViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), shade.id)
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: "lips", shadeID: shade.id, isPro: false))
-        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "lips" && $0.parameter == "u_color" })
-        XCTAssertFalse(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
+        XCTAssertFalse(mock.vectorParameters.contains { $0.gameObject == "lips" && $0.parameter == "u_color" })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
 
@@ -37,9 +37,9 @@ final class MirrorLipViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: berry)
 
         XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
-        XCTAssertTrue(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.isEmpty)
+        XCTAssertEqual(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.count, 1)
         XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" }.count, 1)
-        XCTAssertEqual(mock.vectorParameters.filter { $0.gameObject == "lips" && $0.parameter == "u_color" }.count, 2)
+        XCTAssertTrue(mock.vectorParameters.filter { $0.gameObject == "lips" && $0.parameter == "u_color" }.isEmpty)
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), berry.id)
     }
 
@@ -82,6 +82,6 @@ final class MirrorLipViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), shade.id)
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: "lips", shadeID: shade.id, isPro: true))
-        XCTAssertFalse(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
     }
 }

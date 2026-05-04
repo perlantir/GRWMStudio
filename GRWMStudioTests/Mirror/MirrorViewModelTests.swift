@@ -65,7 +65,7 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: effect.id, shade: shade, isPro: false))
         XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
         XCTAssertEqual(mock.switches.last?.slot, EffectSlot.skin.rawValue)
-        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "lips" && $0.parameter == "u_color" })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
 
@@ -84,7 +84,7 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedShadeID(for: .skin), shade.id)
         XCTAssertEqual(viewModel.selections[.skin], SlotSelection(effectID: "baseBeauty", shadeID: shade.id, isPro: false))
         XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
-        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "u_color" })
+        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "softColor" })
     }
 
     func testSelectBaseShadeAppliesLUTParameters() async throws {
@@ -100,7 +100,7 @@ final class MirrorViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .base, shade: shade)
 
         XCTAssertEqual(viewModel.selectedShadeID(for: .base), shade.id)
-        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "PostprocessLUT" && $0.value })
+        XCTAssertTrue(mock.floatParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "lutAmount" })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "s_texLut" })
     }
 
@@ -125,7 +125,7 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selections[.eyes], SlotSelection(effectID: "baseBeauty", shadeID: liner.id, isPro: false))
         XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "u_color" })
-        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "s_texMask" })
+        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "s_texColor" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && $0.value })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "s_texColor" })
     }
@@ -307,6 +307,12 @@ final class MirrorMockDeepARClient: DeepARClient {
         let value: Bool
     }
 
+    struct FloatParameter {
+        let gameObject: String
+        let parameter: String
+        let value: Float
+    }
+
     struct ImageParameter {
         let gameObject: String
         let parameter: String
@@ -318,6 +324,7 @@ final class MirrorMockDeepARClient: DeepARClient {
     private(set) var switches: [Switch] = []
     private(set) var vectorParameters: [VectorParameter] = []
     private(set) var boolParameters: [BoolParameter] = []
+    private(set) var floatParameters: [FloatParameter] = []
     private(set) var imageParameters: [ImageParameter] = []
 
     init(autoInitialize: Bool, autoSwitchEffect: Bool) {
@@ -360,6 +367,10 @@ final class MirrorMockDeepARClient: DeepARClient {
 
     func setBoolParameter(_ gameObject: String, component: String, parameter: String, value: Bool) {
         boolParameters.append(BoolParameter(gameObject: gameObject, parameter: parameter, value: value))
+    }
+
+    func setFloatParameter(_ gameObject: String, component: String, parameter: String, value: Float) {
+        floatParameters.append(FloatParameter(gameObject: gameObject, parameter: parameter, value: value))
     }
 
     func setImageParameter(_ gameObject: String, component: String, parameter: String, image: UIImage) {

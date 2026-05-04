@@ -71,7 +71,7 @@
             "color": "#FFFFFF",
             "isPro": false,
             "parameters": [
-              { "kind": "bool", "ref": "lutEnabled", "value": 0 }
+              { "kind": "blendshape", "ref": "lutAmount", "value": 0 }
             ]
           },
           {
@@ -80,7 +80,7 @@
             "color": "#FFE6F0",
             "isPro": false,
             "parameters": [
-              { "kind": "bool", "ref": "lutEnabled", "value": 1 },
+              { "kind": "blendshape", "ref": "lutAmount", "value": 0.58 },
               { "kind": "texture", "ref": "lutTexture", "asset": "brightLUT" }
             ]
           },
@@ -90,7 +90,7 @@
             "color": "#FF6FA0",
             "isPro": true,
             "parameters": [
-              { "kind": "bool", "ref": "lutEnabled", "value": 1 },
+              { "kind": "blendshape", "ref": "lutAmount", "value": 0.68 },
               { "kind": "texture", "ref": "lutTexture", "asset": "nashvilleLightLUT" }
             ]
           }
@@ -258,7 +258,7 @@
             "color": "#FF3DA5",
             "isPro": false,
             "parameters": [
-              { "kind": "color", "ref": "lipsColor", "rgba": [1.0, 0.239, 0.647, 0.95] },
+              { "kind": "texture", "ref": "lipsTexture", "asset": "lips_gloss" },
               { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
             ]
           },
@@ -268,7 +268,7 @@
             "color": "#A12454",
             "isPro": false,
             "parameters": [
-              { "kind": "color", "ref": "lipsColor", "rgba": [0.631, 0.141, 0.329, 0.95] },
+              { "kind": "texture", "ref": "lipsTexture", "asset": "lips_matte" },
               { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
             ]
           },
@@ -278,7 +278,7 @@
             "color": "#FF2D5A",
             "isPro": false,
             "parameters": [
-              { "kind": "color", "ref": "lipsColor", "rgba": [1.0, 0.176, 0.353, 0.95] },
+              { "kind": "texture", "ref": "lipsTexture", "asset": "lips_matte" },
               { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
             ]
           },
@@ -288,7 +288,7 @@
             "color": "#5A0A2A",
             "isPro": true,
             "parameters": [
-              { "kind": "color", "ref": "lipsColor", "rgba": [0.353, 0.039, 0.165, 0.95] },
+              { "kind": "texture", "ref": "lipsTexture", "asset": "lips_matte" },
               { "kind": "bool", "ref": "lipsEnabled", "value": 1 }
             ]
           }

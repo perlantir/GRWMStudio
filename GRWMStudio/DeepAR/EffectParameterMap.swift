@@ -5,13 +5,13 @@ public enum EffectParameterMap {
     public static let foundationColor = EffectParameter(
         nodeName: "face_makeup",
         component: "MeshRenderer",
-        parameter: "u_color"
+        parameter: "softColor"
     )
     /// Foundation alpha mask texture parameter.
     public static let foundationMask = EffectParameter(
         nodeName: "face_makeup",
         component: "MeshRenderer",
-        parameter: "s_texMask"
+        parameter: "masktex"
     )
 
     // -- Base (LUT) --
@@ -27,6 +27,12 @@ public enum EffectParameterMap {
         component: "MeshRenderer",
         parameter: "s_texLut"
     )
+    /// Base LUT amount parameter.
+    public static let lutAmount = EffectParameter(
+        nodeName: "PostprocessLUT",
+        component: "MeshRenderer",
+        parameter: "lutAmount"
+    )
 
     // -- Eyes --
     /// Eyeshadow tint color parameter.
@@ -39,7 +45,7 @@ public enum EffectParameterMap {
     public static let eyeshadowMask = EffectParameter(
         nodeName: "eyeshadow",
         component: "MeshRenderer",
-        parameter: "s_texMask"
+        parameter: "s_texColor"
     )
     /// Eyeliner texture parameter.
     public static let eyelinerTexture = EffectParameter(
@@ -113,12 +119,6 @@ public enum EffectParameterMap {
     )
 
     // -- Lips --
-    /// Lip tint color parameter.
-    public static let lipsColor = EffectParameter(
-        nodeName: "lips",
-        component: "MeshRenderer",
-        parameter: "u_color"
-    )
     /// Lip texture parameter.
     public static let lipsTexture = EffectParameter(
         nodeName: "lips",
@@ -142,6 +142,7 @@ public enum EffectParameterMap {
         "foundationMask": foundationMask,
         "lutEnabled": lutEnabled,
         "lutTexture": lutTexture,
+        "lutAmount": lutAmount,
         "eyeshadowColor": eyeshadowColor,
         "eyeshadowMask": eyeshadowMask,
         "eyelinerTexture": eyelinerTexture,
@@ -154,7 +155,6 @@ public enum EffectParameterMap {
         "blushColor": blushColor,
         "blushMask": blushMask,
         "blushEnabled": blushEnabled,
-        "lipsColor": lipsColor,
         "lipsTexture": lipsTexture,
         "lipsEnabled": lipsEnabled
     ]

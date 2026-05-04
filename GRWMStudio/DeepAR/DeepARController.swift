@@ -292,9 +292,21 @@ public final class DeepARController {
 extension DeepARController {
     func completeEffectLoad(slotRawValue: String) {
         Logger.deepAR.info("didSwitchEffect: \(slotRawValue)")
-        guard let slot = EffectSlot(rawValue: slotRawValue) else {
+        if let slot = EffectSlot(rawValue: slotRawValue) {
+            finishEffectLoad(slot: slot)
             return
         }
+
+        guard loadEffectContinuations.count == 1, let slot = loadEffectContinuations.keys.first else {
+            Logger.deepAR.info("Ignoring didSwitchEffect for unknown slot: \(slotRawValue)")
+            return
+        }
+
+        Logger.deepAR.info("Mapping SDK effect callback \(slotRawValue) to pending slot \(slot.rawValue)")
+        finishEffectLoad(slot: slot)
+    }
+
+    private func finishEffectLoad(slot: EffectSlot) {
         loadEffectContinuations[slot]?.resume()
         loadEffectContinuations[slot] = nil
         loadEffectRequestIDs[slot] = nil

@@ -5,7 +5,7 @@ extension Shade {
             name: "None",
             swatchColor: DH.cream,
             effectID: "baseBeauty",
-            parameters: [EffectParam(ref: "lutEnabled", value: .enabled(false))],
+            parameters: [EffectParam(ref: "lutAmount", value: .blendshape(0))],
             isPro: false
         ),
         Shade(
@@ -14,7 +14,7 @@ extension Shade {
             swatchColor: DH.pinkLight,
             effectID: "baseBeauty",
             parameters: [
-                EffectParam(ref: "lutEnabled", value: .enabled(true)),
+                EffectParam(ref: "lutAmount", value: .blendshape(0.58)),
                 EffectParam(ref: "lutTexture", value: .texture("lut_soft"))
             ],
             isPro: false
@@ -25,7 +25,7 @@ extension Shade {
             swatchColor: DH.butter,
             effectID: "baseBeauty",
             parameters: [
-                EffectParam(ref: "lutEnabled", value: .enabled(true)),
+                EffectParam(ref: "lutAmount", value: .blendshape(0.62)),
                 EffectParam(ref: "lutTexture", value: .texture("lut_glow"))
             ],
             isPro: false
@@ -36,7 +36,7 @@ extension Shade {
             swatchColor: DH.lavender,
             effectID: "baseBeauty",
             parameters: [
-                EffectParam(ref: "lutEnabled", value: .enabled(true)),
+                EffectParam(ref: "lutAmount", value: .blendshape(0.68)),
                 EffectParam(ref: "lutTexture", value: .texture("lut_glam"))
             ],
             isPro: false

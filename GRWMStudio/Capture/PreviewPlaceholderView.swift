@@ -134,9 +134,13 @@ struct PreviewPlaceholderView: View {
         .frame(height: 34)
         .background {
             Capsule()
-                .fill(.white.opacity(0.96))
-                .chunkyShadow(.sm(deep: DH.pink), shape: Capsule())
+                .fill(DH.pinkPaper.opacity(0.92))
+                .overlay {
+                    Capsule()
+                        .strokeBorder(DH.pinkLight, lineWidth: 2)
+                }
         }
+        .accessibilityLabel("Preview look: \(name)")
         .accessibilityIdentifier("preview-look-chip")
     }
 

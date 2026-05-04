@@ -1,11 +1,14 @@
 import OSLog
 import SwiftData
 import SwiftUI
+import UIKit
 
 struct RootContainer: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.modelContext) private var modelContext
     @Environment(\.rootCoordinator) private var coordinator
+    @State private var isSharingPreview = false
+    @State private var previewShareItems: [Any] = []
 
     var body: some View {
         ZStack {
@@ -14,6 +17,10 @@ struct RootContainer: View {
             overlayView
         }
         .preferredColorScheme(.light)
+        .sheet(isPresented: $isSharingPreview) {
+            ActivityShareSheet(items: previewShareItems)
+                .ignoresSafeArea()
+        }
         .task {
             resolveInitialRoute()
             await loadEffectCatalog()
@@ -118,6 +125,9 @@ struct RootContainer: View {
             onSave: {
                 try await savePreview(asset: asset)
             },
+            onShare: {
+                sharePreview(asset)
+            },
             onDiscard: {
                 coordinator.dismissPreview()
             }
@@ -131,7 +141,22 @@ struct RootContainer: View {
             lookName: coordinator.previewLookName,
             shadeIDs: coordinator.previewShadeIDs
         )
+        do {
+            try await PhotoLibrarySaver().save(asset: asset)
+        } catch {
+            Logger.capture.error("Photos save failed after locker save: \(error.localizedDescription, privacy: .public)")
+        }
         coordinator.dismissPreviewSaved()
+    }
+
+    private func sharePreview(_ asset: CapturedAsset) {
+        switch asset {
+        case .photo(let image):
+            previewShareItems = [image]
+        case .video(let url):
+            previewShareItems = [url]
+        }
+        isSharingPreview = true
     }
 
     private func resolveInitialRoute() {
@@ -162,6 +187,16 @@ struct RootContainer: View {
             coordinator.presentError(.effectFail)
         }
     }
+}
+
+private struct ActivityShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context _: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_: UIActivityViewController, context _: Context) {}
 }
 
 private struct PlaceholderParentGateView: View {

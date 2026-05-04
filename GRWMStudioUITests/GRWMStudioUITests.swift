@@ -136,7 +136,7 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(app.buttons["preview-discard-button"].exists)
         XCTAssertTrue(app.buttons["Save to Locker"].exists)
         XCTAssertTrue(app.buttons["Share"].exists)
-        XCTAssertTrue(app.staticTexts["Custom mix"].exists)
+        XCTAssertTrue(app.otherElements["preview-look-chip"].exists)
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         attachment.name = "photo-preview-layout-controls"
