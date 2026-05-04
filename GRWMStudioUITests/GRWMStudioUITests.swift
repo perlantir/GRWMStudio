@@ -80,14 +80,14 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(stopRecording.waitForExistence(timeout: 3))
         stopRecording.tap()
 
-        XCTAssertTrue(app.staticTexts["Video Preview"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["Back to mirror"].exists)
-        XCTAssertTrue(app.buttons["Pause video preview"].exists || app.buttons["Play video preview"].exists)
-        XCTAssertTrue(app.buttons["Save"].exists)
+        XCTAssertTrue(app.staticTexts["Preview"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["preview-discard-button"].exists)
+        XCTAssertTrue(app.buttons["Unmute video preview"].exists || app.buttons["Mute video preview"].exists)
+        XCTAssertTrue(app.buttons["Save to Locker"].exists)
 
-        app.buttons["Back to mirror"].tap()
+        app.buttons["preview-discard-button"].tap()
 
-        XCTAssertFalse(app.staticTexts["Video Preview"].waitForExistence(timeout: 1))
+        XCTAssertFalse(app.staticTexts["Preview"].waitForExistence(timeout: 1))
         XCTAssertTrue(app.buttons["Skin filter category"].exists)
     }
 
@@ -109,22 +109,15 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(stopRecording.waitForExistence(timeout: 3))
         stopRecording.tap()
 
-        XCTAssertTrue(app.staticTexts["Video Preview"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Preview"].waitForExistence(timeout: 5))
 
-        let pause = app.buttons["Pause video preview"]
-        let play = app.buttons["Play video preview"]
-        if pause.waitForExistence(timeout: 2) {
-            pause.tap()
-            XCTAssertTrue(play.waitForExistence(timeout: 2))
-        } else {
-            XCTAssertTrue(play.waitForExistence(timeout: 2))
-        }
-
-        play.tap()
-        XCTAssertTrue(app.buttons["Pause video preview"].waitForExistence(timeout: 2))
+        let unmute = app.buttons["Unmute video preview"]
+        XCTAssertTrue(unmute.waitForExistence(timeout: 3))
+        unmute.tap()
+        XCTAssertTrue(app.buttons["Mute video preview"].waitForExistence(timeout: 2))
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
-        attachment.name = "video-preview-playback-control"
+        attachment.name = "video-preview-muted-control"
         attachment.lifetime = .keepAlways
         add(attachment)
     }
@@ -139,10 +132,11 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(capture.waitForExistence(timeout: 8))
         capture.tap()
 
-        XCTAssertTrue(app.staticTexts["Photo Preview"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["Back to mirror"].exists)
-        XCTAssertTrue(app.buttons["Save"].exists)
-        XCTAssertTrue(app.buttons["Done"].exists)
+        XCTAssertTrue(app.staticTexts["Preview"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["preview-discard-button"].exists)
+        XCTAssertTrue(app.buttons["Save to Locker"].exists)
+        XCTAssertTrue(app.buttons["Share"].exists)
+        XCTAssertTrue(app.staticTexts["Custom mix"].exists)
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         attachment.name = "photo-preview-layout-controls"

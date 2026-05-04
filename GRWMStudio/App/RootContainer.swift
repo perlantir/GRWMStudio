@@ -52,9 +52,9 @@ struct RootContainer: View {
             AppShell()
         case .preview:
             if let asset = coordinator.previewAsset {
-                PreviewPlaceholderView(asset: asset) {
+                PreviewPlaceholderView(asset: asset, lookName: coordinator.previewLookName, onDiscard: {
                     coordinator.dismissPreview()
-                }
+                })
             } else {
                 placeholder("Preview unavailable")
             }
@@ -81,9 +81,9 @@ struct RootContainer: View {
             switch overlay {
             case .preview:
                 if let asset = coordinator.previewAsset {
-                    PreviewPlaceholderView(asset: asset) {
+                    PreviewPlaceholderView(asset: asset, lookName: coordinator.previewLookName, onDiscard: {
                         coordinator.dismissPreview()
-                    }
+                    })
                     .transition(.opacity)
                 }
 

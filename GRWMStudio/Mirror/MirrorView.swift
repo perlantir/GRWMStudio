@@ -84,7 +84,7 @@ struct MirrorView: View {
                 return
             }
 
-            coordinator.showPreview(asset: asset)
+            coordinator.showPreview(asset: asset, lookName: viewModel.activeLookName)
             viewModel.pendingPreviewAsset = nil
             viewModel.previewRouteID = nil
         }

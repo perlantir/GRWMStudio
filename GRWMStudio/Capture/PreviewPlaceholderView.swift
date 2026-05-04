@@ -1,34 +1,75 @@
-import AVKit
-import OSLog
+import AVFoundation
 import SwiftUI
 import UIKit
 
+@MainActor
+@Observable
+final class PreviewViewModel {
+    let asset: CapturedAsset
+    let lookName: String?
+    private(set) var isMuted = true
+
+    init(asset: CapturedAsset, lookName: String?) {
+        self.asset = asset
+        self.lookName = lookName
+    }
+
+    var displayLookName: String {
+        lookName ?? "Custom mix"
+    }
+
+    func toggleMute() {
+        isMuted.toggle()
+    }
+}
+
 struct PreviewPlaceholderView: View {
     let asset: CapturedAsset
-    let onClose: () -> Void
-    @State private var saveState: SaveState = .idle
-    @State private var activeSaver: PhotoLibrarySaver?
+    let lookName: String?
+    let onSave: @MainActor () async -> Void
+    let onShare: @MainActor () -> Void
+    let onDiscard: @MainActor () -> Void
+
+    @State private var viewModel: PreviewViewModel
+    @State private var saving = false
+
+    init(
+        asset: CapturedAsset,
+        lookName: String? = nil,
+        onSave: @escaping @MainActor () async -> Void = {},
+        onShare: @escaping @MainActor () -> Void = {},
+        onDiscard: @escaping @MainActor () -> Void
+    ) {
+        self.asset = asset
+        self.lookName = lookName
+        self.onSave = onSave
+        self.onShare = onShare
+        self.onDiscard = onDiscard
+        _viewModel = State(initialValue: PreviewViewModel(asset: asset, lookName: lookName))
+    }
 
     var body: some View {
         GeometryReader { proxy in
             let metrics = PreviewLayoutMetrics(size: proxy.size, safeAreaInsets: proxy.safeAreaInsets)
 
-            ZStack {
-                DHWallpaperGradient()
-                    .ignoresSafeArea()
+            ZStack(alignment: .top) {
+                LinearGradient(
+                    colors: [DH.pinkPaper, DH.cream],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
 
                 VStack(spacing: metrics.verticalSpacing) {
-                    topBar
+                    topChrome
                         .frame(height: metrics.topBarHeight)
-                        .zIndex(2)
 
                     mediaCard
                         .frame(width: metrics.mediaWidth, height: metrics.mediaHeight)
-                        .zIndex(1)
 
-                    bottomControls
-                        .frame(height: metrics.bottomControlsHeight)
-                        .zIndex(2)
+                    Spacer(minLength: 0)
+
+                    bottomActions
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height, alignment: .top)
                 .padding(.top, metrics.topPadding)
@@ -36,37 +77,60 @@ struct PreviewPlaceholderView: View {
             }
         }
         .preferredColorScheme(.light)
-        .accessibilityIdentifier("preview-placeholder")
     }
 
-    private var topBar: some View {
-        HStack {
-            Button {
-                onClose()
-            } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 16, weight: .heavy))
-
-                    Text("Mirror")
-                        .font(DH.font(.buttonSmall))
-                        .tracking(DH.tracking(.buttonSmall))
-                }
+    private var topChrome: some View {
+        ZStack {
+            Text("Preview")
+                .font(DH.font(.buttonLarge))
+                .tracking(DH.tracking(.buttonLarge))
                 .foregroundStyle(DH.pinkDeep)
-                .padding(.horizontal, 16)
-                .frame(height: 48)
-                .background {
-                    Capsule()
-                        .fill(.white)
-                        .chunkyShadow(.sm(deep: DH.pinkDeep), shape: Capsule())
-                }
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Back to mirror")
+                .accessibilityIdentifier("preview-title")
 
-            Spacer()
+            HStack {
+                Button {
+                    onDiscard()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 17, weight: .heavy))
+                        .foregroundStyle(DH.pinkDeep)
+                        .frame(width: 42, height: 42)
+                        .background {
+                            Circle()
+                                .fill(.white)
+                                .chunkyShadow(.sm(deep: DH.pinkDeep), shape: Circle())
+                        }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Discard preview and return to mirror")
+                .accessibilityIdentifier("preview-discard-button")
+
+                Spacer()
+
+                lookTagChip(viewModel.displayLookName)
+            }
         }
         .padding(.horizontal, 18)
+    }
+
+    private func lookTagChip(_ name: String) -> some View {
+        HStack(spacing: 6) {
+            StickerStar(size: 14, fill: DH.butter, stroke: .white, strokeWidth: 2)
+
+            Text(name)
+                .font(DH.font(.buttonSmall))
+                .tracking(DH.tracking(.buttonSmall))
+                .foregroundStyle(DH.ink)
+                .lineLimit(1)
+        }
+        .padding(.horizontal, 12)
+        .frame(height: 34)
+        .background {
+            Capsule()
+                .fill(.white.opacity(0.96))
+                .chunkyShadow(.sm(deep: DH.pink), shape: Capsule())
+        }
+        .accessibilityIdentifier("preview-look-chip")
     }
 
     private var mediaCard: some View {
@@ -79,116 +143,79 @@ struct PreviewPlaceholderView: View {
                     .strokeBorder(.white, lineWidth: 6)
             }
             .chunkyShadow(.lg(deep: DH.pinkDeep), shape: RoundedRectangle(cornerRadius: DH.Radius.viewportInner))
-    }
-
-    private var bottomControls: some View {
-        VStack(spacing: 12) {
-            Text(statusTitle)
-                .font(DH.font(.caption))
-                .tracking(DH.tracking(.caption))
-                .foregroundStyle(statusColor)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .background(Capsule().fill(.white.opacity(0.92)))
-
-            HStack(spacing: 12) {
-                PreviewActionButton(
-                    title: saveButtonTitle,
-                    kind: .primary,
-                    systemImage: "square.and.arrow.down"
-                ) {
-                    Task { @MainActor in
-                        await saveToPhotos()
-                    }
-                }
-                .disabled(saveState == .saving)
-
-                PreviewActionButton(
-                    title: "Done",
-                    kind: .white,
-                    action: onClose
-                )
+            .padding(10)
+            .background {
+                RoundedRectangle(cornerRadius: DH.Radius.bigCard)
+                    .fill(.white)
+                    .chunkyShadow(.md(deep: DH.pink), shape: RoundedRectangle(cornerRadius: DH.Radius.bigCard))
             }
-        }
-        .padding(.horizontal, 18)
     }
 
     @ViewBuilder
     private var assetView: some View {
         switch asset {
         case .photo(let image):
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .accessibilityLabel("Captured photo preview")
+            ZoomablePreviewImage(image: image)
+                .accessibilityLabel("Photo Preview")
 
         case .video(let url):
-            VideoPreviewPlayer(url: url)
-                .accessibilityIdentifier("captured-video-preview")
+            ZStack(alignment: .bottomTrailing) {
+                LoopingVideoPreview(url: url, isMuted: viewModel.isMuted)
+                    .onTapGesture {
+                        viewModel.toggleMute()
+                    }
+
+                Button {
+                    viewModel.toggleMute()
+                } label: {
+                    Image(systemName: viewModel.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundStyle(.white)
+                        .frame(width: 40, height: 40)
+                        .background(Circle().fill(DH.ink.opacity(0.62)))
+                }
+                .buttonStyle(.plain)
+                .padding(14)
+                .accessibilityLabel(viewModel.isMuted ? "Unmute video preview" : "Mute video preview")
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("captured-video-preview")
         }
     }
 
-    private var previewTitle: String {
-        switch asset {
-        case .photo:
-            "Photo Preview"
-        case .video:
-            "Video Preview"
-        }
-    }
+    private var bottomActions: some View {
+        HStack(spacing: 12) {
+            DHButton(
+                title: saving ? "Saving..." : "Save to Locker",
+                kind: .primary,
+                size: .xl,
+                leadingIcon: AnyView(Image(systemName: "heart.fill").foregroundStyle(DH.butter)),
+                isFullWidth: true
+            ) {
+                guard !saving else {
+                    return
+                }
 
-    private var statusTitle: String {
-        switch saveState {
-        case .idle:
-            previewTitle
-        case .saving:
-            "Saving..."
-        case .saved:
-            "Saved to Photos"
-        case .failed:
-            "Saving needs a reset"
-        }
-    }
+                saving = true
+                Task { @MainActor in
+                    await onSave()
+                    saving = false
+                }
+            }
+            .accessibilityLabel("Save to Locker")
 
-    private var statusColor: Color {
-        switch saveState {
-        case .failed:
-            DH.recRedDeep
-        default:
-            DH.pinkDeep
+            DHButton(
+                title: "Share",
+                kind: .ghost,
+                size: .lg,
+                leadingIcon: AnyView(Image(systemName: "square.and.arrow.up")),
+                action: onShare
+            )
+            .frame(width: 142)
+            .accessibilityLabel("Share")
         }
-    }
-
-    private var saveButtonTitle: String {
-        switch saveState {
-        case .saving:
-            "Saving"
-        case .saved:
-            "Saved"
-        default:
-            "Save"
-        }
-    }
-
-    @MainActor
-    private func saveToPhotos() async {
-        guard saveState != .saving else {
-            return
-        }
-
-        saveState = .saving
-        let saver = PhotoLibrarySaver()
-        activeSaver = saver
-        defer { activeSaver = nil }
-
-        do {
-            try await saver.save(asset: asset)
-            saveState = .saved
-        } catch {
-            Logger.capture.error("Preview save failed: \(error.localizedDescription, privacy: .public)")
-            saveState = .failed
-        }
+        .padding(.horizontal, 18)
+        .padding(.bottom, 54)
     }
 }
 
@@ -197,183 +224,146 @@ private struct PreviewLayoutMetrics {
     let mediaHeight: CGFloat
     let topPadding: CGFloat
     let bottomPadding: CGFloat
-    let topBarHeight: CGFloat = 52
-    let bottomControlsHeight: CGFloat = 92
-    let verticalSpacing: CGFloat = 12
+    let topBarHeight: CGFloat = 54
+    let verticalSpacing: CGFloat = 14
 
     init(size: CGSize, safeAreaInsets: EdgeInsets) {
         let horizontalPadding: CGFloat = 18
         mediaWidth = max(280, size.width - horizontalPadding * 2)
         topPadding = safeAreaInsets.top + 8
-        bottomPadding = max(safeAreaInsets.bottom, 12) + 12
+        bottomPadding = max(safeAreaInsets.bottom, 12)
 
-        let reservedHeight = topPadding
-            + topBarHeight
-            + bottomControlsHeight
-            + bottomPadding
-            + verticalSpacing * 2
+        let reservedHeight = topPadding + topBarHeight + bottomPadding + 138 + verticalSpacing * 2
         let availableHeight = max(280, size.height - reservedHeight)
         mediaHeight = min(availableHeight, mediaWidth * 4.0 / 3.0)
     }
 }
 
-private struct VideoPreviewPlayer: View {
-    let url: URL
-    @State private var player: AVPlayer?
-    @State private var isPlaying = false
+private struct ZoomablePreviewImage: UIViewRepresentable {
+    let image: UIImage
 
-    var body: some View {
-        ZStack {
-            DH.pinkPaper
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
 
-            if let player {
-                VideoPlayer(player: player)
-                    .onAppear {
-                        player.seek(to: .zero)
-                        player.play()
-                        isPlaying = true
-                    }
+    func makeUIView(context: Context) -> UIScrollView {
+        let scrollView = UIScrollView()
+        scrollView.delegate = context.coordinator
+        scrollView.minimumZoomScale = 1
+        scrollView.maximumZoomScale = 3
+        scrollView.bouncesZoom = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = .clear
 
-                playbackButton
-            } else {
-                playbackIcon(systemName: "play.fill")
-            }
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+
+        scrollView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            imageView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor)
+        ])
+
+        let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.doubleTapped(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
+
+        context.coordinator.imageView = imageView
+        context.coordinator.scrollView = scrollView
+        return scrollView
+    }
+
+    func updateUIView(_ scrollView: UIScrollView, context: Context) {
+        context.coordinator.imageView?.image = image
+        if scrollView.zoomScale < scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            togglePlayback()
+    }
+
+    final class Coordinator: NSObject, UIScrollViewDelegate {
+        weak var imageView: UIImageView?
+        weak var scrollView: UIScrollView?
+
+        func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+            imageView
         }
-        .onAppear {
-            guard player == nil else {
+
+        @objc func doubleTapped(_ recognizer: UITapGestureRecognizer) {
+            guard let scrollView else {
                 return
             }
-            player = AVPlayer(url: url)
-        }
-        .onDisappear {
-            player?.pause()
-            player = nil
-            isPlaying = false
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)) { _ in
-            isPlaying = false
+
+            let targetZoom = scrollView.zoomScale > 1 ? 1 : min(2, scrollView.maximumZoomScale)
+            scrollView.setZoomScale(targetZoom, animated: true)
         }
     }
+}
 
-    private var playbackButton: some View {
-        Button {
-            togglePlayback()
-        } label: {
-            playbackIcon(systemName: isPlaying ? "pause.fill" : "play.fill")
-                .opacity(isPlaying ? 0.82 : 1)
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(isPlaying ? "Pause video preview" : "Play video preview")
+private struct LoopingVideoPreview: View {
+    let url: URL
+    let isMuted: Bool
+    @State private var player = AVQueuePlayer()
+    @State private var looper: AVPlayerLooper?
+
+    var body: some View {
+        VideoLayerView(player: player)
+            .background(.black)
+            .onAppear {
+                configurePlayer()
+            }
+            .onDisappear {
+                player.pause()
+                player.removeAllItems()
+                looper = nil
+            }
+            .onChange(of: isMuted) { _, muted in
+                player.isMuted = muted
+            }
     }
 
-    private func playbackIcon(systemName: String) -> some View {
-        Image(systemName: systemName)
-            .font(.system(size: 34, weight: .heavy))
-            .foregroundStyle(.white)
-            .frame(width: 74, height: 74)
-            .background(Circle().fill(DH.pinkDeep.opacity(0.92)))
-            .overlay(Circle().strokeBorder(.white, lineWidth: 4))
-            .shadow(color: DH.pinkDeep.opacity(0.35), radius: 10, x: 0, y: 5)
-    }
-
-    private func togglePlayback() {
-        guard let player else {
+    private func configurePlayer() {
+        guard looper == nil else {
+            player.isMuted = isMuted
+            player.play()
             return
         }
 
-        if isPlaying {
-            player.pause()
-            isPlaying = false
-        } else {
-            if player.currentItem?.currentTime() == player.currentItem?.duration {
-                player.seek(to: .zero)
-            }
-            player.play()
-            isPlaying = true
-        }
+        let item = AVPlayerItem(url: url)
+        looper = AVPlayerLooper(player: player, templateItem: item)
+        player.isMuted = isMuted
+        player.play()
     }
 }
 
-private struct PreviewActionButton: View {
-    enum Kind {
-        case primary
-        case white
+private struct VideoLayerView: UIViewRepresentable {
+    let player: AVPlayer
 
-        var background: Color {
-            switch self {
-            case .primary:
-                DH.pink
-            case .white:
-                .white
-            }
-        }
-
-        var foreground: Color {
-            switch self {
-            case .primary:
-                .white
-            case .white:
-                DH.pinkDeep
-            }
-        }
-
-        var deep: Color {
-            switch self {
-            case .primary:
-                DH.pinkDeep
-            case .white:
-                DH.pink
-            }
-        }
+    func makeUIView(context _: Context) -> PlayerLayerView {
+        let view = PlayerLayerView()
+        view.playerLayer?.player = player
+        view.playerLayer?.videoGravity = .resizeAspectFill
+        return view
     }
 
-    let title: String
-    let kind: Kind
-    var systemImage: String?
-    let action: () -> Void
-
-    var body: some View {
-        Button {
-            DHHaptics.tapMedium()
-            action()
-        } label: {
-            HStack(spacing: 10) {
-                if let systemImage {
-                    Image(systemName: systemImage)
-                        .font(.system(size: 18, weight: .heavy))
-                }
-
-                Text(title)
-                    .font(DH.font(.buttonSmall))
-                    .tracking(DH.tracking(.buttonSmall))
-            }
-            .foregroundStyle(kind.foreground)
-            .frame(maxWidth: .infinity)
-            .frame(height: 52)
-            .background {
-                ZStack {
-                    Capsule()
-                        .fill(kind.deep)
-                        .offset(y: 4)
-                    Capsule()
-                        .fill(kind.background)
-                }
-                .shadow(color: kind.deep.opacity(0.35), radius: 14, x: 0, y: 7)
-            }
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(title)
+    func updateUIView(_ view: PlayerLayerView, context _: Context) {
+        view.playerLayer?.player = player
     }
 }
 
-private enum SaveState {
-    case idle
-    case saving
-    case saved
-    case failed
+private final class PlayerLayerView: UIView {
+    override static var layerClass: AnyClass {
+        AVPlayerLayer.self
+    }
+
+    var playerLayer: AVPlayerLayer? {
+        layer as? AVPlayerLayer
+    }
 }

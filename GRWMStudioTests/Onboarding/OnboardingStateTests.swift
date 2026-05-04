@@ -80,12 +80,23 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertEqual(coordinator.route, .app)
         XCTAssertEqual(coordinator.overlay, .preview)
         XCTAssertNotNil(coordinator.previewAsset)
+        XCTAssertNil(coordinator.previewLookName)
 
         coordinator.dismissPreview()
 
         XCTAssertEqual(coordinator.route, .app)
         XCTAssertNil(coordinator.overlay)
         XCTAssertNil(coordinator.previewAsset)
+        XCTAssertNil(coordinator.previewLookName)
+    }
+
+    func testCoordinatorPreviewStoresLookName() {
+        let coordinator = RootCoordinator()
+
+        coordinator.showPreview(asset: .photo(Self.testImage()), lookName: "Sunday Best")
+
+        XCTAssertEqual(coordinator.overlay, .preview)
+        XCTAssertEqual(coordinator.previewLookName, "Sunday Best")
     }
 
     private func makeDefaults() throws -> UserDefaults {

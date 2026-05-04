@@ -58,6 +58,7 @@ final class RootCoordinator {
 
     var route: Route = .onboardingSplash
     var previewAsset: CapturedAsset?
+    var previewLookName: String?
     private(set) var overlay: Overlay?
 
     func advanceFromSplash() {
@@ -101,13 +102,15 @@ final class RootCoordinator {
         route = .error(variant)
     }
 
-    func showPreview(asset: CapturedAsset) {
+    func showPreview(asset: CapturedAsset, lookName: String? = nil) {
         previewAsset = asset
+        previewLookName = lookName
         overlay = .preview
     }
 
     func dismissPreview() {
         previewAsset = nil
+        previewLookName = nil
         if overlay == .preview {
             overlay = nil
         } else {
