@@ -17,6 +17,7 @@ struct EffectParam: Hashable, Sendable {
 enum ParamValue: Hashable, Sendable {
     case color(RGBA)
     case texture(String)
+    case tintedTexture(String, RGBA)
     case blendshape(Float)
     case enabled(Bool)
 }

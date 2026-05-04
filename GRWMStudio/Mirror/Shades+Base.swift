@@ -1,3 +1,5 @@
+import SwiftUI
+
 extension Shade {
     static let baseShades: [Shade] = [
         Shade(
@@ -5,41 +7,25 @@ extension Shade {
             name: "None",
             swatchColor: DH.cream,
             effectID: "baseBeauty",
-            parameters: [EffectParam(ref: "lutAmount", value: .blendshape(0))],
+            parameters: [EffectParam(ref: "foundationAmount", value: .blendshape(0))],
             isPro: false
         ),
+        base(id: "base.soft", name: "Soft", swatchColor: DH.pinkLight, rgba: RGBA(1.0, 0.86, 0.78, 1), amount: 0.42),
+        base(id: "base.glow", name: "Glow", swatchColor: DH.butter, rgba: RGBA(1.0, 0.78, 0.58, 1), amount: 0.56),
+        base(id: "base.glam", name: "Glam", swatchColor: DH.lavender, rgba: RGBA(0.96, 0.70, 0.92, 1), amount: 0.68)
+    ]
+
+    private static func base(id: String, name: String, swatchColor: Color, rgba: RGBA, amount: Float) -> Shade {
         Shade(
-            id: "base.soft",
-            name: "Soft",
-            swatchColor: DH.pinkLight,
+            id: id,
+            name: name,
+            swatchColor: swatchColor,
             effectID: "baseBeauty",
             parameters: [
-                EffectParam(ref: "lutAmount", value: .blendshape(0.58)),
-                EffectParam(ref: "lutTexture", value: .texture("lut_soft"))
-            ],
-            isPro: false
-        ),
-        Shade(
-            id: "base.glow",
-            name: "Glow",
-            swatchColor: DH.butter,
-            effectID: "baseBeauty",
-            parameters: [
-                EffectParam(ref: "lutAmount", value: .blendshape(0.62)),
-                EffectParam(ref: "lutTexture", value: .texture("lut_glow"))
-            ],
-            isPro: false
-        ),
-        Shade(
-            id: "base.glam",
-            name: "Glam",
-            swatchColor: DH.lavender,
-            effectID: "baseBeauty",
-            parameters: [
-                EffectParam(ref: "lutAmount", value: .blendshape(0.68)),
-                EffectParam(ref: "lutTexture", value: .texture("lut_glam"))
+                EffectParam(ref: "foundationColor", value: .color(rgba)),
+                EffectParam(ref: "foundationAmount", value: .blendshape(amount))
             ],
             isPro: false
         )
-    ]
+    }
 }

@@ -1,4 +1,5 @@
 import OSLog
+import UIKit
 
 extension MirrorViewModel {
     func selectLook(_ look: LookPreset) async {
@@ -24,6 +25,39 @@ extension MirrorViewModel {
         } catch {
             lastError = .effectFail
             Logger.mirror.error("selectLook failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    func setTintedTexture(_ assetName: String, tint: RGBA, on parameter: EffectParameter) async throws {
+        guard let baseImage = image(named: assetName) else {
+            throw MirrorActionError.missingTexture(assetName)
+        }
+        guard shouldApply(.tintedTexture(assetName, tint), on: parameter) else {
+            return
+        }
+
+        let cacheKey = "tinted:\(assetName):\(tint.red):\(tint.green):\(tint.blue):\(tint.alpha)"
+        let image = textureImageCache[cacheKey] ?? tintedImage(baseImage, tint: tint)
+        textureImageCache[cacheKey] = image
+        await controller.setTexture(image, on: parameter)
+    }
+
+    private func tintedImage(_ image: UIImage, tint: RGBA) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = image.scale
+        format.opaque = false
+
+        return UIGraphicsImageRenderer(size: image.size, format: format).image { context in
+            let rect = CGRect(origin: .zero, size: image.size)
+            image.draw(in: rect)
+            context.cgContext.setBlendMode(.sourceAtop)
+            UIColor(
+                red: CGFloat(tint.red),
+                green: CGFloat(tint.green),
+                blue: CGFloat(tint.blue),
+                alpha: CGFloat(tint.alpha)
+            ).setFill()
+            context.fill(rect)
         }
     }
 }

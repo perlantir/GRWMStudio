@@ -220,6 +220,7 @@ struct EffectParameterKey: Hashable {
 enum AppliedParameterValue: Equatable {
     case color(red: Double, green: Double, blue: Double, alpha: Double)
     case texture(String)
+    case tintedTexture(String, RGBA)
     case blendshape(Float)
     case enabled(Bool)
 }

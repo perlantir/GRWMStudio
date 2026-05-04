@@ -258,6 +258,8 @@ extension MirrorViewModel {
             await setColor(rgba, on: parameter)
         case .texture(let assetName):
             try await setTexture(assetName, on: parameter)
+        case .tintedTexture(let assetName, let rgba):
+            try await setTintedTexture(assetName, tint: rgba, on: parameter)
         case .blendshape(let value):
             await setBlendshape(value, on: parameter)
         case .enabled(let enabled):
@@ -335,7 +337,7 @@ extension MirrorViewModel {
         await controller.setEnabled(enabled, on: parameter)
     }
 
-    private func shouldApply(_ value: AppliedParameterValue, on parameter: EffectParameter) -> Bool {
+    func shouldApply(_ value: AppliedParameterValue, on parameter: EffectParameter) -> Bool {
         let key = EffectParameterKey(parameter)
         guard appliedParameterValues[key] != value else {
             return false
@@ -367,7 +369,7 @@ extension MirrorViewModel {
         }
     }
 
-    private func image(named assetName: String) -> UIImage? {
+    func image(named assetName: String) -> UIImage? {
         if let image = textureImageCache[assetName] {
             return image
         }

@@ -6,14 +6,17 @@ final class EffectParameterMapTests: XCTestCase {
         let refs = [
             "foundationColor",
             "foundationMask",
+            "foundationAmount",
             "lutEnabled",
             "lutTexture",
             "lutAmount",
             "eyeshadowColor",
             "eyeshadowMask",
             "eyelinerTexture",
+            "eyelinerColor",
             "eyelinerEnabled",
             "eyelashesTexture",
+            "eyelashesColor",
             "eyelashesEnabled",
             "browColor",
             "browTexture",
@@ -32,10 +35,12 @@ final class EffectParameterMapTests: XCTestCase {
 
     func testVerifiedFreePackNodeNames() {
         XCTAssertEqual(EffectParameterMap.foundationColor.nodeName, "face_makeup")
-        XCTAssertEqual(EffectParameterMap.lutTexture.nodeName, "PostprocessLUT")
+        XCTAssertEqual(EffectParameterMap.foundationAmount.parameter, "softAmount")
         XCTAssertEqual(EffectParameterMap.eyeshadowColor.nodeName, "eyeshadow")
         XCTAssertEqual(EffectParameterMap.eyelinerTexture.nodeName, "eyeliner")
+        XCTAssertEqual(EffectParameterMap.eyelinerColor.parameter, "u_color")
         XCTAssertEqual(EffectParameterMap.eyelashesTexture.nodeName, "eyelashes")
+        XCTAssertEqual(EffectParameterMap.eyelashesColor.parameter, "u_color")
         XCTAssertEqual(EffectParameterMap.lipsTexture.nodeName, "lips")
     }
 }

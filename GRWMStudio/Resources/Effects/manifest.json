@@ -71,7 +71,7 @@
             "color": "#FFFFFF",
             "isPro": false,
             "parameters": [
-              { "kind": "blendshape", "ref": "lutAmount", "value": 0 }
+              { "kind": "blendshape", "ref": "foundationAmount", "value": 0 }
             ]
           },
           {
@@ -80,8 +80,8 @@
             "color": "#FFE6F0",
             "isPro": false,
             "parameters": [
-              { "kind": "blendshape", "ref": "lutAmount", "value": 0.58 },
-              { "kind": "texture", "ref": "lutTexture", "asset": "brightLUT" }
+              { "kind": "color", "ref": "foundationColor", "rgba": [1.0, 0.86, 0.78, 1.0] },
+              { "kind": "blendshape", "ref": "foundationAmount", "value": 0.42 }
             ]
           },
           {
@@ -90,8 +90,8 @@
             "color": "#FF6FA0",
             "isPro": true,
             "parameters": [
-              { "kind": "blendshape", "ref": "lutAmount", "value": 0.68 },
-              { "kind": "texture", "ref": "lutTexture", "asset": "nashvilleLightLUT" }
+              { "kind": "color", "ref": "foundationColor", "rgba": [0.96, 0.70, 0.92, 1.0] },
+              { "kind": "blendshape", "ref": "foundationAmount", "value": 0.68 }
             ]
           }
         ]

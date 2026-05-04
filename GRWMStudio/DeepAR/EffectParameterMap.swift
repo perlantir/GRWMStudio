@@ -13,6 +13,12 @@ public enum EffectParameterMap {
         component: "MeshRenderer",
         parameter: "masktex"
     )
+    /// Foundation strength parameter.
+    public static let foundationAmount = EffectParameter(
+        nodeName: "face_makeup",
+        component: "MeshRenderer",
+        parameter: "softAmount"
+    )
 
     // -- Base (LUT) --
     /// Base LUT node enabled-state parameter.
@@ -53,6 +59,12 @@ public enum EffectParameterMap {
         component: "MeshRenderer",
         parameter: "s_texColor"
     )
+    /// Eyeliner tint color parameter.
+    public static let eyelinerColor = EffectParameter(
+        nodeName: "eyeliner",
+        component: "MeshRenderer",
+        parameter: "u_color"
+    )
     /// Eyeliner enabled-state parameter.
     public static let eyelinerEnabled = EffectParameter(
         nodeName: "eyeliner",
@@ -64,6 +76,12 @@ public enum EffectParameterMap {
         nodeName: "eyelashes",
         component: "MeshRenderer",
         parameter: "s_texColor"
+    )
+    /// Eyelashes tint color parameter.
+    public static let eyelashesColor = EffectParameter(
+        nodeName: "eyelashes",
+        component: "MeshRenderer",
+        parameter: "u_color"
     )
     /// Eyelashes enabled-state parameter.
     public static let eyelashesEnabled = EffectParameter(
@@ -140,14 +158,17 @@ public enum EffectParameterMap {
     private static let map: [String: EffectParameter] = [
         "foundationColor": foundationColor,
         "foundationMask": foundationMask,
+        "foundationAmount": foundationAmount,
         "lutEnabled": lutEnabled,
         "lutTexture": lutTexture,
         "lutAmount": lutAmount,
         "eyeshadowColor": eyeshadowColor,
         "eyeshadowMask": eyeshadowMask,
         "eyelinerTexture": eyelinerTexture,
+        "eyelinerColor": eyelinerColor,
         "eyelinerEnabled": eyelinerEnabled,
         "eyelashesTexture": eyelashesTexture,
+        "eyelashesColor": eyelashesColor,
         "eyelashesEnabled": eyelashesEnabled,
         "browColor": browColor,
         "browTexture": browTexture,

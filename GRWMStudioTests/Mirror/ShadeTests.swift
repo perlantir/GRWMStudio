@@ -15,6 +15,7 @@ final class ShadeTests: XCTestCase {
         XCTAssertTrue(
             Shade.skinShades.allSatisfy { shade in
                 shade.parameters.contains { $0.ref == "foundationColor" }
+                    && shade.parameters.contains { $0.ref == "foundationAmount" }
             }
         )
     }
@@ -28,11 +29,12 @@ final class ShadeTests: XCTestCase {
         XCTAssertEqual(Shade.baseShades[0].name, "None")
     }
 
-    func testBaseShadesCarryLUTParameters() {
+    func testBaseShadesCarryFaceOnlyFoundationParameters() {
         let glow = Shade.baseShades[2]
 
-        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutAmount" && $0.value == .blendshape(0.62) })
-        XCTAssertTrue(glow.parameters.contains { $0.ref == "lutTexture" && $0.value == .texture("lut_glow") })
+        XCTAssertTrue(glow.parameters.contains { $0.ref == "foundationColor" })
+        XCTAssertTrue(glow.parameters.contains { $0.ref == "foundationAmount" && $0.value == .blendshape(0.56) })
+        XCTAssertFalse(glow.parameters.contains { $0.ref == "lutTexture" })
     }
 
     func testEyeshadowShadesAreFreeAndCarryColorAndMaskParameters() {
@@ -57,11 +59,23 @@ final class ShadeTests: XCTestCase {
     func testEyelinerShadesCarryFreeAndProStyles() {
         XCTAssertEqual(
             Shade.eyelinerShades.map(\.id),
-            ["eyeliner.none", "eyeliner.classic", "eyeliner.winged", "eyeliner.double-flick"]
+            [
+                "eyeliner.none",
+                "eyeliner.pink",
+                "eyeliner.purple",
+                "eyeliner.gold",
+                "eyeliner.teal",
+                "eyeliner.brown",
+                "eyeliner.blue",
+                "eyeliner.classic",
+                "eyeliner.winged",
+                "eyeliner.double-flick"
+            ]
         )
-        XCTAssertEqual(Shade.eyelinerShades.map(\.isPro), [false, false, true, true])
+        XCTAssertEqual(Shade.eyelinerShades.map(\.isPro), [false, false, false, false, false, false, false, false, true, true])
         XCTAssertTrue(Shade.eyelinerShades[0].parameters.contains { $0.ref == "eyelinerEnabled" && $0.value == .enabled(false) })
         XCTAssertTrue(Shade.eyelinerShades[1].parameters.contains { $0.ref == "eyelinerEnabled" && $0.value == .enabled(true) })
+        XCTAssertTrue(Shade.eyelinerShades[1].parameters.contains { $0.ref == "eyelinerColor" })
         XCTAssertTrue(
             Shade.eyelinerShades[1].parameters.contains {
                 $0.ref == "eyelinerTexture" && $0.value == .texture("eyeliner_classic")
@@ -72,11 +86,23 @@ final class ShadeTests: XCTestCase {
     func testEyelashShadesCarryFreeAndProStyles() {
         XCTAssertEqual(
             Shade.eyelashShades.map(\.id),
-            ["eyelashes.none", "eyelashes.natural", "eyelashes.doll", "eyelashes.drama"]
+            [
+                "eyelashes.none",
+                "eyelashes.pink",
+                "eyelashes.purple",
+                "eyelashes.gold",
+                "eyelashes.teal",
+                "eyelashes.brown",
+                "eyelashes.blue",
+                "eyelashes.natural",
+                "eyelashes.doll",
+                "eyelashes.drama"
+            ]
         )
-        XCTAssertEqual(Shade.eyelashShades.map(\.isPro), [false, false, true, true])
+        XCTAssertEqual(Shade.eyelashShades.map(\.isPro), [false, false, false, false, false, false, false, false, true, true])
         XCTAssertTrue(Shade.eyelashShades[0].parameters.contains { $0.ref == "eyelashesEnabled" && $0.value == .enabled(false) })
         XCTAssertTrue(Shade.eyelashShades[1].parameters.contains { $0.ref == "eyelashesEnabled" && $0.value == .enabled(true) })
+        XCTAssertTrue(Shade.eyelashShades[1].parameters.contains { $0.ref == "eyelashesColor" })
         XCTAssertTrue(
             Shade.eyelashShades[1].parameters.contains {
                 $0.ref == "eyelashesTexture" && $0.value == .texture("eyelashes_natural")
@@ -121,17 +147,34 @@ final class ShadeTests: XCTestCase {
                 "lip.nude",
                 "lip.berry",
                 "lip.coral",
+                "lip.pink",
+                "lip.purple",
+                "lip.gold",
+                "lip.teal",
+                "lip.brown",
+                "lip.blue",
                 "lip.plum",
                 "lip.neon-pink",
                 "lip.disco-brat"
             ]
         )
-        XCTAssertEqual(Shade.lipShades.map(\.isPro), [false, false, false, false, false, true, true, true])
+        XCTAssertEqual(
+            Shade.lipShades.map(\.isPro),
+            [false, false, false, false, false, false, false, false, false, false, false, true, true, true]
+        )
 
         let petal = Shade.lipShades[1]
         XCTAssertEqual(petal.effectID, "lips")
         XCTAssertFalse(petal.parameters.contains { $0.ref == "lipsColor" })
         XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsTexture" && $0.value == .texture("lips_gloss") })
         XCTAssertTrue(petal.parameters.contains { $0.ref == "lipsEnabled" && $0.value == .enabled(true) })
+
+        let purple = Shade.lipShades[6]
+        XCTAssertTrue(
+            purple.parameters.contains {
+                $0.ref == "lipsTexture"
+                    && $0.value == .tintedTexture("lips_matte", RGBA(0.64, 0.42, 1.00, 0.88))
+            }
+        )
     }
 }

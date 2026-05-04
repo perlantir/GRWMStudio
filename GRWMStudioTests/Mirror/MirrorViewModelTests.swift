@@ -100,8 +100,8 @@ final class MirrorViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .base, shade: shade)
 
         XCTAssertEqual(viewModel.selectedShadeID(for: .base), shade.id)
-        XCTAssertTrue(mock.floatParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "lutAmount" })
-        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "s_texLut" })
+        XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "softColor" })
+        XCTAssertTrue(mock.floatParameters.contains { $0.gameObject == "face_makeup" && $0.parameter == "softAmount" })
     }
 
     func testEyeSubCategoriesApplyAdditiveParametersOnSharedSlot() async throws {
