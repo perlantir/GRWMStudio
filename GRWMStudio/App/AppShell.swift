@@ -63,6 +63,16 @@ struct AppShell: View {
                     }
                 }
                 .offset(y: -34)
+
+                if mirrorViewModel.isRecording {
+                    RecordingStopChip {
+                        Task { @MainActor in
+                            await mirrorViewModel.captureButtonTapped()
+                        }
+                    }
+                    .offset(y: 44)
+                    .transition(.scale.combined(with: .opacity))
+                }
             }
             .padding(.horizontal, 14)
             .padding(.bottom, 18)

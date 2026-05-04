@@ -30,6 +30,9 @@ struct MirrorView: View {
                     .overlay(alignment: .top) {
                         cameraTopOverlay
                     }
+                    .overlay(alignment: .topLeading) {
+                        recordingOverlay
+                    }
                     .padding(.horizontal, 14)
                     .padding(.top, 12)
 
@@ -123,6 +126,14 @@ struct MirrorView: View {
             NoFaceTipView()
                 .padding(.top, 18)
                 .transition(.opacity.combined(with: .move(edge: .top)))
+        }
+    }
+
+    @ViewBuilder
+    private var recordingOverlay: some View {
+        if case .videoRecording(let secondsElapsed) = viewModel.captureMode {
+            RecordingOverlay(secondsElapsed: secondsElapsed)
+                .transition(.scale.combined(with: .opacity))
         }
     }
 

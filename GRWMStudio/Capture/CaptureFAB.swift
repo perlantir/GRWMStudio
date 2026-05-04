@@ -173,3 +173,98 @@ struct CaptureFAB: View {
     .padding(32)
     .background(DH.pinkPaper)
 }
+
+struct RecordingOverlay: View {
+    let secondsElapsed: Double
+    var cap: Double?
+
+    @State private var pulsing = false
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Circle()
+                .fill(.white)
+                .frame(width: 12, height: 12)
+                .scaleEffect(pulsing ? 1.05 : 1.0)
+                .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: pulsing)
+                .accessibilityHidden(true)
+
+            Text("REC")
+                .font(DH.font(.buttonSmall))
+                .tracking(DH.tracking(.buttonSmall))
+
+            Text(timeString)
+                .font(DH.font(.buttonSmall))
+                .tracking(DH.tracking(.buttonSmall))
+                .foregroundStyle(approachingCap ? DH.butter : .white)
+                .accessibilityIdentifier("recording-elapsed-label")
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background {
+            Capsule()
+                .fill(DH.recRed)
+                .chunkyShadow(.sm(deep: DH.recRedDeep), shape: Capsule())
+        }
+        .padding(.horizontal, 18)
+        .padding(.top, 16)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("recording-overlay")
+        .onAppear {
+            pulsing = true
+        }
+    }
+
+    private var approachingCap: Bool {
+        guard let cap else {
+            return false
+        }
+
+        return (cap - secondsElapsed) <= 2.0
+    }
+
+    private var timeString: String {
+        guard let cap else {
+            return Self.format(secondsElapsed)
+        }
+
+        return "\(Self.format(secondsElapsed)) / \(Self.format(cap))"
+    }
+
+    private static func format(_ seconds: Double) -> String {
+        let safeSeconds = max(0, Int(seconds.rounded(.down)))
+        return String(format: "%d:%02d", safeSeconds / 60, safeSeconds % 60)
+    }
+}
+
+struct RecordingStopChip: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button {
+            DHHaptics.tapMedium()
+            action()
+        } label: {
+            HStack(spacing: 7) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 12, weight: .heavy))
+
+                Text("Stop")
+                    .font(DH.font(.buttonSmall))
+                    .tracking(DH.tracking(.buttonSmall))
+            }
+            .foregroundStyle(DH.recRedDeep)
+            .padding(.horizontal, 16)
+            .frame(height: 34)
+            .background {
+                Capsule()
+                    .fill(.white)
+                    .chunkyShadow(.sm(deep: DH.recRedDeep), shape: Capsule())
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Stop recording")
+        .accessibilityIdentifier("recording-stop-chip")
+    }
+}

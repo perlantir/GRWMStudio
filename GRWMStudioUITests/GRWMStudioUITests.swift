@@ -165,6 +165,25 @@ final class GRWMStudioUITests: XCTestCase {
     }
 
     @MainActor
+    func testRecordingOverlayHidesMirrorControls() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell", "-GRWMDebugCaptureRecording"]
+        app.launch()
+
+        XCTAssertTrue(app.otherElements["recording-overlay"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["recording-elapsed-label"].waitForExistence(timeout: 2))
+        XCTAssertEqual(app.staticTexts["recording-elapsed-label"].label, "0:05")
+        XCTAssertTrue(app.buttons["recording-stop-chip"].exists)
+        XCTAssertFalse(app.scrollViews["filter-rail"].exists)
+        XCTAssertFalse(app.buttons["Flip camera"].exists)
+
+        let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
+        attachment.name = "recording-overlay"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
+    @MainActor
     func testLooksSelectionDismissesTray() throws {
         let app = XCUIApplication()
         app.launchArguments = ["-GRWMDebugAppShell"]

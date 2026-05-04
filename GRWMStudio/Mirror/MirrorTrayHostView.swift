@@ -10,40 +10,40 @@ struct MirrorTrayHostView: View {
         VStack {
             Spacer()
 
-            trayView
+            if !viewModel.isRecording {
+                trayView
 
-            if let pendingCategoryAfterLook, let activeLookName = viewModel.activeLookName {
-                LookSwitchConfirmationView(
-                    lookName: activeLookName,
-                    onConfirm: {
-                        Task { @MainActor in
-                            await viewModel.clear(slot: .looks)
+                if let pendingCategoryAfterLook, let activeLookName = viewModel.activeLookName {
+                    LookSwitchConfirmationView(
+                        lookName: activeLookName,
+                        onConfirm: {
+                            Task { @MainActor in
+                                await viewModel.clear(slot: .looks)
+                                withAnimation(.bouncy(duration: 0.22)) {
+                                    viewModel.activeCategory = pendingCategoryAfterLook
+                                    self.pendingCategoryAfterLook = nil
+                                }
+                            }
+                        },
+                        onCancel: {
                             withAnimation(.bouncy(duration: 0.22)) {
-                                viewModel.activeCategory = pendingCategoryAfterLook
                                 self.pendingCategoryAfterLook = nil
                             }
                         }
-                    },
-                    onCancel: {
-                        withAnimation(.bouncy(duration: 0.22)) {
-                            self.pendingCategoryAfterLook = nil
-                        }
-                    }
-                )
-                .padding(.bottom, 120)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
+                    )
+                    .padding(.bottom, 120)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
 
-            if !viewModel.isRecording {
                 MirrorBottomControls(viewModel: viewModel)
                     .padding(.bottom, 8)
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
-            }
 
-            FilterRailView(viewModel: viewModel) { category in
-                handleCategoryTap(category)
+                FilterRailView(viewModel: viewModel) { category in
+                    handleCategoryTap(category)
+                }
+                .padding(.bottom, 118)
             }
-            .padding(.bottom, 118)
         }
     }
 
