@@ -5,6 +5,7 @@ struct MirrorView: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
     @Bindable var viewModel: MirrorViewModel
+    var onFavoriteLooks: @MainActor () -> Void = {}
     @State private var pendingCategoryAfterLook: FilterCategory?
     @State private var showNoFaceTip = false
     @State private var noFaceTipTask: Task<Void, Never>?
@@ -16,7 +17,7 @@ struct MirrorView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                MirrorChrome.top {
+                MirrorChrome.top(onFavoriteLooks: onFavoriteLooks) {
                     Task { @MainActor in
                         await viewModel.resetAll()
                         pendingCategoryAfterLook = nil

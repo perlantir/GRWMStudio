@@ -11,7 +11,9 @@ struct AppShell: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selected) {
-                MirrorView(viewModel: mirrorViewModel)
+                MirrorView(viewModel: mirrorViewModel) {
+                    selected = .looks
+                }
                     .tag(DHTab.mirror)
 
                 placeholder("Looks Library - wired in GRWM-500")
@@ -111,6 +113,14 @@ struct AppShell: View {
     }
 
     private func restoreSelectedTab() {
+        #if DEBUG
+        guard !ProcessInfo.processInfo.arguments.contains("-GRWMDebugAppShell") else {
+            UserDefaults.standard.removeObject(forKey: lastTabKey)
+            selected = .mirror
+            return
+        }
+        #endif
+
         guard
             let raw = UserDefaults.standard.string(forKey: lastTabKey),
             let tab = DHTab(rawValue: raw),

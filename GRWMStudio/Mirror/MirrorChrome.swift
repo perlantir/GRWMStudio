@@ -2,11 +2,14 @@ import SwiftUI
 
 enum MirrorChrome {
     @MainActor
-    static func top(onReset: @escaping @MainActor () -> Void) -> some View {
+    static func top(
+        onFavoriteLooks: @escaping @MainActor () -> Void,
+        onReset: @escaping @MainActor () -> Void
+    ) -> some View {
         HStack(alignment: .center) {
             GRWMLogo(layout: .row, size: .lg)
-                .padding(.horizontal, 16)
-                .frame(width: 154, height: 54)
+                .fixedSize(horizontal: true, vertical: true)
+                .frame(width: 190, height: 54)
                 .background {
                     Capsule()
                         .fill(.white)
@@ -16,15 +19,27 @@ enum MirrorChrome {
             Spacer()
 
             HStack(spacing: 10) {
-                StickerHeart(size: 28, fill: .white, stroke: DH.pinkDeep, strokeWidth: 2.8)
-                    .frame(width: 46, height: 46)
-                    .background {
-                        Circle()
-                            .fill(DH.pink)
-                            .chunkyShadow(.md(deep: DH.pinkDeep), shape: Circle())
+                Button {
+                    DHHaptics.tapMedium()
+                    onFavoriteLooks()
+                } label: {
+                    Label {
+                        Text("Favorite looks")
+                    } icon: {
+                        StickerHeart(size: 28, fill: .white, stroke: DH.pinkDeep, strokeWidth: 2.8)
+                            .frame(width: 46, height: 46)
+                            .background {
+                                Circle()
+                                    .fill(DH.pink)
+                                    .chunkyShadow(.md(deep: DH.pinkDeep), shape: Circle())
+                            }
+                            .rotationEffect(.degrees(8))
                     }
-                    .rotationEffect(.degrees(8))
-                    .accessibilityLabel("Favorite looks")
+                    .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Favorite looks")
+                .accessibilityIdentifier("favorite-looks-button")
 
                 MirrorResetButton(action: onReset)
             }
@@ -60,7 +75,7 @@ private struct MirrorResetButton: View {
 }
 
 #Preview("Mirror Chrome") {
-    MirrorChrome.top {}
+    MirrorChrome.top {} onReset: {}
         .padding(18)
         .background(DH.pinkPaper)
 }

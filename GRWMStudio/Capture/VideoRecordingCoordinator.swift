@@ -60,7 +60,7 @@ final class VideoRecordingCoordinator: VideoRecordingCoordinating {
         try? FileManager.default.removeItem(at: url)
 
         let width = 720
-        let height = 1_280
+        let height = 960
         let writer = try AVAssetWriter(outputURL: url, fileType: .mp4)
         let input = AVAssetWriterInput(
             mediaType: .video,

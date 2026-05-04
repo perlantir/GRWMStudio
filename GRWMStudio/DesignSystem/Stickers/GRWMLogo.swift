@@ -42,6 +42,7 @@ struct GRWMLogo: View {
                 StickerHeart(size: heartSize * 0.42, fill: DH.pinkDeep, strokeWidth: 3)
                 studioSubtitle
             }
+            .fixedSize(horizontal: true, vertical: true)
             .alignmentGuide(.firstTextBaseline) { dimensions in
                 dimensions[.bottom]
             }
@@ -74,7 +75,7 @@ struct GRWMLogo: View {
     }
 
     private var rowFont: Font {
-        .custom("Fredoka-Bold", size: grwmFontSize * 0.34)
+        .custom("Fredoka-Bold", size: grwmFontSize * 0.38)
     }
 
     private var studioFont: Font {
@@ -102,12 +103,12 @@ struct GRWMLogo: View {
     private var rowTitle: some View {
         ZStack {
             strokeText("GRWM", font: rowFont, offset: 1.6 * scale)
-                .tracking(-0.02 * grwmFontSize * 0.34)
+                .tracking(-0.02 * grwmFontSize * 0.38)
                 .foregroundStyle(.white)
 
             Text("GRWM")
                 .font(rowFont)
-                .tracking(-0.02 * grwmFontSize * 0.34)
+                .tracking(-0.02 * grwmFontSize * 0.38)
                 .foregroundStyle(DH.pink)
         }
         .shadow(color: DH.pinkDeep, radius: 0, x: 0, y: 3 * scale)
@@ -118,6 +119,8 @@ struct GRWMLogo: View {
             .font(studioFont)
             .tracking((layout == .stack ? 0.32 : 0.28) * studioFontSize)
             .foregroundStyle(DH.pinkDeep)
+            .lineLimit(1)
+            .minimumScaleFactor(0.82)
             .padding(.leading, (layout == .stack ? 0.32 : 0.28) * studioFontSize)
     }
 

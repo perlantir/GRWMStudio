@@ -74,3 +74,38 @@ Date: 2026-05-03
 
 - Signed connected-device build attempted: `xcodebuild-preview-playback-lip-device-build-v2.log`
 - Device build is currently blocked by local Xcode signing state: Xcode reports no account for team `84D222Q647` and no development provisioning profile for `app.grwmstudio.ios`.
+
+## Follow-up: Recording Aspect, Mirror Logo, Heart Route
+
+Date: 2026-05-03
+
+### Scope
+
+- Changed DeepAR video recording output to 720x960 so saved video uses the same 3:4 aspect as the mirror viewport.
+- Changed simulator placeholder MP4 generation to 720x960 so playback smoke tests exercise the same geometry.
+- Constrained preview media cards to 3:4 so photo/video previews do not render as a taller stretched surface.
+- Rebalanced the mirror logo capsule so the wordmark is readable and no longer clipped or squeezed.
+- Wired the top-right heart button to the Looks tab placeholder and added a stable UI-test accessibility identifier.
+- Removed lipstick texture swaps from shade selection so lips only update color + enabled state, reducing DeepAR parameter churn during video.
+- Made `-GRWMDebugAppShell` launch from the Mirror tab every time to avoid UI-test state leaking between runs.
+
+### Automated Evidence
+
+- Focused unit + UI regression tests: `xcodebuild-distortion-logo-lip-focused-tests-full.log`
+- Result bundle: `distortion-logo-lip-focused.xcresult`
+- SwiftLint: `lint-distortion-logo-lip.log`
+- DeepAR import isolation: `deepar-isolation-distortion-logo-lip.log`
+- Generic iOS no-sign build: `xcodebuild-generic-ios-distortion-logo-lip.log`
+- Signed connected-device build: `xcodebuild-device-distortion-logo-lip.log`
+
+### Visual Evidence
+
+- Mirror shell logo/aspect screenshot: `simulator-mirror-logo-aspect-followup.jpg`
+- Photo preview 3:4 screenshot: `simulator-photo-preview-3x4-followup.jpg`
+- Video preview 3:4 screenshot: `simulator-video-preview-3x4-followup.jpg`
+
+### Notes
+
+- The device build now succeeds with the local signing state.
+- The app was not reinstalled on the connected phone in this follow-up; real-camera validation still needs one install/run pass because simulator video uses the DEBUG placeholder.
+- Looks, Feed, Locker, and Settings are still planned ticket surfaces: Looks Library in GRWM-509, Locker in GRWM-502, Feed in GRWM-602, Settings shell in GRWM-605 and full Settings in GRWM-750.

@@ -3,7 +3,7 @@ import XCTest
 
 @MainActor
 final class MirrorLipViewModelTests: XCTestCase {
-    func testSelectLipShadeAppliesColorTextureAndSelection() async throws {
+    func testSelectLipShadeAppliesColorEnabledAndSelection() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
@@ -18,11 +18,11 @@ final class MirrorLipViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), shade.id)
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: "lips", shadeID: shade.id, isPro: false))
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "lips" && $0.parameter == "u_color" })
-        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
+        XCTAssertFalse(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
 
-    func testLipShadeSelectionSkipsUnchangedTextureAndEnabledParameters() async throws {
+    func testLipShadeSelectionSkipsUnchangedEnabledParameters() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
@@ -37,7 +37,7 @@ final class MirrorLipViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: berry)
 
         XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
-        XCTAssertEqual(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.count, 1)
+        XCTAssertTrue(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.isEmpty)
         XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" }.count, 1)
         XCTAssertEqual(mock.vectorParameters.filter { $0.gameObject == "lips" && $0.parameter == "u_color" }.count, 2)
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), berry.id)
@@ -82,6 +82,6 @@ final class MirrorLipViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), shade.id)
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: "lips", shadeID: shade.id, isPro: true))
-        XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
+        XCTAssertFalse(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
     }
 }

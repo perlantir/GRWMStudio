@@ -151,6 +151,20 @@ final class GRWMStudioUITests: XCTestCase {
     }
 
     @MainActor
+    func testFavoriteLooksButtonRoutesToLooksTab() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell"]
+        app.launch()
+
+        let favoriteLooks = app.buttons["favorite-looks-button"]
+        XCTAssertTrue(favoriteLooks.waitForExistence(timeout: 8))
+        favoriteLooks.tap()
+
+        XCTAssertTrue(app.staticTexts["Looks Library - wired in GRWM-500"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["Looks"].isSelected)
+    }
+
+    @MainActor
     func testLooksSelectionDismissesTray() throws {
         let app = XCUIApplication()
         app.launchArguments = ["-GRWMDebugAppShell"]

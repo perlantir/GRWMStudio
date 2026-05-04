@@ -91,7 +91,10 @@ extension DeepARController {
 
         client.setVideoRecordingOutputPath(outputURL.deletingLastPathComponent().path)
         client.setVideoRecordingOutputName(outputURL.deletingPathExtension().lastPathComponent)
-        client.startVideoRecording(outputWidth: 720, outputHeight: 1_280)
+        client.startVideoRecording(
+            outputWidth: Int32(Self.recordingOutputSize.width),
+            outputHeight: Int32(Self.recordingOutputSize.height)
+        )
         isRecordingVideo = true
         recordingDuration = 0
         Logger.deepAR.info("Started video recording")
@@ -219,5 +222,9 @@ extension DeepARController {
         recordingProgressTask = nil
         videoContinuation?.resume(throwing: SetupError.recordingFailed(reason: reason))
         videoContinuation = nil
+    }
+
+    private static var recordingOutputSize: CGSize {
+        CGSize(width: 720, height: 960)
     }
 }

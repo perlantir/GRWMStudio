@@ -212,7 +212,8 @@ private struct PreviewLayoutMetrics {
             + bottomControlsHeight
             + bottomPadding
             + verticalSpacing * 2
-        mediaHeight = max(280, size.height - reservedHeight)
+        let availableHeight = max(280, size.height - reservedHeight)
+        mediaHeight = min(availableHeight, mediaWidth * 4.0 / 3.0)
     }
 }
 

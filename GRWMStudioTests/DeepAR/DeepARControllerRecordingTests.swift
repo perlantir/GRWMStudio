@@ -26,7 +26,7 @@ final class DeepARControllerRecordingTests: XCTestCase {
 
         XCTAssertTrue(controller.isRecordingVideo)
         XCTAssertEqual(mock.videoStartSize?.width, 720)
-        XCTAssertEqual(mock.videoStartSize?.height, 1_280)
+        XCTAssertEqual(mock.videoStartSize?.height, 960)
         XCTAssertTrue(mock.videoOutputName?.hasPrefix("rec_sdk_") == true)
         XCTAssertEqual(mock.videoOutputPath, FileManager.default.temporaryDirectory.path)
 
