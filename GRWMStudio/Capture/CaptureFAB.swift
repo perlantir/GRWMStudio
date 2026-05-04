@@ -268,3 +268,97 @@ struct RecordingStopChip: View {
         .accessibilityIdentifier("recording-stop-chip")
     }
 }
+
+struct SaveFailureBanner: View {
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 17, weight: .heavy))
+                .foregroundStyle(.white)
+                .frame(width: 34, height: 34)
+                .background(Circle().fill(DH.recRedDeep))
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Saving needs a reset.")
+                    .font(DH.font(.buttonSmall))
+                    .tracking(DH.tracking(.buttonSmall))
+                    .foregroundStyle(DH.ink)
+
+                Text("Try again, or go back to the mirror.")
+                    .font(DH.font(.caption))
+                    .tracking(DH.tracking(.caption))
+                    .foregroundStyle(DH.ink.opacity(0.72))
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background {
+            RoundedRectangle(cornerRadius: DH.Radius.card)
+                .fill(.white.opacity(0.96))
+                .chunkyShadow(.sm(deep: DH.recRedDeep), shape: RoundedRectangle(cornerRadius: DH.Radius.card))
+        }
+        .accessibilityIdentifier("save-fail-banner")
+    }
+}
+
+struct SavedConfetti: View {
+    let onComplete: @MainActor () -> Void
+    @State private var phase: CGFloat = 0
+
+    var body: some View {
+        ZStack {
+            Color.white.opacity(0.58)
+                .ignoresSafeArea()
+
+            ForEach(0..<12, id: \.self) { index in
+                StickerHeart(
+                    size: index.isMultiple(of: 3) ? 34 : 26,
+                    fill: index.isMultiple(of: 2) ? DH.pinkDeep : DH.butter
+                )
+                .offset(
+                    x: xOffset(for: index),
+                    y: yOffset(for: index) - 210 * phase
+                )
+                .opacity(1 - phase)
+                .rotationEffect(.degrees(Double(index * 30) + Double(phase * 90)))
+            }
+
+            VStack(spacing: 10) {
+                Text("Saved! 💖")
+                    .font(DH.font(.display3))
+                    .tracking(DH.tracking(.display3))
+                    .foregroundStyle(DH.pinkDeep)
+                    .scaleEffect(1 + 0.1 * phase)
+
+                StickerStar(size: 34, fill: DH.butter)
+            }
+            .padding(.horizontal, 30)
+            .padding(.vertical, 24)
+            .background {
+                RoundedRectangle(cornerRadius: DH.Radius.bigCard)
+                    .fill(.white)
+                    .chunkyShadow(.lg(deep: DH.pinkDeep), shape: RoundedRectangle(cornerRadius: DH.Radius.bigCard))
+            }
+        }
+        .accessibilityIdentifier("saved-confetti")
+        .task {
+            Sounds.confetti.play()
+            DHHaptics.success()
+            withAnimation(.easeOut(duration: 1.2)) {
+                phase = 1
+            }
+            try? await Task.sleep(for: .milliseconds(1_200))
+            onComplete()
+        }
+    }
+
+    private func xOffset(for index: Int) -> CGFloat {
+        CGFloat((index * 43) % 240) - 120
+    }
+
+    private func yOffset(for index: Int) -> CGFloat {
+        CGFloat((index * 29) % 80) - 40
+    }
+}

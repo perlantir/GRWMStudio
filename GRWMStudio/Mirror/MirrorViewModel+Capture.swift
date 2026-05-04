@@ -32,6 +32,12 @@ extension MirrorViewModel {
         }
     }
 
+    var selectedCaptureShadeIDs: [String] {
+        let slotShadeIDs = selections.values.compactMap(\.shadeID)
+        let eyeShadeIDs = Array(eyeSelections.values)
+        return Array(Set(slotShadeIDs + eyeShadeIDs)).sorted()
+    }
+
     func onCaptureTap() {
         guard state == .running else {
             return

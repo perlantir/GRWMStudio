@@ -81,6 +81,7 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertEqual(coordinator.overlay, .preview)
         XCTAssertNotNil(coordinator.previewAsset)
         XCTAssertNil(coordinator.previewLookName)
+        XCTAssertTrue(coordinator.previewShadeIDs.isEmpty)
 
         coordinator.dismissPreview()
 
@@ -88,15 +89,39 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertNil(coordinator.overlay)
         XCTAssertNil(coordinator.previewAsset)
         XCTAssertNil(coordinator.previewLookName)
+        XCTAssertTrue(coordinator.previewShadeIDs.isEmpty)
     }
 
     func testCoordinatorPreviewStoresLookName() {
         let coordinator = RootCoordinator()
 
-        coordinator.showPreview(asset: .photo(Self.testImage()), lookName: "Sunday Best")
+        coordinator.showPreview(
+            asset: .photo(Self.testImage()),
+            lookName: "Sunday Best",
+            shadeIDs: ["lip.classic-red"]
+        )
 
         XCTAssertEqual(coordinator.overlay, .preview)
         XCTAssertEqual(coordinator.previewLookName, "Sunday Best")
+        XCTAssertEqual(coordinator.previewShadeIDs, ["lip.classic-red"])
+    }
+
+    func testCoordinatorSavedPreviewShowsConfettiThenFinishes() {
+        let coordinator = RootCoordinator()
+        coordinator.route = .app
+        coordinator.showPreview(asset: .photo(Self.testImage()), lookName: "Sunday Best", shadeIDs: ["lip.classic-red"])
+
+        coordinator.dismissPreviewSaved()
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertEqual(coordinator.overlay, .savedConfetti)
+        XCTAssertNil(coordinator.previewAsset)
+        XCTAssertNil(coordinator.previewLookName)
+        XCTAssertTrue(coordinator.previewShadeIDs.isEmpty)
+
+        coordinator.finishPreviewSaved()
+
+        XCTAssertNil(coordinator.overlay)
     }
 
     private func makeDefaults() throws -> UserDefaults {

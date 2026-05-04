@@ -1,8 +1,10 @@
 import OSLog
+import SwiftData
 import SwiftUI
 
 struct RootContainer: View {
     @Environment(\.appEnvironment) private var env
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.rootCoordinator) private var coordinator
 
     var body: some View {
@@ -52,9 +54,7 @@ struct RootContainer: View {
             AppShell()
         case .preview:
             if let asset = coordinator.previewAsset {
-                PreviewPlaceholderView(asset: asset, lookName: coordinator.previewLookName, onDiscard: {
-                    coordinator.dismissPreview()
-                })
+                previewView(for: asset)
             } else {
                 placeholder("Preview unavailable")
             }
@@ -81,9 +81,7 @@ struct RootContainer: View {
             switch overlay {
             case .preview:
                 if let asset = coordinator.previewAsset {
-                    PreviewPlaceholderView(asset: asset, lookName: coordinator.previewLookName, onDiscard: {
-                        coordinator.dismissPreview()
-                    })
+                    previewView(for: asset)
                     .transition(.opacity)
                 }
 
@@ -103,8 +101,37 @@ struct RootContainer: View {
                     coordinator.dismissOverlay()
                 }
                 .transition(.opacity.combined(with: .scale(scale: 0.98)))
+
+            case .savedConfetti:
+                SavedConfetti {
+                    coordinator.finishPreviewSaved()
+                }
+                .transition(.opacity)
             }
         }
+    }
+
+    private func previewView(for asset: CapturedAsset) -> some View {
+        PreviewPlaceholderView(
+            asset: asset,
+            lookName: coordinator.previewLookName,
+            onSave: {
+                try await savePreview(asset: asset)
+            },
+            onDiscard: {
+                coordinator.dismissPreview()
+            }
+        )
+    }
+
+    private func savePreview(asset: CapturedAsset) async throws {
+        let service = CaptureSaveService(modelContext)
+        _ = try await service.save(
+            asset: asset,
+            lookName: coordinator.previewLookName,
+            shadeIDs: coordinator.previewShadeIDs
+        )
+        coordinator.dismissPreviewSaved()
     }
 
     private func resolveInitialRoute() {

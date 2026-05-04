@@ -26,17 +26,18 @@ final class PreviewViewModel {
 struct PreviewPlaceholderView: View {
     let asset: CapturedAsset
     let lookName: String?
-    let onSave: @MainActor () async -> Void
+    let onSave: @MainActor () async throws -> Void
     let onShare: @MainActor () -> Void
     let onDiscard: @MainActor () -> Void
 
     @State private var viewModel: PreviewViewModel
     @State private var saving = false
+    @State private var saveFailed = false
 
     init(
         asset: CapturedAsset,
         lookName: String? = nil,
-        onSave: @escaping @MainActor () async -> Void = {},
+        onSave: @escaping @MainActor () async throws -> Void = {},
         onShare: @escaping @MainActor () -> Void = {},
         onDiscard: @escaping @MainActor () -> Void
     ) {
@@ -66,6 +67,12 @@ struct PreviewPlaceholderView: View {
 
                     mediaCard
                         .frame(width: metrics.mediaWidth, height: metrics.mediaHeight)
+
+                    if saveFailed {
+                        SaveFailureBanner()
+                            .padding(.horizontal, 18)
+                            .transition(.opacity.combined(with: .move(edge: .bottom)))
+                    }
 
                     Spacer(minLength: 0)
 
@@ -198,7 +205,12 @@ struct PreviewPlaceholderView: View {
 
                 saving = true
                 Task { @MainActor in
-                    await onSave()
+                    saveFailed = false
+                    do {
+                        try await onSave()
+                    } catch {
+                        saveFailed = true
+                    }
                     saving = false
                 }
             }

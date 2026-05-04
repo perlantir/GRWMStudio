@@ -145,6 +145,44 @@ final class GRWMStudioUITests: XCTestCase {
     }
 
     @MainActor
+    func testPhotoPreviewSaveShowsConfettiAndReturnsMirror() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell"]
+        app.launch()
+
+        let capture = app.buttons["capture-fab"]
+        XCTAssertTrue(capture.waitForExistence(timeout: 8))
+        capture.tap()
+
+        let save = app.buttons["Save to Locker"]
+        XCTAssertTrue(save.waitForExistence(timeout: 5))
+        save.tap()
+
+        XCTAssertTrue(app.staticTexts["Saved! 💖"].waitForExistence(timeout: 3))
+        XCTAssertFalse(app.staticTexts["Preview"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["Skin filter category"].waitForExistence(timeout: 3))
+    }
+
+    @MainActor
+    func testPhotoPreviewSaveFailureShowsInlineBanner() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-GRWMDebugAppShell", "-GRWMDebugSaveFail"]
+        app.launch()
+
+        let capture = app.buttons["capture-fab"]
+        XCTAssertTrue(capture.waitForExistence(timeout: 8))
+        capture.tap()
+
+        let save = app.buttons["Save to Locker"]
+        XCTAssertTrue(save.waitForExistence(timeout: 5))
+        save.tap()
+
+        XCTAssertTrue(app.staticTexts["Saving needs a reset."].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Preview"].exists)
+        XCTAssertTrue(app.buttons["Save to Locker"].exists)
+    }
+
+    @MainActor
     func testFavoriteLooksButtonRoutesToLooksTab() throws {
         let app = XCUIApplication()
         app.launchArguments = ["-GRWMDebugAppShell"]

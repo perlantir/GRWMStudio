@@ -22,6 +22,7 @@ final class RootCoordinator {
         case preview
         case parentGate(intent: ParentGateIntent)
         case paywall
+        case savedConfetti
     }
 
     enum ParentGateIntent: Hashable {
@@ -59,6 +60,7 @@ final class RootCoordinator {
     var route: Route = .onboardingSplash
     var previewAsset: CapturedAsset?
     var previewLookName: String?
+    var previewShadeIDs: [String] = []
     private(set) var overlay: Overlay?
 
     func advanceFromSplash() {
@@ -102,18 +104,36 @@ final class RootCoordinator {
         route = .error(variant)
     }
 
-    func showPreview(asset: CapturedAsset, lookName: String? = nil) {
+    func showPreview(asset: CapturedAsset, lookName: String? = nil, shadeIDs: [String] = []) {
         previewAsset = asset
         previewLookName = lookName
+        previewShadeIDs = shadeIDs
         overlay = .preview
     }
 
     func dismissPreview() {
         previewAsset = nil
         previewLookName = nil
+        previewShadeIDs = []
         if overlay == .preview {
             overlay = nil
         } else {
+            route = .app
+        }
+    }
+
+    func dismissPreviewSaved() {
+        previewAsset = nil
+        previewLookName = nil
+        previewShadeIDs = []
+        overlay = .savedConfetti
+    }
+
+    func finishPreviewSaved() {
+        if overlay == .savedConfetti {
+            overlay = nil
+        }
+        if route == .preview {
             route = .app
         }
     }

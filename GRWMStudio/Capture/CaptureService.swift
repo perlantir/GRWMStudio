@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import UIKit
 
 /// Writes captured photos and videos into the app's local captures directory.
@@ -47,12 +48,87 @@ public actor CaptureService {
     }
 }
 
+@MainActor
+final class CaptureSaveService {
+    private let modelContext: ModelContext
+    private let fileManager: FileManager
+
+    init(_ modelContext: ModelContext, fileManager: FileManager = .default) {
+        self.modelContext = modelContext
+        self.fileManager = fileManager
+    }
+
+    func save(asset: CapturedAsset, lookName: String?, shadeIDs: [String]) async throws -> SavedCapture {
+        if ProcessInfo.processInfo.shouldForceSaveFailure {
+            throw CaptureServiceError.debugForcedFailure
+        }
+
+        let id = UUID()
+        let directory = try captureDirectory()
+        let fileURL: URL
+        let kind: SavedCapture.Kind
+
+        switch asset {
+        case .photo(let image):
+            fileURL = directory.appendingPathComponent("\(id.uuidString).jpg")
+            guard let data = image.jpegData(compressionQuality: 0.92) else {
+                throw CaptureServiceError.jpegEncodingFailed
+            }
+
+            try data.write(to: fileURL, options: .atomic)
+            kind = .photo
+
+        case .video(let sourceURL):
+            guard fileManager.fileExists(atPath: sourceURL.path) else {
+                throw CaptureServiceError.videoFileMissing(sourceURL.path)
+            }
+
+            fileURL = directory.appendingPathComponent("\(id.uuidString).mp4")
+            try fileManager.copyItem(at: sourceURL, to: fileURL)
+            kind = .video
+        }
+
+        let record = SavedCapture(
+            id: id,
+            mediaPath: fileURL.lastPathComponent,
+            kindRaw: kind.rawValue,
+            appliedLookID: lookName,
+            appliedShadesJSON: try encodedShadeIDs(shadeIDs),
+            name: lookName ?? "Custom mix"
+        )
+
+        modelContext.insert(record)
+        try modelContext.save()
+        return record
+    }
+
+    private func captureDirectory() throws -> URL {
+        let directory = URL.documentsURL.appendingPathComponent("captures", isDirectory: true)
+        if !fileManager.fileExists(atPath: directory.path) {
+            try fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
+        }
+        return directory
+    }
+
+    private func encodedShadeIDs(_ shadeIDs: [String]) throws -> String {
+        let data = try JSONEncoder().encode(shadeIDs.sorted())
+        guard let encoded = String(bytes: data, encoding: .utf8) else {
+            throw CaptureServiceError.shadeEncodingFailed
+        }
+        return encoded
+    }
+}
+
 /// Capture persistence failures.
 public enum CaptureServiceError: LocalizedError {
     /// JPEG encoding failed.
     case jpegEncodingFailed
     /// DeepAR reported a video file that does not exist.
     case videoFileMissing(String)
+    /// Debug-only forced save failure.
+    case debugForcedFailure
+    /// Shade metadata could not be encoded.
+    case shadeEncodingFailed
 
     /// Human-readable diagnostic text.
     public var errorDescription: String? {
@@ -61,6 +137,20 @@ public enum CaptureServiceError: LocalizedError {
             "JPEG encoding failed"
         case .videoFileMissing(let path):
             "Video file missing: \(path)"
+        case .debugForcedFailure:
+            "Debug forced save failure"
+        case .shadeEncodingFailed:
+            "Shade metadata encoding failed"
         }
+    }
+}
+
+private extension ProcessInfo {
+    var shouldForceSaveFailure: Bool {
+        #if DEBUG
+        arguments.contains("-GRWMDebugSaveFail")
+        #else
+        false
+        #endif
     }
 }
