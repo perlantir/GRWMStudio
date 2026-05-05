@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class AccessibilityUITests: XCTestCase {
     @MainActor
     func testCaptureAccessibilityVisualEvidence() throws {

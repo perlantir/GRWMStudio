@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class SettingsPolishUITests: XCTestCase {
     @MainActor
     func testSettingsLookAndFeelShowsSeparateSoundAndHapticsRows() throws {

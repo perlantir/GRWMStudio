@@ -1,5 +1,6 @@
 import XCTest
 
+@MainActor
 final class GRWMStudioUITests: XCTestCase {
     @MainActor
     func testLaunches() throws {

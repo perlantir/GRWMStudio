@@ -1,6 +1,7 @@
 import Foundation
 import XCTest
 
+@MainActor
 final class ErrorScreenshotsUITests: XCTestCase {
     private let variants: [(slug: String, chip: String)] = [
         ("cam-denied", "CAM-DENIED issue"),
