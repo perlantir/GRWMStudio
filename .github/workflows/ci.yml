@@ -55,7 +55,13 @@ jobs:
             -scheme GRWMStudio \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }},OS=latest" \
             -resultBundlePath TestResults.xcresult \
-            | xcbeautify
+            2>&1 | tee xcodebuild.log | xcbeautify
+      - name: Upload xcodebuild log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: xcodebuild.log
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
