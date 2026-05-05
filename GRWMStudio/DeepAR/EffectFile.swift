@@ -19,6 +19,10 @@ public struct EffectFile: Decodable, Identifiable, Hashable, Sendable {
     /// Optional hot flag used by preset looks.
     public let hot: Bool?
 
+    public var localizedDisplayName: String {
+        L10n.string("deepar.effect.\(id).name", fallback: displayName)
+    }
+
     /// Resolves the effect file in the application bundle.
     public func bundleURL() throws -> URL {
         let stem = (file as NSString).deletingPathExtension

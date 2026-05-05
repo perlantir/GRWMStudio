@@ -60,13 +60,15 @@ public final class DeepARController {
     }
 
     /// Current DeepAR lifecycle state.
-    public private(set) var state: State = .uninitialized
+    var state: State = .uninitialized
     /// Whether DeepAR currently sees a tracked face.
-    public private(set) var trackedFace = false
+    var trackedFace = false
     /// Whether the active or next camera session should use the front camera.
-    public private(set) var cameraIsFront = true
+    var cameraIsFront = true
+    /// Whether the active camera session includes audio input.
+    var cameraIncludesAudio = false
     /// Effect IDs currently loaded by slot.
-    public private(set) var loadedEffects: [EffectSlot: EffectFile.ID] = [:]
+    var loadedEffects: [EffectSlot: EffectFile.ID] = [:]
     /// Whether video recording is active.
     public internal(set) var isRecordingVideo = false
     /// Current video recording duration.
@@ -79,7 +81,7 @@ public final class DeepARController {
     @ObservationIgnored var _arView: UIView?
     @ObservationIgnored var _delegateProxy: DeepARDelegateProxy?
     @ObservationIgnored var _client: (any DeepARClient)?
-    @ObservationIgnored private var _cameraController: CameraController?
+    @ObservationIgnored var cameraController: CameraController?
 
     @ObservationIgnored var bootstrapContinuation: CheckedContinuation<Void, Error>?
     @ObservationIgnored var photoContinuation: CheckedContinuation<URL, Error>?
@@ -87,8 +89,8 @@ public final class DeepARController {
     @ObservationIgnored var videoContinuation: CheckedContinuation<URL, Error>?
     @ObservationIgnored var recordingProgressTask: Task<Void, Never>?
     @ObservationIgnored var loadEffectContinuations: [EffectSlot: CheckedContinuation<Void, Error>] = [:]
-    @ObservationIgnored private var loadEffectRequestIDs: [EffectSlot: UUID] = [:]
-    @ObservationIgnored private var faceVisibilityContinuations: [UUID: AsyncStream<Bool>.Continuation] = [:]
+    @ObservationIgnored var loadEffectRequestIDs: [EffectSlot: UUID] = [:]
+    @ObservationIgnored var faceVisibilityContinuations: [UUID: AsyncStream<Bool>.Continuation] = [:]
     @ObservationIgnored private let clientFactory: @MainActor () -> any DeepARClient
     @ObservationIgnored private let bootstrapTimeout: Duration
     @ObservationIgnored private let effectLoadTimeout: Duration
@@ -110,32 +112,6 @@ public final class DeepARController {
         self.effectLoadTimeout = effectLoadTimeout
     }
 
-    /// Stream of face visibility changes from DeepAR's delegate callbacks.
-    public var faceVisibilityStream: AsyncStream<Bool> {
-        let id = UUID()
-        let pair = AsyncStream.makeStream(of: Bool.self)
-        pair.continuation.yield(trackedFace)
-        faceVisibilityContinuations[id] = pair.continuation
-        pair.continuation.onTermination = { [weak self] _ in
-            Task { @MainActor in
-                self?.faceVisibilityContinuations[id] = nil
-            }
-        }
-        return pair.stream
-    }
-
-    func updateTrackedFace(_ isTracked: Bool) {
-        trackedFace = isTracked
-        for continuation in faceVisibilityContinuations.values {
-            continuation.yield(isTracked)
-        }
-    }
-
-    func completeBootstrapFromDelegate() {
-        bootstrapContinuation?.resume()
-        bootstrapContinuation = nil
-    }
-
     /// Bootstraps the DeepAR SDK.
     public func bootstrap(licenseKey: String = DeepARController.licenseKeyFromInfoPlist()) async throws {
         if state != .uninitialized {
@@ -146,6 +122,7 @@ public final class DeepARController {
             throw SetupError.missingLicenseKey
         }
         state = .initializing
+        PerformanceSignposts.beginDeepARBootstrap()
         Logger.deepAR.info("Bootstrapping DeepAR")
 
         do {
@@ -162,6 +139,10 @@ public final class DeepARController {
                         client.setLicenseKey(licenseKey)
                         let proxy = DeepARDelegateProxy(controller: self)
                         client.setDelegate(proxy)
+                        client.setRenderingResolution(
+                            width: Int(Self.previewResolution.width),
+                            height: Int(Self.previewResolution.height)
+                        )
                         self._client = client
                         self._deepAR = (client as? LiveDeepARClient)?.sdk
                         self._delegateProxy = proxy
@@ -170,15 +151,18 @@ public final class DeepARController {
                 }
             }
             state = .ready
+            PerformanceSignposts.endDeepARBootstrap()
             Logger.deepAR.info("DeepAR bootstrap complete (state: ready)")
         } catch is TimeoutError {
             state = .failed(reason: "SDK init timeout")
             bootstrapContinuation?.resume(throwing: SetupError.sdkInitTimeout)
             bootstrapContinuation = nil
+            PerformanceSignposts.endDeepARBootstrap()
             throw SetupError.sdkInitTimeout
         } catch {
             state = .failed(reason: error.localizedDescription)
             bootstrapContinuation = nil
+            PerformanceSignposts.endDeepARBootstrap()
             throw error
         }
     }
@@ -189,20 +173,57 @@ public final class DeepARController {
             throw SetupError.recordingFailed(reason: "DeepAR not ready")
         }
         guard let deepAR = _deepAR else {
-            throw SetupError.recordingFailed(reason: "Missing DeepAR instance")
+            // Mock-backed tests have no live SDK camera pipeline; keep audio mode as logical state only.
+            guard _client != nil else {
+                throw SetupError.recordingFailed(reason: "Missing DeepAR instance")
+            }
+            cameraIncludesAudio = includeAudio
+            Logger.deepAR.info("Camera start skipped for mock-backed DeepAR client (audio: \(includeAudio))")
+            return
         }
 
-        if _cameraController == nil {
-            _cameraController = CameraController(deepAR: deepAR)
+        if cameraController == nil {
+            cameraController = CameraController(deepAR: deepAR)
         }
-        _cameraController?.startCamera(withAudio: includeAudio)
+        PerformanceSignposts.beginDeepARStartCamera()
+        configureCameraController()
+        cameraController?.position = cameraIsFront ? .front : .back
+        cameraController?.startCamera(withAudio: includeAudio)
+        _client?.resumeRendering()
+        cameraIncludesAudio = includeAudio
+        PerformanceSignposts.endDeepARStartCamera()
         Logger.deepAR.info("Camera started (audio: \(includeAudio))")
+    }
+
+    /// Restarts the active camera session when the requested audio mode changes.
+    public func ensureCameraAudioMode(includeAudio: Bool) async throws {
+        guard state == .ready else {
+            throw SetupError.recordingFailed(reason: "DeepAR not ready")
+        }
+
+        if cameraController == nil {
+            try await startCamera(includeAudio: includeAudio)
+            return
+        }
+
+        guard cameraIncludesAudio != includeAudio else {
+            return
+        }
+
+        cameraController?.stopCamera()
+        configureCameraController()
+        cameraController?.position = cameraIsFront ? .front : .back
+        cameraController?.startCamera(withAudio: includeAudio)
+        _client?.resumeRendering()
+        cameraIncludesAudio = includeAudio
+        Logger.deepAR.info("Camera audio mode updated (audio: \(includeAudio))")
     }
 
     /// Stops the camera pipeline.
     public func stopCamera() async {
-        _cameraController?.stopCamera()
-        _cameraController = nil
+        cameraController?.stopCamera()
+        cameraController = nil
+        cameraIncludesAudio = false
         trackedFace = false
         Logger.deepAR.info("Camera stopped")
     }
@@ -217,11 +238,12 @@ public final class DeepARController {
         guard state == .ready else {
             throw SetupError.recordingFailed(reason: "DeepAR not ready")
         }
-        guard let cameraController = _cameraController else {
+        guard let cameraController else {
             throw SetupError.recordingFailed(reason: "Camera not started")
         }
 
         cameraController.position = toFront ? .front : .back
+        configureCameraController()
         cameraIsFront = toFront
         trackedFace = false
         Logger.deepAR.info("Camera switched (front: \(toFront))")
@@ -239,6 +261,7 @@ public final class DeepARController {
         let url = try effect.bundleURL()
         let requestID = UUID()
         let effectPath = url.path
+        PerformanceSignposts.beginDeepARLoadEffect()
         Logger.deepAR.info("Loading effect \(effect.id) into \(slot.rawValue)")
 
         do {
@@ -259,11 +282,14 @@ public final class DeepARController {
                 }
             }
             loadedEffects[slot] = effect.id
+            PerformanceSignposts.endDeepARLoadEffect()
         } catch is TimeoutError {
             clearEffectLoadIfCurrent(slot: slot, requestID: requestID, reason: "Timeout")
+            PerformanceSignposts.endDeepARLoadEffect()
             throw SetupError.effectLoadFailed(slot: slot, reason: "Timeout")
         } catch {
             clearEffectLoadIfCurrent(slot: slot, requestID: requestID, reason: nil)
+            PerformanceSignposts.endDeepARLoadEffect()
             throw error
         }
     }

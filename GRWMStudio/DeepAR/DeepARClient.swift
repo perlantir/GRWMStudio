@@ -34,6 +34,14 @@ protocol DeepARClient: AnyObject {
     func setVideoRecordingOutputName(_ name: String)
     /// Finishes SDK video recording.
     func finishVideoRecording()
+    /// Tunes the SDK rendering resolution.
+    func setRenderingResolution(width: Int, height: Int)
+    /// Pauses DeepAR rendering without releasing resources.
+    func pauseRendering()
+    /// Resumes rendering after a temporary pause.
+    func resumeRendering()
+    /// Shuts down DeepAR and releases native resources.
+    func shutdown()
     /// Applies a Vector4 runtime parameter.
     func setVectorParameter(
         _ gameObject: String,
@@ -59,6 +67,14 @@ extension DeepARClient {
     func setVideoRecordingOutputName(_ name: String) {}
 
     func finishVideoRecording() {}
+
+    func setRenderingResolution(width: Int, height: Int) {}
+
+    func pauseRendering() {}
+
+    func resumeRendering() {}
+
+    func shutdown() {}
 
     func setVectorParameter(
         _ gameObject: String,
@@ -119,6 +135,22 @@ final class LiveDeepARClient: DeepARClient {
 
     func finishVideoRecording() {
         sdk.finishVideoRecording()
+    }
+
+    func setRenderingResolution(width: Int, height: Int) {
+        sdk.setRenderingResolutionWithWidth(width, height: height)
+    }
+
+    func pauseRendering() {
+        sdk.pause()
+    }
+
+    func resumeRendering() {
+        sdk.resume()
+    }
+
+    func shutdown() {
+        sdk.shutdown()
     }
 
     func setVectorParameter(

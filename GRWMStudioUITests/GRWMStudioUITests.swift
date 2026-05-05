@@ -76,18 +76,18 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(capture.waitForExistence(timeout: 3))
         capture.tap()
 
-        let stopRecording = app.buttons["Stop video recording"]
+        let stopRecording = app.buttons["recording-stop-chip"]
         XCTAssertTrue(stopRecording.waitForExistence(timeout: 3))
         stopRecording.tap()
 
         XCTAssertTrue(app.staticTexts["Preview"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["preview-discard-button"].exists)
-        XCTAssertTrue(app.buttons["Unmute video preview"].exists || app.buttons["Mute video preview"].exists)
+        XCTAssertTrue(app.buttons["preview-video-audio-toggle"].exists)
         XCTAssertTrue(app.buttons["Save to Locker"].exists)
 
         app.buttons["preview-discard-button"].tap()
 
-        XCTAssertFalse(app.staticTexts["Preview"].waitForExistence(timeout: 1))
+        XCTAssertFalse(app.staticTexts["Preview"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.buttons["Skin filter category"].exists)
     }
 
@@ -105,16 +105,16 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(capture.waitForExistence(timeout: 3))
         capture.tap()
 
-        let stopRecording = app.buttons["Stop video recording"]
+        let stopRecording = app.buttons["recording-stop-chip"]
         XCTAssertTrue(stopRecording.waitForExistence(timeout: 3))
         stopRecording.tap()
 
         XCTAssertTrue(app.staticTexts["Preview"].waitForExistence(timeout: 5))
 
-        let unmute = app.buttons["Unmute video preview"]
+        let unmute = app.buttons["preview-video-audio-toggle"]
         XCTAssertTrue(unmute.waitForExistence(timeout: 3))
         unmute.tap()
-        XCTAssertTrue(app.buttons["Mute video preview"].waitForExistence(timeout: 2))
+        XCTAssertEqual(unmute.label, "Mute video")
 
         let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         attachment.name = "video-preview-muted-control"
@@ -158,7 +158,7 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(save.waitForExistence(timeout: 5))
         save.tap()
 
-        XCTAssertTrue(app.staticTexts["Saved! 💖"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.otherElements["saved-confetti"].waitForExistence(timeout: 3))
         XCTAssertFalse(app.staticTexts["Preview"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.buttons["Skin filter category"].waitForExistence(timeout: 3))
     }
@@ -177,7 +177,7 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(save.waitForExistence(timeout: 5))
         save.tap()
 
-        XCTAssertTrue(app.staticTexts["Saving needs a reset."].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["We could not save that look"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.staticTexts["Preview"].exists)
         XCTAssertTrue(app.buttons["Save to Locker"].exists)
     }
@@ -192,8 +192,8 @@ final class GRWMStudioUITests: XCTestCase {
         XCTAssertTrue(favoriteLooks.waitForExistence(timeout: 8))
         favoriteLooks.tap()
 
-        XCTAssertTrue(app.staticTexts["Looks Library - wired in GRWM-500"].waitForExistence(timeout: 3))
-        XCTAssertTrue(app.buttons["Looks"].isSelected)
+        XCTAssertTrue(app.staticTexts["looks-library-title"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["tab-looks"].isSelected)
     }
 
     @MainActor

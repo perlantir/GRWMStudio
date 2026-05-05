@@ -41,7 +41,7 @@ struct WelcomeView: View {
             Button {
                 coordinator.showParentInfo()
             } label: {
-                Text("Skip ›")
+                Text("onboarding.welcome.skip")
                     .font(DH.font(.buttonSmall))
                     .tracking(0.08 * DH.TypeStyle.buttonSmall.size)
                     .foregroundStyle(DH.pinkDeep)
@@ -50,7 +50,7 @@ struct WelcomeView: View {
                     .background(Capsule().fill(.white.opacity(0.55)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Skip")
+            .accessibilityLabel(L10n.string("onboarding.welcome.skip_accessibility"))
         }
     }
 
@@ -87,7 +87,7 @@ struct WelcomeView: View {
     private var heartBubble: some View {
         ZStack {
             StickerHeart(size: 84, fill: .white, stroke: DH.pinkDeep, strokeWidth: 1.8)
-            Text("hey\nbestie!")
+            Text("onboarding.welcome.hero_badge")
                 .font(DH.font(.buttonSmall))
                 .tracking(0)
                 .foregroundStyle(DH.pinkDeep)
@@ -101,7 +101,7 @@ struct WelcomeView: View {
 
     private var headlineBlock: some View {
         VStack(spacing: 10) {
-            Text("Try every shade.\nSave the ones you love.")
+            Text("onboarding.welcome.title")
                 .font(DH.font(.display3))
                 .tracking(DH.tracking(.display3))
                 .foregroundStyle(DH.pinkDeep)
@@ -111,7 +111,7 @@ struct WelcomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .layoutPriority(1)
 
-            Text("Point your camera at your face and we'll do the rest. Mix lips, eyes & cheeks. Save your fav looks to your locker.")
+            Text("onboarding.welcome.subtitle")
                 .font(DH.font(.body))
                 .foregroundStyle(DH.ink.opacity(0.7))
                 .multilineTextAlignment(.center)
@@ -140,7 +140,7 @@ struct WelcomeView: View {
     private var ctaBlock: some View {
         VStack(spacing: 10) {
             DHButton(
-                title: "Let's go!",
+                title: L10n.string("onboarding.welcome.cta"),
                 kind: .primary,
                 size: .xl,
                 trailingIcon: AnyView(Image(systemName: "arrow.right")),
@@ -148,12 +148,12 @@ struct WelcomeView: View {
             ) {
                 coordinator.showParentInfo()
             }
-            .accessibilityLabel("Let's go")
+            .accessibilityLabel(L10n.string("onboarding.welcome.cta"))
 
             Button {
                 coordinator.showParentInfo()
             } label: {
-                Text("I already have an account →")
+                Text("onboarding.welcome.account_link")
                     .font(DH.font(.buttonSmall))
                     .tracking(0.06 * DH.TypeStyle.buttonSmall.size)
                     .foregroundStyle(DH.pinkDeep)
@@ -161,7 +161,7 @@ struct WelcomeView: View {
                     .frame(height: 46)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("I already have an account")
+            .accessibilityLabel(L10n.string("onboarding.welcome.account_link_accessibility"))
         }
     }
 }

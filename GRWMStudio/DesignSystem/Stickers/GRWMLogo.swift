@@ -159,7 +159,7 @@ private struct StickerBobModifier: ViewModifier {
                     return
                 }
 
-                withAnimation(.easeInOut(duration: period).repeatForever(autoreverses: true)) {
+                withAnimation(DHAnim.respecting(.stickerWobble, reduceMotion: reduceMotion).speed(1.6 / period)) {
                     animating = true
                 }
             }

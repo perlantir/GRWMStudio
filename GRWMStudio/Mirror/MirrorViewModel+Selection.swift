@@ -10,13 +10,17 @@ extension MirrorViewModel {
         guard beginSelectionIfPossible(label: shade.id) else {
             return
         }
-        defer { endSelection() }
+        PerformanceSignposts.beginApplyShade()
+        defer {
+            PerformanceSignposts.endApplyShade()
+            endSelection()
+        }
 
         do {
             let effect = try await effect(containing: shade, in: slot, preferredID: effectID)
             let isPro = effect.isPro || (shade.isPro ?? false)
             guard canUseProContent(isPro: isPro) else {
-                lastError = .license
+                pendingFullScreenError = .license
                 Logger.mirror.info("Blocked pro shade without entitlement: \(shade.id, privacy: .public)")
                 return
             }
@@ -37,8 +41,7 @@ extension MirrorViewModel {
             selections[slot] = SlotSelection(effectID: effect.id, shade: shade, isPro: isPro)
             resetEffectFailureCounter()
         } catch {
-            recordEffectFailure()
-            lastError = .effectFail
+            pendingFullScreenError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
         }
     }
@@ -47,8 +50,13 @@ extension MirrorViewModel {
         guard beginSelectionIfPossible(label: shade.id) else {
             return
         }
-        defer { endSelection() }
+        PerformanceSignposts.beginApplyShade()
+        defer {
+            PerformanceSignposts.endApplyShade()
+            endSelection()
+        }
 
+        lastEffectIntent = .shade(slot: slot, shade: shade)
         lastShadeSelection = (slot, shade)
 
         do {
@@ -58,7 +66,7 @@ extension MirrorViewModel {
 
             let isPro = effect.isPro || shade.isPro
             guard canUseProContent(isPro: isPro) else {
-                lastError = .license
+                pendingFullScreenError = .license
                 Logger.mirror.info("Blocked pro shade without entitlement: \(shade.id, privacy: .public)")
                 return
             }
@@ -76,8 +84,7 @@ extension MirrorViewModel {
             }
             resetEffectFailureCounter()
         } catch {
-            recordEffectFailure()
-            lastError = .effectFail
+            pendingFullScreenError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
         }
     }
@@ -116,25 +123,19 @@ extension MirrorViewModel {
     }
 
     func retryLastSelection() async {
-        guard let lastShadeSelection else {
-            return
-        }
-
-        lastError = nil
-        await Task.yield()
-        await selectShade(in: lastShadeSelection.slot, shade: lastShadeSelection.shade)
+        await retryLastEffect()
     }
 
     func dismissEffectFailureBanner() {
-        guard lastError == .effectFail else {
+        guard pendingFullScreenError == .effectFail else {
             return
         }
-        lastError = nil
+        pendingFullScreenError = nil
     }
 
     func selectLook(_ effect: EffectFile) async throws {
         guard canUseProContent(isPro: effect.isPro) else {
-            lastError = .license
+            pendingFullScreenError = .license
             Logger.mirror.info("Blocked pro look without entitlement: \(effect.id, privacy: .public)")
             return
         }
@@ -148,7 +149,7 @@ extension MirrorViewModel {
         }
 
         selections[.looks] = SlotSelection(effectID: effect.id, shade: nil, isPro: effect.isPro)
-        activeLookName = effect.displayName
+        activeLookName = effect.localizedDisplayName
         resetEffectFailureCounter()
     }
 
@@ -314,7 +315,7 @@ extension MirrorViewModel {
     }
 
     private func setTexture(_ assetName: String, on parameter: EffectParameter) async throws {
-        guard let image = image(named: assetName) else {
+        guard let image = await image(named: assetName) else {
             throw MirrorActionError.missingTexture(assetName)
         }
         guard shouldApply(.texture(assetName), on: parameter) else {
@@ -364,36 +365,9 @@ extension MirrorViewModel {
     private func resetEffectFailureCounter() {
         effectFailureCount = 0
         effectFailureWindowStart = nil
-        if lastError == .effectFail {
-            lastError = nil
+        if pendingFullScreenError == .effectFail {
+            pendingFullScreenError = nil
         }
     }
 
-    func image(named assetName: String) -> UIImage? {
-        if let image = textureImageCache[assetName] {
-            return image
-        }
-
-        if let image = UIImage(named: assetName) {
-            textureImageCache[assetName] = image
-            return image
-        }
-
-        let resourceName = (assetName as NSString).deletingPathExtension
-        let resourceExtension = (assetName as NSString).pathExtension.isEmpty ? "png" : (assetName as NSString).pathExtension
-
-        for subdirectory in ["Effects/luts", "Effects/textures"] {
-            if let url = Bundle.main.url(
-                forResource: resourceName,
-                withExtension: resourceExtension,
-                subdirectory: subdirectory
-            ),
-                let image = UIImage(contentsOfFile: url.path) {
-                textureImageCache[assetName] = image
-                return image
-            }
-        }
-
-        return nil
-    }
 }

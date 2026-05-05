@@ -10,7 +10,8 @@ struct MirrorBottomControls: View {
                     await viewModel.flipCamera()
                 }
             }
-            .accessibilityLabel("Flip camera")
+            .accessibilityLabel(L10n.string("mirror.controls.flip_camera"))
+            .accessibilityHint(L10n.string("mirror.controls.flip_camera.hint"))
 
             ControlButton(
                 systemName: viewModel.flashEnabled ? "bolt.fill" : "bolt",
@@ -18,7 +19,8 @@ struct MirrorBottomControls: View {
             ) {
                 viewModel.toggleFlash()
             }
-            .accessibilityLabel(viewModel.flashEnabled ? "Flash on" : "Flash off")
+            .accessibilityLabel(viewModel.flashEnabled ? L10n.string("mirror.controls.flash_on") : L10n.string("mirror.controls.flash_off"))
+            .accessibilityHint(L10n.string("mirror.controls.flash.hint"))
 
             Spacer(minLength: 0)
         }
@@ -42,6 +44,7 @@ private struct ControlButton: View {
                 .frame(width: 44, height: 50)
         }
         .buttonStyle(.plain)
+        .accessibilityHint(L10n.string("common.double_tap_activate"))
     }
 }
 

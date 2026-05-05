@@ -4,6 +4,8 @@ import SwiftUI
 struct MirrorView: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Bindable var viewModel: MirrorViewModel
     var onFavoriteLooks: @MainActor () -> Void = {}
     @State private var pendingCategoryAfterLook: FilterCategory?
@@ -44,15 +46,20 @@ struct MirrorView: View {
                 pendingCategoryAfterLook: $pendingCategoryAfterLook
             )
 
-            effectFailureOverlay
-            captureFailureOverlay
             countdownOverlay
             flashOverlay
         }
         .preferredColorScheme(.light)
         .task {
             await viewModel.start(env: env)
+            presentPendingFullScreenErrorIfNeeded()
             updateNoFaceTip(for: viewModel.isFaceDetected)
+        }
+        .onChange(of: viewModel.pendingFullScreenError) { _, _ in
+            presentPendingFullScreenErrorIfNeeded()
+        }
+        .onChange(of: coordinator.presentedError) { _, _ in
+            presentPendingFullScreenErrorIfNeeded()
         }
         .onChange(of: viewModel.isFaceDetected) { _, visible in
             if visible {
@@ -61,23 +68,21 @@ struct MirrorView: View {
             updateNoFaceTip(for: visible)
         }
         .onChange(of: viewModel.state) { _, state in
+            if state == .running {
+                Task { @MainActor in
+                    await Task.yield()
+                    PerformanceSignposts.endAppLaunchOnMirrorFirstFrame()
+                }
+            }
             guard state == .running else {
                 noFaceTipTask?.cancel()
-                withAnimation(.easeOut(duration: 0.18)) {
+                withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
                     showNoFaceTip = false
                 }
                 return
             }
 
             updateNoFaceTip(for: viewModel.isFaceDetected)
-        }
-        .onChange(of: viewModel.lastError) { _, newValue in
-            guard newValue == .license else {
-                return
-            }
-
-            coordinator.startParentGate(intent: .paywall)
-            viewModel.lastError = nil
         }
         .onChange(of: viewModel.previewRouteID) { _, newValue in
             guard newValue != nil, let asset = viewModel.pendingPreviewAsset else {
@@ -92,8 +97,25 @@ struct MirrorView: View {
             viewModel.pendingPreviewAsset = nil
             viewModel.previewRouteID = nil
         }
+        .onChange(of: scenePhase) { _, newPhase in
+            Task { @MainActor in
+                await viewModel.handleScenePhase(newPhase)
+
+                if newPhase == .active {
+                    await viewModel.refreshCameraAuthorization()
+                    if coordinator.presentedError == .camDenied,
+                       await env.permissions.cameraStatus() == .granted {
+                        coordinator.dismissError()
+                    }
+                    presentPendingFullScreenErrorIfNeeded()
+                }
+            }
+        }
         .onDisappear {
             noFaceTipTask?.cancel()
+            guard scenePhase == .active else {
+                return
+            }
             viewModel.pause()
         }
     }
@@ -126,7 +148,7 @@ struct MirrorView: View {
 
     @ViewBuilder
     private var cameraTopOverlay: some View {
-        if showNoFaceTip, viewModel.lastError != .effectFail {
+        if showNoFaceTip {
             NoFaceTipView()
                 .padding(.top, 18)
                 .transition(.opacity.combined(with: .move(edge: .top)))
@@ -142,40 +164,6 @@ struct MirrorView: View {
     }
 
     @ViewBuilder
-    private var effectFailureOverlay: some View {
-        if viewModel.state == .running, viewModel.lastError == .effectFail {
-            EffectFailureBanner {
-                Task { @MainActor in
-                    await viewModel.retryLastSelection()
-                }
-            } onDismiss: {
-                Task { @MainActor in
-                    viewModel.dismissEffectFailureBanner()
-                }
-            }
-            .padding(.horizontal, 14)
-            .padding(.top, 80)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .transition(.opacity.combined(with: .move(edge: .top)))
-        }
-    }
-
-    @ViewBuilder
-    private var captureFailureOverlay: some View {
-        if viewModel.state == .running, viewModel.lastError == .recFail {
-            CaptureFailureBanner {
-                Task { @MainActor in
-                    viewModel.dismissCaptureFailureBanner()
-                }
-            }
-            .padding(.horizontal, 14)
-            .padding(.top, 80)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .transition(.opacity.combined(with: .move(edge: .top)))
-        }
-    }
-
-    @ViewBuilder
     private var cameraRegion: some View {
         switch viewModel.state {
         case .idle, .starting, .running:
@@ -186,8 +174,13 @@ struct MirrorView: View {
                     RoundedRectangle(cornerRadius: DH.Radius.viewportInner)
                         .strokeBorder(.white, lineWidth: 6)
                 }
+                .overlay {
+                    if viewModel.state == .starting {
+                        DHSpinner()
+                    }
+                }
                 .chunkyShadow(.lg(deep: DH.pinkDeep), shape: RoundedRectangle(cornerRadius: DH.Radius.viewportInner))
-                .accessibilityLabel("Magic mirror camera")
+                .accessibilityLabel(L10n.string("mirror.camera.accessibility_label"))
 
         case .needsPermission:
             permissionCard
@@ -195,7 +188,7 @@ struct MirrorView: View {
         case .failed(let variant):
             DHCard(bg: DH.cream, deep: DH.pink, cornerRadius: DH.Radius.bigCard, padding: 20) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Mirror needs a restart")
+                    Text("mirror.failed.title")
                         .font(DH.font(.headline))
                         .tracking(DH.tracking(.headline))
                         .foregroundStyle(DH.pinkDeep)
@@ -209,7 +202,10 @@ struct MirrorView: View {
         }
     }
 
-    private var permissionCard: some View {
+}
+
+private extension MirrorView {
+    var permissionCard: some View {
         DHCard(bg: DH.butter, deep: DH.butterDeep, cornerRadius: DH.Radius.bigCard, padding: 24) {
             HStack(spacing: 14) {
                 Image(systemName: "camera.fill")
@@ -218,7 +214,7 @@ struct MirrorView: View {
                     .frame(width: 48, height: 48)
                     .background(Circle().fill(.white.opacity(0.65)))
 
-                Text("Tap to allow camera 💕")
+                Text("mirror.permission.title")
                     .font(DH.font(.headline))
                     .tracking(DH.tracking(.headline))
                     .foregroundStyle(DH.ink)
@@ -231,14 +227,15 @@ struct MirrorView: View {
             coordinator.showPermissions()
         }
         .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("Tap to allow camera")
+        .accessibilityLabel(L10n.string("mirror.permission.accessibility_label"))
+        .accessibilityHint(L10n.string("mirror.permission.accessibility_hint"))
     }
 
-    private func updateNoFaceTip(for visible: Bool) {
+    func updateNoFaceTip(for visible: Bool) {
         noFaceTipTask?.cancel()
 
         guard viewModel.state == .running else {
-            withAnimation(.easeOut(duration: 0.18)) {
+            withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
                 showNoFaceTip = false
             }
             return
@@ -246,14 +243,14 @@ struct MirrorView: View {
 
         if visible {
             hasSeenFace = true
-            withAnimation(.easeOut(duration: 0.18)) {
+            withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
                 showNoFaceTip = false
             }
             return
         }
 
         guard hasSeenFace else {
-            withAnimation(.easeOut(duration: 0.18)) {
+            withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
                 showNoFaceTip = false
             }
             return
@@ -265,10 +262,23 @@ struct MirrorView: View {
                 return
             }
 
-            withAnimation(.bouncy(duration: 0.28)) {
+            withAnimation(DHAnim.respecting(.bouncy, reduceMotion: reduceMotion)) {
                 showNoFaceTip = true
             }
         }
+    }
+
+    func presentPendingFullScreenErrorIfNeeded() {
+        guard let variant = viewModel.pendingFullScreenError else {
+            return
+        }
+
+        guard coordinator.presentedError == nil else {
+            return
+        }
+
+        coordinator.presentError(variant)
+        viewModel.pendingFullScreenError = nil
     }
 }
 

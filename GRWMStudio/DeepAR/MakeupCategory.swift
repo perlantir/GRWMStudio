@@ -22,19 +22,19 @@ public enum MakeupCategory: String, CaseIterable, Identifiable, Sendable, Hashab
     public var displayName: String {
         switch self {
         case .skin:
-            "Skin"
+            L10n.string("mirror.category.skin")
         case .base:
-            "Base"
+            L10n.string("mirror.category.base")
         case .eyes:
-            "Eyes"
+            L10n.string("mirror.category.eyes")
         case .brows:
-            "Brows"
+            L10n.string("mirror.category.brows")
         case .cheeks:
-            "Cheeks"
+            L10n.string("mirror.category.cheeks")
         case .lips:
-            "Lips"
+            L10n.string("mirror.category.lips")
         case .looks:
-            "Looks"
+            L10n.string("mirror.category.looks")
         }
     }
 

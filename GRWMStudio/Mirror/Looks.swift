@@ -4,6 +4,10 @@ struct LookPreset: Identifiable, Hashable, Sendable {
     let thumbnailAsset: String
     let effectID: EffectFile.ID
     let isPro: Bool
+
+    var localizedName: String {
+        L10n.string("\(id).name", fallback: name)
+    }
 }
 
 enum Looks {
@@ -65,4 +69,8 @@ enum Looks {
             isPro: true
         )
     ]
+
+    static func byID(_ id: String) -> LookPreset? {
+        all.first(where: { $0.id == id })
+    }
 }

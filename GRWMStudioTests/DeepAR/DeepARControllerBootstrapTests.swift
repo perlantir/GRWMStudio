@@ -32,6 +32,15 @@ final class DeepARControllerBootstrapTests: XCTestCase {
         XCTAssertNotNil(controller.arView)
     }
 
+    func testBootstrapSetsPreviewResolutionTo720p() async throws {
+        let mock = MockDeepARClient(autoInitialize: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        XCTAssertEqual(mock.renderingResolution, CGSize(width: 1280, height: 720))
+    }
+
     func testBootstrapTwiceThrowsAlreadyInitialized() async throws {
         let mock = MockDeepARClient(autoInitialize: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
@@ -71,6 +80,7 @@ private final class MockDeepARClient: DeepARClient {
     private(set) var licenseKey: String?
     private(set) var delegate: DeepARDelegateProxy?
     private(set) var createdFrame: CGRect?
+    private(set) var renderingResolution: CGSize?
 
     init(autoInitialize: Bool = false) {
         self.autoInitialize = autoInitialize
@@ -94,6 +104,10 @@ private final class MockDeepARClient: DeepARClient {
             }
         }
         return view
+    }
+
+    func setRenderingResolution(width: Int, height: Int) {
+        renderingResolution = CGSize(width: width, height: height)
     }
 
     func switchEffect(withSlot slot: String, path: String?) {}

@@ -60,46 +60,86 @@ final class CaptureSaveService {
 
     func save(asset: CapturedAsset, lookName: String?, shadeIDs: [String]) async throws -> SavedCapture {
         if ProcessInfo.processInfo.shouldForceSaveFailure {
-            throw CaptureServiceError.debugForcedFailure
+            throw CaptureServiceError.contextFailed
+        }
+
+        let captureCount = try modelContext.fetchCount(FetchDescriptor<SavedCapture>())
+        if captureCount >= 50 {
+            throw CaptureServiceError.lockerAtLimit
         }
 
         let id = UUID()
         let directory = try captureDirectory()
-        let fileURL: URL
-        let kind: SavedCapture.Kind
+        let storedFile = try writeAssetFile(asset, id: id, directory: directory)
 
+        let record = SavedCapture(
+            id: id,
+            mediaPath: storedFile.url.lastPathComponent,
+            kindRaw: storedFile.kind.rawValue,
+            appliedLookID: lookName,
+            appliedShadesJSON: try encodedShadeIDs(shadeIDs),
+            name: lookName ?? "Custom mix"
+        )
+
+        try persist(record)
+        return record
+    }
+
+    private func writeAssetFile(
+        _ asset: CapturedAsset,
+        id: UUID,
+        directory: URL
+    ) throws -> (url: URL, kind: SavedCapture.Kind) {
         switch asset {
         case .photo(let image):
-            fileURL = directory.appendingPathComponent("\(id.uuidString).jpg")
+            let fileURL = directory.appendingPathComponent("\(id.uuidString).jpg")
             guard let data = image.jpegData(compressionQuality: 0.92) else {
                 throw CaptureServiceError.jpegEncodingFailed
             }
-
-            try data.write(to: fileURL, options: .atomic)
-            kind = .photo
+            try write(data, to: fileURL)
+            return (fileURL, .photo)
 
         case .video(let sourceURL):
             guard fileManager.fileExists(atPath: sourceURL.path) else {
                 throw CaptureServiceError.videoFileMissing(sourceURL.path)
             }
 
-            fileURL = directory.appendingPathComponent("\(id.uuidString).mp4")
-            try fileManager.copyItem(at: sourceURL, to: fileURL)
-            kind = .video
+            let fileURL = directory.appendingPathComponent("\(id.uuidString).mp4")
+            try copyItem(at: sourceURL, to: fileURL)
+            return (fileURL, .video)
         }
+    }
 
-        let record = SavedCapture(
-            id: id,
-            mediaPath: fileURL.lastPathComponent,
-            kindRaw: kind.rawValue,
-            appliedLookID: lookName,
-            appliedShadesJSON: try encodedShadeIDs(shadeIDs),
-            name: lookName ?? "Custom mix"
-        )
+    private func write(_ data: Data, to fileURL: URL) throws {
+        do {
+            try data.write(to: fileURL, options: .atomic)
+        } catch let error as CocoaError where error.code == .fileWriteOutOfSpace {
+            throw CaptureServiceError.capacityExceeded
+        } catch {
+            throw CaptureServiceError.copyFailed
+        }
+    }
 
+    private func copyItem(at sourceURL: URL, to destinationURL: URL) throws {
+        do {
+            try fileManager.copyItem(at: sourceURL, to: destinationURL)
+        } catch let error as CocoaError where error.code == .fileWriteOutOfSpace {
+            throw CaptureServiceError.capacityExceeded
+        } catch {
+            throw CaptureServiceError.copyFailed
+        }
+    }
+
+    private func persist(_ record: SavedCapture) throws {
         modelContext.insert(record)
-        try modelContext.save()
-        return record
+        updateProfileActivity()
+        do {
+            try modelContext.save()
+        } catch let error as CocoaError where error.code == .fileWriteOutOfSpace {
+            throw CaptureServiceError.capacityExceeded
+        } catch {
+            throw CaptureServiceError.contextFailed
+        }
     }
 
     private func captureDirectory() throws -> URL {
@@ -117,6 +157,17 @@ final class CaptureSaveService {
         }
         return encoded
     }
+
+    private func updateProfileActivity() {
+        let descriptor = FetchDescriptor<ProfileRecord>()
+        let profile = (try? modelContext.fetch(descriptor).first) ?? {
+            let record = ProfileRecord.makeDefault()
+            modelContext.insert(record)
+            return record
+        }()
+
+        profile.recordActivity(today: .now)
+    }
 }
 
 /// Capture persistence failures.
@@ -129,6 +180,14 @@ public enum CaptureServiceError: LocalizedError {
     case debugForcedFailure
     /// Shade metadata could not be encoded.
     case shadeEncodingFailed
+    /// The local locker is full.
+    case lockerAtLimit
+    /// The media file could not be copied into the locker.
+    case copyFailed
+    /// SwiftData could not persist the saved capture record.
+    case contextFailed
+    /// The device ran out of space while writing.
+    case capacityExceeded
 
     /// Human-readable diagnostic text.
     public var errorDescription: String? {
@@ -141,6 +200,14 @@ public enum CaptureServiceError: LocalizedError {
             "Debug forced save failure"
         case .shadeEncodingFailed:
             "Shade metadata encoding failed"
+        case .lockerAtLimit:
+            "Locker is full"
+        case .copyFailed:
+            "Capture copy failed"
+        case .contextFailed:
+            "Capture persistence failed"
+        case .capacityExceeded:
+            "Device is out of storage"
         }
     }
 }

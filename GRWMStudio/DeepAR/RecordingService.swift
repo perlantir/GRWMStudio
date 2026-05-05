@@ -38,11 +38,12 @@ public final class RecordingService {
     }
 
     /// Starts video recording and returns the reserved temporary output URL.
-    public func startVideoRecording() async throws -> URL {
+    public func startVideoRecording(includeAudio: Bool) async throws -> URL {
         let url = FileManager.default.temporaryDirectory
             .appendingPathComponent("rec_\(UUID().uuidString).mov")
         currentVideoURL = url
 
+        try await controller.ensureCameraAudioMode(includeAudio: includeAudio)
         try await controller.startVideoRecording(outputURL: url)
         return url
     }

@@ -1,0 +1,13 @@
+PASS  Primary button copy          white on pink  3.25 (min 3.00)
+PASS  White button copy            pinkDeep on white  5.03 (min 4.50)
+PASS  Butter button copy           ink on butter  11.88 (min 4.50)
+PASS  Mint surface body text       ink on mint  11.85 (min 4.50)
+PASS  Body text on cream           ink on cream  15.61 (min 4.50)
+PASS  Body text on pink paper      ink on pinkPaper  13.98 (min 4.50)
+PASS  Large headline on pink paper pinkDeep on pinkPaper  4.25 (min 3.00)
+PASS  Large headline on pink light pinkDeep on pinkLight  3.15 (min 3.00)
+PASS  Badge copy on pink deep      white on pinkDeep  5.03 (min 4.50)
+PASS  Large label on recording red white on recRed  3.64 (min 3.00)
+PASS  Large label on lavender deep white on lavenderDeep  5.37 (min 4.50)
+PASS  Deep text on cream           pinkDeep on cream  4.75 (min 4.50)
+Contrast audit complete: 0 failures.

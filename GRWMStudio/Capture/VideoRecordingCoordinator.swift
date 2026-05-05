@@ -7,7 +7,7 @@ import UIKit
 protocol VideoRecordingCoordinating: AnyObject {
     var currentURL: URL? { get }
 
-    func start() async throws -> URL
+    func start(withAudio: Bool) async throws -> URL
     func finish() async throws -> URL
     func reset()
 }
@@ -23,7 +23,7 @@ final class VideoRecordingCoordinator: VideoRecordingCoordinating {
         self.allowSimulatorPlaceholder = allowSimulatorPlaceholder
     }
 
-    func start() async throws -> URL {
+    func start(withAudio: Bool) async throws -> URL {
         if allowSimulatorPlaceholder {
             let url = Self.makeTemporaryMP4URL()
             try Self.writePlaceholderVideo(to: url)
@@ -31,7 +31,7 @@ final class VideoRecordingCoordinator: VideoRecordingCoordinating {
             return url
         }
 
-        let url = try await recordingService.startVideoRecording()
+        let url = try await recordingService.startVideoRecording(includeAudio: withAudio)
         currentURL = url
         return url
     }

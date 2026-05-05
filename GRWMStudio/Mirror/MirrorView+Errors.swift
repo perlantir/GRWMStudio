@@ -2,25 +2,25 @@ extension MirrorView {
     func errorMessage(for variant: ErrorVariant) -> String {
         switch variant {
         case .license:
-            "Studio Pro needs a grown-up."
+            L10n.string("mirror.failed.license")
         case .licenseInvalid:
-            "License check needs attention."
+            L10n.string("mirror.failed.license_invalid")
         case .effectFail:
-            "The mirror effect needs a reset."
+            L10n.string("mirror.failed.effect_fail")
         case .camDenied:
-            "Camera access is off."
+            L10n.string("mirror.failed.cam_denied")
         case .micDenied:
-            "Microphone access is off."
+            L10n.string("mirror.failed.mic_denied")
         case .photoDenied:
-            "Photos access is off."
+            L10n.string("mirror.failed.photo_denied")
         case .recFail:
-            "Recording needs a reset."
+            L10n.string("mirror.failed.rec_fail")
         case .saveFail:
-            "Saving needs a reset."
+            L10n.string("mirror.failed.save_fail")
         case .noFace:
-            "Move your face into the mirror."
+            L10n.string("mirror.failed.no_face")
         case .lowStorage:
-            "This phone needs more free space."
+            L10n.string("mirror.failed.low_storage")
         }
     }
 }

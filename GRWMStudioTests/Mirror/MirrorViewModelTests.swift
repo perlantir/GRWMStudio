@@ -15,6 +15,15 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertFalse(permissions.requestedCamera)
     }
 
+    func testDeniedCameraQueuesCamDeniedFullScreenError() async {
+        let viewModel = MirrorViewModel()
+
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .denied)))
+
+        XCTAssertEqual(viewModel.state, .needsPermission)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .camDenied)
+    }
+
     func testPauseFromPermissionStateLeavesStateAlone() {
         let viewModel = MirrorViewModel()
 
@@ -135,11 +144,11 @@ final class MirrorViewModelTests: XCTestCase {
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
 
-        let viewModel = MirrorViewModel(controller: controller)
-        let environment = AppEnvironment(
-            permissions: MirrorPermissionsStub(camera: .granted),
-            proEntitlement: MirrorProEntitlementStub(hasPro: false)
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            entitlements: makeEntitlements(false)
         )
+        let environment = AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted))
         await viewModel.start(env: environment)
 
         viewModel.eyesSubCategory = .liner
@@ -149,7 +158,7 @@ final class MirrorViewModelTests: XCTestCase {
 
         XCTAssertNil(viewModel.selections[.eyes])
         XCTAssertNil(viewModel.eyeSelections[.liner])
-        XCTAssertEqual(viewModel.lastError, .license)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .license)
         XCTAssertTrue(mock.switches.isEmpty)
     }
 
@@ -158,11 +167,11 @@ final class MirrorViewModelTests: XCTestCase {
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
 
-        let viewModel = MirrorViewModel(controller: controller)
-        let environment = AppEnvironment(
-            permissions: MirrorPermissionsStub(camera: .granted),
-            proEntitlement: MirrorProEntitlementStub(hasPro: false)
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            entitlements: makeEntitlements(false)
         )
+        let environment = AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted))
         await viewModel.start(env: environment)
 
         let effect = try await EffectCatalog.shared.effects(for: .lips)[0]
@@ -171,7 +180,7 @@ final class MirrorViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: shade)
 
         XCTAssertNil(viewModel.selections[.lips])
-        XCTAssertEqual(viewModel.lastError, .license)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .license)
         XCTAssertTrue(mock.switches.isEmpty)
     }
 
@@ -236,144 +245,12 @@ final class MirrorViewModelTests: XCTestCase {
         }
         XCTAssertTrue(condition(), file: file, line: line)
     }
-}
 
-final class MirrorPermissionsStub: PermissionsService, @unchecked Sendable {
-    private let camera: AppPermissionStatus
-    private(set) var requestedCamera = false
-
-    init(camera: AppPermissionStatus) {
-        self.camera = camera
-    }
-
-    func cameraStatus() async -> AppPermissionStatus {
-        camera
-    }
-
-    @MainActor
-    func requestCamera() async -> AppPermissionStatus {
-        requestedCamera = true
-        return camera
-    }
-
-    func micStatus() async -> AppPermissionStatus {
-        .granted
-    }
-
-    @MainActor
-    func requestMic() async -> AppPermissionStatus {
-        .granted
-    }
-
-    func photosAddStatus() async -> AppPermissionStatus {
-        .granted
-    }
-
-    @MainActor
-    func requestPhotosAdd() async -> AppPermissionStatus {
-        .granted
-    }
-
-    func notificationsStatus() async -> AppPermissionStatus {
-        .denied
-    }
-
-    @MainActor
-    func requestNotifications() async -> AppPermissionStatus {
-        .denied
-    }
-}
-
-struct MirrorProEntitlementStub: ProEntitlementService {
-    let hasPro: Bool
-}
-
-@MainActor
-final class MirrorMockDeepARClient: DeepARClient {
-    struct Switch: Equatable {
-        let slot: String
-        let path: String?
-    }
-
-    struct VectorParameter {
-        let gameObject: String
-        let parameter: String
-        let value: DeepARVectorParameter
-    }
-
-    struct BoolParameter {
-        let gameObject: String
-        let parameter: String
-        let value: Bool
-    }
-
-    struct FloatParameter {
-        let gameObject: String
-        let parameter: String
-        let value: Float
-    }
-
-    struct ImageParameter {
-        let gameObject: String
-        let parameter: String
-    }
-
-    private let autoInitialize: Bool
-    private let autoSwitchEffect: Bool
-    private(set) var delegate: DeepARDelegateProxy?
-    private(set) var switches: [Switch] = []
-    private(set) var vectorParameters: [VectorParameter] = []
-    private(set) var boolParameters: [BoolParameter] = []
-    private(set) var floatParameters: [FloatParameter] = []
-    private(set) var imageParameters: [ImageParameter] = []
-
-    init(autoInitialize: Bool, autoSwitchEffect: Bool) {
-        self.autoInitialize = autoInitialize
-        self.autoSwitchEffect = autoSwitchEffect
-    }
-
-    func setLicenseKey(_ licenseKey: String) {}
-
-    func setDelegate(_ delegate: DeepARDelegateProxy) {
-        self.delegate = delegate
-    }
-
-    func createARView(frame: CGRect) -> UIView {
-        if autoInitialize {
-            Task { @MainActor [weak self] in
-                self?.delegate?.didInitialize()
-            }
-        }
-        return UIView(frame: frame)
-    }
-
-    func switchEffect(withSlot slot: String, path: String?) {
-        switches.append(Switch(slot: slot, path: path))
-        if autoSwitchEffect {
-            Task { @MainActor [weak self] in
-                self?.delegate?.didSwitchEffect(slot)
-            }
-        }
-    }
-
-    func setVectorParameter(
-        _ gameObject: String,
-        component: String,
-        parameter: String,
-        value: DeepARVectorParameter
-    ) {
-        vectorParameters.append(VectorParameter(gameObject: gameObject, parameter: parameter, value: value))
-    }
-
-    func setBoolParameter(_ gameObject: String, component: String, parameter: String, value: Bool) {
-        boolParameters.append(BoolParameter(gameObject: gameObject, parameter: parameter, value: value))
-    }
-
-    func setFloatParameter(_ gameObject: String, component: String, parameter: String, value: Float) {
-        floatParameters.append(FloatParameter(gameObject: gameObject, parameter: parameter, value: value))
-    }
-
-    func setImageParameter(_ gameObject: String, component: String, parameter: String, image: UIImage) {
-        imageParameters.append(ImageParameter(gameObject: gameObject, parameter: parameter))
+    private func makeEntitlements(_ isPro: Bool) -> ProEntitlements {
+        let suiteName = "app.grwmstudio.tests.mirror.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName) ?? .standard
+        defaults.removePersistentDomain(forName: suiteName)
+        defaults.set(isPro, forKey: ProEntitlements.cacheKey)
+        return ProEntitlements(defaults: defaults, autoRefresh: false)
     }
 }

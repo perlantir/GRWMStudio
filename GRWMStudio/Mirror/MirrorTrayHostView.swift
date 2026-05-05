@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct MirrorTrayHostView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Bindable var viewModel: MirrorViewModel
     @Binding var pendingCategoryAfterLook: FilterCategory?
-    private let shadeTrayBottomPadding: CGFloat = 72
-    private let looksTrayBottomPadding: CGFloat = 72
 
     var body: some View {
         VStack {
@@ -19,30 +19,30 @@ struct MirrorTrayHostView: View {
                         onConfirm: {
                             Task { @MainActor in
                                 await viewModel.clear(slot: .looks)
-                                withAnimation(.bouncy(duration: 0.22)) {
+                                withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
                                     viewModel.activeCategory = pendingCategoryAfterLook
                                     self.pendingCategoryAfterLook = nil
                                 }
                             }
                         },
                         onCancel: {
-                            withAnimation(.bouncy(duration: 0.22)) {
+                            withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
                                 self.pendingCategoryAfterLook = nil
                             }
                         }
                     )
-                    .padding(.bottom, 120)
+                    .padding(.bottom, confirmationBottomPadding)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
 
                 MirrorBottomControls(viewModel: viewModel)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, bottomControlsPadding)
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
 
                 FilterRailView(viewModel: viewModel) { category in
                     handleCategoryTap(category)
                 }
-                .padding(.bottom, 118)
+                .padding(.bottom, filterRailBottomPadding)
             }
         }
     }
@@ -67,7 +67,7 @@ struct MirrorTrayHostView: View {
                 }
             }
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
 
         case .base:
             ShadeTrayView(
@@ -90,14 +90,14 @@ struct MirrorTrayHostView: View {
                 }
             }
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
 
         case .eyes:
             EyesTrayView(viewModel: viewModel) {
                 dismissTray()
             }
                 .padding(.bottom, shadeTrayBottomPadding)
-                .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                .dhAnimation(.softSpring, value: viewModel.activeCategory)
 
         case .brows:
             browsTray
@@ -122,14 +122,14 @@ struct MirrorTrayHostView: View {
                 }
             }
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
 
         case .looks where pendingCategoryAfterLook == nil:
             LooksTrayView(viewModel: viewModel) {
                 dismissTray()
             }
                 .padding(.bottom, looksTrayBottomPadding)
-                .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+                .dhAnimation(.softSpring, value: viewModel.activeCategory)
 
         case .looks, .none:
             EmptyView()
@@ -155,14 +155,14 @@ struct MirrorTrayHostView: View {
                 }
             }
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
         } else {
             EmptyShadeTrayView(
                 category: .brows,
                 message: "Brows coming soon ✨ — your bigger pack will unlock these!"
             )
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
         }
     }
 
@@ -185,14 +185,14 @@ struct MirrorTrayHostView: View {
                 }
             }
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
         } else {
             EmptyShadeTrayView(
                 category: .cheeks,
                 message: "Blush coming soon ✨"
             )
             .padding(.bottom, shadeTrayBottomPadding)
-            .animation(.bouncy(duration: 0.32), value: viewModel.activeCategory)
+            .dhAnimation(.softSpring, value: viewModel.activeCategory)
         }
     }
 
@@ -202,16 +202,40 @@ struct MirrorTrayHostView: View {
             return false
         }
 
-        withAnimation(.bouncy(duration: 0.22)) {
+        withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
             pendingCategoryAfterLook = category
         }
         return true
     }
 
     private func dismissTray() {
-        withAnimation(.bouncy(duration: 0.22)) {
+        withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
             viewModel.activeCategory = nil
             pendingCategoryAfterLook = nil
         }
+    }
+
+    private var isAccessibilityLayout: Bool {
+        dynamicTypeSize.isAccessibilitySize
+    }
+
+    private var shadeTrayBottomPadding: CGFloat {
+        isAccessibilityLayout ? 116 : 72
+    }
+
+    private var looksTrayBottomPadding: CGFloat {
+        isAccessibilityLayout ? 116 : 72
+    }
+
+    private var filterRailBottomPadding: CGFloat {
+        isAccessibilityLayout ? 152 : 118
+    }
+
+    private var bottomControlsPadding: CGFloat {
+        isAccessibilityLayout ? 18 : 8
+    }
+
+    private var confirmationBottomPadding: CGFloat {
+        isAccessibilityLayout ? 150 : 120
     }
 }

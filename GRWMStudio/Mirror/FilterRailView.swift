@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct FilterRailView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Bindable var viewModel: MirrorViewModel
     var onCategoryTap: (FilterCategory) -> Bool = { _ in false }
 
@@ -32,7 +33,7 @@ struct FilterRailView: View {
                 return
             }
 
-            withAnimation(.bouncy(duration: 0.22)) {
+            withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
                 viewModel.activeCategory = category
             }
             DHHaptics.light()
@@ -45,6 +46,8 @@ struct FilterRailView: View {
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(active ? .white : DH.ink)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
             }
             .padding(.horizontal, 14)
             .frame(height: 42)
@@ -56,11 +59,14 @@ struct FilterRailView: View {
                 }
             }
             .scaleEffect(active ? 1.06 : 1)
-            .animation(.bouncy(duration: 0.22), value: active)
+            .dhAnimation(.quickPop, value: active)
             .frame(minHeight: 54)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("\(category.label) filter category")
+        .accessibilityLabel(L10n.format("mirror.filter_rail.accessibility_label", category.label))
+        .accessibilityValue(active ? L10n.string("common.selected") : L10n.string("common.not_selected"))
+        .accessibilityHint(L10n.format("mirror.filter_rail.accessibility_hint", category.label.lowercased()))
+        .accessibilityIdentifier("\(category.label) filter category")
         .accessibilityAddTraits(active ? [.isSelected] : [])
     }
 

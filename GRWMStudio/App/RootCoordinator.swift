@@ -15,20 +15,11 @@ final class RootCoordinator {
         case preview
         case parentalGate(reason: GateReason)
         case paywall(source: PaywallSource)
-        case error(ErrorVariant)
     }
 
     enum Overlay: Hashable {
         case preview
-        case parentGate(intent: ParentGateIntent)
-        case paywall
         case savedConfetti
-    }
-
-    enum ParentGateIntent: Hashable {
-        case paywall
-        case settings
-        case deletion
     }
 
     enum GateReason: Hashable {
@@ -37,31 +28,52 @@ final class RootCoordinator {
         case deleteData
     }
 
-    enum PaywallSource: Hashable {
+    enum PaywallSource: Hashable, Identifiable {
         case proShade
         case lockerLimit
         case longRecording
         case settings
-    }
 
-    enum ErrorVariant: Hashable {
-        case camDenied
-        case micDenied
-        case photoDenied
-        case license
-        case licenseInvalid
-        case effectFail
-        case recFail
-        case saveFail
-        case noFace
-        case lowStorage
+        var id: String {
+            switch self {
+            case .proShade:
+                "pro-shade"
+            case .lockerLimit:
+                "locker-limit"
+            case .longRecording:
+                "long-recording"
+            case .settings:
+                "settings"
+            }
+        }
     }
 
     var route: Route = .onboardingSplash
     var previewAsset: CapturedAsset?
     var previewLookName: String?
     var previewShadeIDs: [String] = []
+    var presentedParentGate: ParentGateIntent?
+    var presentedPaywallSource: PaywallSource?
+    var presentedError: ErrorVariant?
+    var toastMessage: String?
     private(set) var overlay: Overlay?
+    @ObservationIgnored private let openURL: @MainActor (URL, @escaping @Sendable (Bool) -> Void) -> Void
+    @ObservationIgnored private let notificationCenter: NotificationCenter
+    @ObservationIgnored private let currentDate: @MainActor () -> Date
+    @ObservationIgnored private var lastDeepLinkAt: Date = .distantPast
+    @ObservationIgnored private var toastTask: Task<Void, Never>?
+
+    init(
+        openURL: @escaping @MainActor (URL, @escaping @Sendable (Bool) -> Void) -> Void = { url, completion in
+            UIApplication.shared.open(url, options: [:], completionHandler: completion)
+        },
+        notificationCenter: NotificationCenter = .default,
+        currentDate: @escaping @MainActor () -> Date = Date.init
+    ) {
+        self.openURL = openURL
+        self.notificationCenter = notificationCenter
+        self.currentDate = currentDate
+    }
 
     func advanceFromSplash() {
         route = .onboardingWelcome
@@ -97,11 +109,15 @@ final class RootCoordinator {
     }
 
     func presentPaywall(source: PaywallSource) {
-        route = .paywall(source: source)
+        presentedPaywallSource = source
     }
 
     func presentError(_ variant: ErrorVariant) {
-        route = .error(variant)
+        presentedError = variant
+    }
+
+    func dismissError() {
+        presentedError = nil
     }
 
     func showPreview(asset: CapturedAsset, lookName: String? = nil, shadeIDs: [String] = []) {
@@ -139,15 +155,77 @@ final class RootCoordinator {
     }
 
     func startParentGate(intent: ParentGateIntent) {
-        overlay = .parentGate(intent: intent)
+        presentedParentGate = intent
     }
 
-    func paywallShown() {
-        overlay = .paywall
+    func dismissParentGate() {
+        presentedParentGate = nil
+    }
+
+    func parentGatePassed(_ intent: ParentGateIntent) {
+        presentedParentGate = nil
+        switch intent {
+        case .paywall(let source):
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(for: .milliseconds(250))
+                self?.presentPaywall(source: source)
+            }
+        case .manageSubscription:
+            openExternalURL(
+                PurchaseLinks.managePurchases,
+                failureMessage: "Couldn't open the App Store. Try later."
+            )
+        case .privacyDeepLink(let url):
+            openExternalURL(url, failureMessage: "Couldn't open that link.")
+        case .deleteAllData:
+            notificationCenter.post(name: .deleteAllRequested, object: nil)
+        }
+    }
+
+    var isPaywallPresented: Bool {
+        presentedPaywallSource != nil
+    }
+
+    func dismissPaywall() {
+        presentedPaywallSource = nil
     }
 
     func dismissOverlay() {
         overlay = nil
+    }
+
+    func showToast(_ message: String, duration: Duration = .seconds(2.4)) {
+        toastTask?.cancel()
+        toastMessage = message
+        toastTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(for: duration)
+            guard let self, self.toastMessage == message else {
+                return
+            }
+            self.toastMessage = nil
+        }
+    }
+
+    func dismissToast() {
+        toastTask?.cancel()
+        toastMessage = nil
+    }
+
+    private func openExternalURL(_ url: URL, failureMessage: String) {
+        let now = currentDate()
+        guard now.timeIntervalSince(lastDeepLinkAt) >= 1 else {
+            return
+        }
+        lastDeepLinkAt = now
+
+        openURL(url) { [weak self] opened in
+            guard !opened else {
+                return
+            }
+            Task { @MainActor in
+                self?.showToast(failureMessage)
+            }
+        }
     }
 }
 
@@ -162,4 +240,8 @@ extension EnvironmentValues {
         get { self[RootCoordinatorKey.self] }
         set { self[RootCoordinatorKey.self] = newValue }
     }
+}
+
+extension Notification.Name {
+    static let deleteAllRequested = Notification.Name("dh.deleteAllRequested")
 }

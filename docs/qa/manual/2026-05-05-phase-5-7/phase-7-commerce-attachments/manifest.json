@@ -1,0 +1,17 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "FC58B5F0-CE16-415B-AE8C-1C42B1184EE3",
+        "deviceName" : "iPhone 16",
+        "exportedFileName" : "C1C5BBFC-8238-4902-BBCA-201DFCCBE024.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "settings-studio-pro-parent-gate-paywall_0_CD2C3848-0BA9-41C5-A7F4-E839F66B2364.png",
+        "timestamp" : 1778017811.158
+      }
+    ],
+    "testIdentifier" : "SettingsPolishUITests/testLockedStudioProFromSettingsPresentsParentGateAndPaywall()",
+    "testIdentifierURL" : "test://com.apple.xcode/GRWMStudio/GRWMStudioUITests/SettingsPolishUITests/testLockedStudioProFromSettingsPresentsParentGateAndPaywall"
+  }
+]

@@ -7,6 +7,10 @@ struct Shade: Identifiable, Hashable, Sendable {
     let effectID: EffectFile.ID
     let parameters: [EffectParam]
     let isPro: Bool
+
+    var localizedName: String {
+        L10n.string("mirror.shade.\(id.replacingOccurrences(of: ".", with: "_"))", fallback: name)
+    }
 }
 
 struct EffectParam: Hashable, Sendable {

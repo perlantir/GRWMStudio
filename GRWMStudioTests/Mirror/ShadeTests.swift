@@ -110,6 +110,18 @@ final class ShadeTests: XCTestCase {
         )
     }
 
+    func testEyeTexturesStayOnTheirDeepARSourceMeshes() throws {
+        try assertTexture("eyeliner_classic.png", matchesSource: "smooth.png")
+        try assertTexture("eyeliner_winged.png", matchesSource: "luxe.png")
+        try assertTexture("eyeliner_double_flick.png", matchesSource: "luxe.png")
+        try assertTexture("eyelashes_natural.png", matchesSource: "sexy.png")
+        try assertTexture("eyelashes_doll.png", matchesSource: "gorgeous.png")
+        try assertTexture("eyelashes_drama.png", matchesSource: "gorgeous.png")
+
+        try assertTexture("eyeliner_winged.png", doesNotMatchSource: "gorgeous.png")
+        try assertTexture("eyelashes_drama.png", doesNotMatchSource: "luxe.png")
+    }
+
     func testBrowShadesAreFreeAndCarryNaturalShapeParameters() {
         XCTAssertEqual(
             Shade.browShades.map(\.id),
@@ -176,5 +188,40 @@ final class ShadeTests: XCTestCase {
                     && $0.value == .tintedTexture("lips_matte", RGBA(0.64, 0.42, 1.00, 0.88))
             }
         )
+    }
+
+    private func assertTexture(_ textureName: String, matchesSource sourceName: String) throws {
+        XCTAssertEqual(
+            try textureData(textureName),
+            try sourceTextureData(sourceName),
+            "\(textureName) must preserve the DeepAR source UV layout from \(sourceName)."
+        )
+    }
+
+    private func assertTexture(_ textureName: String, doesNotMatchSource sourceName: String) throws {
+        XCTAssertNotEqual(
+            try textureData(textureName),
+            try sourceTextureData(sourceName),
+            "\(textureName) is mapped to the wrong DeepAR face region source texture."
+        )
+    }
+
+    private func textureData(_ filename: String) throws -> Data {
+        try Data(contentsOf: repoRoot.appendingPathComponent("GRWMStudio/Resources/Effects/textures/\(filename)"))
+    }
+
+    private func sourceTextureData(_ filename: String) throws -> Data {
+        try Data(contentsOf: repoRoot.appendingPathComponent(sourceTexturePath(filename)))
+    }
+
+    private var repoRoot: URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
+
+    private func sourceTexturePath(_ filename: String) -> String {
+        "GRWMStudio/Resources/Effects/_source/Free.v1.3/baseBeauty.deeparproj/resources/\(filename)"
     }
 }

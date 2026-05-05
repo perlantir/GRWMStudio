@@ -40,7 +40,9 @@ final class DeepARDelegateProxy: NSObject, DeepARDelegate {
 
     func number(ofFacesVisibleChanged facesVisible: Int) {}
 
-    func didFinishShutdown() {}
+    func didFinishShutdown() {
+        Logger.deepAR.info("DeepAR didFinishShutdown")
+    }
 
     func imageVisibilityChanged(_ gameObjectName: String, imageVisible: Bool) {}
 

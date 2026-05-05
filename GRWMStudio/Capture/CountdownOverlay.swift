@@ -42,6 +42,7 @@ struct CountdownSequenceRunner {
 }
 
 struct CountdownOverlay: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let onComplete: () -> Void
     let onCancel: () -> Void
     let stepDuration: TimeInterval
@@ -59,7 +60,7 @@ struct CountdownOverlay: View {
         stepDuration: TimeInterval = 1,
         onTick: @escaping @MainActor (CountdownStep) -> Void = { _ in
             Sounds.countdownTick.play()
-            DHHaptics.medium()
+            DHHaptics.shared.fire(.pop)
         }
     ) {
         self.onComplete = onComplete
@@ -89,7 +90,7 @@ struct CountdownOverlay: View {
             cancelCountdownTask()
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Countdown to recording: \(step.label)")
+        .accessibilityLabel(L10n.format("capture.countdown.accessibility_label", step.label))
         .accessibilityIdentifier("countdown-overlay")
     }
 
@@ -99,7 +100,7 @@ struct CountdownOverlay: View {
                 .fill(.white)
                 .frame(width: 8, height: 8)
 
-            Text("GET READY")
+            Text("capture.countdown.ready")
                 .font(DH.font(.microLabel))
                 .tracking(DH.tracking(.microLabel))
                 .foregroundStyle(.white)
@@ -152,7 +153,7 @@ struct CountdownOverlay: View {
 
     private var cancelPill: some View {
         Button(action: cancel) {
-            Text("Tap anywhere to cancel")
+            Text("capture.countdown.cancel")
                 .font(DH.font(.buttonSmall))
                 .tracking(DH.tracking(.buttonSmall))
                 .foregroundStyle(DH.pinkDeep)
@@ -161,7 +162,7 @@ struct CountdownOverlay: View {
                 .background(Capsule().fill(.white.opacity(0.86)))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Cancel countdown")
+        .accessibilityLabel(L10n.string("capture.countdown.cancel_accessibility_label"))
         .accessibilityIdentifier("countdown-cancel-button")
     }
 
@@ -209,7 +210,7 @@ struct CountdownOverlay: View {
         visible = false
         bubbleScale = 0.6
 
-        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+        withAnimation(DHAnim.respecting(.countdown, reduceMotion: reduceMotion)) {
             visible = true
             bubbleScale = 1.1
         }
@@ -220,7 +221,7 @@ struct CountdownOverlay: View {
             return
         }
 
-        withAnimation(.spring(response: 0.22, dampingFraction: 0.72)) {
+        withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
             bubbleScale = 1.0
         }
     }
@@ -230,7 +231,7 @@ struct CountdownOverlay: View {
             return
         }
 
-        withAnimation(.easeIn(duration: 0.14)) {
+        withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
             visible = false
             bubbleScale = 0.6
         }

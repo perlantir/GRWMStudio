@@ -41,7 +41,7 @@ struct PhotoCaptureCoordinator {
             path.lineWidth = 10
             path.stroke()
 
-            let text = "Magic Mirror"
+            let text = L10n.string("deepar.placeholder.magic_mirror_plain")
             let font = labelFont(size: 68)
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,

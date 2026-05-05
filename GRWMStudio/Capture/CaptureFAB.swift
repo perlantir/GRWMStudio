@@ -22,11 +22,13 @@ struct CaptureFAB: View {
         .buttonStyle(.plain)
         .frame(width: 104, height: 104)
         .scaleEffect(pulseScale)
-        .animation(recordingPulse, value: isRecording)
+        .dhAnimation(.pulse, value: isRecording)
         .contentShape(Circle())
         .allowsHitTesting(mode.isInteractive)
         .disabled(mode == .disabled)
-        .accessibilityLabel(accessibilityLabel)
+        .accessibilityLabel(L10n.string("capture.fab.accessibility_label"))
+        .accessibilityValue(accessibilityValue)
+        .accessibilityHint(accessibilityHint)
         .accessibilityAddTraits(.isButton)
         .accessibilityIdentifier("capture-fab")
     }
@@ -120,22 +122,43 @@ struct CaptureFAB: View {
         isRecording ? 0.94 : 1
     }
 
-    private var recordingPulse: Animation? {
-        isRecording ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true) : .default
-    }
-
-    private var accessibilityLabel: String {
+    private var accessibilityValue: String {
         switch visualMode {
         case .idle:
-            kind == .photo ? "Take photo" : "Start video recording"
+            switch kind {
+            case .photo:
+                L10n.string("capture.fab.photo_mode")
+            case .video:
+                L10n.string("capture.fab.video_mode")
+            }
         case .photoFiring:
-            "Capturing photo"
+            L10n.string("capture.fab.photo_capturing")
         case .videoCountdown:
-            "Get ready, recording starts in a moment"
+            L10n.string("capture.fab.video_countdown")
         case .videoRecording:
-            "Stop video recording"
+            L10n.string("capture.fab.video_recording")
         case .disabled:
-            "Capture button disabled"
+            L10n.string("common.disabled")
+        }
+    }
+
+    private var accessibilityHint: String {
+        switch visualMode {
+        case .idle:
+            switch kind {
+            case .photo:
+                L10n.string("capture.fab.photo_hint")
+            case .video:
+                L10n.string("capture.fab.video_hint")
+            }
+        case .photoFiring:
+            L10n.string("capture.fab.photo_busy_hint")
+        case .videoCountdown:
+            L10n.string("capture.fab.video_countdown_hint")
+        case .videoRecording:
+            L10n.string("capture.fab.stop_hint")
+        case .disabled:
+            L10n.string("capture.fab.disabled_hint")
         }
     }
 
@@ -186,10 +209,10 @@ struct RecordingOverlay: View {
                 .fill(.white)
                 .frame(width: 12, height: 12)
                 .scaleEffect(pulsing ? 1.05 : 1.0)
-                .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: pulsing)
+                .dhAnimation(.pulse, value: pulsing)
                 .accessibilityHidden(true)
 
-            Text("REC")
+            Text("capture.recording.rec")
                 .font(DH.font(.buttonSmall))
                 .tracking(DH.tracking(.buttonSmall))
 
@@ -210,6 +233,8 @@ struct RecordingOverlay: View {
         .padding(.horizontal, 18)
         .padding(.top, 16)
         .accessibilityElement(children: .contain)
+        .accessibilityLabel(L10n.string("capture.recording.timer"))
+        .accessibilityValue(timeString)
         .accessibilityIdentifier("recording-overlay")
         .onAppear {
             pulsing = true
@@ -250,7 +275,7 @@ struct RecordingStopChip: View {
                 Image(systemName: "xmark")
                     .font(.system(size: 12, weight: .heavy))
 
-                Text("Stop")
+                Text("capture.recording.stop")
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
             }
@@ -264,7 +289,8 @@ struct RecordingStopChip: View {
             }
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Stop recording")
+        .accessibilityLabel(L10n.string("capture.recording.stop_accessibility_label"))
+        .accessibilityHint(L10n.string("capture.recording.stop_accessibility_hint"))
         .accessibilityIdentifier("recording-stop-chip")
     }
 }
@@ -279,12 +305,12 @@ struct SaveFailureBanner: View {
                 .background(Circle().fill(DH.recRedDeep))
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Saving needs a reset.")
+                Text("capture.save_failure.title")
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
 
-                Text("Try again, or go back to the mirror.")
+                Text("capture.save_failure.subtitle")
                     .font(DH.font(.caption))
                     .tracking(DH.tracking(.caption))
                     .foregroundStyle(DH.ink.opacity(0.72))
@@ -304,6 +330,7 @@ struct SaveFailureBanner: View {
 }
 
 struct SavedConfetti: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let onComplete: @MainActor () -> Void
     @State private var phase: CGFloat = 0
 
@@ -326,7 +353,7 @@ struct SavedConfetti: View {
             }
 
             VStack(spacing: 10) {
-                Text("Saved! 💖")
+                Text("capture.saved.title")
                     .font(DH.font(.display3))
                     .tracking(DH.tracking(.display3))
                     .foregroundStyle(DH.pinkDeep)
@@ -346,7 +373,7 @@ struct SavedConfetti: View {
         .task {
             Sounds.confetti.play()
             DHHaptics.success()
-            withAnimation(.easeOut(duration: 1.2)) {
+            withAnimation(DHAnim.respecting(.celebrate, reduceMotion: reduceMotion)) {
                 phase = 1
             }
             try? await Task.sleep(for: .milliseconds(1_200))

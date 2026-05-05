@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ShadeTrayView: View {
+    @Environment(ProEntitlements.self) private var entitlements
     let category: FilterCategory
     let shades: [Shade]
     let selectedID: String?
@@ -12,8 +13,8 @@ struct ShadeTrayView: View {
             HStack(spacing: 8) {
                 clearChip
 
-                ForEach(shades) { shade in
-                    swatch(shade)
+                ForEach(Array(shades.enumerated()), id: \.element.id) { index, shade in
+                    swatch(shade, index: index)
                 }
             }
             .padding(.horizontal, 8)
@@ -45,7 +46,7 @@ struct ShadeTrayView: View {
                     .background(Circle().fill(DH.cream))
                     .chunkyShadow(.sm(deep: DH.pink), shape: Circle())
 
-                Text("Clear")
+                Text("mirror.shade.clear")
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
@@ -56,10 +57,11 @@ struct ShadeTrayView: View {
             .frame(width: 64, height: 86)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Clear \(category.label) filter")
+        .accessibilityLabel(L10n.format("mirror.shade.clear.accessibility_label", category.label))
+        .accessibilityHint(L10n.format("mirror.shade.clear.accessibility_hint", category.label.lowercased()))
     }
 
-    private func swatch(_ shade: Shade) -> some View {
+    private func swatch(_ shade: Shade, index: Int) -> some View {
         let active = shade.id == selectedID
 
         return Button {
@@ -79,7 +81,7 @@ struct ShadeTrayView: View {
                             .foregroundStyle(.white)
                     }
 
-                    if shade.isPro {
+                    if shade.isPro && !entitlements.isPro {
                         ZStack {
                             StickerStar(size: 22, fill: DH.butter, stroke: .white, strokeWidth: 3)
 
@@ -91,23 +93,37 @@ struct ShadeTrayView: View {
                     }
                 }
                 .scaleEffect(active ? 1.1 : 1)
-                .animation(.bouncy(duration: 0.22), value: active)
+                .dhAnimation(.quickPop, value: active)
                 .chunkyShadow(.sm(deep: DH.pinkDeep), shape: Circle())
 
-                Text(shade.name)
+                Text(verbatim: shade.localizedName)
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
                     .lineLimit(2)
-                    .minimumScaleFactor(0.68)
+                    .minimumScaleFactor(0.85)
                     .multilineTextAlignment(.center)
                     .frame(height: 26)
             }
             .frame(width: 64, height: 86)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("\(shade.name) \(category.label) shade\(shade.isPro ? ", Pro" : "")")
+        .accessibilityLabel(L10n.format("mirror.shade.accessibility_label", shade.localizedName, category.label))
+        .accessibilityValue(accessibilityValue(for: shade, active: active, index: index))
+        .accessibilityHint(L10n.string("mirror.shade.accessibility_hint"))
+        .accessibilityIdentifier("\(shade.localizedName) \(category.label) shade")
         .accessibilityAddTraits(active ? [.isSelected] : [])
+    }
+
+    private func accessibilityValue(for shade: Shade, active: Bool, index: Int) -> String {
+        var parts = [L10n.format("common.index_of_total", index + 1, shades.count)]
+        if active {
+            parts.append(L10n.string("common.selected"))
+        }
+        if shade.isPro {
+            parts.append(entitlements.isPro ? L10n.string("common.pro") : L10n.string("common.pro_locked"))
+        }
+        return parts.joined(separator: ", ")
     }
 }
 

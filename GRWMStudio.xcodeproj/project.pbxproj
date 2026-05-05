@@ -7,25 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00BCEAEF3470EA7886E27E45 /* ParentGateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250B9D486F553B9BAA0699B1 /* ParentGateCoordinator.swift */; };
+		00EB0AC7AC6DFD426D78AD9A /* SettingsCommercePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA64450AB08B664EC96344FC /* SettingsCommercePresentation.swift */; };
+		038F8D89EC163262FFE9626C /* AvatarSwatch+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD65E86B6EF7F4F1BB31097 /* AvatarSwatch+Style.swift */; };
+		03BC5CAA92758564C6151930 /* DeepARController+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FDED6EC8BF5C3CBDBE9EC3 /* DeepARController+Lifecycle.swift */; };
+		041B7D44A60B46A56C76DC91 /* MirrorNoFaceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF4912862A8A2EF41A2393F /* MirrorNoFaceViewModelTests.swift */; };
 		046C7951B5CB1BDCD99A74F1 /* CaptureFailureBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A268F7652D4EC86CDBCFB0B3 /* CaptureFailureBanner.swift */; };
+		048677A079438454440BFDBA /* FeedMosaic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFAFBFF08656B6CCF2F6B60 /* FeedMosaic.swift */; };
 		04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE28718EC19A161B7B6256B8 /* RecordingService.swift */; };
+		05A407784778C03180A08352 /* PurchasesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E3433AE1CAD008BDCC2373 /* PurchasesSection.swift */; };
 		077A80D96A98ABD0CA624C31 /* CaptureFAB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6521D81D6A115E8D33BB8BF3 /* CaptureFAB.swift */; };
 		08BD9A0040A4702A6E0DA1BA /* Shades+Lips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */; };
 		08F3DD2BC33E2F5C73BF965F /* DHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4E6016A9E66CAE4115EDD /* DHCard.swift */; };
 		095DF65FA6F88F854209518B /* look_legacy01.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 42EE7539807C18A27917DF2C /* look_legacy01.deepar */; };
+		0961F3A7FA4DC5D4E147E231 /* AccessibilitySnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C9203BA269D425BDE8AFE2 /* AccessibilitySnapshotTests.swift */; };
+		0C75AF768755F69E4BDA4262 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6454A168D2C7046B685C99 /* ToastView.swift */; };
+		0CCAB705EA0EA28A8E00ACDB /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40377332B77C5B4F93C5748A /* PaywallViewModel.swift */; };
 		0D00171D0CF9553190798188 /* eyelashes_natural.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 135CF27B332AB567A935E3F1 /* eyelashes_natural.png */; };
+		0D5517A0D0DE015D97C93B3D /* HitTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2663A27ACE4D94801D60A9 /* HitTargetTests.swift */; };
 		0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C5D32426D75F1151F9561AC5 /* shadow.png */; };
 		0FD8C133751BA4C6AD83D7C0 /* LooksTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B27CB7093174E0A22603532 /* LooksTrayView.swift */; };
 		124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CB44E7E81F82BDD61D38E7A /* lut_soft.png */; };
 		14C299B26E9DD987F98C089A /* MirrorLipViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */; };
+		1572AD8247EE833324915B10 /* AvatarEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B1CE86A3D059FDFBB1389 /* AvatarEditorView.swift */; };
+		16811596AADFCA9DDFCEC429 /* LookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314A7625B2190732CA045B78 /* LookDetailView.swift */; };
 		16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C372D46745B2B38661FF3 /* FilterCategory.swift */; };
 		1800B2D637206141971D7418 /* Shade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E973E0B871A21B0A2A52D3 /* Shade.swift */; };
 		18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */; };
+		1A04F8D49149A735924C075B /* LockerAtLimitBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4C27161FCB286A1968AF0B /* LockerAtLimitBanner.swift */; };
 		1A2D86DB789B69BFF2F22A79 /* CapturedAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D14B354DF2DFE8538B7F7F1 /* CapturedAsset.swift */; };
 		1B209F1B9C86C0624787BBAF /* Shades+Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */; };
 		1BABC8D57043E9542DEB26AF /* MirrorResetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38BDDEB1C326D10F3B8702B /* MirrorResetViewModelTests.swift */; };
 		1C23C7AA8E7836697B388667 /* eyeliner_classic.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = DA5E801A42C2F3996FAEC8AF /* eyeliner_classic.png */; };
 		1CF31F8AB21E1BE158CD646A /* DeepARControllerBootstrapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */; };
+		1D4EA796BBB890D044D7E6AB /* DHSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B88FA95FBFBB0D92F183C /* DHSettingsView.swift */; };
+		1DF530ABD4680C8D5E96DB21 /* SettingsPolishUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49437BE93839AC21689199A /* SettingsPolishUITests.swift */; };
+		1E2ED37CE7A08A229E399882 /* ErrorScreenshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BF2E564C1D8F3742941E3D /* ErrorScreenshotsUITests.swift */; };
 		1E8A7EFB01EFA649A0EF3BC3 /* EyesTrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4D75786E88E615D6143E3 /* EyesTrayView.swift */; };
 		1EAC6745C361E552BC925C81 /* MirrorViewModel+Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C006B8AB5336EA4E8E26EF /* MirrorViewModel+Looks.swift */; };
 		1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */; };
@@ -36,58 +53,95 @@
 		25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECA27149E6906AFA7487B6A8 /* eyeliner.png */; };
 		26187129797773F0E04EAD72 /* manifest.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7343E3534A7DE0BCC753B134 /* manifest.json */; };
 		295D67D1392E3AC02C5AB7A3 /* MirrorEffectFailureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940E22752D3BAC351C71820 /* MirrorEffectFailureViewModelTests.swift */; };
+		2ACF2B50B4610B1FA2C6EAFB /* ThumbnailLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF323DEB1C463565EBD4821 /* ThumbnailLoader.swift */; };
+		2B13B34CB3DAF562AFB61F21 /* LockerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617013626020B0092B43AE10 /* LockerViewModel.swift */; };
 		2B18D53A6A67CBD558914653 /* URL+Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FED8DFC90B6D62C5B39367 /* URL+Documents.swift */; };
 		2C34EB4871AF70731018813D /* DHTokensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */; };
 		2DF1C76511E729B61F5E41ED /* GRWMLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67DE9D864F5CD4ADAC6B687B /* GRWMLogo.swift */; };
+		2ED4FD762E2B0F00572CD88E /* feed-curated.json in Resources */ = {isa = PBXBuildFile; fileRef = 68A53EE38383DE4AB4306E79 /* feed-curated.json */; };
 		30F16AA226DEB8D74E821564 /* EffectParameterMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */; };
+		3189A58D3C3C524347F8B1FA /* DHToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B057E83C8FFFD3C0698ACE8 /* DHToggle.swift */; };
 		31CFFF8BC1D5F80F1D8FCF02 /* AppPermissionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75252126C4F475FEF381B01 /* AppPermissionStatus.swift */; };
 		325AEE52E2D29C862240479A /* StickerHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D57AA91FC9E5D20190631 /* StickerHeart.swift */; };
 		33E0F275925F0FB81DEF741C /* StickerStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1A95064129A2EB93F7502 /* StickerStar.swift */; };
+		33F49BB88F91C1CD4FB7EDC6 /* DHPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7463B22093BB6074B08ACFE0 /* DHPaywallView.swift */; };
 		34F701731F9A9AFCC0D5F5EF /* MirrorView+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E68467C0C2659F9EEBC8F /* MirrorView+Errors.swift */; };
 		357669F4C17040937B6EA1F5 /* PhotoCaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21C51747F3EABB9A45A08C /* PhotoCaptureCoordinator.swift */; };
+		3805CED9D3305E33A9F682F0 /* SettingsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421F6EA3803C6BB53039CF54 /* SettingsGroup.swift */; };
 		38B4C99A41B3D7ADC7EF8042 /* eyeshadow_basic.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = CDDD1ED41FF361FAF2299E81 /* eyeshadow_basic.png */; };
 		3DECBFE62DE88823B1C96B9A /* MirrorViewModel+Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7BB1E15F9D8878EC668505 /* MirrorViewModel+Controls.swift */; };
 		3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67B9D91B985787DB196F53 /* AppEnvironment.swift */; };
 		40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B043BD930A105B118373369 /* Logger+GRWM.swift */; };
+		410C21565F8EBD53CD6860B9 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF62FF26DAEF6140FE042B3 /* FeedItem.swift */; };
 		41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF9CC4EB41EFE8F9E7DFBD47 /* cheeks.png */; };
+		4258CF36E61B92B2287873FC /* ErrorVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CD5B354D8948AF7925923 /* ErrorVariant.swift */; };
 		44A5B6D1105C57DE6B5998A8 /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1540F04B748F26E1D4FC9B5D /* Looks.swift */; };
+		44A88678D6358037CA4456CB /* DeepARController+FaceTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08C097E11E40865511764F /* DeepARController+FaceTracking.swift */; };
 		44B05971C0E0DBB6921D130D /* Shades+Cheeks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F75F769340157BAFF5B011 /* Shades+Cheeks.swift */; };
 		46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */; };
 		475FF88D8F84A1891F82084B /* DeepARControllerParameterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */; };
+		48300C37F5C8426A860C4506 /* LookSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DCCB7518C3A72B0459DCBA /* LookSection.swift */; };
 		48A1BF761FFDFD8C5ABADF39 /* DeepARController+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */; };
+		49D81FBE8F9CEB666CC470A0 /* LockerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E78E3AA68B5A25F1C493D0 /* LockerDetailView.swift */; };
+		4A71C1CDCD56F23C59E556BF /* MirrorLifecycleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A640F58A15FAA864636DF /* MirrorLifecycleViewModelTests.swift */; };
 		4CA779BCA5540FB75C118A8A /* Shades+Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8166C382E2B2372DFAE3B23D /* Shades+Eyes.swift */; };
+		4E31D029C04D0D0CDB5A05FD /* DebugRuntimeFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261CA6513A8F43B74B9275A /* DebugRuntimeFlags.swift */; };
 		4FC881F9A2B0E94B3D8556E8 /* MirrorBottomControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739436046EFE0E4DADB39B06 /* MirrorBottomControls.swift */; };
 		517D5C32F1DCB4A37A01F84F /* PreviewPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB43008B7FD2B449BA1A5D27 /* PreviewPlaceholderView.swift */; };
 		519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C558272F9814E7825BC889 /* PermRow.swift */; };
 		527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79AC2D570879CC7CA211099B /* look_legacy02.png */; };
 		53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */; };
+		53E654F16AAC9AB41F313E79 /* RootCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2A91CD79B71289EEB939A4 /* RootCoordinatorTests.swift */; };
+		54249E1C58941D55DC037B0B /* DHAnim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85616CED70296D41FFD9FADE /* DHAnim.swift */; };
+		54CAD16E73FBFDDC1A253336 /* ParentGateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CCBFD8F63C6A82C91DBBBA /* ParentGateIntent.swift */; };
+		59B082E45CD65187983422ED /* ErrorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C1DD53D8393193A4C587C5 /* ErrorRouter.swift */; };
 		5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */; };
 		5E085A2B9D09F6CBEA552306 /* MirrorTrayHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ED1842B1FD5FD7B794F566 /* MirrorTrayHostView.swift */; };
 		5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */; };
+		5F109A78F055251CE98CD84A /* LockerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045F44BEC60D15F1C5D14887 /* LockerCardView.swift */; };
 		60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */; };
 		6091042F28F1BD50A2500A52 /* CaptureServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116BFE195EF24C36D83D2276 /* CaptureServiceTests.swift */; };
+		60A86FD3589A8C5DEEA27AFF /* ParentGateRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0163319BDAE1696CA5DFCC80 /* ParentGateRootView.swift */; };
 		6262BA8B791E9B13DEE85538 /* MirrorViewModel+Reset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09BFAABFA8175D0BA38B55 /* MirrorViewModel+Reset.swift */; };
 		6302DD2951CA6BD778834A4F /* VideoRecordingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80893EB70023EE827A7DD41 /* VideoRecordingCoordinator.swift */; };
 		632B44213189DB33DEA376EE /* Fredoka-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB1004F88430111E629DA4 /* Fredoka-Medium.ttf */; };
 		65487BA25C93B1171C40B8E1 /* MirrorControlsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B11CFBF384A28D9B118929 /* MirrorControlsViewModelTests.swift */; };
 		66B94A9C71A8C541A59D7202 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9473F056F3FEE5B6C8D88645 /* Sounds.swift */; };
 		66D296E3E80B25DE4A682848 /* PermissionsDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */; };
+		6828CB42D1C30289AB697132 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 934B22C263E8E3785BC71614 /* Localizable.xcstrings */; };
+		69188FBD41F367B8DA9B2CFB /* DHParentMathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C054BC537408ABFD9AFC6E /* DHParentMathView.swift */; };
+		6A4EE202F0779D91CDEF3CE2 /* MirrorViewModel+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8BD3AAE745F7AC08D5A8C /* MirrorViewModel+Lifecycle.swift */; };
+		6AE71744D415728235602687 /* LockerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6215AC72E40BFE2797CB9FF /* LockerViewModelTests.swift */; };
+		6B274B4576D964A5B10C4E35 /* LooksLibraryView+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B9DDF153E3F421ADC7EFD8 /* LooksLibraryView+States.swift */; };
+		6B9FDD194E119E48384C6A41 /* AsyncBundleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02584AAF3D8BBEA101405DC9 /* AsyncBundleImage.swift */; };
+		6BFA31366C18CC32C3715ED1 /* MirrorViewModel+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2875D3DE388E8EADE94E24 /* MirrorViewModel+Debug.swift */; };
 		6C052DD2E427A6C2B4F5366B /* DHHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06EF686867E7FA7B9D66550 /* DHHaptics.swift */; };
+		6CD88A74192267AF867C4016 /* SettingsPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D62FCB1650DA3D56CFD0904 /* SettingsPreferences.swift */; };
+		6CF539CE66E180870AED7D38 /* DHErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B794787C6AC3231C59205B67 /* DHErrorView.swift */; };
+		6E7F31111E0D1C6B2379D60E /* EffectTextureCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA53F8377C7915FF33C9641 /* EffectTextureCache.swift */; };
 		6F30CCFE4C5EB81EC03859D9 /* EffectSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610FEB616B3436F330D5B37C /* EffectSlot.swift */; };
+		70283D79037085E9092DA263 /* DHSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E4038C6D062A9F9CD2F610 /* DHSkeleton.swift */; };
 		71337A950998A0A1175144E9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B16955494AFCF013FFD049C /* SplashView.swift */; };
+		72CF8DE31DB8CCBD498B8C8F /* DHParentHoldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F28F99FF95B6594A0B45960 /* DHParentHoldView.swift */; };
 		7328FEE722FD4A566C5D1A17 /* MirrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D3EE099B91E0423AECABC5 /* MirrorState.swift */; };
+		74E5D674EE0218D865C76CF6 /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3323EF28621E5D630F5566 /* SettingsRow.swift */; };
 		75702078CD900D5C85A583B6 /* Concurrency+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */; };
 		765234480C28766F058036AD /* DeepARController+Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3BFFA4F5506B71E3C510C /* DeepARController+Recording.swift */; };
+		7876743E090949F572E9A51B /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 929FA6F87ABC37CD9A824D99 /* Configuration.storekit */; };
 		79B00FB89F6DCA4DF7A33ED4 /* DH+ChunkyShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */; };
 		79F595E03C1BC8032A2BB98D /* eyeliner_none.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00B656B3CF36F3ABC99C855A /* eyeliner_none.png */; };
+		7A55F1C503E4DA2D2C90F44B /* LockerProfileHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B34CE82257560335A808C62 /* LockerProfileHeroView.swift */; };
 		7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */; };
 		7B764DC07634CA7F076EABC4 /* NoFaceTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */; };
 		7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4D64278E0C4061B17F667183 /* lips_satin.png */; };
 		7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E441DC4BB243A8321854669A /* DHWallpaper.swift */; };
+		7DCD830DBBF40B75D7212589 /* ErrorTriggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F23A73AEBDAF34CB6C56F /* ErrorTriggerView.swift */; };
 		7EF79EF347D8F95885442153 /* StickerFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */; };
 		7FDE54C8812562F6E58CEC8E /* DeepARLicenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B7FE6884AADB7B47AAB7AF /* DeepARLicenseTests.swift */; };
 		8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */; };
+		80455581078DFBDCDC6972C2 /* FeedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2D174B7A563AFC157329 /* FeedCardView.swift */; };
 		8047AC02F4BB590FA56B5FD2 /* DHTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221A387D41CC593F23F0463A /* DHTabBar.swift */; };
+		8281D0AFCB4E9A1B297311DE /* LooksLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FEB51E2FBF37683D6A73B7 /* LooksLibraryViewModel.swift */; };
 		8427AF7F1AD2BAAAA2372024 /* DeepARLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DDE32365C12B30732193AA /* DeepARLicense.swift */; };
 		865CB218539DDCD45374B271 /* EffectFailureBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3B735809366F752D43EE16 /* EffectFailureBanner.swift */; };
 		88FB008A30081225FA7CFCBE /* LooksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691D7CF4E6B5FE243428D33D /* LooksTests.swift */; };
@@ -104,13 +158,20 @@
 		982C8EE5A5C711635F382AED /* blush_mask.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 508583F491B70CF60A09098B /* blush_mask.png */; };
 		98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */; };
 		993E89029E80D90A6E5EBF0F /* CaptureMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0B177A0BD49AA82C072DCF /* CaptureMode.swift */; };
+		99661DF2411DEBB197B5C1C4 /* SaveShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314D2411A6FCA660B66DB72 /* SaveShareView.swift */; };
 		9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA1EFDAE8487082E1A023FF /* RootContainer.swift */; };
+		9B45A25346BE39E6C10A1B00 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05657396A54FDDB3243BC03 /* ActivityShareSheet.swift */; };
 		9BFE821DADE7DC109CCB0A75 /* brows_natural.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D6ED4920FF5E4E0116F07CA /* brows_natural.png */; };
 		9DB0B0E618A1C82A298F7564 /* Fredoka-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */; };
 		9E4E4126FC8ABC0E06F984B1 /* Shades+Brows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */; };
+		9EEE09B761E41AAA54565311 /* MirrorViewModel+Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5690609E99EB25742C317D3 /* MirrorViewModel+Textures.swift */; };
+		A1A02958C3ABECBF743F7492 /* SettingsPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD478D6519859F13DA7E7F4 /* SettingsPreferencesTests.swift */; };
 		A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4305B706633CFFF0075CBB45 /* eyeliner_winged.png */; };
 		A3EDB25296FCAA64B884DCF7 /* EffectCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */; };
 		A528A87D755749FE1C990D3B /* DHButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D211B2767AFF359F546874 /* DHButton.swift */; };
+		A52EA78FC307D7CB7C8450A1 /* StorageMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333FE39A1635227746A3AD9 /* StorageMonitor.swift */; };
+		A69DE0B5548EDE21177AE7DC /* EffectTextureCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64045D5D30D29EFCA794AC0 /* EffectTextureCacheTests.swift */; };
+		A7B0A1D63784220423707DB0 /* AppShellSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5FB44FD38AD18549684E28 /* AppShellSelection.swift */; };
 		A8187C9267C114BC44BA9152 /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F08944FAB932F872FCC276 /* PermissionsView.swift */; };
 		AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ED3FC6892310C07240BA42 /* MirrorView.swift */; };
 		ABFD6743A207E5DCECFFACE1 /* lips_gloss.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */; };
@@ -118,37 +179,54 @@
 		AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */; };
 		AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA57750E522F4B57E9C302 /* WelcomeView.swift */; };
 		ADCFC682D7389A7A554D208A /* FilterRailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1839F69BE023409EA86E07 /* FilterRailView.swift */; };
+		AEEE8FB22909C48FD295E1A9 /* AvatarEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094CB3AD94908E0FEF981CFB /* AvatarEditorViewModel.swift */; };
+		B07EA75ACF5ADF2D82B84838 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F6CF6C6EC14A091A2D3DE6 /* FeedViewModel.swift */; };
+		B1E80EB60FBEBBACB9FDD0FF /* LooksLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D3CF4830BBC7368B18812 /* LooksLibraryView.swift */; };
+		B3709677C832E662E68FC7E9 /* PurchaseLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D75D241A88B64F65696716B /* PurchaseLinks.swift */; };
 		B3C6524B2224613603E4612E /* CapturePressClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D35F948135A1C46D45D91DF /* CapturePressClassifierTests.swift */; };
+		B4778468995CC71CD17A3970 /* LookTutorialOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D678521BBCC088131B30A9 /* LookTutorialOverlay.swift */; };
 		B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */; };
 		B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */; };
 		B723CB8AB36EF8F12B1DFBB3 /* EffectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E938A290AC30DF1198A2F2A /* EffectFile.swift */; };
 		B87512D4385601B554F5C640 /* ShadeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */; };
 		B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */; };
+		B979642DA57BE3AD4A0CC938 /* TwoFingerHoldGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F610953E0B5BF6607B395D4 /* TwoFingerHoldGesture.swift */; };
 		B990F364C775B0D2842F5EB1 /* look_legacy02.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 056D9293EAE75780F27C49DB /* look_legacy02.deepar */; };
 		BA3619294D02D6F9E5873AF9 /* Fredoka-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */; };
 		BB1CE5D1A0DE816F2E3D0918 /* CountdownOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729EFEA7FFEF5A2DDC2C1D94 /* CountdownOverlayTests.swift */; };
+		BC1707230337817FE846F30B /* PerformanceSignposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C22CAFE6902B05CAE6AE7A4 /* PerformanceSignposts.swift */; };
 		BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F81E22F49903D155C25263DE /* lipstick.png */; };
 		C0A008C2DD8C344D0C7BB51D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67CB30236678D50E4D8BA115 /* Assets.xcassets */; };
+		C220F19EE7AEAD28C95C857C /* ProEntitlementsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A05E00AFA56C3CDC2E30B /* ProEntitlementsHolder.swift */; };
 		C28AAAAAFA07B2F82B9B659A /* MirrorViewModel+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669D85766D2FD7DF42FC964 /* MirrorViewModel+Selection.swift */; };
 		C3B16D6FBE113D25D9C3D470 /* eyelashes_drama.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3762331612665796AC7A7637 /* eyelashes_drama.png */; };
+		C3C06A72A898DD9420D95957 /* MirrorViewModel+FaceTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42D909AF46D882A65C7D373 /* MirrorViewModel+FaceTracking.swift */; };
 		C47E1EDF0C24DCCCBE90AA79 /* MirrorCaptureViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFBCE81B9773FFAAFB47CAC /* MirrorCaptureViewModelTests.swift */; };
 		C4E4C6AB8EB1F7FDF14337FF /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7717AB86CE427901B61D44DC /* Quicksand-Regular.ttf */; };
 		C69E6C6F9CE9E05AF268FE2A /* AppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DE872D8CE0EFD6B557813 /* AppShell.swift */; };
+		CA86D454CD11F37C1742AA12 /* ProEntitlements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039DEA13C06A6829E786765B /* ProEntitlements.swift */; };
+		CB920001F7E0055136420F42 /* ErrorTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79FC8E382235C5857038CF /* ErrorTone.swift */; };
 		CC6F483929F02A1013C47963 /* DeepARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAECB2E29E326501184B58A9 /* DeepARView.swift */; };
 		CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */; };
 		CD92DE08C4C84E90F3E4AE8B /* lips_matte.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 767FD9102336E13A4ACC8EE6 /* lips_matte.png */; };
 		D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */; };
 		D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 408499017F9D17AED4F1B6A0 /* lut_glow.png */; };
+		D1AFE14719F2B67B5B188FFA /* MirrorTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C666D54FD677FEB71B7DD660 /* MirrorTestSupport.swift */; };
+		D3637EC5494D1C7A96E3FDAE /* StoreIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B78D0EF737FD1266343F84 /* StoreIDs.swift */; };
+		D3CA8FE11EB5EB8AED20EFD0 /* GlowLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507DB4CEA4DD414201677E0B /* GlowLevel.swift */; };
 		D4011D6B13EB41FC78E7FCCD /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27404CCB96EE563E725C9A98 /* CaptureService.swift */; };
 		D483121AF654372FF86840ED /* ProfileRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393CC36E6316BE411EB860A /* ProfileRecordTests.swift */; };
 		D9058B2A6584BDC9E6B71B48 /* Fredoka-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */; };
+		D9519663EB21A4D7D3AE2AAC /* LockerView+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E82F11E9622EFE729A8E19 /* LockerView+States.swift */; };
 		D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F2635EC159BE740ED08A5B /* OnboardingStateTests.swift */; };
 		DA1A5E58CC40E2706A08B246 /* FilterCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */; };
 		DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */; };
 		DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836AF9B238A751CB43B7643C /* PermissionsService.swift */; };
+		DB019EED88C74056CAF05474 /* LookCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F63B486ECE6BA89110159F /* LookCopy.swift */; };
 		DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D467971A6379875D90F32 /* PermissionsServiceTests.swift */; };
 		DC57D49E81A1F266FA0E7236 /* DeepARControllerEffectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */; };
 		DCEFD5C9D85346DF5C80D167 /* DeepARDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */; };
+		DDCEB931A7F43664DC813C74 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8846C6A79ACFCFC6DFE8D77 /* L10n.swift */; };
 		E1E0921F0C20DDCD7D17F849 /* DeepARControllerRecordingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A8EC77CF58CA2EE8D5A6A /* DeepARControllerRecordingTests.swift */; };
 		E334D88D8F881B2B5127FCDE /* baseBeauty.deepar in CopyFiles */ = {isa = PBXBuildFile; fileRef = FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */; };
 		E3A28A70055DE0D59E4C5E6C /* eyelashes_doll.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8EBEEA65D673E4619983BBA /* eyelashes_doll.png */; };
@@ -159,14 +237,23 @@
 		E85099929E6688B19E0DB0E3 /* eyelashes_none.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0223412256CBF5F63222106A /* eyelashes_none.png */; };
 		E98942651A6E054EDBA27D74 /* StickerSparkle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52100C15AC1F3AD6747329A /* StickerSparkle.swift */; };
 		E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = E71D00F40AEDBE5021960897 /* brows.png */; };
+		EA01DC1D71DAA406136553DC /* LockerEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00050CDC7FD85AD1C25ECE /* LockerEmptyView.swift */; };
 		EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */; };
+		EC1CA124231186F5D1E9D14D /* AccessibilityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0480A0899C7BE4ACBB2006A9 /* AccessibilityUITests.swift */; };
+		EC7CE92D247CE1532756FB14 /* MathChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F143517F73BA13CC0064E64F /* MathChip.swift */; };
 		EDFF469B66D685262FCE81F3 /* DH+Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */; };
 		EE65D90F35B9641BE5708449 /* MirrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */; };
+		F04EFCBA6B731BEFF354356B /* LockerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FCF70A1DAD446ABCD550C6 /* LockerView.swift */; };
+		F053EA490BD0CF362BA1A594 /* DHFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809DFD4E0E15826CD78E20C3 /* DHFeedView.swift */; };
+		F0C4F34DA145B6A30D651DAE /* FaceTrackingDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE71CA6C83406D8E4535D3F1 /* FaceTrackingDots.swift */; };
+		F2AAA37B1D3A2CFD226C95E5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A7C0F04A427BCAE34739C /* SettingsViewModel.swift */; };
+		F3EF6742B98EAC7D17406F03 /* FeedHeartPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 574B2F53906A7A2A6EED8E11 /* FeedHeartPill.swift */; };
 		F4B2152832EB61050FF2E9B1 /* MirrorViewModel+Capture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D4D1F59A4509C0E841D5 /* MirrorViewModel+Capture.swift */; };
 		F4DFC1A552907B2F58E8153A /* DH+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A16D5E83B67577C1380959 /* DH+Fonts.swift */; };
 		F5E33B184140C7689A2797FE /* SlotSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD9E808A5ECF675350EC72 /* SlotSelection.swift */; };
 		F8B6E5AFDA28E0AECD286607 /* LookSwitchConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754F901F9A72AD868534B1E9 /* LookSwitchConfirmationView.swift */; };
 		F99AF7FE261407C5A3AA42BE /* DHChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7106DD365B22C90F28A98A3B /* DHChip.swift */; };
+		FA42EAA28AB1CDD8E012998A /* SettingsDebugSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29531486D3EB5755841DDB4B /* SettingsDebugSection.swift */; };
 		FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */; };
 		FEDD34ADA971035A527AB7BB /* Shades+Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */; };
 /* End PBXBuildFile section */
@@ -192,36 +279,6 @@
 		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Effects/luts;
-			dstSubfolderSpec = 7;
-			files = (
-				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
-				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
-				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/thumbnails;
-			dstSubfolderSpec = 7;
-			files = (
-				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
-				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
-				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
-				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
-				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
-				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
-				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
-				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
-				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = Effects/textures;
 			dstSubfolderSpec = 7;
 			files = (
@@ -244,7 +301,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C11C208F764B56B1CC794199 /* CopyFiles */ = {
+		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Effects;
@@ -257,16 +314,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/thumbnails;
+			dstSubfolderSpec = 7;
+			files = (
+				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
+				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
+				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
+				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
+				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
+				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
+				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
+				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
+				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11C208F764B56B1CC794199 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00B656B3CF36F3ABC99C855A /* eyeliner_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner_none.png; sourceTree = "<group>"; };
+		0163319BDAE1696CA5DFCC80 /* ParentGateRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentGateRootView.swift; sourceTree = "<group>"; };
 		01B7FE6884AADB7B47AAB7AF /* DeepARLicenseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARLicenseTests.swift; sourceTree = "<group>"; };
 		0223412256CBF5F63222106A /* eyelashes_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_none.png; sourceTree = "<group>"; };
+		02584AAF3D8BBEA101405DC9 /* AsyncBundleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBundleImage.swift; sourceTree = "<group>"; };
+		039DEA13C06A6829E786765B /* ProEntitlements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProEntitlements.swift; sourceTree = "<group>"; };
 		04571EAC7FE135649E32ED09 /* eyeshadow_smokey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeshadow_smokey.png; sourceTree = "<group>"; };
+		045F44BEC60D15F1C5D14887 /* LockerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerCardView.swift; sourceTree = "<group>"; };
+		0480A0899C7BE4ACBB2006A9 /* AccessibilityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityUITests.swift; sourceTree = "<group>"; };
 		056D9293EAE75780F27C49DB /* look_legacy02.deepar */ = {isa = PBXFileReference; path = look_legacy02.deepar; sourceTree = "<group>"; };
 		05FB09FBE6397A340CD92A9D /* PhotoLibrarySaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrarySaver.swift; sourceTree = "<group>"; };
 		08F4E6016A9E66CAE4115EDD /* DHCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHCard.swift; sourceTree = "<group>"; };
+		094CB3AD94908E0FEF981CFB /* AvatarEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditorViewModel.swift; sourceTree = "<group>"; };
+		09E82F11E9622EFE729A8E19 /* LockerView+States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockerView+States.swift"; sourceTree = "<group>"; };
 		09EE4CCC0717D91C85E63897 /* Shades+Lips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Lips.swift"; sourceTree = "<group>"; };
 		0B0B177A0BD49AA82C072DCF /* CaptureMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureMode.swift; sourceTree = "<group>"; };
 		0B16955494AFCF013FFD049C /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -279,28 +373,43 @@
 		140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFaceTipView.swift; sourceTree = "<group>"; };
 		1540F04B748F26E1D4FC9B5D /* Looks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 		18BA57750E522F4B57E9C302 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		18BF2E564C1D8F3742941E3D /* ErrorScreenshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorScreenshotsUITests.swift; sourceTree = "<group>"; };
+		19D678521BBCC088131B30A9 /* LookTutorialOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookTutorialOverlay.swift; sourceTree = "<group>"; };
 		1AA1EFDAE8487082E1A023FF /* RootContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainer.swift; sourceTree = "<group>"; };
+		1B5FB44FD38AD18549684E28 /* AppShellSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShellSelection.swift; sourceTree = "<group>"; };
 		1E1D57AA91FC9E5D20190631 /* StickerHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerHeart.swift; sourceTree = "<group>"; };
+		1F2875D3DE388E8EADE94E24 /* MirrorViewModel+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Debug.swift"; sourceTree = "<group>"; };
+		1F8A05E00AFA56C3CDC2E30B /* ProEntitlementsHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProEntitlementsHolder.swift; sourceTree = "<group>"; };
 		221A387D41CC593F23F0463A /* DHTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTabBar.swift; sourceTree = "<group>"; };
+		250B9D486F553B9BAA0699B1 /* ParentGateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentGateCoordinator.swift; sourceTree = "<group>"; };
 		27404CCB96EE563E725C9A98 /* CaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureService.swift; sourceTree = "<group>"; };
 		28A3BFFA4F5506B71E3C510C /* DeepARController+Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Recording.swift"; sourceTree = "<group>"; };
+		29531486D3EB5755841DDB4B /* SettingsDebugSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDebugSection.swift; sourceTree = "<group>"; };
+		2B057E83C8FFFD3C0698ACE8 /* DHToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHToggle.swift; sourceTree = "<group>"; };
 		2CB44E7E81F82BDD61D38E7A /* lut_soft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_soft.png; sourceTree = "<group>"; };
 		2CC5BAA338D96DB9EF815B84 /* StickerFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerFlower.swift; sourceTree = "<group>"; };
 		2CF96972FBBAD00BB3CAD25D /* MirrorChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorChrome.swift; sourceTree = "<group>"; };
 		2D6ED4920FF5E4E0116F07CA /* brows_natural.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brows_natural.png; sourceTree = "<group>"; };
+		2D75D241A88B64F65696716B /* PurchaseLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLinks.swift; sourceTree = "<group>"; };
+		2F610953E0B5BF6607B395D4 /* TwoFingerHoldGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFingerHoldGesture.swift; sourceTree = "<group>"; };
 		2FEA115F3DC7BF7ECC28DC7C /* look_legacy01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy01.png; sourceTree = "<group>"; };
 		30BDD8C123F3283EE5617293 /* DefaultPermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPermissionsService.swift; sourceTree = "<group>"; };
 		30F57E8DFFCF4C12C1CF6A05 /* EffectCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalog.swift; sourceTree = "<group>"; };
 		3129266168088884925A7CC4 /* DeepARController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARController.swift; sourceTree = "<group>"; };
+		314A7625B2190732CA045B78 /* LookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookDetailView.swift; sourceTree = "<group>"; };
 		33B4D75786E88E615D6143E3 /* EyesTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyesTrayView.swift; sourceTree = "<group>"; };
 		36A20A809AC7BB05AC58C5E9 /* Fredoka-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Bold.ttf"; sourceTree = "<group>"; };
 		3762331612665796AC7A7637 /* eyelashes_drama.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_drama.png; sourceTree = "<group>"; };
 		37B2FFFFF90C0AA1DF93E3C3 /* lips_glitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_glitter.png; sourceTree = "<group>"; };
 		3898CFC879661BDA5715FFCC /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-Regular.ttf"; sourceTree = "<group>"; };
 		3AFBCE81B9773FFAAFB47CAC /* MirrorCaptureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorCaptureViewModelTests.swift; sourceTree = "<group>"; };
+		3C22CAFE6902B05CAE6AE7A4 /* PerformanceSignposts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSignposts.swift; sourceTree = "<group>"; };
 		3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMapTests.swift; sourceTree = "<group>"; };
+		40377332B77C5B4F93C5748A /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
 		408499017F9D17AED4F1B6A0 /* lut_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glow.png; sourceTree = "<group>"; };
 		41D3EE099B91E0423AECABC5 /* MirrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorState.swift; sourceTree = "<group>"; };
+		421F6EA3803C6BB53039CF54 /* SettingsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGroup.swift; sourceTree = "<group>"; };
+		42E78E3AA68B5A25F1C493D0 /* LockerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerDetailView.swift; sourceTree = "<group>"; };
 		42EE7539807C18A27917DF2C /* look_legacy01.deepar */ = {isa = PBXFileReference; path = look_legacy01.deepar; sourceTree = "<group>"; };
 		4305B706633CFFF0075CBB45 /* eyeliner_winged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner_winged.png; sourceTree = "<group>"; };
 		44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTests.swift; sourceTree = "<group>"; };
@@ -312,24 +421,36 @@
 		4D67B9D91B985787DB196F53 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		4E7BB1E15F9D8878EC668505 /* MirrorViewModel+Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Controls.swift"; sourceTree = "<group>"; };
 		503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioApp.swift; sourceTree = "<group>"; };
+		507DB4CEA4DD414201677E0B /* GlowLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowLevel.swift; sourceTree = "<group>"; };
 		508583F491B70CF60A09098B /* blush_mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blush_mask.png; sourceTree = "<group>"; };
+		524B88FA95FBFBB0D92F183C /* DHSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHSettingsView.swift; sourceTree = "<group>"; };
+		5314D2411A6FCA660B66DB72 /* SaveShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveShareView.swift; sourceTree = "<group>"; };
 		54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARClient.swift; sourceTree = "<group>"; };
+		55B78D0EF737FD1266343F84 /* StoreIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreIDs.swift; sourceTree = "<group>"; };
 		5689FD3614E6CE1BB6C0C8C3 /* noFilter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noFilter.png; sourceTree = "<group>"; };
 		56C006B8AB5336EA4E8E26EF /* MirrorViewModel+Looks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Looks.swift"; sourceTree = "<group>"; };
 		573CDC0F1EE5B91F5CF8363E /* Shades+Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Skin.swift"; sourceTree = "<group>"; };
+		574B2F53906A7A2A6EED8E11 /* FeedHeartPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeartPill.swift; sourceTree = "<group>"; };
 		5941F02C76D8ECF0C86DE257 /* DeepARControllerEffectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerEffectTests.swift; sourceTree = "<group>"; };
 		5D14B354DF2DFE8538B7F7F1 /* CapturedAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedAsset.swift; sourceTree = "<group>"; };
+		5E2A91CD79B71289EEB939A4 /* RootCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinatorTests.swift; sourceTree = "<group>"; };
+		5E79FC8E382235C5857038CF /* ErrorTone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTone.swift; sourceTree = "<group>"; };
 		5E938A290AC30DF1198A2F2A /* EffectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFile.swift; sourceTree = "<group>"; };
 		5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Parameters.swift"; sourceTree = "<group>"; };
 		5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		610FEB616B3436F330D5B37C /* EffectSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectSlot.swift; sourceTree = "<group>"; };
+		617013626020B0092B43AE10 /* LockerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerViewModel.swift; sourceTree = "<group>"; };
+		62C1DD53D8393193A4C587C5 /* ErrorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorRouter.swift; sourceTree = "<group>"; };
 		62E44E9225A2DF9188D5BF1E /* DeepARControllerParameterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerParameterTests.swift; sourceTree = "<group>"; };
 		636E68467C0C2659F9EEBC8F /* MirrorView+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorView+Errors.swift"; sourceTree = "<group>"; };
 		6521D81D6A115E8D33BB8BF3 /* CaptureFAB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureFAB.swift; sourceTree = "<group>"; };
 		66F2635EC159BE740ED08A5B /* OnboardingStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStateTests.swift; sourceTree = "<group>"; };
 		67CB30236678D50E4D8BA115 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67DE9D864F5CD4ADAC6B687B /* GRWMLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMLogo.swift; sourceTree = "<group>"; };
+		68A53EE38383DE4AB4306E79 /* feed-curated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "feed-curated.json"; sourceTree = "<group>"; };
 		691D7CF4E6B5FE243428D33D /* LooksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooksTests.swift; sourceTree = "<group>"; };
+		6B34CE82257560335A808C62 /* LockerProfileHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerProfileHeroView.swift; sourceTree = "<group>"; };
+		6D62FCB1650DA3D56CFD0904 /* SettingsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferences.swift; sourceTree = "<group>"; };
 		7106DD365B22C90F28A98A3B /* DHChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHChip.swift; sourceTree = "<group>"; };
 		71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupShade.swift; sourceTree = "<group>"; };
 		72758F600E00EC23E45ABED2 /* OnboardingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingState.swift; sourceTree = "<group>"; };
@@ -337,7 +458,10 @@
 		733EC90AF38DBC6579223CBD /* DeepARControllerBootstrapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerBootstrapTests.swift; sourceTree = "<group>"; };
 		7343E3534A7DE0BCC753B134 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		739436046EFE0E4DADB39B06 /* MirrorBottomControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorBottomControls.swift; sourceTree = "<group>"; };
+		73E4038C6D062A9F9CD2F610 /* DHSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHSkeleton.swift; sourceTree = "<group>"; };
+		743CD5B354D8948AF7925923 /* ErrorVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorVariant.swift; sourceTree = "<group>"; };
 		7458D4D1F59A4509C0E841D5 /* MirrorViewModel+Capture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Capture.swift"; sourceTree = "<group>"; };
+		7463B22093BB6074B08ACFE0 /* DHPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHPaywallView.swift; sourceTree = "<group>"; };
 		754F901F9A72AD868534B1E9 /* LookSwitchConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookSwitchConfirmationView.swift; sourceTree = "<group>"; };
 		75ED1842B1FD5FD7B794F566 /* MirrorTrayHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorTrayHostView.swift; sourceTree = "<group>"; };
 		767FD9102336E13A4ACC8EE6 /* lips_matte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_matte.png; sourceTree = "<group>"; };
@@ -345,24 +469,37 @@
 		78C558272F9814E7825BC889 /* PermRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermRow.swift; sourceTree = "<group>"; };
 		79AC2D570879CC7CA211099B /* look_legacy02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = look_legacy02.png; sourceTree = "<group>"; };
 		7B5A8EC77CF58CA2EE8D5A6A /* DeepARControllerRecordingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARControllerRecordingTests.swift; sourceTree = "<group>"; };
+		809DFD4E0E15826CD78E20C3 /* DHFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHFeedView.swift; sourceTree = "<group>"; };
 		8166C382E2B2372DFAE3B23D /* Shades+Eyes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Eyes.swift"; sourceTree = "<group>"; };
 		81BD9E808A5ECF675350EC72 /* SlotSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotSelection.swift; sourceTree = "<group>"; };
 		81E973E0B871A21B0A2A52D3 /* Shade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shade.swift; sourceTree = "<group>"; };
 		8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHTokensTests.swift; sourceTree = "<group>"; };
 		836AF9B238A751CB43B7643C /* PermissionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsService.swift; sourceTree = "<group>"; };
 		83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		85616CED70296D41FFD9FADE /* DHAnim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHAnim.swift; sourceTree = "<group>"; };
 		86929B6B53CF58E628E130D8 /* GRWMStudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DBC14F5B2F34243F954FE1 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
 		893009F8C8216D1B11711EF8 /* StickerBow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBow.swift; sourceTree = "<group>"; };
 		89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryTests.swift; sourceTree = "<group>"; };
 		8D21C51747F3EABB9A45A08C /* PhotoCaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCaptureCoordinator.swift; sourceTree = "<group>"; };
+		8D5F23A73AEBDAF34CB6C56F /* ErrorTriggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTriggerView.swift; sourceTree = "<group>"; };
 		8DDE88D73A863ECFBC5625F5 /* Fredoka-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fredoka-SemiBold.ttf"; sourceTree = "<group>"; };
+		8F28F99FF95B6594A0B45960 /* DHParentHoldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHParentHoldView.swift; sourceTree = "<group>"; };
 		8F78C47B463A48FABE026C52 /* PermissionsDeniedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsDeniedView.swift; sourceTree = "<group>"; };
+		904B1CE86A3D059FDFBB1389 /* AvatarEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarEditorView.swift; sourceTree = "<group>"; };
+		90FEB51E2FBF37683D6A73B7 /* LooksLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooksLibraryViewModel.swift; sourceTree = "<group>"; };
 		91F75F769340157BAFF5B011 /* Shades+Cheeks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Cheeks.swift"; sourceTree = "<group>"; };
+		929FA6F87ABC37CD9A824D99 /* Configuration.storekit */ = {isa = PBXFileReference; path = Configuration.storekit; sourceTree = "<group>"; };
+		934B22C263E8E3785BC71614 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9473F056F3FEE5B6C8D88645 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
+		98E3433AE1CAD008BDCC2373 /* PurchasesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesSection.swift; sourceTree = "<group>"; };
+		99CCBFD8F63C6A82C91DBBBA /* ParentGateIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentGateIntent.swift; sourceTree = "<group>"; };
 		9B043BD930A105B118373369 /* Logger+GRWM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+GRWM.swift"; sourceTree = "<group>"; };
+		9C4C27161FCB286A1968AF0B /* LockerAtLimitBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerAtLimitBanner.swift; sourceTree = "<group>"; };
 		9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectParameterMap.swift; sourceTree = "<group>"; };
 		9F3F3E2AB65EE7E9310EEE87 /* Shades+Brows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Brows.swift"; sourceTree = "<group>"; };
+		9F5D3CF4830BBC7368B18812 /* LooksLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooksLibraryView.swift; sourceTree = "<group>"; };
+		9F6454A168D2C7046B685C99 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		A06EF686867E7FA7B9D66550 /* DHHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHHaptics.swift; sourceTree = "<group>"; };
 		A07C372D46745B2B38661FF3 /* FilterCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategory.swift; sourceTree = "<group>"; };
 		A1DDE32365C12B30732193AA /* DeepARLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARLicense.swift; sourceTree = "<group>"; };
@@ -377,25 +514,45 @@
 		AE8F9C16088C7167B070E353 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModelTests.swift; sourceTree = "<group>"; };
 		B2CAE98BAC007E56F3E3E929 /* ShadeTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadeTrayView.swift; sourceTree = "<group>"; };
+		B2F6CF6C6EC14A091A2D3DE6 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B4234637D1D41F546D13863E /* DeepARViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARViewTests.swift; sourceTree = "<group>"; };
 		B43DE872D8CE0EFD6B557813 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
+		B49437BE93839AC21689199A /* SettingsPolishUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPolishUITests.swift; sourceTree = "<group>"; };
+		B794787C6AC3231C59205B67 /* DHErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHErrorView.swift; sourceTree = "<group>"; };
 		B8970E72BA8C9A80F8709EF5 /* AppModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelContainer.swift; sourceTree = "<group>"; };
+		BA64450AB08B664EC96344FC /* SettingsCommercePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCommercePresentation.swift; sourceTree = "<group>"; };
 		BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shades+Base.swift"; sourceTree = "<group>"; };
+		BC00050CDC7FD85AD1C25ECE /* LockerEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerEmptyView.swift; sourceTree = "<group>"; };
+		BCD65E86B6EF7F4F1BB31097 /* AvatarSwatch+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvatarSwatch+Style.swift"; sourceTree = "<group>"; };
+		BCF4912862A8A2EF41A2393F /* MirrorNoFaceViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorNoFaceViewModelTests.swift; sourceTree = "<group>"; };
 		BD65C7021428380739D34C9B /* lut_glam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lut_glam.png; sourceTree = "<group>"; };
 		C0B11CFBF384A28D9B118929 /* MirrorControlsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorControlsViewModelTests.swift; sourceTree = "<group>"; };
+		C261CA6513A8F43B74B9275A /* DebugRuntimeFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugRuntimeFlags.swift; sourceTree = "<group>"; };
 		C38BDDEB1C326D10F3B8702B /* MirrorResetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorResetViewModelTests.swift; sourceTree = "<group>"; };
+		C5690609E99EB25742C317D3 /* MirrorViewModel+Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Textures.swift"; sourceTree = "<group>"; };
 		C5D32426D75F1151F9561AC5 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
+		C6215AC72E40BFE2797CB9FF /* LockerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerViewModelTests.swift; sourceTree = "<group>"; };
+		C666D54FD677FEB71B7DD660 /* MirrorTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorTestSupport.swift; sourceTree = "<group>"; };
 		C6F08944FAB932F872FCC276 /* PermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
+		C6FDED6EC8BF5C3CBDBE9EC3 /* DeepARController+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+Lifecycle.swift"; sourceTree = "<group>"; };
 		C80893EB70023EE827A7DD41 /* VideoRecordingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecordingCoordinator.swift; sourceTree = "<group>"; };
 		C864855B4C7D6BF81930D62A /* baseBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseBeauty.png; sourceTree = "<group>"; };
 		C940E22752D3BAC351C71820 /* MirrorEffectFailureViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorEffectFailureViewModelTests.swift; sourceTree = "<group>"; };
+		C97B2D174B7A563AFC157329 /* FeedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCardView.swift; sourceTree = "<group>"; };
 		C9BB786A31544390072EF3CD /* GRWMStudioTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = GRWMStudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA1A95064129A2EB93F7502 /* StickerStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerStar.swift; sourceTree = "<group>"; };
+		CAA53F8377C7915FF33C9641 /* EffectTextureCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTextureCache.swift; sourceTree = "<group>"; };
+		CB3323EF28621E5D630F5566 /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
 		CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD0278E1339612085DDDEBE0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		CDDD1ED41FF361FAF2299E81 /* eyeshadow_basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeshadow_basic.png; sourceTree = "<group>"; };
 		CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorLipViewModelTests.swift; sourceTree = "<group>"; };
 		CF3B735809366F752D43EE16 /* EffectFailureBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectFailureBanner.swift; sourceTree = "<group>"; };
+		D05657396A54FDDB3243BC03 /* ActivityShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
+		D0C9203BA269D425BDE8AFE2 /* AccessibilitySnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySnapshotTests.swift; sourceTree = "<group>"; };
+		D2FCF70A1DAD446ABCD550C6 /* LockerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockerView.swift; sourceTree = "<group>"; };
+		D3C054BC537408ABFD9AFC6E /* DHParentMathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHParentMathView.swift; sourceTree = "<group>"; };
+		D3DCCB7518C3A72B0459DCBA /* LookSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookSection.swift; sourceTree = "<group>"; };
 		D42B4180E5BC94F2A07CFBFB /* ProfileRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRecord.swift; sourceTree = "<group>"; };
 		D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Concurrency+Extensions.swift"; sourceTree = "<group>"; };
 		D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorViewModel.swift; sourceTree = "<group>"; };
@@ -403,28 +560,45 @@
 		D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepARDelegateProxy.swift; sourceTree = "<group>"; };
 		D5FED8DFC90B6D62C5B39367 /* URL+Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Documents.swift"; sourceTree = "<group>"; };
 		D67D1A0641F04DB5487BE9B2 /* EmptyShadeTrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyShadeTrayView.swift; sourceTree = "<group>"; };
+		D8846C6A79ACFCFC6DFE8D77 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		DA5E801A42C2F3996FAEC8AF /* eyeliner_classic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner_classic.png; sourceTree = "<group>"; };
 		DB43008B7FD2B449BA1A5D27 /* PreviewPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPlaceholderView.swift; sourceTree = "<group>"; };
+		DDF62FF26DAEF6140FE042B3 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		DE28718EC19A161B7B6256B8 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
 		DF454D14E2FFA94365BA70A0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		DFDE84E743A5D49B7079EA09 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		DFEFBE084C76CD26A86B34B8 /* DH+ChunkyShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+ChunkyShadow.swift"; sourceTree = "<group>"; };
+		E1F63B486ECE6BA89110159F /* LookCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookCopy.swift; sourceTree = "<group>"; };
 		E30B1C2E989AE8B4BA935BCC /* ParentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentInfoView.swift; sourceTree = "<group>"; };
+		E42D909AF46D882A65C7D373 /* MirrorViewModel+FaceTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+FaceTracking.swift"; sourceTree = "<group>"; };
 		E441DC4BB243A8321854669A /* DHWallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DHWallpaper.swift; sourceTree = "<group>"; };
 		E508B38CACB288B78B8B9EDD /* CountdownOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownOverlay.swift; sourceTree = "<group>"; };
 		E71D00F40AEDBE5021960897 /* brows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brows.png; sourceTree = "<group>"; };
 		E75252126C4F475FEF381B01 /* AppPermissionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissionStatus.swift; sourceTree = "<group>"; };
+		E7B9DDF153E3F421ADC7EFD8 /* LooksLibraryView+States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LooksLibraryView+States.swift"; sourceTree = "<group>"; };
 		E8EBEEA65D673E4619983BBA /* eyelashes_doll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyelashes_doll.png; sourceTree = "<group>"; };
 		E8EE539AD707663BED29DBAA /* DH+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Color.swift"; sourceTree = "<group>"; };
 		E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRWMStudioUITests.swift; sourceTree = "<group>"; };
+		EA08C097E11E40865511764F /* DeepARController+FaceTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeepARController+FaceTracking.swift"; sourceTree = "<group>"; };
 		EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DH+Tokens.swift"; sourceTree = "<group>"; };
 		EB96D3405D78A0561EA1F0AF /* GRWMStudio.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GRWMStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA27149E6906AFA7487B6A8 /* eyeliner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeliner.png; sourceTree = "<group>"; };
+		EE2663A27ACE4D94801D60A9 /* HitTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitTargetTests.swift; sourceTree = "<group>"; };
+		EFD478D6519859F13DA7E7F4 /* SettingsPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferencesTests.swift; sourceTree = "<group>"; };
+		F143517F73BA13CC0064E64F /* MathChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathChip.swift; sourceTree = "<group>"; };
+		F333FE39A1635227746A3AD9 /* StorageMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMonitor.swift; sourceTree = "<group>"; };
+		F48A7C0F04A427BCAE34739C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F4AA2AC16D6E75FEB1EB507E /* lips_gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lips_gloss.png; sourceTree = "<group>"; };
 		F58CE707234895BA156A2DCB /* EffectCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectCatalogTests.swift; sourceTree = "<group>"; };
+		F64045D5D30D29EFCA794AC0 /* EffectTextureCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectTextureCacheTests.swift; sourceTree = "<group>"; };
+		F80A640F58A15FAA864636DF /* MirrorLifecycleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorLifecycleViewModelTests.swift; sourceTree = "<group>"; };
 		F81E22F49903D155C25263DE /* lipstick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lipstick.png; sourceTree = "<group>"; };
 		FA09BFAABFA8175D0BA38B55 /* MirrorViewModel+Reset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Reset.swift"; sourceTree = "<group>"; };
+		FBD8BD3AAE745F7AC08D5A8C /* MirrorViewModel+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MirrorViewModel+Lifecycle.swift"; sourceTree = "<group>"; };
+		FCFAFBFF08656B6CCF2F6B60 /* FeedMosaic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMosaic.swift; sourceTree = "<group>"; };
+		FE71CA6C83406D8E4535D3F1 /* FaceTrackingDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTrackingDots.swift; sourceTree = "<group>"; };
 		FEEFFA2DB46DB0F562C1ECE5 /* baseBeauty.deepar */ = {isa = PBXFileReference; path = baseBeauty.deepar; sourceTree = "<group>"; };
+		FEF323DEB1C463565EBD4821 /* ThumbnailLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailLoader.swift; sourceTree = "<group>"; };
 		FF9CC4EB41EFE8F9E7DFBD47 /* cheeks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheeks.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -446,6 +620,19 @@
 				8363BC67FABE968C805CC4B3 /* DHTokensTests.swift */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		0D0315A3A7FFED54BE6998D1 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				809DFD4E0E15826CD78E20C3 /* DHFeedView.swift */,
+				C97B2D174B7A563AFC157329 /* FeedCardView.swift */,
+				574B2F53906A7A2A6EED8E11 /* FeedHeartPill.swift */,
+				DDF62FF26DAEF6140FE042B3 /* FeedItem.swift */,
+				FCFAFBFF08656B6CCF2F6B60 /* FeedMosaic.swift */,
+				B2F6CF6C6EC14A091A2D3DE6 /* FeedViewModel.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		0F48319150D1E6ED27568D31 /* Onboarding */ = {
@@ -479,6 +666,21 @@
 			path = textures;
 			sourceTree = "<group>";
 		};
+		16B0B600DF5378A480F24019 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				E1F63B486ECE6BA89110159F /* LookCopy.swift */,
+				314A7625B2190732CA045B78 /* LookDetailView.swift */,
+				D3DCCB7518C3A72B0459DCBA /* LookSection.swift */,
+				9F5D3CF4830BBC7368B18812 /* LooksLibraryView.swift */,
+				E7B9DDF153E3F421ADC7EFD8 /* LooksLibraryView+States.swift */,
+				90FEB51E2FBF37683D6A73B7 /* LooksLibraryViewModel.swift */,
+				19D678521BBCC088131B30A9 /* LookTutorialOverlay.swift */,
+				5314D2411A6FCA660B66DB72 /* SaveShareView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		17815A28FB4EA66FD13AEA62 = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +697,8 @@
 			children = (
 				54ED0D0EC3C275BE486A2F52 /* DeepARClient.swift */,
 				3129266168088884925A7CC4 /* DeepARController.swift */,
+				EA08C097E11E40865511764F /* DeepARController+FaceTracking.swift */,
+				C6FDED6EC8BF5C3CBDBE9EC3 /* DeepARController+Lifecycle.swift */,
 				5F11F80BF2A781CF8AA14DE7 /* DeepARController+Parameters.swift */,
 				28A3BFFA4F5506B71E3C510C /* DeepARController+Recording.swift */,
 				D5BC23C3C712C4C00DDB8CA4 /* DeepARDelegateProxy.swift */,
@@ -505,6 +709,7 @@
 				A86ECD439C1F53FF5C947E22 /* EffectParameter.swift */,
 				9EB6C5F74DA6CE9EA2A67B42 /* EffectParameterMap.swift */,
 				610FEB616B3436F330D5B37C /* EffectSlot.swift */,
+				CAA53F8377C7915FF33C9641 /* EffectTextureCache.swift */,
 				AD2ADF117DCA3665BB8A8393 /* MakeupCategory.swift */,
 				71177722F2DDB9FC87FA4E4C /* MakeupShade.swift */,
 				DE28718EC19A161B7B6256B8 /* RecordingService.swift */,
@@ -535,12 +740,15 @@
 				E8EE539AD707663BED29DBAA /* DH+Color.swift */,
 				D5A16D5E83B67577C1380959 /* DH+Fonts.swift */,
 				EA09F418180E8EF00CE83AD0 /* DH+Tokens.swift */,
+				85616CED70296D41FFD9FADE /* DHAnim.swift */,
 				13D211B2767AFF359F546874 /* DHButton.swift */,
 				08F4E6016A9E66CAE4115EDD /* DHCard.swift */,
 				7106DD365B22C90F28A98A3B /* DHChip.swift */,
 				A06EF686867E7FA7B9D66550 /* DHHaptics.swift */,
+				73E4038C6D062A9F9CD2F610 /* DHSkeleton.swift */,
 				221A387D41CC593F23F0463A /* DHTabBar.swift */,
 				E441DC4BB243A8321854669A /* DHWallpaper.swift */,
+				FE71CA6C83406D8E4535D3F1 /* FaceTrackingDots.swift */,
 				9473F056F3FEE5B6C8D88645 /* Sounds.swift */,
 				D92A5EA8E2B1EE81CECA336E /* Stickers */,
 			);
@@ -553,9 +761,11 @@
 				CCD20E57EA6BBE1D678D86BB /* AppDelegate.swift */,
 				4D67B9D91B985787DB196F53 /* AppEnvironment.swift */,
 				B43DE872D8CE0EFD6B557813 /* AppShell.swift */,
+				1B5FB44FD38AD18549684E28 /* AppShellSelection.swift */,
 				503BD80C39FB5520C18E5B91 /* GRWMStudioApp.swift */,
 				1AA1EFDAE8487082E1A023FF /* RootContainer.swift */,
 				83F45FCC2FC8F25713B1524E /* RootCoordinator.swift */,
+				9F6454A168D2C7046B685C99 /* ToastView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -563,16 +773,30 @@
 		35691EE1D805C8B885C40010 /* GRWMStudioTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0C9203BA269D425BDE8AFE2 /* AccessibilitySnapshotTests.swift */,
+				929FA6F87ABC37CD9A824D99 /* Configuration.storekit */,
 				A9F840C372620E9C72E727EC /* GRWMStudioTests.swift */,
+				EE2663A27ACE4D94801D60A9 /* HitTargetTests.swift */,
+				4AE9C7EB4370616150C9F147 /* App */,
 				573077F4EEC4B2F01A980BBF /* Capture */,
 				D2F6467826E99E8C1A10F2B5 /* DeepAR */,
 				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
+				BD6F6D733CE8FA90E94315C9 /* Locker */,
 				D37CFD7D5B6C385F4FB5D846 /* Mirror */,
 				0F48319150D1E6ED27568D31 /* Onboarding */,
 				EA5CD952999A93C7679C2A59 /* Permissions */,
 				BAB671FBF528DC5C74EAD7D1 /* Persistence */,
+				3D426452DF39F74CA0FD4420 /* Settings */,
 			);
 			path = GRWMStudioTests;
+			sourceTree = "<group>";
+		};
+		3D426452DF39F74CA0FD4420 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EFD478D6519859F13DA7E7F4 /* SettingsPreferencesTests.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		3DE1D7572561F9470B143F08 /* Onboarding */ = {
@@ -589,11 +813,24 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		4AE9C7EB4370616150C9F147 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5E2A91CD79B71289EEB939A4 /* RootCoordinatorTests.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		51CB23B090FC06420E2B62A7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D05657396A54FDDB3243BC03 /* ActivityShareSheet.swift */,
+				02584AAF3D8BBEA101405DC9 /* AsyncBundleImage.swift */,
 				D53C4BA264FB2F0BC6AC4A32 /* Concurrency+Extensions.swift */,
+				D8846C6A79ACFCFC6DFE8D77 /* L10n.swift */,
 				9B043BD930A105B118373369 /* Logger+GRWM.swift */,
+				3C22CAFE6902B05CAE6AE7A4 /* PerformanceSignposts.swift */,
+				F333FE39A1635227746A3AD9 /* StorageMonitor.swift */,
 				D5FED8DFC90B6D62C5B39367 /* URL+Documents.swift */,
 			);
 			path = Utilities;
@@ -618,6 +855,49 @@
 			path = Capture;
 			sourceTree = "<group>";
 		};
+		63A3FCC8B9927F1E85584321 /* Commerce */ = {
+			isa = PBXGroup;
+			children = (
+				7463B22093BB6074B08ACFE0 /* DHPaywallView.swift */,
+				40377332B77C5B4F93C5748A /* PaywallViewModel.swift */,
+				039DEA13C06A6829E786765B /* ProEntitlements.swift */,
+				1F8A05E00AFA56C3CDC2E30B /* ProEntitlementsHolder.swift */,
+				2D75D241A88B64F65696716B /* PurchaseLinks.swift */,
+				55B78D0EF737FD1266343F84 /* StoreIDs.swift */,
+			);
+			path = Commerce;
+			sourceTree = "<group>";
+		};
+		659DAA2607358BC1E697551F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				524B88FA95FBFBB0D92F183C /* DHSettingsView.swift */,
+				98E3433AE1CAD008BDCC2373 /* PurchasesSection.swift */,
+				BA64450AB08B664EC96344FC /* SettingsCommercePresentation.swift */,
+				29531486D3EB5755841DDB4B /* SettingsDebugSection.swift */,
+				421F6EA3803C6BB53039CF54 /* SettingsGroup.swift */,
+				6D62FCB1650DA3D56CFD0904 /* SettingsPreferences.swift */,
+				CB3323EF28621E5D630F5566 /* SettingsRow.swift */,
+				F48A7C0F04A427BCAE34739C /* SettingsViewModel.swift */,
+				8FE27950DC1E5C98F00E993C /* Toggle */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7044316634176565830E3FCD /* ParentGate */ = {
+			isa = PBXGroup;
+			children = (
+				8F28F99FF95B6594A0B45960 /* DHParentHoldView.swift */,
+				D3C054BC537408ABFD9AFC6E /* DHParentMathView.swift */,
+				F143517F73BA13CC0064E64F /* MathChip.swift */,
+				250B9D486F553B9BAA0699B1 /* ParentGateCoordinator.swift */,
+				99CCBFD8F63C6A82C91DBBBA /* ParentGateIntent.swift */,
+				0163319BDAE1696CA5DFCC80 /* ParentGateRootView.swift */,
+				2F610953E0B5BF6607B395D4 /* TwoFingerHoldGesture.swift */,
+			);
+			path = ParentGate;
+			sourceTree = "<group>";
+		};
 		748D406B1C5333F2F3D372C3 /* luts */ = {
 			isa = PBXGroup;
 			children = (
@@ -633,16 +913,36 @@
 			children = (
 				322DBD4C113A738A4E28F066 /* App */,
 				BC45D209D14BA80AA9A3ABE3 /* Capture */,
+				63A3FCC8B9927F1E85584321 /* Commerce */,
+				F25137F0310C5CF147B4E74D /* Debug */,
 				1856E43C21F0DE495D560864 /* DeepAR */,
 				29EE459A880492A90D704EBE /* DesignSystem */,
+				D3F8BFBF7E45510DDAE927E5 /* Errors */,
+				0D0315A3A7FFED54BE6998D1 /* Feed */,
+				16B0B600DF5378A480F24019 /* Library */,
+				8AAD2F1A65436988FA193D5A /* Locker */,
 				806952685AB83A501CB7EB0F /* Mirror */,
 				3DE1D7572561F9470B143F08 /* Onboarding */,
+				7044316634176565830E3FCD /* ParentGate */,
 				F3D8926139F1F430A18E8150 /* Permissions */,
 				DC09C75263DE4AEECC51545B /* Persistence */,
+				7F6A08B6A7B8DE3AAFA32B54 /* Profile */,
 				AA738BCAA887B227C0AA18B5 /* Resources */,
+				659DAA2607358BC1E697551F /* Settings */,
 				51CB23B090FC06420E2B62A7 /* Utilities */,
 			);
 			path = GRWMStudio;
+			sourceTree = "<group>";
+		};
+		7F6A08B6A7B8DE3AAFA32B54 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				904B1CE86A3D059FDFBB1389 /* AvatarEditorView.swift */,
+				094CB3AD94908E0FEF981CFB /* AvatarEditorViewModel.swift */,
+				BCD65E86B6EF7F4F1BB31097 /* AvatarSwatch+Style.swift */,
+				507DB4CEA4DD414201677E0B /* GlowLevel.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		806952685AB83A501CB7EB0F /* Mirror */ = {
@@ -666,9 +966,13 @@
 				D58C7667346BC0EC2C9E7FE4 /* MirrorViewModel.swift */,
 				7458D4D1F59A4509C0E841D5 /* MirrorViewModel+Capture.swift */,
 				4E7BB1E15F9D8878EC668505 /* MirrorViewModel+Controls.swift */,
+				1F2875D3DE388E8EADE94E24 /* MirrorViewModel+Debug.swift */,
+				E42D909AF46D882A65C7D373 /* MirrorViewModel+FaceTracking.swift */,
+				FBD8BD3AAE745F7AC08D5A8C /* MirrorViewModel+Lifecycle.swift */,
 				56C006B8AB5336EA4E8E26EF /* MirrorViewModel+Looks.swift */,
 				FA09BFAABFA8175D0BA38B55 /* MirrorViewModel+Reset.swift */,
 				4669D85766D2FD7DF42FC964 /* MirrorViewModel+Selection.swift */,
+				C5690609E99EB25742C317D3 /* MirrorViewModel+Textures.swift */,
 				140C4C6E57F8EBF1DB688E71 /* NoFaceTipView.swift */,
 				81E973E0B871A21B0A2A52D3 /* Shade.swift */,
 				BBFC21DA4FC5818F6DC88E0C /* Shades+Base.swift */,
@@ -683,11 +987,37 @@
 			path = Mirror;
 			sourceTree = "<group>";
 		};
+		8AAD2F1A65436988FA193D5A /* Locker */ = {
+			isa = PBXGroup;
+			children = (
+				9C4C27161FCB286A1968AF0B /* LockerAtLimitBanner.swift */,
+				045F44BEC60D15F1C5D14887 /* LockerCardView.swift */,
+				42E78E3AA68B5A25F1C493D0 /* LockerDetailView.swift */,
+				BC00050CDC7FD85AD1C25ECE /* LockerEmptyView.swift */,
+				6B34CE82257560335A808C62 /* LockerProfileHeroView.swift */,
+				D2FCF70A1DAD446ABCD550C6 /* LockerView.swift */,
+				09E82F11E9622EFE729A8E19 /* LockerView+States.swift */,
+				617013626020B0092B43AE10 /* LockerViewModel.swift */,
+				FEF323DEB1C463565EBD4821 /* ThumbnailLoader.swift */,
+			);
+			path = Locker;
+			sourceTree = "<group>";
+		};
+		8FE27950DC1E5C98F00E993C /* Toggle */ = {
+			isa = PBXGroup;
+			children = (
+				2B057E83C8FFFD3C0698ACE8 /* DHToggle.swift */,
+			);
+			path = Toggle;
+			sourceTree = "<group>";
+		};
 		AA738BCAA887B227C0AA18B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				67CB30236678D50E4D8BA115 /* Assets.xcassets */,
+				68A53EE38383DE4AB4306E79 /* feed-curated.json */,
 				5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */,
+				934B22C263E8E3785BC71614 /* Localizable.xcstrings */,
 				E0B65DF5659ED1DFA0C0A332 /* Effects */,
 				F05ED27ECE889EFBC98C74D8 /* Fonts */,
 			);
@@ -718,6 +1048,14 @@
 			path = Capture;
 			sourceTree = "<group>";
 		};
+		BD6F6D733CE8FA90E94315C9 /* Locker */ = {
+			isa = PBXGroup;
+			children = (
+				C6215AC72E40BFE2797CB9FF /* LockerViewModelTests.swift */,
+			);
+			path = Locker;
+			sourceTree = "<group>";
+		};
 		D2F6467826E99E8C1A10F2B5 /* DeepAR */ = {
 			isa = PBXGroup;
 			children = (
@@ -729,6 +1067,7 @@
 				B4234637D1D41F546D13863E /* DeepARViewTests.swift */,
 				F58CE707234895BA156A2DCB /* EffectCatalogTests.swift */,
 				3C4604471A662FD0D9128B9D /* EffectParameterMapTests.swift */,
+				F64045D5D30D29EFCA794AC0 /* EffectTextureCacheTests.swift */,
 			);
 			path = DeepAR;
 			sourceTree = "<group>";
@@ -741,12 +1080,26 @@
 				3AFBCE81B9773FFAAFB47CAC /* MirrorCaptureViewModelTests.swift */,
 				C0B11CFBF384A28D9B118929 /* MirrorControlsViewModelTests.swift */,
 				C940E22752D3BAC351C71820 /* MirrorEffectFailureViewModelTests.swift */,
+				F80A640F58A15FAA864636DF /* MirrorLifecycleViewModelTests.swift */,
 				CE78D16083ED34E18E6AC894 /* MirrorLipViewModelTests.swift */,
+				BCF4912862A8A2EF41A2393F /* MirrorNoFaceViewModelTests.swift */,
 				C38BDDEB1C326D10F3B8702B /* MirrorResetViewModelTests.swift */,
+				C666D54FD677FEB71B7DD660 /* MirrorTestSupport.swift */,
 				B04F4830A66F0328263FA081 /* MirrorViewModelTests.swift */,
 				44ACED8BADA1F0C77DBB8AF1 /* ShadeTests.swift */,
 			);
 			path = Mirror;
+			sourceTree = "<group>";
+		};
+		D3F8BFBF7E45510DDAE927E5 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				B794787C6AC3231C59205B67 /* DHErrorView.swift */,
+				62C1DD53D8393193A4C587C5 /* ErrorRouter.swift */,
+				5E79FC8E382235C5857038CF /* ErrorTone.swift */,
+				743CD5B354D8948AF7925923 /* ErrorVariant.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		D92A5EA8E2B1EE81CECA336E /* Stickers */ = {
@@ -808,6 +1161,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		F25137F0310C5CF147B4E74D /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				C261CA6513A8F43B74B9275A /* DebugRuntimeFlags.swift */,
+				8D5F23A73AEBDAF34CB6C56F /* ErrorTriggerView.swift */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
 		F3D8926139F1F430A18E8150 /* Permissions */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,7 +1183,10 @@
 		F57AAE1B00D8008F270FFD47 /* GRWMStudioUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0480A0899C7BE4ACBB2006A9 /* AccessibilityUITests.swift */,
+				18BF2E564C1D8F3742941E3D /* ErrorScreenshotsUITests.swift */,
 				E9E64AD90CB8AA6957534A94 /* GRWMStudioUITests.swift */,
+				B49437BE93839AC21689199A /* SettingsPolishUITests.swift */,
 			);
 			path = GRWMStudioUITests;
 			sourceTree = "<group>";
@@ -887,6 +1252,7 @@
 			buildConfigurationList = F4DD6DFF2749E91D0C651DB3 /* Build configuration list for PBXNativeTarget "GRWMStudioTests" */;
 			buildPhases = (
 				869A8ACDA39D94D1842A549B /* Sources */,
+				6C14730ACC22B2C7FC54390F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -910,15 +1276,15 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					2E1F08A02DDB466A6B9F47FC = {
-						DevelopmentTeam = 84D222Q647;
+						DevelopmentTeam = 7JL22TDB44;
 						ProvisioningStyle = Automatic;
 					};
 					B9D5AE14F9121C8DAFB2AB5B = {
-						DevelopmentTeam = 84D222Q647;
+						DevelopmentTeam = 7JL22TDB44;
 						TestTargetID = 2E1F08A02DDB466A6B9F47FC;
 					};
 					C0231A2978FD6F39B4B16797 = {
-						DevelopmentTeam = 84D222Q647;
+						DevelopmentTeam = 7JL22TDB44;
 					};
 				};
 			};
@@ -928,6 +1294,7 @@
 			knownRegions = (
 				Base,
 				en,
+				es,
 			);
 			mainGroup = 17815A28FB4EA66FD13AEA62;
 			minimizedProjectReferenceProxies = 1;
@@ -957,10 +1324,20 @@
 				BA3619294D02D6F9E5873AF9 /* Fredoka-Regular.ttf in Resources */,
 				9DB0B0E618A1C82A298F7564 /* Fredoka-SemiBold.ttf in Resources */,
 				DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */,
+				6828CB42D1C30289AB697132 /* Localizable.xcstrings in Resources */,
 				1EB608C2D122CD1AD80D6F71 /* Quicksand-Bold.ttf in Resources */,
 				98870F741D0975FADD6D7F68 /* Quicksand-Medium.ttf in Resources */,
 				C4E4C6AB8EB1F7FDF14337FF /* Quicksand-Regular.ttf in Resources */,
 				B8D31C9A93D643BD5E8461FB /* Quicksand-SemiBold.ttf in Resources */,
+				2ED4FD762E2B0F00572CD88E /* feed-curated.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C14730ACC22B2C7FC54390F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7876743E090949F572E9A51B /* Configuration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0961F3A7FA4DC5D4E147E231 /* AccessibilitySnapshotTests.swift in Sources */,
 				B3C6524B2224613603E4612E /* CapturePressClassifierTests.swift in Sources */,
 				6091042F28F1BD50A2500A52 /* CaptureServiceTests.swift in Sources */,
 				BB1CE5D1A0DE816F2E3D0918 /* CountdownOverlayTests.swift in Sources */,
@@ -1006,18 +1384,26 @@
 				94E4E5FE229210AB8C3E5413 /* DeepARViewTests.swift in Sources */,
 				2553F93440BF12F3280B5F54 /* EffectCatalogTests.swift in Sources */,
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
+				A69DE0B5548EDE21177AE7DC /* EffectTextureCacheTests.swift in Sources */,
 				DA1A5E58CC40E2706A08B246 /* FilterCategoryTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
+				0D5517A0D0DE015D97C93B3D /* HitTargetTests.swift in Sources */,
+				6AE71744D415728235602687 /* LockerViewModelTests.swift in Sources */,
 				88FB008A30081225FA7CFCBE /* LooksTests.swift in Sources */,
 				C47E1EDF0C24DCCCBE90AA79 /* MirrorCaptureViewModelTests.swift in Sources */,
 				65487BA25C93B1171C40B8E1 /* MirrorControlsViewModelTests.swift in Sources */,
 				295D67D1392E3AC02C5AB7A3 /* MirrorEffectFailureViewModelTests.swift in Sources */,
+				4A71C1CDCD56F23C59E556BF /* MirrorLifecycleViewModelTests.swift in Sources */,
 				14C299B26E9DD987F98C089A /* MirrorLipViewModelTests.swift in Sources */,
+				041B7D44A60B46A56C76DC91 /* MirrorNoFaceViewModelTests.swift in Sources */,
 				1BABC8D57043E9542DEB26AF /* MirrorResetViewModelTests.swift in Sources */,
+				D1AFE14719F2B67B5B188FFA /* MirrorTestSupport.swift in Sources */,
 				8BC489AE4C14115066C88E63 /* MirrorViewModelTests.swift in Sources */,
 				D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */,
 				DC4174F0367628361C82AA14 /* PermissionsServiceTests.swift in Sources */,
 				D483121AF654372FF86840ED /* ProfileRecordTests.swift in Sources */,
+				53E654F16AAC9AB41F313E79 /* RootCoordinatorTests.swift in Sources */,
+				A1A02958C3ABECBF743F7492 /* SettingsPreferencesTests.swift in Sources */,
 				B87512D4385601B554F5C640 /* ShadeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1026,11 +1412,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B45A25346BE39E6C10A1B00 /* ActivityShareSheet.swift in Sources */,
 				8040833576D7D9BC38A61B78 /* AppDelegate.swift in Sources */,
 				3E9B7DB09F68001167072DF0 /* AppEnvironment.swift in Sources */,
 				E6F66FDDB90BFE67CD070990 /* AppModelContainer.swift in Sources */,
 				31CFFF8BC1D5F80F1D8FCF02 /* AppPermissionStatus.swift in Sources */,
 				C69E6C6F9CE9E05AF268FE2A /* AppShell.swift in Sources */,
+				A7B0A1D63784220423707DB0 /* AppShellSelection.swift in Sources */,
+				6B9FDD194E119E48384C6A41 /* AsyncBundleImage.swift in Sources */,
+				1572AD8247EE833324915B10 /* AvatarEditorView.swift in Sources */,
+				AEEE8FB22909C48FD295E1A9 /* AvatarEditorViewModel.swift in Sources */,
+				038F8D89EC163262FFE9626C /* AvatarSwatch+Style.swift in Sources */,
 				077A80D96A98ABD0CA624C31 /* CaptureFAB.swift in Sources */,
 				046C7951B5CB1BDCD99A74F1 /* CaptureFailureBanner.swift in Sources */,
 				993E89029E80D90A6E5EBF0F /* CaptureMode.swift in Sources */,
@@ -1042,13 +1434,25 @@
 				20EF096D6D11BAC66687FE35 /* DH+Color.swift in Sources */,
 				F4DFC1A552907B2F58E8153A /* DH+Fonts.swift in Sources */,
 				EDFF469B66D685262FCE81F3 /* DH+Tokens.swift in Sources */,
+				54249E1C58941D55DC037B0B /* DHAnim.swift in Sources */,
 				A528A87D755749FE1C990D3B /* DHButton.swift in Sources */,
 				08F3DD2BC33E2F5C73BF965F /* DHCard.swift in Sources */,
 				F99AF7FE261407C5A3AA42BE /* DHChip.swift in Sources */,
+				6CF539CE66E180870AED7D38 /* DHErrorView.swift in Sources */,
+				F053EA490BD0CF362BA1A594 /* DHFeedView.swift in Sources */,
 				6C052DD2E427A6C2B4F5366B /* DHHaptics.swift in Sources */,
+				72CF8DE31DB8CCBD498B8C8F /* DHParentHoldView.swift in Sources */,
+				69188FBD41F367B8DA9B2CFB /* DHParentMathView.swift in Sources */,
+				33F49BB88F91C1CD4FB7EDC6 /* DHPaywallView.swift in Sources */,
+				1D4EA796BBB890D044D7E6AB /* DHSettingsView.swift in Sources */,
+				70283D79037085E9092DA263 /* DHSkeleton.swift in Sources */,
 				8047AC02F4BB590FA56B5FD2 /* DHTabBar.swift in Sources */,
+				3189A58D3C3C524347F8B1FA /* DHToggle.swift in Sources */,
 				7D3FF7292903A32E234746FC /* DHWallpaper.swift in Sources */,
+				4E31D029C04D0D0CDB5A05FD /* DebugRuntimeFlags.swift in Sources */,
 				AD5D7034448EAED39A7AC9CC /* DeepARClient.swift in Sources */,
+				44A88678D6358037CA4456CB /* DeepARController+FaceTracking.swift in Sources */,
+				03BC5CAA92758564C6151930 /* DeepARController+Lifecycle.swift in Sources */,
 				48A1BF761FFDFD8C5ABADF39 /* DeepARController+Parameters.swift in Sources */,
 				765234480C28766F058036AD /* DeepARController+Recording.swift in Sources */,
 				9415F7FE3A9E019D25477E0E /* DeepARController.swift in Sources */,
@@ -1062,18 +1466,47 @@
 				5ED9C2082513C31FFCAFCC11 /* EffectParameter.swift in Sources */,
 				30F16AA226DEB8D74E821564 /* EffectParameterMap.swift in Sources */,
 				6F30CCFE4C5EB81EC03859D9 /* EffectSlot.swift in Sources */,
+				6E7F31111E0D1C6B2379D60E /* EffectTextureCache.swift in Sources */,
 				8A496BFB5859F564663EFAD9 /* EmptyShadeTrayView.swift in Sources */,
+				59B082E45CD65187983422ED /* ErrorRouter.swift in Sources */,
+				CB920001F7E0055136420F42 /* ErrorTone.swift in Sources */,
+				7DCD830DBBF40B75D7212589 /* ErrorTriggerView.swift in Sources */,
+				4258CF36E61B92B2287873FC /* ErrorVariant.swift in Sources */,
 				1E8A7EFB01EFA649A0EF3BC3 /* EyesTrayView.swift in Sources */,
+				F0C4F34DA145B6A30D651DAE /* FaceTrackingDots.swift in Sources */,
+				80455581078DFBDCDC6972C2 /* FeedCardView.swift in Sources */,
+				F3EF6742B98EAC7D17406F03 /* FeedHeartPill.swift in Sources */,
+				410C21565F8EBD53CD6860B9 /* FeedItem.swift in Sources */,
+				048677A079438454440BFDBA /* FeedMosaic.swift in Sources */,
+				B07EA75ACF5ADF2D82B84838 /* FeedViewModel.swift in Sources */,
 				16E8EA0727126040F0940210 /* FilterCategory.swift in Sources */,
 				ADCFC682D7389A7A554D208A /* FilterRailView.swift in Sources */,
 				2DF1C76511E729B61F5E41ED /* GRWMLogo.swift in Sources */,
 				18D2EDEC67500C3E1B2685FA /* GRWMStudioApp.swift in Sources */,
+				D3CA8FE11EB5EB8AED20EFD0 /* GlowLevel.swift in Sources */,
+				DDCEB931A7F43664DC813C74 /* L10n.swift in Sources */,
+				1A04F8D49149A735924C075B /* LockerAtLimitBanner.swift in Sources */,
+				5F109A78F055251CE98CD84A /* LockerCardView.swift in Sources */,
+				49D81FBE8F9CEB666CC470A0 /* LockerDetailView.swift in Sources */,
+				EA01DC1D71DAA406136553DC /* LockerEmptyView.swift in Sources */,
+				7A55F1C503E4DA2D2C90F44B /* LockerProfileHeroView.swift in Sources */,
+				D9519663EB21A4D7D3AE2AAC /* LockerView+States.swift in Sources */,
+				F04EFCBA6B731BEFF354356B /* LockerView.swift in Sources */,
+				2B13B34CB3DAF562AFB61F21 /* LockerViewModel.swift in Sources */,
 				40913BB427E7D4731DCF1CD4 /* Logger+GRWM.swift in Sources */,
+				DB019EED88C74056CAF05474 /* LookCopy.swift in Sources */,
+				16811596AADFCA9DDFCEC429 /* LookDetailView.swift in Sources */,
+				48300C37F5C8426A860C4506 /* LookSection.swift in Sources */,
 				F8B6E5AFDA28E0AECD286607 /* LookSwitchConfirmationView.swift in Sources */,
+				B4778468995CC71CD17A3970 /* LookTutorialOverlay.swift in Sources */,
 				44A5B6D1105C57DE6B5998A8 /* Looks.swift in Sources */,
+				6B274B4576D964A5B10C4E35 /* LooksLibraryView+States.swift in Sources */,
+				B1E80EB60FBEBBACB9FDD0FF /* LooksLibraryView.swift in Sources */,
+				8281D0AFCB4E9A1B297311DE /* LooksLibraryViewModel.swift in Sources */,
 				0FD8C133751BA4C6AD83D7C0 /* LooksTrayView.swift in Sources */,
 				921B72EC7927E48F6BFB9DE1 /* MakeupCategory.swift in Sources */,
 				D0E69847C47B20ECCFCEA03F /* MakeupShade.swift in Sources */,
+				EC7CE92D247CE1532756FB14 /* MathChip.swift in Sources */,
 				4FC881F9A2B0E94B3D8556E8 /* MirrorBottomControls.swift in Sources */,
 				B6E1E1AEF4009CBA71B3C1DA /* MirrorChrome.swift in Sources */,
 				7328FEE722FD4A566C5D1A17 /* MirrorState.swift in Sources */,
@@ -1082,13 +1515,22 @@
 				AA091675D06EA56A8D62354A /* MirrorView.swift in Sources */,
 				F4B2152832EB61050FF2E9B1 /* MirrorViewModel+Capture.swift in Sources */,
 				3DECBFE62DE88823B1C96B9A /* MirrorViewModel+Controls.swift in Sources */,
+				6BFA31366C18CC32C3715ED1 /* MirrorViewModel+Debug.swift in Sources */,
+				C3C06A72A898DD9420D95957 /* MirrorViewModel+FaceTracking.swift in Sources */,
+				6A4EE202F0779D91CDEF3CE2 /* MirrorViewModel+Lifecycle.swift in Sources */,
 				1EAC6745C361E552BC925C81 /* MirrorViewModel+Looks.swift in Sources */,
 				6262BA8B791E9B13DEE85538 /* MirrorViewModel+Reset.swift in Sources */,
 				C28AAAAAFA07B2F82B9B659A /* MirrorViewModel+Selection.swift in Sources */,
+				9EEE09B761E41AAA54565311 /* MirrorViewModel+Textures.swift in Sources */,
 				EE65D90F35B9641BE5708449 /* MirrorViewModel.swift in Sources */,
 				7B764DC07634CA7F076EABC4 /* NoFaceTipView.swift in Sources */,
 				95AFEBCE5623260BF09A8D76 /* OnboardingState.swift in Sources */,
+				00BCEAEF3470EA7886E27E45 /* ParentGateCoordinator.swift in Sources */,
+				54CAD16E73FBFDDC1A253336 /* ParentGateIntent.swift in Sources */,
+				60A86FD3589A8C5DEEA27AFF /* ParentGateRootView.swift in Sources */,
 				FD6E10A1C4B681FD5D981A0C /* ParentInfoView.swift in Sources */,
+				0CCAB705EA0EA28A8E00ACDB /* PaywallViewModel.swift in Sources */,
+				BC1707230337817FE846F30B /* PerformanceSignposts.swift in Sources */,
 				519BF781BF66EFC6ADA77713 /* PermRow.swift in Sources */,
 				66D296E3E80B25DE4A682848 /* PermissionsDeniedView.swift in Sources */,
 				DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */,
@@ -1096,10 +1538,21 @@
 				357669F4C17040937B6EA1F5 /* PhotoCaptureCoordinator.swift in Sources */,
 				E48E70C1ABBA0B9C632C3308 /* PhotoLibrarySaver.swift in Sources */,
 				517D5C32F1DCB4A37A01F84F /* PreviewPlaceholderView.swift in Sources */,
+				CA86D454CD11F37C1742AA12 /* ProEntitlements.swift in Sources */,
+				C220F19EE7AEAD28C95C857C /* ProEntitlementsHolder.swift in Sources */,
 				CD5C730D99C20A8A67A63AED /* ProfileRecord.swift in Sources */,
+				B3709677C832E662E68FC7E9 /* PurchaseLinks.swift in Sources */,
+				05A407784778C03180A08352 /* PurchasesSection.swift in Sources */,
 				04DDB5B3CC5F33EFA7EF227C /* RecordingService.swift in Sources */,
 				9B227DF304ABA2C3AB0CF894 /* RootContainer.swift in Sources */,
 				7B6F546F148AD1327C802860 /* RootCoordinator.swift in Sources */,
+				99661DF2411DEBB197B5C1C4 /* SaveShareView.swift in Sources */,
+				00EB0AC7AC6DFD426D78AD9A /* SettingsCommercePresentation.swift in Sources */,
+				FA42EAA28AB1CDD8E012998A /* SettingsDebugSection.swift in Sources */,
+				3805CED9D3305E33A9F682F0 /* SettingsGroup.swift in Sources */,
+				6CD88A74192267AF867C4016 /* SettingsPreferences.swift in Sources */,
+				74E5D674EE0218D865C76CF6 /* SettingsRow.swift in Sources */,
+				F2AAA37B1D3A2CFD226C95E5 /* SettingsViewModel.swift in Sources */,
 				1800B2D637206141971D7418 /* Shade.swift in Sources */,
 				AC182FE4E08F66104B32FFDB /* ShadeTrayView.swift in Sources */,
 				1B209F1B9C86C0624787BBAF /* Shades+Base.swift in Sources */,
@@ -1116,6 +1569,11 @@
 				325AEE52E2D29C862240479A /* StickerHeart.swift in Sources */,
 				E98942651A6E054EDBA27D74 /* StickerSparkle.swift in Sources */,
 				33E0F275925F0FB81DEF741C /* StickerStar.swift in Sources */,
+				A52EA78FC307D7CB7C8450A1 /* StorageMonitor.swift in Sources */,
+				D3637EC5494D1C7A96E3FDAE /* StoreIDs.swift in Sources */,
+				2ACF2B50B4610B1FA2C6EAFB /* ThumbnailLoader.swift in Sources */,
+				0C75AF768755F69E4BDA4262 /* ToastView.swift in Sources */,
+				B979642DA57BE3AD4A0CC938 /* TwoFingerHoldGesture.swift in Sources */,
 				2B18D53A6A67CBD558914653 /* URL+Documents.swift in Sources */,
 				6302DD2951CA6BD778834A4F /* VideoRecordingCoordinator.swift in Sources */,
 				AD74E34BBD698F2D6728FAA6 /* WelcomeView.swift in Sources */,
@@ -1126,7 +1584,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1CA124231186F5D1E9D14D /* AccessibilityUITests.swift in Sources */,
+				1E2ED37CE7A08A229E399882 /* ErrorScreenshotsUITests.swift in Sources */,
 				5C15D1755F6DC63E2CCCBF1F /* GRWMStudioUITests.swift in Sources */,
+				1DF530ABD4680C8D5E96DB21 /* SettingsPolishUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1206,7 +1667,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 84D222Q647;
+				DEVELOPMENT_TEAM = 7JL22TDB44;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1305,7 +1766,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 84D222Q647;
+				DEVELOPMENT_TEAM = 7JL22TDB44;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;

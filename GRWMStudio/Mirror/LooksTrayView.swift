@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 
 struct LooksTrayView: View {
+    @Environment(ProEntitlements.self) private var entitlements
     @Bindable var viewModel: MirrorViewModel
     var onSelectionComplete: () -> Void = {}
 
@@ -43,12 +44,12 @@ struct LooksTrayView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                         .padding([.horizontal, .top], 7)
 
-                    Text(look.name)
+                    Text(verbatim: look.localizedName)
                         .font(DH.font(.buttonSmall))
                         .tracking(DH.tracking(.buttonSmall))
                         .foregroundStyle(DH.ink)
                         .lineLimit(2)
-                        .minimumScaleFactor(0.74)
+                        .minimumScaleFactor(0.85)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
                         .frame(height: 40)
@@ -74,34 +75,40 @@ struct LooksTrayView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel(for: look, available: available))
+        .accessibilityValue(active ? L10n.string("common.selected") : L10n.string("common.not_selected"))
+        .accessibilityHint(L10n.string("mirror.looks.accessibility_hint"))
         .accessibilityAddTraits(active ? [.isSelected] : [])
     }
 
-    @ViewBuilder
     private func thumbnail(for look: LookPreset, available: Bool) -> some View {
-        if let image = image(named: look.thumbnailAsset) {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-                .saturation(available ? 1 : 0.35)
-        } else {
+        AsyncBundleImage(assetName: look.thumbnailAsset, subdirectory: "Effects/thumbnails") {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(DH.pinkLight)
                 StickerSparkle(size: 28, fill: DH.pinkDeep, stroke: .white, strokeWidth: 2)
             }
         }
+        .scaledToFill()
+        .saturation(available ? 1 : 0.35)
     }
 
     @ViewBuilder
     private func badgeOverlay(look: LookPreset, available: Bool) -> some View {
         VStack(alignment: .trailing, spacing: 5) {
             if look.isPro {
-                StickerStar(size: 24, fill: DH.butter, stroke: .white, strokeWidth: 3)
+                ZStack {
+                    StickerStar(size: 24, fill: DH.butter, stroke: .white, strokeWidth: 3)
+
+                    if !entitlements.isPro {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 8, weight: .heavy))
+                            .foregroundStyle(DH.ink)
+                    }
+                }
             }
 
             if !available {
-                Text("Soon ✨")
+                Text("mirror.looks.soon")
                     .font(DH.font(.microLabel))
                     .tracking(DH.tracking(.microLabel))
                     .foregroundStyle(.white)
@@ -113,23 +120,13 @@ struct LooksTrayView: View {
         }
         .offset(x: 4, y: -4)
     }
-
-    private func image(named assetName: String) -> UIImage? {
-        if let image = UIImage(named: assetName) {
-            return image
-        }
-
-        return Bundle.main.url(forResource: assetName, withExtension: "png", subdirectory: "Effects/thumbnails")
-            .flatMap { UIImage(contentsOfFile: $0.path) }
-    }
-
     private func accessibilityLabel(for look: LookPreset, available: Bool) -> String {
-        var parts = [look.name, "look"]
+        var parts = [look.localizedName, L10n.string("mirror.looks.accessibility_noun")]
         if look.isPro {
-            parts.append("Pro")
+            parts.append(entitlements.isPro ? L10n.string("common.pro") : L10n.string("common.pro_locked"))
         }
         if !available {
-            parts.append("coming soon")
+            parts.append(L10n.string("mirror.looks.coming_soon"))
         }
         return parts.joined(separator: ", ")
     }

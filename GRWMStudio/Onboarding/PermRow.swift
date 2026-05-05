@@ -55,7 +55,7 @@ struct PermRow: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title). \(description). \(accessibilityStatus).")
+        .accessibilityLabel(L10n.format("onboarding.permissions.row.accessibility_label", title, description, accessibilityStatus))
     }
 
     private var icon: some View {
@@ -75,18 +75,18 @@ struct PermRow: View {
     @ViewBuilder
     private var statusBadge: some View {
         if isRequesting {
-            badge(title: "Asking...", foreground: DH.ink, background: DH.butter)
+            badge(title: L10n.string("onboarding.permissions.status.asking"), foreground: DH.ink, background: DH.butter)
         } else {
             switch status {
             case .notDetermined:
-                DHButton(title: "Allow", kind: .primary, size: .sm, action: onAllow)
-                    .accessibilityLabel("Allow \(title)")
+                DHButton(title: L10n.string("common.allow"), kind: .primary, size: .sm, action: onAllow)
+                    .accessibilityLabel(L10n.format("onboarding.permissions.allow_accessibility_label", title))
             case .granted:
-                badge(title: "Granted ✓", foreground: DH.pinkDeep, background: DH.mint)
+                badge(title: L10n.string("onboarding.permissions.status.granted"), foreground: DH.pinkDeep, background: DH.mint)
             case .denied:
-                badge(title: "Denied ✗", foreground: .white, background: DH.recRed)
+                badge(title: L10n.string("onboarding.permissions.status.denied"), foreground: .white, background: DH.recRed)
             case .restricted:
-                badge(title: "Restricted", foreground: .white, background: DH.recRed)
+                badge(title: L10n.string("onboarding.permissions.status.restricted"), foreground: .white, background: DH.recRed)
             }
         }
     }
@@ -104,18 +104,18 @@ struct PermRow: View {
 
     private var accessibilityStatus: String {
         if isRequesting {
-            return "Asking"
+            return L10n.string("onboarding.permissions.status.asking_plain")
         }
 
         switch status {
         case .notDetermined:
-            return "Not determined"
+            return L10n.string("onboarding.permissions.status.not_determined")
         case .granted:
-            return "Granted"
+            return L10n.string("onboarding.permissions.status.granted_plain")
         case .denied:
-            return "Denied"
+            return L10n.string("onboarding.permissions.status.denied_plain")
         case .restricted:
-            return "Restricted"
+            return L10n.string("onboarding.permissions.status.restricted_plain")
         }
     }
 }

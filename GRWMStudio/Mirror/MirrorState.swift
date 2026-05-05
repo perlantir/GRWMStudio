@@ -1,5 +1,3 @@
-typealias ErrorVariant = RootCoordinator.ErrorVariant
-
 enum MirrorState: Equatable {
     case idle
     case starting

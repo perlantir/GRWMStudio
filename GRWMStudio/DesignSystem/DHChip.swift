@@ -1,21 +1,34 @@
 import SwiftUI
 
 struct DHChip: View {
+    @ScaledMetric(relativeTo: .body) private var chipHeight = 34
+    @ScaledMetric(relativeTo: .body) private var horizontalPadding = 14
     let title: String
     var selected = false
     var leadingIcon: AnyView?
+    var accessibilityCategory: String?
+    var accessibilityHintText: String?
     let action: () -> Void
 
-    init(title: String, selected: Bool = false, leadingIcon: AnyView? = nil, action: @escaping () -> Void) {
+    init(
+        title: String,
+        selected: Bool = false,
+        leadingIcon: AnyView? = nil,
+        accessibilityCategory: String? = nil,
+        accessibilityHintText: String? = nil,
+        action: @escaping () -> Void
+    ) {
         self.title = title
         self.selected = selected
         self.leadingIcon = leadingIcon
+        self.accessibilityCategory = accessibilityCategory
+        self.accessibilityHintText = accessibilityHintText
         self.action = action
     }
 
     var body: some View {
         Button {
-            DHHaptics.tap()
+            DHHaptics.shared.fire(.pop)
             action()
         } label: {
             HStack(spacing: 6) {
@@ -27,16 +40,22 @@ struct DHChip: View {
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.pinkDeep)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
             }
-            .padding(.horizontal, 14)
-            .frame(height: 34)
+            .padding(.horizontal, horizontalPadding)
+            .frame(height: chipHeight)
             .background(background)
             .offset(y: selected ? -1 : 0)
-            .animation(.spring(response: 0.25, dampingFraction: 0.7), value: selected)
+            .dhAnimation(.quickPop, value: selected)
             .frame(minHeight: 44)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue(selected ? "Selected" : "Not selected")
+        .accessibilityHint(accessibilityHintText ?? "Double-tap to choose this option.")
+        .accessibilityAddTraits(selected ? [.isButton, .isSelected] : [.isButton])
     }
 
     @ViewBuilder
@@ -54,6 +73,14 @@ struct DHChip: View {
             Capsule()
                 .fill(.white.opacity(0.55))
         }
+    }
+
+    private var accessibilityLabel: String {
+        guard let accessibilityCategory, !accessibilityCategory.isEmpty else {
+            return title
+        }
+
+        return "\(title), \(accessibilityCategory)"
     }
 }
 

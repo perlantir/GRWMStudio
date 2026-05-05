@@ -14,15 +14,15 @@ enum DHTab: String, CaseIterable, Hashable, Identifiable {
     var title: String {
         switch self {
         case .mirror:
-            "Mirror"
+            L10n.string("tab.mirror")
         case .looks:
-            "Looks"
+            L10n.string("tab.looks")
         case .fab:
             ""
         case .feed:
-            "Feed"
+            L10n.string("tab.feed")
         case .locker:
-            "Locker"
+            L10n.string("tab.locker")
         }
     }
 
@@ -43,6 +43,10 @@ enum DHTab: String, CaseIterable, Hashable, Identifiable {
 }
 
 struct DHTabBar: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .caption) private var barHeight = 74
+    @ScaledMetric(relativeTo: .caption) private var tabHeight = 58
+    @ScaledMetric(relativeTo: .caption) private var fabSize = 70
     @Binding var selected: DHTab
     let onFABTap: () -> Void
     private let showsDefaultFAB: Bool
@@ -75,27 +79,32 @@ struct DHTabBar: View {
             tabButton(.locker)
         }
         .padding(.horizontal, 18)
-        .frame(height: 74)
+        .frame(height: effectiveBarHeight)
         .background {
             Capsule()
                 .fill(.white)
                 .chunkyShadow(.lg(deep: DH.pinkDeep), shape: Capsule())
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isTabBar)
     }
 
     private func tabButton(_ tab: DHTab) -> some View {
         Button {
-            DHHaptics.tap()
+            DHHaptics.shared.fire(.tap)
             selected = tab
         } label: {
-            VStack(spacing: 2) {
+            VStack(spacing: isAccessibilityLayout ? 4 : 2) {
                 Image(systemName: tab.iconSystemName)
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.system(size: isAccessibilityLayout ? 20 : 22, weight: .bold))
                     .frame(width: 24, height: 24)
 
                 Text(tab.title)
                     .font(DH.font(.microLabel))
-                    .tracking(0.04 * DH.TypeStyle.microLabel.size)
+                    .tracking(isAccessibilityLayout ? 0 : 0.04 * DH.TypeStyle.microLabel.size)
+                    .lineLimit(isAccessibilityLayout ? 1 : 2)
+                    .minimumScaleFactor(isAccessibilityLayout ? 0.55 : 0.85)
+                    .multilineTextAlignment(.center)
 
                 Circle()
                     .fill(selected == tab ? DH.pink : .clear)
@@ -103,11 +112,17 @@ struct DHTabBar: View {
             }
             .foregroundStyle(selected == tab ? DH.pinkDeep : DH.pinkDeep.opacity(0.55))
             .frame(maxWidth: .infinity)
-            .frame(height: 58)
+            .frame(height: effectiveTabHeight)
+            .frame(minWidth: 44, minHeight: 44)
             .contentShape(Rectangle())
+            .accessibilityHidden(true)
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
         .accessibilityLabel(tab.title)
+        .accessibilityValue(selected == tab ? L10n.string("common.selected") : L10n.string("common.not_selected"))
+        .accessibilityHint(L10n.format("tab.accessibility_hint", tab.title))
+        .accessibilityIdentifier("tab-\(tab.rawValue)")
         .accessibilityAddTraits(selected == tab ? .isSelected : [])
     }
 
@@ -115,7 +130,7 @@ struct DHTabBar: View {
     private var centerSlot: some View {
         if let centerContent {
             centerContent()
-                .offset(y: -34)
+                .offset(y: centerContentLift)
                 .frame(maxWidth: .infinity)
         } else if showsDefaultFAB {
             fabButton
@@ -129,13 +144,13 @@ struct DHTabBar: View {
 
     private var fabButton: some View {
         Button {
-            DHHaptics.tapMedium()
+            DHHaptics.shared.fire(.pop)
             onFABTap()
         } label: {
             Image(systemName: DHTab.fab.iconSystemName)
                 .font(.system(size: 26, weight: .bold))
                 .foregroundStyle(.white)
-                .frame(width: 70, height: 70)
+                .frame(width: effectiveFABSize, height: effectiveFABSize)
                 .background {
                     Circle()
                         .fill(DH.pink)
@@ -148,9 +163,34 @@ struct DHTabBar: View {
                 }
         }
         .buttonStyle(.plain)
-        .offset(y: -22)
+        .offset(y: fabLift)
         .frame(maxWidth: .infinity)
-        .accessibilityLabel("Create")
+        .accessibilityLabel(L10n.string("tab.create"))
+        .accessibilityHint(L10n.string("tab.create.hint"))
+    }
+
+    private var isAccessibilityLayout: Bool {
+        dynamicTypeSize.isAccessibilitySize
+    }
+
+    private var effectiveBarHeight: CGFloat {
+        min(barHeight, isAccessibilityLayout ? 82 : 74)
+    }
+
+    private var effectiveTabHeight: CGFloat {
+        min(tabHeight, isAccessibilityLayout ? 62 : 58)
+    }
+
+    private var effectiveFABSize: CGFloat {
+        min(fabSize, isAccessibilityLayout ? 64 : 70)
+    }
+
+    private var centerContentLift: CGFloat {
+        isAccessibilityLayout ? -22 : -34
+    }
+
+    private var fabLift: CGFloat {
+        isAccessibilityLayout ? -16 : -22
     }
 }
 

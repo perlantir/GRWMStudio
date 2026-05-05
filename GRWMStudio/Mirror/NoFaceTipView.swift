@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 
 struct NoFaceTipView: View {
-    private let announcement = "I can't see your face! Move into the light, or come a little closer."
+    private let announcement = L10n.string("mirror.no_face.announcement")
 
     var body: some View {
         DHCard(bg: .white, deep: DH.pink, cornerRadius: DH.Radius.card, padding: 14) {
@@ -14,14 +14,14 @@ struct NoFaceTipView: View {
                 StickerSparkle(size: 24, fill: DH.pink, stroke: .white, strokeWidth: 2)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("I can't see your face!")
+                    Text("mirror.no_face.title")
                         .font(DH.font(.buttonLarge))
                         .tracking(DH.tracking(.buttonLarge))
                         .foregroundStyle(DH.ink)
                         .lineLimit(1)
                         .minimumScaleFactor(0.78)
 
-                    Text("Move into the light, or come a little closer.")
+                    Text("mirror.no_face.subtitle")
                         .font(DH.font(.body))
                         .tracking(DH.tracking(.body))
                         .foregroundStyle(DH.ink.opacity(0.72))

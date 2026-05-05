@@ -32,6 +32,7 @@ struct DHWallpaperStripes: View {
         }
         .opacity(opacity)
         .ignoresSafeArea()
+        .accessibilityHidden(true)
     }
 }
 
@@ -52,6 +53,7 @@ struct DHWallpaperGradient: View {
         )
         .opacity(opacity)
         .ignoresSafeArea()
+        .accessibilityHidden(true)
     }
 }
 
@@ -69,6 +71,7 @@ struct DHWallpaperRadial: View {
             endRadius: endRadius
         )
         .opacity(opacity)
+        .accessibilityHidden(true)
     }
 }
 

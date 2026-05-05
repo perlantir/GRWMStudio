@@ -4,6 +4,11 @@ import XCTest
 
 @MainActor
 final class MirrorCaptureViewModelTests: XCTestCase {
+    override func tearDown() async throws {
+        StorageMonitor.resetForTests()
+        try await super.tearDown()
+    }
+
     func testCaptureModeIsDisabledUntilMirrorIsRunning() {
         let viewModel = MirrorViewModel()
 
@@ -49,7 +54,7 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.lastError)
     }
 
-    func testCapturePhotoFailureShowsRecordingFailureBannerState() async {
+    func testCapturePhotoFailureQueuesRecordingError() async {
         let viewModel = runningViewModel(
             photoCapture: {
                 throw DeepARController.SetupError.captureFailed(reason: "test failure")
@@ -60,12 +65,12 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         await viewModel.capturePhoto()
 
         XCTAssertEqual(viewModel.captureMode, .idle)
-        XCTAssertEqual(viewModel.lastError, .recFail)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .recFail)
         XCTAssertNil(viewModel.pendingPreviewAsset)
         XCTAssertNil(viewModel.previewRouteID)
 
         viewModel.dismissCaptureFailureBanner()
-        XCTAssertNil(viewModel.lastError)
+        XCTAssertNil(viewModel.pendingFullScreenError)
     }
 
     func testLongPressBeginShowsRecordingMode() async {
@@ -119,10 +124,120 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         XCTAssertEqual(url, video.outputURL)
     }
 
-    func testRecordingContinuesPastFormerFreeLimitUntilUserStops() async throws {
+    func testMicDeniedQueuesFullScreenErrorInsteadOfStartingVideoRecording() async {
+        let video = MockVideoRecordingCoordinator()
+        let viewModel = runningViewModel(videoRecording: video)
+        let permissions = MirrorPermissionsStub(camera: .granted, mic: .denied)
+
+        await viewModel.start(env: AppEnvironment(permissions: permissions))
+        await viewModel.startVideoRecording(forceNoAudio: false)
+
+        XCTAssertEqual(viewModel.captureMode, .idle)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .micDenied)
+        XCTAssertFalse(video.didStart)
+    }
+
+    func testRecordWithoutAudioNotificationStartsVideoRecordingAfterMicDenied() async throws {
+        let notificationCenter = NotificationCenter()
+        let video = MockVideoRecordingCoordinator()
+        let viewModel = runningViewModel(videoRecording: video, notificationCenter: notificationCenter)
+        let permissions = MirrorPermissionsStub(camera: .granted, mic: .denied)
+
+        await viewModel.start(env: AppEnvironment(permissions: permissions))
+        await viewModel.startVideoRecording(forceNoAudio: false)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .micDenied)
+
+        notificationCenter.post(name: .recordWithoutAudio, object: nil)
+        try await Task.sleep(for: .milliseconds(120))
+
+        XCTAssertTrue(video.didStart)
+        XCTAssertEqual(video.startWithAudioValues, [false])
+        if case .videoRecording(let secondsElapsed) = viewModel.captureMode {
+            XCTAssertGreaterThanOrEqual(secondsElapsed, 0)
+        } else {
+            XCTFail("Expected recording to start without audio")
+        }
+    }
+
+    func testRetryRecordingNotificationRetriesFailedPhotoCapture() async throws {
+        let notificationCenter = NotificationCenter()
+        var attempts = 0
+        let viewModel = runningViewModel(
+            photoCapture: {
+                attempts += 1
+                if attempts == 1 {
+                    throw DeepARController.SetupError.captureFailed(reason: "test failure")
+                }
+                return Self.testImage()
+            },
+            notificationCenter: notificationCenter
+        )
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        await viewModel.capturePhoto()
+        XCTAssertEqual(viewModel.pendingFullScreenError, .recFail)
+
+        notificationCenter.post(name: .retryRecording, object: nil)
+        try await Task.sleep(for: .milliseconds(120))
+
+        guard case .photo = viewModel.pendingPreviewAsset else {
+            XCTFail("Expected retry to capture a replacement photo")
+            return
+        }
+        XCTAssertEqual(attempts, 2)
+    }
+
+    func testLowStorageBlocksVideoRecordingBeforeStart() async {
+        StorageMonitor.setAvailableBytesProviderForTests {
+            StorageMonitor.recordThreshold - 1
+        }
+
+        let video = MockVideoRecordingCoordinator()
+        let viewModel = runningViewModel(videoRecording: video)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        viewModel.selectedCaptureKind = .video
+        await viewModel.startVideoRecording(forceNoAudio: false)
+
+        XCTAssertEqual(viewModel.captureMode, .idle)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .lowStorage)
+        XCTAssertFalse(video.didStart)
+    }
+
+    func testFreeRecordingAutoStopsAtEightSeconds() async throws {
         var now = Date()
         let video = MockVideoRecordingCoordinator()
-        let viewModel = runningViewModel(currentDate: { now }, videoRecording: video)
+        let viewModel = runningViewModel(
+            currentDate: { now },
+            videoRecording: video,
+            entitlements: makeEntitlements(false)
+        )
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        viewModel.onCaptureLongPressBegan()
+        await viewModel.videoCountdownComplete()
+        now = now.addingTimeInterval(8.2)
+
+        try await Task.sleep(for: .milliseconds(150))
+
+        XCTAssertTrue(video.didFinish)
+        XCTAssertNotNil(viewModel.previewRouteID)
+        XCTAssertEqual(viewModel.captureMode, .idle)
+        guard case .video(let url) = viewModel.pendingPreviewAsset else {
+            XCTFail("Expected recorded video asset")
+            return
+        }
+        XCTAssertEqual(url, video.outputURL)
+    }
+
+    func testProRecordingContinuesPastEightSecondsUntilFifteenSecondCap() async throws {
+        var now = Date()
+        let video = MockVideoRecordingCoordinator()
+        let viewModel = runningViewModel(
+            currentDate: { now },
+            videoRecording: video,
+            entitlements: makeEntitlements(true)
+        )
         await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
 
         viewModel.onCaptureLongPressBegan()
@@ -135,34 +250,41 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         if case .videoRecording(let secondsElapsed) = viewModel.captureMode {
             XCTAssertEqual(secondsElapsed, 9.2, accuracy: 0.01)
         } else {
-            XCTFail("Expected recording to continue")
+            XCTFail("Expected recording to continue for Pro")
         }
-        XCTAssertNil(viewModel.recordingProGateRouteID)
-        XCTAssertNil(viewModel.pendingRecordingProGateClipURL)
 
-        _ = await viewModel.endVideoFlow(force: true)
+        now = now.addingTimeInterval(6.0)
+
+        try await Task.sleep(for: .milliseconds(150))
 
         XCTAssertTrue(video.didFinish)
-        XCTAssertNotNil(viewModel.previewRouteID)
-        guard case .video(let url) = viewModel.pendingPreviewAsset else {
-            XCTFail("Expected recorded video asset")
-            return
-        }
-        XCTAssertEqual(url, video.outputURL)
+        XCTAssertEqual(viewModel.captureMode, .idle)
     }
 
     private func runningViewModel(
         currentDate: @escaping () -> Date = Date.init,
         photoCapture: (@MainActor () async throws -> UIImage)? = nil,
-        videoRecording: (any VideoRecordingCoordinating)? = nil
+        videoRecording: (any VideoRecordingCoordinating)? = nil,
+        entitlements: ProEntitlements = ProEntitlements(defaults: .standard, autoRefresh: false),
+        notificationCenter: NotificationCenter = .default
     ) -> MirrorViewModel {
         MirrorViewModel(
             licenseLoader: { "test-license" },
             usesSimulatorPlaceholder: true,
             currentDate: currentDate,
             photoCapture: photoCapture,
-            videoRecording: videoRecording
+            videoRecording: videoRecording,
+            entitlements: entitlements,
+            notificationCenter: notificationCenter
         )
+    }
+
+    private func makeEntitlements(_ isPro: Bool) -> ProEntitlements {
+        let suiteName = "app.grwmstudio.tests.capture.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName) ?? .standard
+        defaults.removePersistentDomain(forName: suiteName)
+        defaults.set(isPro, forKey: ProEntitlements.cacheKey)
+        return ProEntitlements(defaults: defaults, autoRefresh: false)
     }
 
     private static func testImage() -> UIImage {
@@ -179,13 +301,15 @@ private final class MockVideoRecordingCoordinator: VideoRecordingCoordinating {
     private(set) var didStart = false
     private(set) var didFinish = false
     private(set) var currentURL: URL?
+    private(set) var startWithAudioValues: [Bool] = []
 
     deinit {
         try? FileManager.default.removeItem(at: outputURL)
     }
 
-    func start() async throws -> URL {
+    func start(withAudio: Bool) async throws -> URL {
         didStart = true
+        startWithAudioValues.append(withAudio)
         currentURL = outputURL
         try Data([0, 1, 2, 3]).write(to: outputURL, options: .atomic)
         return outputURL

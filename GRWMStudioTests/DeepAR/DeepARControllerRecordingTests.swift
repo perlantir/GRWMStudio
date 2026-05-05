@@ -80,7 +80,7 @@ final class DeepARControllerRecordingTests: XCTestCase {
         let service = RecordingService(controller: controller)
 
         try await controller.bootstrap(licenseKey: "test-license")
-        let reservedURL = try await service.startVideoRecording()
+        let reservedURL = try await service.startVideoRecording(includeAudio: true)
         let finishedURL = try await service.finishVideoRecording()
         defer { try? FileManager.default.removeItem(at: finishedURL) }
 
@@ -89,6 +89,7 @@ final class DeepARControllerRecordingTests: XCTestCase {
         XCTAssertTrue(finishedURL.path.hasPrefix(FileManager.default.temporaryDirectory.path))
         XCTAssertTrue(mock.didStartVideoRecording)
         XCTAssertTrue(mock.didFinishVideoRecording)
+        XCTAssertTrue(controller.cameraIncludesAudio)
     }
 
     func testRecordingServiceTakeScreenshotReturnsDelegateImage() async throws {

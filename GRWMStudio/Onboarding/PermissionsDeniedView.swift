@@ -17,15 +17,14 @@ struct PermissionsDeniedView: View {
                 sadCamera
 
                 VStack(spacing: 12) {
-                    Text("WE NEED YOUR CAMERA")
+                    Text("onboarding.permissions_denied.title")
                         .font(DH.font(.display3))
                         .tracking(DH.tracking(.display3))
                         .foregroundStyle(DH.pinkDeep)
                         .multilineTextAlignment(.center)
 
                     Text(
-                        "Without the camera, the magic mirror can't work. " +
-                            "Please turn it on in Settings - we'll be right here when you get back!"
+                        "onboarding.permissions_denied.subtitle"
                     )
                         .font(DH.font(.body))
                         .foregroundStyle(DH.pinkDeep.opacity(0.85))
@@ -38,7 +37,7 @@ struct PermissionsDeniedView: View {
 
                 VStack(spacing: 12) {
                     DHButton(
-                        title: "Open Settings",
+                        title: L10n.string("common.open_settings"),
                         kind: .primary,
                         size: .xl,
                         trailingIcon: AnyView(Image(systemName: "gearshape.fill")),
@@ -46,10 +45,10 @@ struct PermissionsDeniedView: View {
                     ) {
                         openSettings()
                     }
-                    .accessibilityLabel("Open Settings")
+                    .accessibilityLabel(L10n.string("common.open_settings"))
 
                     DHButton(
-                        title: isChecking ? "Checking..." : "Try again",
+                        title: isChecking ? L10n.string("common.checking") : L10n.string("common.try_again"),
                         kind: .ghost,
                         size: .xl,
                         isFullWidth: true
@@ -57,7 +56,7 @@ struct PermissionsDeniedView: View {
                         Task { await retryCamera() }
                     }
                     .disabled(isChecking)
-                    .accessibilityLabel("Try again")
+                    .accessibilityLabel(L10n.string("common.try_again"))
                 }
                 .padding(.horizontal, DH.Spacing.hPad)
                 .padding(.bottom, 24)
@@ -127,6 +126,7 @@ struct PermissionsDeniedView: View {
 
     @MainActor
     private func routeAfterCameraGrant() async {
+        coordinator.dismissError()
         let mic = await env.permissions.micStatus()
         if mic == .granted {
             coordinator.completeOnboarding(env: env)

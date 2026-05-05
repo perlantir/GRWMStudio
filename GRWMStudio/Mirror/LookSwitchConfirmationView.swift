@@ -8,7 +8,7 @@ struct LookSwitchConfirmationView: View {
     var body: some View {
         DHCard(bg: .white, deep: DH.pink, cornerRadius: DH.Radius.card, padding: 12) {
             HStack(spacing: 8) {
-                Text("Switch out of \(lookName)?")
+                Text(verbatim: L10n.format("mirror.look_switch.title", lookName))
                     .font(DH.font(.buttonSmall))
                     .tracking(DH.tracking(.buttonSmall))
                     .foregroundStyle(DH.ink)
@@ -17,13 +17,13 @@ struct LookSwitchConfirmationView: View {
 
                 Spacer(minLength: 0)
 
-                chipButton("Yes, mix it", fill: DH.pinkDeep, foreground: .white, action: onConfirm)
-                chipButton("Stay in look", fill: DH.cream, foreground: DH.ink, action: onCancel)
+                chipButton(L10n.string("mirror.look_switch.confirm"), fill: DH.pinkDeep, foreground: .white, action: onConfirm)
+                chipButton(L10n.string("mirror.look_switch.cancel"), fill: DH.cream, foreground: DH.ink, action: onCancel)
             }
         }
         .padding(.horizontal, 14)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Switch out of \(lookName)?")
+        .accessibilityLabel(L10n.format("mirror.look_switch.title", lookName))
     }
 
     private func chipButton(_ title: String, fill: Color, foreground: Color, action: @escaping () -> Void) -> some View {

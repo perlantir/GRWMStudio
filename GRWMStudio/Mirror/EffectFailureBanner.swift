@@ -12,13 +12,13 @@ struct EffectFailureBanner: View {
                 StickerSparkle(size: 22, fill: DH.mintDeep, stroke: .white, strokeWidth: 2)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("That sparkle didn't load")
+                    Text("mirror.effect_failure.title")
                         .font(DH.font(.bodyEmphasis))
                         .foregroundStyle(DH.ink)
                         .lineLimit(1)
                         .minimumScaleFactor(0.82)
 
-                    Text("Tap to try again.")
+                    Text("mirror.effect_failure.subtitle")
                         .font(DH.font(.body))
                         .foregroundStyle(DH.ink.opacity(0.72))
                         .lineLimit(1)
@@ -27,7 +27,7 @@ struct EffectFailureBanner: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .layoutPriority(1)
 
-                DHButton(title: "Try again", kind: .ghost, size: .sm, action: retry)
+                DHButton(title: L10n.string("mirror.effect_failure.cta"), kind: .ghost, size: .sm, action: retry)
                     .fixedSize(horizontal: true, vertical: false)
                     .layoutPriority(2)
             }
@@ -36,7 +36,7 @@ struct EffectFailureBanner: View {
         .contentShape(RoundedRectangle(cornerRadius: DH.Radius.card))
         .onTapGesture(perform: retry)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("That sparkle didn't load. Tap to try again.")
+        .accessibilityLabel(L10n.string("mirror.effect_failure.announcement"))
         .onAppear {
             dismissTask?.cancel()
             dismissTask = Task { @MainActor in

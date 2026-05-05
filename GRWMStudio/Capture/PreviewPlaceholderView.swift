@@ -15,7 +15,7 @@ final class PreviewViewModel {
     }
 
     var displayLookName: String {
-        lookName ?? "Custom mix"
+        lookName ?? L10n.string("common.custom_mix")
     }
 
     func toggleMute() {
@@ -26,18 +26,17 @@ final class PreviewViewModel {
 struct PreviewPlaceholderView: View {
     let asset: CapturedAsset
     let lookName: String?
-    let onSave: @MainActor () async throws -> Void
+    let onSave: @MainActor () async -> Void
     let onShare: @MainActor () -> Void
     let onDiscard: @MainActor () -> Void
 
     @State private var viewModel: PreviewViewModel
     @State private var saving = false
-    @State private var saveFailed = false
 
     init(
         asset: CapturedAsset,
         lookName: String? = nil,
-        onSave: @escaping @MainActor () async throws -> Void = {},
+        onSave: @escaping @MainActor () async -> Void = {},
         onShare: @escaping @MainActor () -> Void = {},
         onDiscard: @escaping @MainActor () -> Void
     ) {
@@ -68,12 +67,6 @@ struct PreviewPlaceholderView: View {
                     mediaCard
                         .frame(width: metrics.mediaWidth, height: metrics.mediaHeight)
 
-                    if saveFailed {
-                        SaveFailureBanner()
-                            .padding(.horizontal, 18)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
-
                     Spacer(minLength: 0)
 
                     bottomActions
@@ -88,7 +81,7 @@ struct PreviewPlaceholderView: View {
 
     private var topChrome: some View {
         ZStack {
-            Text("Preview")
+            Text("preview.title")
                 .font(DH.font(.buttonLarge))
                 .tracking(DH.tracking(.buttonLarge))
                 .foregroundStyle(DH.pinkDeep)
@@ -101,7 +94,7 @@ struct PreviewPlaceholderView: View {
                     Image(systemName: "xmark")
                         .font(.system(size: 17, weight: .heavy))
                         .foregroundStyle(DH.pinkDeep)
-                        .frame(width: 42, height: 42)
+                        .frame(width: 44, height: 44)
                         .background {
                             Circle()
                                 .fill(.white)
@@ -109,7 +102,8 @@ struct PreviewPlaceholderView: View {
                         }
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Discard preview and return to mirror")
+                .accessibilityLabel(L10n.string("preview.discard.accessibility_label"))
+                .accessibilityHint(L10n.string("preview.discard.accessibility_hint"))
                 .accessibilityIdentifier("preview-discard-button")
 
                 Spacer()
@@ -140,7 +134,7 @@ struct PreviewPlaceholderView: View {
                         .strokeBorder(DH.pinkLight, lineWidth: 2)
                 }
         }
-        .accessibilityLabel("Preview look: \(name)")
+        .accessibilityLabel(L10n.format("preview.look_chip.accessibility_label", name))
         .accessibilityIdentifier("preview-look-chip")
     }
 
@@ -167,7 +161,7 @@ struct PreviewPlaceholderView: View {
         switch asset {
         case .photo(let image):
             ZoomablePreviewImage(image: image)
-                .accessibilityLabel("Photo Preview")
+                .accessibilityLabel(L10n.string("preview.photo.accessibility_label"))
 
         case .video(let url):
             ZStack(alignment: .bottomTrailing) {
@@ -182,12 +176,14 @@ struct PreviewPlaceholderView: View {
                     Image(systemName: viewModel.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
                         .font(.system(size: 15, weight: .heavy))
                         .foregroundStyle(.white)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 44, height: 44)
                         .background(Circle().fill(DH.ink.opacity(0.62)))
                 }
                 .buttonStyle(.plain)
                 .padding(14)
-                .accessibilityLabel(viewModel.isMuted ? "Unmute video preview" : "Mute video preview")
+                .accessibilityLabel(viewModel.isMuted ? L10n.string("preview.video.unmute") : L10n.string("preview.video.mute"))
+                .accessibilityHint(L10n.string("preview.video.audio_hint"))
+                .accessibilityIdentifier("preview-video-audio-toggle")
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("captured-video-preview")
@@ -197,7 +193,7 @@ struct PreviewPlaceholderView: View {
     private var bottomActions: some View {
         HStack(spacing: 12) {
             DHButton(
-                title: saving ? "Saving..." : "Save to Locker",
+                title: saving ? L10n.string("preview.save.saving") : L10n.string("preview.save.cta"),
                 kind: .primary,
                 size: .xl,
                 leadingIcon: AnyView(Image(systemName: "heart.fill").foregroundStyle(DH.butter)),
@@ -209,26 +205,21 @@ struct PreviewPlaceholderView: View {
 
                 saving = true
                 Task { @MainActor in
-                    saveFailed = false
-                    do {
-                        try await onSave()
-                    } catch {
-                        saveFailed = true
-                    }
+                    await onSave()
                     saving = false
                 }
             }
-            .accessibilityLabel("Save to Locker")
+            .accessibilityLabel(L10n.string("preview.save.accessibility_label"))
 
             DHButton(
-                title: "Share",
+                title: L10n.string("common.share"),
                 kind: .ghost,
                 size: .lg,
                 leadingIcon: AnyView(Image(systemName: "square.and.arrow.up")),
                 action: onShare
             )
             .frame(width: 142)
-            .accessibilityLabel("Share")
+            .accessibilityLabel(L10n.string("common.share"))
         }
         .padding(.horizontal, 18)
         .padding(.bottom, 54)

@@ -4,7 +4,7 @@ import SwiftUI
 struct ParentInfoView: View {
     @Environment(\.rootCoordinator) private var coordinator
     @Environment(\.modelContext) private var modelContext
-    @State private var displayName = "Star"
+    @State private var displayName = L10n.string("profile.default_display_name_short")
     @State private var parentEmail = ""
     @State private var emailLooksInvalid = false
     @FocusState private var focusedField: Field?
@@ -50,7 +50,7 @@ struct ParentInfoView: View {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(DH.pinkDeep)
-                    .frame(width: 42, height: 42)
+                    .frame(width: 44, height: 44)
                     .background {
                         Circle()
                             .fill(.white)
@@ -58,11 +58,12 @@ struct ParentInfoView: View {
                     }
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Back")
+            .accessibilityLabel(L10n.string("common.back"))
+            .accessibilityHint(L10n.string("common.back_hint"))
 
             Spacer()
 
-            Text("STEP 1 OF 3")
+            Text("onboarding.parent_info.step")
                 .font(DH.font(.caption))
                 .tracking(0.16 * DH.TypeStyle.caption.size)
                 .foregroundStyle(DH.pinkDeep)
@@ -70,7 +71,7 @@ struct ParentInfoView: View {
             Spacer()
 
             Color.clear
-                .frame(width: 42, height: 42)
+                .frame(width: 44, height: 44)
         }
     }
 
@@ -83,19 +84,19 @@ struct ParentInfoView: View {
                         .accessibilityHidden(true)
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("HI, GROWN-UP")
+                        Text("onboarding.parent_info.eyebrow")
                             .font(DH.font(.caption))
                             .tracking(0.16 * DH.TypeStyle.caption.size)
                             .foregroundStyle(DH.ink.opacity(0.5))
 
-                        Text("A quick check-in")
+                        Text("onboarding.parent_info.title")
                             .font(DH.font(.headline))
                             .tracking(DH.tracking(.headline))
                             .foregroundStyle(DH.pinkDeep)
                     }
                 }
 
-                Text("Choose a star name for this device. A grown-up's email is optional and stays private.")
+                Text("onboarding.parent_info.subtitle")
                     .font(DH.font(.body))
                     .foregroundStyle(DH.ink.opacity(0.75))
                     .lineSpacing(4)
@@ -107,8 +108,8 @@ struct ParentInfoView: View {
         DHCard(bg: DH.cream, deep: DH.pinkLight, cornerRadius: DH.Radius.card, padding: 16) {
             VStack(alignment: .leading, spacing: 14) {
                 labeledTextField(
-                    label: "STAR NAME",
-                    placeholder: "Star",
+                    label: L10n.string("onboarding.parent_info.star_name_label"),
+                    placeholder: L10n.string("profile.default_display_name_short"),
                     text: $displayName,
                     iconSystemName: "star.fill",
                     field: .name
@@ -116,8 +117,8 @@ struct ParentInfoView: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     labeledTextField(
-                        label: "GROWN-UP'S EMAIL - OPTIONAL",
-                        placeholder: "parent@example.com",
+                        label: L10n.string("onboarding.parent_info.email_label"),
+                        placeholder: L10n.string("onboarding.parent_info.email_placeholder"),
                         text: $parentEmail,
                         iconSystemName: "envelope.fill",
                         field: .email,
@@ -125,13 +126,13 @@ struct ParentInfoView: View {
                     )
 
                     if emailLooksInvalid {
-                        Text("Hmm, that doesn't look like an email - we'll skip it.")
+                        Text("onboarding.parent_info.email_invalid")
                             .font(DH.font(.caption))
                             .tracking(DH.tracking(.caption))
                             .foregroundStyle(DH.recRed)
                     }
 
-                    Text("Optional. Stored only as a private hash on this device.")
+                    Text("onboarding.parent_info.email_help")
                         .font(DH.font(.caption))
                         .tracking(DH.tracking(.caption))
                         .foregroundStyle(DH.pinkDeep.opacity(0.65))
@@ -141,7 +142,7 @@ struct ParentInfoView: View {
     }
 
     private var privacyCopy: some View {
-        Text("By continuing, GRWM may store this profile on this device. Parent email is optional, hashed locally, and never shared.")
+        Text("onboarding.parent_info.privacy")
             .font(DH.font(.caption))
             .foregroundStyle(DH.ink.opacity(0.55))
             .lineSpacing(4)
@@ -151,7 +152,7 @@ struct ParentInfoView: View {
     private var buttonStack: some View {
         VStack(spacing: 12) {
             DHButton(
-                title: "Continue",
+                title: L10n.string("common.continue"),
                 kind: .primary,
                 size: .xl,
                 trailingIcon: AnyView(Image(systemName: "arrow.right")),
@@ -160,17 +161,17 @@ struct ParentInfoView: View {
                 save()
                 coordinator.showPermissions()
             }
-            .accessibilityLabel("Continue")
+            .accessibilityLabel(L10n.string("common.continue"))
 
             DHButton(
-                title: "Skip for now",
+                title: L10n.string("common.skip_for_now"),
                 kind: .ghost,
                 size: .xl,
                 isFullWidth: true
             ) {
                 coordinator.showPermissions()
             }
-            .accessibilityLabel("Skip for now")
+            .accessibilityLabel(L10n.string("common.skip_for_now"))
         }
     }
 
@@ -205,7 +206,11 @@ struct ParentInfoView: View {
                     .onChange(of: parentEmail) { _, newValue in
                         normalizeEmail(newValue)
                     }
-                    .accessibilityLabel(field == .name ? "Star name" : "Parent's email, optional")
+                    .accessibilityLabel(
+                        field == .name
+                            ? L10n.string("onboarding.parent_info.star_name_accessibility")
+                            : L10n.string("onboarding.parent_info.email_accessibility")
+                    )
             }
             .padding(.horizontal, 14)
             .frame(height: 48)
@@ -246,7 +251,7 @@ struct ParentInfoView: View {
 
     private var normalizedDisplayName: String {
         let trimmed = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "Star" : trimmed
+        return trimmed.isEmpty ? L10n.string("profile.default_display_name_short") : trimmed
     }
 }
 

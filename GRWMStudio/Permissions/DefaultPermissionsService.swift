@@ -10,7 +10,13 @@ public struct DefaultPermissionsService: PermissionsService {
 
     /// Current camera permission state.
     public func cameraStatus() async -> AppPermissionStatus {
-        mapCaptureStatus(AVCaptureDevice.authorizationStatus(for: .video))
+        #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
+            return .granted
+        }
+        #endif
+
+        return mapCaptureStatus(AVCaptureDevice.authorizationStatus(for: .video))
     }
 
     /// Requests camera permission from an explicit user action.
@@ -22,6 +28,12 @@ public struct DefaultPermissionsService: PermissionsService {
 
     /// Current microphone permission state.
     public func micStatus() async -> AppPermissionStatus {
+        #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
+            return .granted
+        }
+        #endif
+
         switch AVAudioApplication.shared.recordPermission {
         case .undetermined:
             return .notDetermined
@@ -46,7 +58,13 @@ public struct DefaultPermissionsService: PermissionsService {
 
     /// Current photo-library add-only permission state.
     public func photosAddStatus() async -> AppPermissionStatus {
-        mapPhotoStatus(PHPhotoLibrary.authorizationStatus(for: .addOnly))
+        #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
+            return .granted
+        }
+        #endif
+
+        return mapPhotoStatus(PHPhotoLibrary.authorizationStatus(for: .addOnly))
     }
 
     /// Requests photo-library add-only permission from an explicit user action.
@@ -58,6 +76,12 @@ public struct DefaultPermissionsService: PermissionsService {
 
     /// Current notification permission state.
     public func notificationsStatus() async -> AppPermissionStatus {
+        #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
+            return .granted
+        }
+        #endif
+
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         switch settings.authorizationStatus {
         case .notDetermined:

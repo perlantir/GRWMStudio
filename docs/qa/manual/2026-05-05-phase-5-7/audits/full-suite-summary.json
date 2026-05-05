@@ -1,0 +1,51 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "x86_64",
+        "deviceId" : "FC58B5F0-CE16-415B-AE8C-1C42B1184EE3",
+        "deviceName" : "iPhone 16",
+        "modelName" : "iPhone 16",
+        "osBuildNumber" : "22D8075",
+        "osVersion" : "18.3.1",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 0,
+      "passedTests" : 169,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "GRWMStudio · Built with macOS 26.4.1",
+  "expectedFailures" : 0,
+  "failedTests" : 0,
+  "finishTime" : 1778019768.47,
+  "passedTests" : 169,
+  "result" : "Passed",
+  "skippedTests" : 0,
+  "startTime" : 1778019489.494,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+
+  ],
+  "title" : "Test - GRWMStudio",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "21% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 44.82s (three standard deviations)"
+    },
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "43% of duration",
+      "text" : "3 longest test runs with outlier durations exceeding 0.34s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 169
+}

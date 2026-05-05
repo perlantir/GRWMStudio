@@ -20,11 +20,11 @@ enum MirrorChrome {
 
             HStack(spacing: 10) {
                 Button {
-                    DHHaptics.tapMedium()
+                    DHHaptics.shared.fire(.pop)
                     onFavoriteLooks()
                 } label: {
                     Label {
-                        Text("Favorite looks")
+                        Text("mirror.chrome.favorite_looks")
                     } icon: {
                         StickerHeart(size: 28, fill: .white, stroke: DH.pinkDeep, strokeWidth: 2.8)
                             .frame(width: 46, height: 46)
@@ -38,7 +38,8 @@ enum MirrorChrome {
                     .labelStyle(.iconOnly)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Favorite looks")
+                .accessibilityLabel(L10n.string("mirror.chrome.favorite_looks"))
+                .accessibilityHint(L10n.string("mirror.chrome.favorite_looks.hint"))
                 .accessibilityIdentifier("favorite-looks-button")
 
                 MirrorResetButton(action: onReset)
@@ -48,12 +49,13 @@ enum MirrorChrome {
 }
 
 private struct MirrorResetButton: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let action: @MainActor () -> Void
     @State private var bounceToken = false
 
     var body: some View {
         Button {
-            withAnimation(.bouncy(duration: 0.22)) {
+            withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
                 bounceToken.toggle()
             }
             action()
@@ -61,7 +63,7 @@ private struct MirrorResetButton: View {
             Image(systemName: "arrow.counterclockwise")
                 .font(.system(size: 18, weight: .heavy))
                 .foregroundStyle(DH.pinkDeep)
-                .frame(width: 42, height: 42)
+                .frame(width: 44, height: 44)
                 .background {
                     Circle()
                         .fill(.white)
@@ -70,7 +72,8 @@ private struct MirrorResetButton: View {
                 .symbolEffect(.bounce, value: bounceToken)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Reset everything")
+        .accessibilityLabel(L10n.string("mirror.chrome.reset"))
+        .accessibilityHint(L10n.string("mirror.chrome.reset.hint"))
     }
 }
 

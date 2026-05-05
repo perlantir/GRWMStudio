@@ -4,13 +4,12 @@ import XCTest
 
 @MainActor
 final class MirrorEffectFailureViewModelTests: XCTestCase {
-    func testEffectFailureSetsInlineErrorBeforeThirdFailure() async {
+    func testEffectFailureQueuesFullScreenErrorOnFirstFailure() async {
         let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
 
         await viewModel.selectShade(in: .lips, shade: missingEffectShade)
 
-        XCTAssertEqual(viewModel.lastError, .effectFail)
-        XCTAssertEqual(viewModel.effectFailureCount, 1)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .effectFail)
         XCTAssertEqual(viewModel.state, .idle)
     }
 
@@ -18,54 +17,36 @@ final class MirrorEffectFailureViewModelTests: XCTestCase {
         let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
 
         await viewModel.selectShade(in: .lips, shade: missingEffectShade)
-        await viewModel.retryLastSelection()
+        viewModel.pendingFullScreenError = nil
+        await viewModel.retryLastEffect()
 
-        XCTAssertEqual(viewModel.lastError, .effectFail)
-        XCTAssertEqual(viewModel.effectFailureCount, 2)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .effectFail)
+        XCTAssertNil(viewModel.selectedShadeID(for: .lips))
     }
 
-    func testThreeFailuresWithinWindowEscalateToFullScreenState() async {
-        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
+    func testPickDifferentLookNotificationCanCoexistWithEffectFailureState() async throws {
+        let notificationCenter = NotificationCenter()
+        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false, notificationCenter: notificationCenter)
 
         await viewModel.selectShade(in: .lips, shade: missingEffectShade)
-        await viewModel.retryLastSelection()
-        await viewModel.retryLastSelection()
+        notificationCenter.post(name: .pickDifferentLook, object: nil)
+        try await Task.sleep(for: .milliseconds(10))
 
-        XCTAssertEqual(viewModel.effectFailureCount, 3)
-        XCTAssertEqual(viewModel.state, .failed(.effectFail))
+        XCTAssertEqual(viewModel.pendingFullScreenError, .effectFail)
     }
 
-    func testFailureWindowRestartsAfterSixtySeconds() async {
-        var now = Date(timeIntervalSince1970: 0)
-        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false) {
-            now
-        }
-
-        await viewModel.selectShade(in: .lips, shade: missingEffectShade)
-        now = Date(timeIntervalSince1970: 61)
-        await viewModel.retryLastSelection()
-
-        XCTAssertEqual(viewModel.effectFailureCount, 1)
-        XCTAssertEqual(viewModel.effectFailureWindowStart, now)
-        XCTAssertEqual(viewModel.state, .idle)
-    }
-
-    func testSuccessfulSelectionResetsFailureCounterAndDismissesBanner() async throws {
+    func testSuccessfulSelectionClearsEffectFailure() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
         let viewModel = MirrorViewModel(controller: controller)
         let shade = try XCTUnwrap(Shade.skinShades.first(where: { $0.id == "skin.medium" }))
 
-        viewModel.effectFailureCount = 2
-        viewModel.effectFailureWindowStart = Date(timeIntervalSince1970: 0)
-        viewModel.lastError = .effectFail
+        viewModel.pendingFullScreenError = .effectFail
 
         await viewModel.selectShade(in: .skin, shade: shade)
 
-        XCTAssertEqual(viewModel.effectFailureCount, 0)
-        XCTAssertNil(viewModel.effectFailureWindowStart)
-        XCTAssertNil(viewModel.lastError)
+        XCTAssertNil(viewModel.pendingFullScreenError)
         XCTAssertEqual(viewModel.selectedShadeID(for: .skin), shade.id)
     }
 

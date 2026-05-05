@@ -26,7 +26,7 @@ final class DeepARViewTests: XCTestCase {
         container.refresh()
 
         XCTAssertEqual(container.deepARPlaceholderLabel.text, "Warming up the magic...")
-        XCTAssertTrue(container.deepARSpinner.isAnimating)
+        XCTAssertFalse(container.deepARSpinner.isHidden)
         mock.delegate?.didInitialize()
         _ = await bootstrapTask.value
     }
@@ -80,8 +80,8 @@ private extension UIView {
         findView(identifier: "deepar-placeholder-label") ?? UILabel()
     }
 
-    var deepARSpinner: UIActivityIndicatorView {
-        findView(identifier: "deepar-placeholder-spinner") ?? UIActivityIndicatorView()
+    var deepARSpinner: UIView {
+        findView(identifier: "deepar-placeholder-spinner") ?? UIView()
     }
 
     func findView<ViewType: UIView>(identifier: String) -> ViewType? {

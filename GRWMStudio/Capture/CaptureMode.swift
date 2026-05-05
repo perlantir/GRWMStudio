@@ -12,9 +12,9 @@ enum CaptureKind: String, CaseIterable, Identifiable {
     var label: String {
         switch self {
         case .photo:
-            "Photo"
+            L10n.string("capture.kind.photo")
         case .video:
-            "Video"
+            L10n.string("capture.kind.video")
         }
     }
 

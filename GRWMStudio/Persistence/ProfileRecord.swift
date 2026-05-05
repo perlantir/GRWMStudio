@@ -48,20 +48,27 @@ final class ProfileRecord {
     @Attribute(.unique) var id: UUID = UUID()
     var displayName: String
     var avatarKey: String
+    var avatarSwatchRaw: String
+    var tagline: String
     var proSince: Date?
     var proExpires: Date?
     var streakDays: Int
     var lifetimeHearts: Int
     var parentEmailHashed: String?
+    var lastActiveDay: Date?
     var createdAt: Date
 
     init(
-        displayName: String = "Star",
+        displayName: String = "",
         avatarKey: String = "avatar_01",
+        avatarSwatchRaw: String = AvatarSwatch.pink.rawValue,
+        tagline: String = "",
         createdAt: Date = .now
     ) {
-        self.displayName = displayName
+        self.displayName = displayName.isEmpty ? L10n.string("profile.default_display_name_short") : displayName
         self.avatarKey = avatarKey
+        self.avatarSwatchRaw = avatarSwatchRaw
+        self.tagline = tagline.isEmpty ? L10n.string("profile.default_tagline") : tagline
         self.streakDays = 0
         self.lifetimeHearts = 0
         self.createdAt = createdAt
@@ -85,6 +92,63 @@ final class ProfileRecord {
         let hash = SHA256.hash(data: Data(normalized.utf8))
         return hash.map { String(format: "%02x", $0) }.joined()
     }
+
+    var avatarSwatch: AvatarSwatch {
+        get {
+            if let swatch = AvatarSwatch(rawValue: avatarSwatchRaw) {
+                return swatch
+            }
+
+            switch avatarKey {
+            case "avatar_02":
+                return .lavender
+            case "avatar_03":
+                return .butter
+            case "avatar_04":
+                return .mint
+            case "avatar_05":
+                return .peach
+            default:
+                return .pink
+            }
+        }
+        set {
+            avatarSwatchRaw = newValue.rawValue
+        }
+    }
+
+    static func makeDefault() -> ProfileRecord {
+        ProfileRecord(displayName: L10n.string("profile.default_display_name"))
+    }
+
+    func recordActivity(today: Date = .now) {
+        let calendar = Calendar.current
+        let normalizedToday = calendar.startOfDay(for: today)
+
+        defer { lastActiveDay = normalizedToday }
+
+        guard let lastActiveDay else {
+            streakDays = 1
+            return
+        }
+
+        let normalizedLastDay = calendar.startOfDay(for: lastActiveDay)
+        guard let delta = calendar.dateComponents([.day], from: normalizedLastDay, to: normalizedToday).day else {
+            streakDays = max(streakDays, 1)
+            return
+        }
+
+        switch delta {
+        case ..<0:
+            streakDays = max(streakDays, 1)
+        case 0:
+            streakDays = max(streakDays, 1)
+        case 1:
+            streakDays = max(streakDays + 1, 2)
+        default:
+            streakDays = 1
+        }
+    }
 }
 
 @Model
@@ -96,4 +160,14 @@ final class FavoriteLook {
         self.lookID = lookID
         self.favoritedAt = favoritedAt
     }
+}
+
+enum AvatarSwatch: String, CaseIterable, Identifiable, Codable, Sendable {
+    case pink
+    case lavender
+    case butter
+    case mint
+    case peach
+
+    var id: String { rawValue }
 }

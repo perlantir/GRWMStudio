@@ -16,28 +16,7 @@ extension DH {
     }
 
     static func font(_ style: TypeStyle) -> Font {
-        switch style {
-        case .display1:
-            .custom("Fredoka-Bold", size: 96)
-        case .display2:
-            .custom("Fredoka-Bold", size: 48)
-        case .display3:
-            .custom("Fredoka-Bold", size: 32)
-        case .headline:
-            .custom("Fredoka-Bold", size: 22)
-        case .body:
-            .custom("Quicksand-Medium", size: 14)
-        case .bodyEmphasis:
-            .custom("Quicksand-Bold", size: 14)
-        case .caption:
-            .custom("Fredoka-SemiBold", size: 11)
-        case .microLabel:
-            .custom("Fredoka-SemiBold", size: 9)
-        case .buttonSmall:
-            .custom("Fredoka-Bold", size: 12)
-        case .buttonLarge:
-            .custom("Fredoka-Bold", size: 18)
-        }
+        .custom(style.fontName, size: style.size, relativeTo: style.relativeTextStyle)
     }
 
     static func tracking(_ style: TypeStyle) -> CGFloat {
@@ -59,6 +38,19 @@ extension DH {
 }
 
 extension DH.TypeStyle {
+    var fontName: String {
+        switch self {
+        case .display1, .display2, .display3, .headline, .buttonSmall, .buttonLarge:
+            "Fredoka-Bold"
+        case .body:
+            "Quicksand-Medium"
+        case .bodyEmphasis:
+            "Quicksand-Bold"
+        case .caption, .microLabel:
+            "Fredoka-SemiBold"
+        }
+    }
+
     var size: CGFloat {
         switch self {
         case .display1:
@@ -79,6 +71,29 @@ extension DH.TypeStyle {
             12
         case .buttonLarge:
             18
+        }
+    }
+
+    var relativeTextStyle: Font.TextStyle {
+        switch self {
+        case .display1:
+            .largeTitle
+        case .display2:
+            .title
+        case .display3:
+            .title2
+        case .headline:
+            .headline
+        case .body, .bodyEmphasis:
+            .body
+        case .caption:
+            .caption
+        case .microLabel:
+            .caption2
+        case .buttonSmall:
+            .subheadline
+        case .buttonLarge:
+            .headline
         }
     }
 }

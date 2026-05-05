@@ -13,6 +13,10 @@ public struct MakeupShade: Decodable, Identifiable, Hashable, Sendable {
     /// Runtime parameter changes applied when the shade is selected.
     public let parameters: [ParameterChange]
 
+    public var localizedDisplayName: String {
+        L10n.string("deepar.shade.\(id.replacingOccurrences(of: ".", with: "_"))", fallback: displayName)
+    }
+
     /// A single runtime parameter mutation declared by a manifest shade.
     public struct ParameterChange: Decodable, Hashable, Sendable {
         /// Supported runtime parameter mutation kinds.

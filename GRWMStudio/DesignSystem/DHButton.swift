@@ -7,6 +7,8 @@ struct DHButton: View {
     var leadingIcon: AnyView?
     var trailingIcon: AnyView?
     var isFullWidth = false
+    var accessibilityLabelText: String?
+    var accessibilityHintText: String?
     let action: () -> Void
 
     @State private var pressed = false
@@ -18,6 +20,8 @@ struct DHButton: View {
         leadingIcon: AnyView? = nil,
         trailingIcon: AnyView? = nil,
         isFullWidth: Bool = false,
+        accessibilityLabelText: String? = nil,
+        accessibilityHintText: String? = nil,
         action: @escaping () -> Void
     ) {
         self.title = title
@@ -26,6 +30,8 @@ struct DHButton: View {
         self.leadingIcon = leadingIcon
         self.trailingIcon = trailingIcon
         self.isFullWidth = isFullWidth
+        self.accessibilityLabelText = accessibilityLabelText
+        self.accessibilityHintText = accessibilityHintText
         self.action = action
     }
 
@@ -126,7 +132,7 @@ struct DHButton: View {
 
     var body: some View {
         Button {
-            DHHaptics.tapMedium()
+            DHHaptics.shared.fire(.tap)
             action()
         } label: {
             HStack(spacing: 8) {
@@ -138,6 +144,8 @@ struct DHButton: View {
                     .font(DH.font(size.fontStyle))
                     .tracking(DH.tracking(size.fontStyle))
                     .foregroundStyle(kind.foreground)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
 
                 if let trailingIcon {
                     trailingIcon
@@ -158,11 +166,14 @@ struct DHButton: View {
             }
             .scaleEffect(pressed ? 0.97 : 1)
             .offset(y: pressed ? 2 : 0)
-            .animation(.spring(response: 0.25, dampingFraction: 0.6), value: pressed)
+            .dhAnimation(.quickPop, value: pressed)
             .frame(minHeight: 44)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityLabelText ?? title)
+        .accessibilityHint(accessibilityHintText ?? "Double-tap to activate \(title.lowercased()).")
+        .accessibilityAddTraits(.isButton)
         .simultaneousGesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in pressed = true }

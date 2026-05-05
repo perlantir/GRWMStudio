@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SplashView: View {
     @Environment(\.rootCoordinator) private var coordinator
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var progress: CGFloat = 0
     @State private var hasAdvanced = false
 
@@ -20,7 +21,7 @@ struct SplashView: View {
         }
         .preferredColorScheme(.light)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("GRWM Studio. Loading.")
+        .accessibilityLabel(L10n.string("onboarding.splash.accessibility_label"))
         .onAppear(perform: startSplash)
     }
 
@@ -34,7 +35,7 @@ struct SplashView: View {
 
             GRWMLogo(layout: .stack, size: .xl)
 
-            Text("Your studio mirror.\nGet ready, but make it sparkle ✨")
+            Text("onboarding.splash.subtitle")
                 .font(DH.font(.buttonLarge))
                 .foregroundStyle(DH.ink.opacity(0.7))
                 .multilineTextAlignment(.center)
@@ -45,7 +46,7 @@ struct SplashView: View {
             progressBar
                 .padding(.top, 36)
 
-            Text("POLISHING THE MIRROR…")
+            Text("onboarding.splash.loading")
                 .font(DH.font(.caption))
                 .tracking(0.24 * 11)
                 .foregroundStyle(DH.pinkDeep.opacity(0.6))
@@ -120,7 +121,7 @@ struct SplashView: View {
         }
 
         progress = 0
-        withAnimation(.linear(duration: 1.5)) {
+        withAnimation(DHAnim.respecting(.progress, reduceMotion: reduceMotion)) {
             progress = 1
         }
 

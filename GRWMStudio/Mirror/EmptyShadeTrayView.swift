@@ -23,7 +23,7 @@ struct EmptyShadeTrayView: View {
         .padding(.horizontal, 14)
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(category.label) filters unavailable. \(message)")
+        .accessibilityLabel(L10n.format("mirror.empty_shade.accessibility_label", category.label, message))
     }
 }
 

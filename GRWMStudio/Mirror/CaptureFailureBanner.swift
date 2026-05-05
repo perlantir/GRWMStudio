@@ -13,12 +13,12 @@ struct CaptureFailureBanner: View {
                     .background(Circle().fill(.white.opacity(0.75)))
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Photo needs one more try")
+                    Text("mirror.capture_failure.title")
                         .font(DH.font(.bodyEmphasis))
                         .tracking(DH.tracking(.bodyEmphasis))
                         .foregroundStyle(DH.ink)
 
-                    Text("The mirror blinked. Tap the button again.")
+                    Text("mirror.capture_failure.subtitle")
                         .font(DH.font(.caption))
                         .foregroundStyle(DH.ink.opacity(0.68))
                 }
@@ -33,11 +33,11 @@ struct CaptureFailureBanner: View {
                         .background(Circle().fill(.white.opacity(0.75)))
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Dismiss capture error")
+                .accessibilityLabel(L10n.string("mirror.capture_failure.dismiss"))
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Photo needs one more try. The mirror blinked. Tap the button again.")
+        .accessibilityLabel(L10n.string("mirror.capture_failure.announcement"))
         .accessibilityIdentifier("capture-failure-banner")
     }
 }

@@ -51,24 +51,27 @@ final class OnboardingStateTests: XCTestCase {
         XCTAssertEqual(coordinator.route, .app)
     }
 
-    func testCoordinatorParentGatePaywallOverlaySequencePreservesAppRoute() {
+    func testCoordinatorParentGatePaywallPresentationPreservesAppRoute() async throws {
         let coordinator = RootCoordinator()
         coordinator.route = .app
 
-        coordinator.startParentGate(intent: .paywall)
+        coordinator.startParentGate(intent: .paywall(source: .proShade))
 
         XCTAssertEqual(coordinator.route, .app)
-        XCTAssertEqual(coordinator.overlay, .parentGate(intent: .paywall))
+        XCTAssertEqual(coordinator.presentedParentGate, .paywall(source: .proShade))
+        XCTAssertNil(coordinator.presentedPaywallSource)
 
-        coordinator.paywallShown()
-
-        XCTAssertEqual(coordinator.route, .app)
-        XCTAssertEqual(coordinator.overlay, .paywall)
-
-        coordinator.dismissOverlay()
+        coordinator.parentGatePassed(.paywall(source: .proShade))
 
         XCTAssertEqual(coordinator.route, .app)
-        XCTAssertNil(coordinator.overlay)
+        XCTAssertNil(coordinator.presentedParentGate)
+        try await Task.sleep(for: .milliseconds(350))
+        XCTAssertEqual(coordinator.presentedPaywallSource, .proShade)
+
+        coordinator.dismissPaywall()
+
+        XCTAssertEqual(coordinator.route, .app)
+        XCTAssertNil(coordinator.presentedPaywallSource)
     }
 
     func testCoordinatorPreviewOverlayPreservesAppRouteAndDismisses() {

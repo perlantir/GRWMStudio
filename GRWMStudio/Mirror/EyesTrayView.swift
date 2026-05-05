@@ -8,16 +8,19 @@ enum EyesSubCategory: String, CaseIterable, Sendable {
     var label: String {
         switch self {
         case .shadow:
-            "Shadow"
+            L10n.string("mirror.eyes.subcategory.shadow")
         case .liner:
-            "Liner"
+            L10n.string("mirror.eyes.subcategory.liner")
         case .lashes:
-            "Lashes"
+            L10n.string("mirror.eyes.subcategory.lashes")
         }
     }
 }
 
 struct EyesTrayView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ScaledMetric(relativeTo: .caption) private var tabMinWidth = 76
+    @ScaledMetric(relativeTo: .caption) private var tabHeight = 34
     @Bindable var viewModel: MirrorViewModel
     var onSelectionComplete: () -> Void = {}
 
@@ -57,17 +60,19 @@ struct EyesTrayView: View {
         let active = viewModel.eyesSubCategory == subCategory
 
         return Button {
-            withAnimation(.snappy(duration: 0.22)) {
+            withAnimation(DHAnim.respecting(.quickPop, reduceMotion: reduceMotion)) {
                 viewModel.eyesSubCategory = subCategory
             }
             DHHaptics.light()
         } label: {
-            Text(subCategory.label)
+            Text(verbatim: subCategory.label)
                 .font(DH.font(.buttonSmall))
                 .tracking(DH.tracking(.buttonSmall))
                 .foregroundStyle(active ? .white : DH.ink)
-                .frame(minWidth: 76)
-                .frame(height: 34)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+                .frame(minWidth: tabMinWidth)
+                .frame(height: tabHeight)
                 .background(
                     Capsule()
                         .fill(active ? DH.pinkDeep : .white)
@@ -75,7 +80,9 @@ struct EyesTrayView: View {
                 )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("\(subCategory.label) eye filter tab")
+        .accessibilityLabel(L10n.format("mirror.eyes.subcategory.accessibility_label", subCategory.label))
+        .accessibilityValue(active ? L10n.string("common.selected") : L10n.string("common.not_selected"))
+        .accessibilityHint(L10n.format("mirror.eyes.subcategory.accessibility_hint", subCategory.label.lowercased()))
         .accessibilityAddTraits(active ? [.isSelected] : [])
     }
 

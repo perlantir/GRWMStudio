@@ -48,11 +48,11 @@ final class MirrorLipViewModelTests: XCTestCase {
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
 
-        let viewModel = MirrorViewModel(controller: controller)
-        let environment = AppEnvironment(
-            permissions: MirrorPermissionsStub(camera: .granted),
-            proEntitlement: MirrorProEntitlementStub(hasPro: false)
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            entitlements: makeEntitlements(false)
         )
+        let environment = AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted))
         await viewModel.start(env: environment)
 
         let shade = try XCTUnwrap(Shade.lipShades.first(where: { $0.id == "lip.disco-brat" }))
@@ -60,7 +60,7 @@ final class MirrorLipViewModelTests: XCTestCase {
         await viewModel.selectShade(in: .lips, shade: shade)
 
         XCTAssertNil(viewModel.selections[.lips])
-        XCTAssertEqual(viewModel.lastError, .license)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .license)
         XCTAssertTrue(mock.switches.isEmpty)
     }
 
@@ -69,11 +69,11 @@ final class MirrorLipViewModelTests: XCTestCase {
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
         try await controller.bootstrap(licenseKey: "test-license")
 
-        let viewModel = MirrorViewModel(controller: controller)
-        let environment = AppEnvironment(
-            permissions: MirrorPermissionsStub(camera: .granted),
-            proEntitlement: MirrorProEntitlementStub(hasPro: true)
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            entitlements: makeEntitlements(true)
         )
+        let environment = AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted))
         await viewModel.start(env: environment)
 
         let shade = try XCTUnwrap(Shade.lipShades.first(where: { $0.id == "lip.disco-brat" }))
@@ -83,5 +83,13 @@ final class MirrorLipViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), shade.id)
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: "lips", shadeID: shade.id, isPro: true))
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
+    }
+
+    private func makeEntitlements(_ isPro: Bool) -> ProEntitlements {
+        let suiteName = "app.grwmstudio.tests.lips.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName) ?? .standard
+        defaults.removePersistentDomain(forName: suiteName)
+        defaults.set(isPro, forKey: ProEntitlements.cacheKey)
+        return ProEntitlements(defaults: defaults, autoRefresh: false)
     }
 }

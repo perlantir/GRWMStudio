@@ -53,14 +53,16 @@ protocol ProEntitlementService: Sendable {
 }
 
 struct StubProEntitlementService: ProEntitlementService {
-    var hasPro = defaultHasPro
-
-    private static var defaultHasPro: Bool {
+    var hasPro: Bool {
         #if DEBUG
-        ProcessInfo.processInfo.arguments.contains("-GRWMDebugHasPro")
+        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugHasPro") {
+            return true
+        }
         #else
         false
         #endif
+
+        return UserDefaults.standard.bool(forKey: "dh.isPro.cached")
     }
 }
 

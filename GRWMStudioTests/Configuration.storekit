@@ -1,0 +1,29 @@
+{
+  "identifier" : "app.grwmstudio.iap",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "14.99",
+      "familyShareable" : false,
+      "internalID" : "PRO_LIFETIME",
+      "localizations" : [
+        {
+          "description" : "Unlock GRWM Studio Pro forever - all shades, all effects, unlimited locker.",
+          "displayName" : "Studio Pro Lifetime",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "app.grwmstudio.ios.pro.lifetime",
+      "referenceName" : "Studio Pro Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

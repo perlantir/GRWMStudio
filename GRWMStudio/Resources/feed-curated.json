@@ -1,0 +1,90 @@
+[
+  {
+    "id": "sunday-best",
+    "lookID": "look.sunday-best",
+    "displayTitle": "Sunday Best",
+    "tagline": "natural day vibes",
+    "cardHeight": "m",
+    "palette": { "cardHex": "#FFE4D8", "deepHex": "#C98090" },
+    "hot": false,
+    "hearts": 67,
+    "featured": true
+  },
+  {
+    "id": "school-day",
+    "lookID": "look.school-day",
+    "displayTitle": "School Day",
+    "tagline": "classroom-chic",
+    "cardHeight": "s",
+    "palette": { "cardHex": "#C8EAFF", "deepHex": "#3D7FBF" },
+    "hot": false,
+    "hearts": 42,
+    "featured": true
+  },
+  {
+    "id": "birthday-glam",
+    "lookID": "look.birthday-glam",
+    "displayTitle": "Birthday Glam",
+    "tagline": "cake-day sparkle",
+    "cardHeight": "l",
+    "palette": { "cardHex": "#FFE5F2", "deepHex": "#D4127B" },
+    "hot": true,
+    "hearts": 124,
+    "featured": true
+  },
+  {
+    "id": "sleepover",
+    "lookID": "look.sleepover",
+    "displayTitle": "Sleepover",
+    "tagline": "pjs and popcorn",
+    "cardHeight": "m",
+    "palette": { "cardHex": "#E8C8FF", "deepHex": "#5A1099" },
+    "hot": false,
+    "hearts": 88,
+    "featured": true
+  },
+  {
+    "id": "pop-star",
+    "lookID": "look.pop-star",
+    "displayTitle": "Pop Star",
+    "tagline": "stage lights on",
+    "cardHeight": "l",
+    "palette": { "cardHex": "#FFB46B", "deepHex": "#C99B1F" },
+    "hot": true,
+    "hearts": 312,
+    "featured": true
+  },
+  {
+    "id": "disco-princess",
+    "lookID": "look.disco-princess",
+    "displayTitle": "Disco Princess",
+    "tagline": "glittery overload",
+    "cardHeight": "s",
+    "palette": { "cardHex": "#FFD66B", "deepHex": "#9C2BFF" },
+    "hot": false,
+    "hearts": 201,
+    "featured": false
+  },
+  {
+    "id": "garden-party",
+    "lookID": "look.garden-party",
+    "displayTitle": "Garden Party",
+    "tagline": "flowy florals",
+    "cardHeight": "m",
+    "palette": { "cardHex": "#C9E8C9", "deepHex": "#5DBD8E" },
+    "hot": false,
+    "hearts": 156,
+    "featured": false
+  },
+  {
+    "id": "time-warp",
+    "lookID": "look.time-warp",
+    "displayTitle": "Time Warp",
+    "tagline": "y2k babe",
+    "cardHeight": "l",
+    "palette": { "cardHex": "#C9A8FF", "deepHex": "#5A1099" },
+    "hot": true,
+    "hearts": 278,
+    "featured": false
+  }
+]

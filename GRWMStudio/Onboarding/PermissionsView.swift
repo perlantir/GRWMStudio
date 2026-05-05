@@ -54,7 +54,7 @@ struct PermissionsView: View {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(DH.pinkDeep)
-                    .frame(width: 42, height: 42)
+                    .frame(width: 44, height: 44)
                     .background {
                         Circle()
                             .fill(.white)
@@ -62,7 +62,8 @@ struct PermissionsView: View {
                     }
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Back")
+            .accessibilityLabel(L10n.string("common.back"))
+            .accessibilityHint(L10n.string("common.back_hint"))
 
             Spacer()
 
@@ -71,7 +72,7 @@ struct PermissionsView: View {
             Spacer()
 
             Color.clear
-                .frame(width: 42, height: 42)
+                .frame(width: 44, height: 44)
         }
     }
 
@@ -120,13 +121,13 @@ struct PermissionsView: View {
 
     private var headline: some View {
         VStack(spacing: 10) {
-            Text("One quick thing!")
+            Text("onboarding.permissions.title")
                 .font(DH.font(.display3))
                 .tracking(DH.tracking(.display3))
                 .foregroundStyle(DH.pinkDeep)
                 .multilineTextAlignment(.center)
 
-            Text("We need a few permissions so the magic mirror can do its thing. We never store anything without you tapping save.")
+            Text("onboarding.permissions.subtitle")
                 .font(DH.font(.body))
                 .foregroundStyle(DH.ink.opacity(0.7))
                 .multilineTextAlignment(.center)
@@ -139,8 +140,8 @@ struct PermissionsView: View {
     private var permissionRows: some View {
         VStack(spacing: 10) {
             PermRow(
-                title: "Camera",
-                description: "See yourself in the magic mirror",
+                title: L10n.string("onboarding.permissions.camera.title"),
+                description: L10n.string("onboarding.permissions.camera.description"),
                 iconSystemName: "camera.fill",
                 iconBackground: DH.pink,
                 iconDeep: DH.pinkDeep,
@@ -151,8 +152,8 @@ struct PermissionsView: View {
             }
 
             PermRow(
-                title: "Microphone",
-                description: "Record sound only when you make a video",
+                title: L10n.string("onboarding.permissions.microphone.title"),
+                description: L10n.string("onboarding.permissions.microphone.description"),
                 iconSystemName: "mic.fill",
                 iconBackground: DH.lavender,
                 iconDeep: DH.lavenderDeep,
@@ -163,8 +164,8 @@ struct PermissionsView: View {
             }
 
             PermRow(
-                title: "Photos",
-                description: "Save favorite looks only when you tap save",
+                title: L10n.string("onboarding.permissions.photos.title"),
+                description: L10n.string("onboarding.permissions.photos.description"),
                 iconSystemName: "photo.fill",
                 iconBackground: DH.butter,
                 iconDeep: DH.butterDeep,
@@ -183,18 +184,18 @@ struct PermissionsView: View {
                 Button {
                     openSettings()
                 } label: {
-                    Text("If you change your mind, open Settings.")
+                    Text("onboarding.permissions.open_settings")
                         .font(DH.font(.caption))
                         .foregroundStyle(DH.pinkDeep.opacity(0.75))
                         .underline()
                         .multilineTextAlignment(.center)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Open Settings")
+                .accessibilityLabel(L10n.string("common.open_settings"))
             }
 
             DHButton(
-                title: "Continue",
+                title: L10n.string("common.continue"),
                 kind: .primary,
                 size: .xl,
                 trailingIcon: AnyView(Image(systemName: "arrow.right")),
@@ -204,11 +205,12 @@ struct PermissionsView: View {
                     coordinator.completeOnboarding(env: env)
                 } else if camera == .denied || camera == .restricted {
                     coordinator.showPermissionsDenied()
+                    coordinator.presentError(.camDenied)
                 }
             }
             .opacity(canContinue ? 1 : 0.5)
             .disabled(!canContinue)
-            .accessibilityLabel("Continue")
+            .accessibilityLabel(L10n.string("common.continue"))
         }
     }
 
@@ -229,6 +231,7 @@ struct PermissionsView: View {
             camera = await env.permissions.requestCamera()
             if camera == .denied || camera == .restricted {
                 coordinator.showPermissionsDenied()
+                coordinator.presentError(.camDenied)
             }
         case .mic:
             mic = await env.permissions.requestMic()

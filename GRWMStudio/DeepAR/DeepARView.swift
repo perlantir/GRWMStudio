@@ -25,7 +25,9 @@ final class DeepARContainerView: UIView {
     private let placeholder = UIView()
     private let mirrorPlate = UIView()
     private let placeholderLabel = UILabel()
-    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    private let spinnerHost = UIHostingConfiguration {
+        DHSpinner(size: 42, lineWidth: 5)
+    }.makeContentView()
 
     init(controller: DeepARController) {
         self.controller = controller
@@ -35,7 +37,7 @@ final class DeepARContainerView: UIView {
         configurePlaceholder()
         configureMirrorPlate()
         configureLabel()
-        configureActivityIndicator()
+        configureSpinnerHost()
         refresh()
         observeControllerState()
     }
@@ -119,14 +121,14 @@ final class DeepARContainerView: UIView {
         ])
     }
 
-    private func configureActivityIndicator() {
-        activityIndicator.accessibilityIdentifier = "deepar-placeholder-spinner"
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.color = UIColor(DH.pinkDeep)
-        mirrorPlate.addSubview(activityIndicator)
+    private func configureSpinnerHost() {
+        spinnerHost.accessibilityIdentifier = "deepar-placeholder-spinner"
+        spinnerHost.translatesAutoresizingMaskIntoConstraints = false
+        spinnerHost.backgroundColor = .clear
+        mirrorPlate.addSubview(spinnerHost)
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: mirrorPlate.centerXAnchor),
-            activityIndicator.bottomAnchor.constraint(equalTo: placeholderLabel.topAnchor, constant: -10)
+            spinnerHost.centerXAnchor.constraint(equalTo: mirrorPlate.centerXAnchor),
+            spinnerHost.bottomAnchor.constraint(equalTo: placeholderLabel.topAnchor, constant: -10)
         ])
     }
 
@@ -134,7 +136,6 @@ final class DeepARContainerView: UIView {
         #if targetEnvironment(simulator)
         showPlaceholder(text: Self.magicMirrorText, isLoading: false)
         #else
-        activityIndicator.stopAnimating()
         placeholder.isHidden = true
         mountARViewIfNeeded()
         #endif
@@ -145,12 +146,7 @@ final class DeepARContainerView: UIView {
         placeholder.isHidden = false
         hostedARView?.removeFromSuperview()
         hostedARView = nil
-
-        if isLoading {
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
+        spinnerHost.isHidden = !isLoading
     }
 
     private func mountARViewIfNeeded() {
@@ -180,9 +176,9 @@ final class DeepARContainerView: UIView {
         }
     }
 
-    private static let magicMirrorText = "✨ Magic Mirror"
-    private static let warmingUpText = "Warming up the magic..."
-    private static let errorText = "Mirror needs a restart"
+    private static let magicMirrorText = L10n.string("deepar.placeholder.magic_mirror")
+    private static let warmingUpText = L10n.string("deepar.placeholder.warming")
+    private static let errorText = L10n.string("deepar.placeholder.error")
 
     private static func labelFont(size: CGFloat) -> UIFont {
         guard let font = UIFont(name: "Fredoka-Bold", size: size) else {
