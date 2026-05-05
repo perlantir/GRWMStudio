@@ -14,7 +14,26 @@ jobs:
         with:
           lfs: true
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.app
+        run: |
+          set -euo pipefail
+          XCODE_APP="$(ls -d /Applications/Xcode_16*.app | sort | tail -1)"
+          sudo xcode-select -s "$XCODE_APP"
+          xcodebuild -version
+      - name: Select simulator
+        id: simulator
+        run: |
+          set -euo pipefail
+          xcrun simctl list devices available
+          SIMULATOR_NAME="$(
+            xcrun simctl list devices available |
+              awk -F '[()]' '/iPhone/ { gsub(/^[ \t]+|[ \t]+$/, "", $1); print $1; exit }'
+          )"
+          if [ -z "$SIMULATOR_NAME" ]; then
+            echo "No available iPhone simulator found."
+            exit 1
+          fi
+          echo "name=$SIMULATOR_NAME" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $SIMULATOR_NAME"
       - name: Install SwiftLint
         run: brew install swiftlint
       - name: Lint
@@ -28,7 +47,7 @@ jobs:
           set -o pipefail
           xcodebuild test \
             -scheme GRWMStudio \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }},OS=latest" \
             -resultBundlePath TestResults.xcresult \
             | xcbeautify
       - name: Upload test results
