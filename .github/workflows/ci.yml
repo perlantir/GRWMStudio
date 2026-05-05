@@ -16,8 +16,7 @@ jobs:
       - name: Select Xcode
         run: |
           set -euo pipefail
-          XCODE_APP="$(ls -d /Applications/Xcode_16*.app | sort | tail -1)"
-          sudo xcode-select -s "$XCODE_APP"
+          sudo xcode-select -s /Applications/Xcode.app
           xcodebuild -version
       - name: Select simulator
         id: simulator
