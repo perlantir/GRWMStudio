@@ -63,7 +63,7 @@ private final class TimeoutRaceState<T: Sendable>: @unchecked Sendable {
 
 func withTimeout<T: Sendable>(
     _ duration: Duration,
-    operation: @escaping @Sendable () async throws -> T
+    operation: @escaping @MainActor @Sendable () async throws -> T
 ) async throws -> T {
     let state = TimeoutRaceState<T>()
 
@@ -71,7 +71,7 @@ func withTimeout<T: Sendable>(
         try await withCheckedThrowingContinuation { continuation in
             state.install(continuation: continuation)
 
-            let operationTask = Task {
+            let operationTask = Task { @MainActor in
                 do {
                     let result = try await operation()
                     state.finish(with: .success(result))

@@ -128,26 +128,24 @@ public final class DeepARController: @unchecked Sendable {
         do {
             try await withTimeout(bootstrapTimeout) { [weak self] in
                 try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-                    Task { @MainActor in
-                        guard let self else {
-                            continuation.resume()
-                            return
-                        }
-
-                        self.bootstrapContinuation = continuation
-                        let client = self.clientFactory()
-                        client.setLicenseKey(licenseKey)
-                        let proxy = DeepARDelegateProxy(controller: self)
-                        client.setDelegate(proxy)
-                        client.setRenderingResolution(
-                            width: Int(Self.previewResolution.width),
-                            height: Int(Self.previewResolution.height)
-                        )
-                        self._client = client
-                        self._deepAR = (client as? LiveDeepARClient)?.sdk
-                        self._delegateProxy = proxy
-                        self._arView = client.createARView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+                    guard let self else {
+                        continuation.resume()
+                        return
                     }
+
+                    self.bootstrapContinuation = continuation
+                    let client = self.clientFactory()
+                    client.setLicenseKey(licenseKey)
+                    let proxy = DeepARDelegateProxy(controller: self)
+                    client.setDelegate(proxy)
+                    client.setRenderingResolution(
+                        width: Int(Self.previewResolution.width),
+                        height: Int(Self.previewResolution.height)
+                    )
+                    self._client = client
+                    self._deepAR = (client as? LiveDeepARClient)?.sdk
+                    self._delegateProxy = proxy
+                    self._arView = client.createARView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
                 }
             }
             state = .ready
@@ -267,18 +265,16 @@ public final class DeepARController: @unchecked Sendable {
         do {
             try await withTimeout(effectLoadTimeout) { [weak self] in
                 try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-                    Task { @MainActor in
-                        guard let self else {
-                            continuation.resume()
-                            return
-                        }
-                        self.beginEffectLoad(
-                            slot: slot,
-                            path: effectPath,
-                            requestID: requestID,
-                            continuation: continuation
-                        )
+                    guard let self else {
+                        continuation.resume()
+                        return
                     }
+                    self.beginEffectLoad(
+                        slot: slot,
+                        path: effectPath,
+                        requestID: requestID,
+                        continuation: continuation
+                    )
                 }
             }
             loadedEffects[slot] = effect.id

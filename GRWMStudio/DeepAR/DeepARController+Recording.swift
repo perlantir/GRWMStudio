@@ -12,20 +12,18 @@ extension DeepARController {
         do {
             return try await withTimeout(.seconds(4)) { [weak self] in
                 try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<URL, Error>) in
-                    Task { @MainActor in
-                        guard let self else {
-                            continuation.resume(throwing: SetupError.captureFailed(reason: "Controller deallocated"))
-                            return
-                        }
-
-                        guard let client = self._client else {
-                            continuation.resume(throwing: SetupError.captureFailed(reason: "Missing DeepAR instance"))
-                            return
-                        }
-
-                        self.photoContinuation = continuation
-                        client.takeScreenshot()
+                    guard let self else {
+                        continuation.resume(throwing: SetupError.captureFailed(reason: "Controller deallocated"))
+                        return
                     }
+
+                    guard let client = self._client else {
+                        continuation.resume(throwing: SetupError.captureFailed(reason: "Missing DeepAR instance"))
+                        return
+                    }
+
+                    self.photoContinuation = continuation
+                    client.takeScreenshot()
                 }
             }
         } catch is TimeoutError {
@@ -47,20 +45,18 @@ extension DeepARController {
         do {
             return try await withTimeout(.seconds(4)) { [weak self] in
                 try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<UIImage, Error>) in
-                    Task { @MainActor in
-                        guard let self else {
-                            continuation.resume(throwing: SetupError.captureFailed(reason: "Controller deallocated"))
-                            return
-                        }
-
-                        guard let client = self._client else {
-                            continuation.resume(throwing: SetupError.captureFailed(reason: "Missing DeepAR instance"))
-                            return
-                        }
-
-                        self.screenshotContinuation = continuation
-                        client.takeScreenshot()
+                    guard let self else {
+                        continuation.resume(throwing: SetupError.captureFailed(reason: "Controller deallocated"))
+                        return
                     }
+
+                    guard let client = self._client else {
+                        continuation.resume(throwing: SetupError.captureFailed(reason: "Missing DeepAR instance"))
+                        return
+                    }
+
+                    self.screenshotContinuation = continuation
+                    client.takeScreenshot()
                 }
             }
         } catch is TimeoutError {
@@ -113,20 +109,18 @@ extension DeepARController {
         do {
             return try await withTimeout(.seconds(6)) { [weak self] in
                 try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<URL, Error>) in
-                    Task { @MainActor in
-                        guard let self else {
-                            continuation.resume(throwing: SetupError.recordingFailed(reason: "Controller deallocated"))
-                            return
-                        }
-
-                        guard let client = self._client else {
-                            continuation.resume(throwing: SetupError.recordingFailed(reason: "Missing DeepAR instance"))
-                            return
-                        }
-
-                        self.videoContinuation = continuation
-                        client.finishVideoRecording()
+                    guard let self else {
+                        continuation.resume(throwing: SetupError.recordingFailed(reason: "Controller deallocated"))
+                        return
                     }
+
+                    guard let client = self._client else {
+                        continuation.resume(throwing: SetupError.recordingFailed(reason: "Missing DeepAR instance"))
+                        return
+                    }
+
+                    self.videoContinuation = continuation
+                    client.finishVideoRecording()
                 }
             }
         } catch is TimeoutError {
