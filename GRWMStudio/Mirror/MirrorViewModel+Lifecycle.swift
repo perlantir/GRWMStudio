@@ -82,14 +82,7 @@ extension MirrorViewModel {
         backgroundReleaseTask = nil
         faceTask?.cancel()
         faceTask = nil
-        recordWithoutAudioTask?.cancel()
-        recordWithoutAudioTask = nil
-        retryEffectTask?.cancel()
-        retryEffectTask = nil
-        retryRecordingTask?.cancel()
-        retryRecordingTask = nil
-        useSampleFaceTask?.cancel()
-        useSampleFaceTask = nil
+        removeErrorActionObservers()
         noFaceErrorTask?.cancel()
         noFaceErrorTask = nil
         captureTickTask?.cancel()
@@ -239,6 +232,28 @@ extension MirrorViewModel {
         observeUseSampleFace()
     }
 
+    private func removeErrorActionObservers() {
+        if let recordWithoutAudioObserver {
+            notificationCenter.removeObserver(recordWithoutAudioObserver)
+            self.recordWithoutAudioObserver = nil
+        }
+
+        if let retryEffectObserver {
+            notificationCenter.removeObserver(retryEffectObserver)
+            self.retryEffectObserver = nil
+        }
+
+        if let retryRecordingObserver {
+            notificationCenter.removeObserver(retryRecordingObserver)
+            self.retryRecordingObserver = nil
+        }
+
+        if let useSampleFaceObserver {
+            notificationCenter.removeObserver(useSampleFaceObserver)
+            self.useSampleFaceObserver = nil
+        }
+    }
+
     private func applyDebugCaptureModeIfNeeded() {
         #if DEBUG
         guard ProcessInfo.processInfo.arguments.contains("-GRWMDebugCaptureRecording") else {
@@ -303,12 +318,16 @@ extension MirrorViewModel {
     }
 
     private func observeRecordWithoutAudio() {
-        guard recordWithoutAudioTask == nil else {
+        guard recordWithoutAudioObserver == nil else {
             return
         }
 
-        recordWithoutAudioTask = Task { @MainActor [weak self, notificationCenter] in
-            for await _ in notificationCenter.notifications(named: .recordWithoutAudio) {
+        recordWithoutAudioObserver = notificationCenter.addObserver(
+            forName: .recordWithoutAudio,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
                 guard let self else {
                     return
                 }
@@ -319,12 +338,16 @@ extension MirrorViewModel {
     }
 
     private func observeRetryEffectLoad() {
-        guard retryEffectTask == nil else {
+        guard retryEffectObserver == nil else {
             return
         }
 
-        retryEffectTask = Task { @MainActor [weak self, notificationCenter] in
-            for await _ in notificationCenter.notifications(named: .retryEffectLoad) {
+        retryEffectObserver = notificationCenter.addObserver(
+            forName: .retryEffectLoad,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
                 guard let self else {
                     return
                 }
@@ -335,12 +358,16 @@ extension MirrorViewModel {
     }
 
     private func observeRetryRecording() {
-        guard retryRecordingTask == nil else {
+        guard retryRecordingObserver == nil else {
             return
         }
 
-        retryRecordingTask = Task { @MainActor [weak self, notificationCenter] in
-            for await _ in notificationCenter.notifications(named: .retryRecording) {
+        retryRecordingObserver = notificationCenter.addObserver(
+            forName: .retryRecording,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
                 guard let self else {
                     return
                 }
@@ -351,12 +378,16 @@ extension MirrorViewModel {
     }
 
     private func observeUseSampleFace() {
-        guard useSampleFaceTask == nil else {
+        guard useSampleFaceObserver == nil else {
             return
         }
 
-        useSampleFaceTask = Task { @MainActor [weak self, notificationCenter] in
-            for await _ in notificationCenter.notifications(named: .useSampleFace) {
+        useSampleFaceObserver = notificationCenter.addObserver(
+            forName: .useSampleFace,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
                 guard let self else {
                     return
                 }

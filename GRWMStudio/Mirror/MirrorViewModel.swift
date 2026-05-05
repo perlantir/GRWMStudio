@@ -34,10 +34,10 @@ final class MirrorViewModel {
 
     @ObservationIgnored var env: AppEnvironment?
     @ObservationIgnored var faceTask: Task<Void, Never>?
-    @ObservationIgnored var recordWithoutAudioTask: Task<Void, Never>?
-    @ObservationIgnored var retryEffectTask: Task<Void, Never>?
-    @ObservationIgnored var retryRecordingTask: Task<Void, Never>?
-    @ObservationIgnored var useSampleFaceTask: Task<Void, Never>?
+    @ObservationIgnored var recordWithoutAudioObserver: NSObjectProtocol?
+    @ObservationIgnored var retryEffectObserver: NSObjectProtocol?
+    @ObservationIgnored var retryRecordingObserver: NSObjectProtocol?
+    @ObservationIgnored var useSampleFaceObserver: NSObjectProtocol?
     @ObservationIgnored var noFaceErrorTask: Task<Void, Never>?
     @ObservationIgnored let licenseLoader: () throws -> String
     @ObservationIgnored let usesSimulatorPlaceholder: Bool
