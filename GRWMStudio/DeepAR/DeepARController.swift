@@ -8,7 +8,7 @@ import UIKit
 
 /// Swift-native boundary around the DeepAR SDK.
 @MainActor @Observable
-public final class DeepARController {
+public final class DeepARController: @unchecked Sendable {
     /// High-level DeepAR lifecycle state exposed to SwiftUI.
     public enum State: Equatable {
         /// The SDK has not been created yet.
