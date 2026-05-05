@@ -49,7 +49,7 @@ private struct ControlButton: View {
 }
 
 #Preview("Mirror Bottom Controls") {
-    @Previewable @State var viewModel = MirrorViewModel()
+    let viewModel = MirrorViewModel()
 
     ZStack {
         DHWallpaperGradient()

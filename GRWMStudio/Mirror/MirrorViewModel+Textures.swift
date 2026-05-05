@@ -8,7 +8,7 @@ extension MirrorViewModel {
         }
     }
 
-    private static func loadTextureImageOnBackground(named assetName: String) async -> UIImage? {
+    private nonisolated static func loadTextureImageOnBackground(named assetName: String) async -> UIImage? {
         await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .utility).async {
                 continuation.resume(returning: loadTextureImage(named: assetName))
@@ -16,7 +16,7 @@ extension MirrorViewModel {
         }
     }
 
-    private static func loadTextureImage(named assetName: String) -> UIImage? {
+    private nonisolated static func loadTextureImage(named assetName: String) -> UIImage? {
         if let image = UIImage(named: assetName) {
             return image
         }

@@ -78,7 +78,7 @@ struct FilterRailView: View {
 }
 
 #Preview("Filter Rail") {
-    @Previewable @State var viewModel = MirrorViewModel()
+    let viewModel = MirrorViewModel()
 
     ZStack {
         DHWallpaperGradient()

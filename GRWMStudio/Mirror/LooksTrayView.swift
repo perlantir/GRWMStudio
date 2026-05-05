@@ -133,7 +133,7 @@ struct LooksTrayView: View {
 }
 
 #Preview("Looks Tray") {
-    @Previewable @State var viewModel = MirrorViewModel()
+    let viewModel = MirrorViewModel()
 
     ZStack {
         DHWallpaperGradient()
