@@ -6,7 +6,6 @@ import XCTest
 final class MirrorCaptureViewModelTests: XCTestCase {
     override func tearDown() async throws {
         StorageMonitor.resetForTests()
-        try await super.tearDown()
     }
 
     func testCaptureModeIsDisabledUntilMirrorIsRunning() {

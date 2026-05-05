@@ -5,7 +5,6 @@ import XCTest
 final class MirrorNoFaceViewModelTests: XCTestCase {
     override func tearDown() async throws {
         StorageMonitor.resetForTests()
-        try await super.tearDown()
     }
 
     func testSustainedNoFaceQueuesFullScreenErrorAfterDelay() async throws {
