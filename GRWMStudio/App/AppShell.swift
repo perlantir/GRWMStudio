@@ -5,9 +5,13 @@ struct AppShell: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.rootCoordinator) private var coordinator
     @State private var selected: DHTab = .mirror
-    @State private var mirrorViewModel = MirrorViewModel()
+    @State private var mirrorViewModel: MirrorViewModel
 
     private let lastTabKey = "dh_last_tab"
+
+    init() {
+        _mirrorViewModel = State(initialValue: MirrorViewModel())
+    }
 
     var body: some View {
         selectedTabContent
