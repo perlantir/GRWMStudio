@@ -35,6 +35,13 @@ jobs:
           echo "Using simulator: $SIMULATOR_NAME"
       - name: Install SwiftLint
         run: brew install swiftlint
+      - name: Create local secrets config
+        env:
+          DEEPAR_LICENSE_KEY: ${{ secrets.DEEPAR_LICENSE_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p Config
+          printf "DEEPAR_LICENSE_KEY = %s\n" "${DEEPAR_LICENSE_KEY:-CI_PLACEHOLDER}" > Config/Secrets.xcconfig
       - name: Lint
         run: ./Scripts/lint.sh
       - name: Check localization
