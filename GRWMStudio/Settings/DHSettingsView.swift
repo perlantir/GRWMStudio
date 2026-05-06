@@ -299,6 +299,7 @@ private struct SettingsLookAndFeelSection: View {
                 subtitle: viewModel.soundEnabled ? L10n.string("settings.look_and_feel.sounds_on") : L10n.string("common.off"),
                 trailing: {
                     DHToggle(isOn: $viewModel.soundEnabled)
+                        .accessibilityIdentifier("settings-sounds-toggle")
                 }
             )
 

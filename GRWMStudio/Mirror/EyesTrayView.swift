@@ -83,6 +83,7 @@ struct EyesTrayView: View {
         .accessibilityLabel(L10n.format("mirror.eyes.subcategory.accessibility_label", subCategory.label))
         .accessibilityValue(active ? L10n.string("common.selected") : L10n.string("common.not_selected"))
         .accessibilityHint(L10n.format("mirror.eyes.subcategory.accessibility_hint", subCategory.label.lowercased()))
+        .accessibilityIdentifier("eyes-subcategory-\(subCategory.rawValue)")
         .accessibilityAddTraits(active ? [.isSelected] : [])
     }
 

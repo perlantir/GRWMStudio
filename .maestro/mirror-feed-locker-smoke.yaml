@@ -1,0 +1,24 @@
+appId: app.grwmstudio.ios
+name: Mirror Feed Locker Smoke
+---
+- launchApp:
+    appId: app.grwmstudio.ios
+    clearState: false
+    permissions:
+      camera: allow
+      microphone: allow
+      photos: allow
+    arguments:
+      "-GRWMDebugAppShell": "true"
+      "-GRWMDebugStartMirror": "true"
+- waitForAnimationToEnd
+- assertVisible: "Capture button"
+- tapOn: "Skin"
+- assertVisible: "Fair Skin"
+- tapOn: "Fair Skin"
+- tapOn: "Feed"
+- waitForAnimationToEnd
+- assertVisible: "Glow Feed"
+- tapOn: "Locker"
+- waitForAnimationToEnd
+- assertVisible: "Settings"

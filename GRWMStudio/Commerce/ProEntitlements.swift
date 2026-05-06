@@ -1,7 +1,6 @@
 import Foundation
 import Observation
 import OSLog
-import StoreKit
 
 @MainActor
 @Observable
@@ -9,11 +8,17 @@ final class ProEntitlements {
     static let cacheKey = "dh.isPro.cached"
 
     private let defaults: UserDefaults
+    private let store: any ProPurchaseStateStoring
     private(set) var isPro: Bool
     private var transactionListener: Task<Void, Never>?
 
-    init(defaults: UserDefaults = .standard, autoRefresh: Bool = true) {
+    init(
+        defaults: UserDefaults = .standard,
+        autoRefresh: Bool = true,
+        store: any ProPurchaseStateStoring = StoreKitPurchaseStateStore()
+    ) {
         self.defaults = defaults
+        self.store = store
         isPro = defaults.bool(forKey: Self.cacheKey)
 
         if autoRefresh {
@@ -25,15 +30,7 @@ final class ProEntitlements {
     }
 
     func refresh() async {
-        var authoritativePro = false
-
-        for await result in Transaction.currentEntitlements {
-            if case .verified(let transaction) = result,
-               transaction.productID == StoreIDs.proLifetime,
-               transaction.revocationDate == nil {
-                authoritativePro = true
-            }
-        }
+        let authoritativePro = await store.currentIsPro()
 
         let cached = isPro
         if cached != authoritativePro {
@@ -49,19 +46,21 @@ final class ProEntitlements {
     }
 
     private func startListening() {
+        let updates = store.proPurchaseUpdates()
         transactionListener = Task { [weak self] in
-            for await result in Transaction.updates {
+            for await isPro in updates {
                 guard let self else { return }
-                if case .verified(let transaction) = result {
-                    if transaction.productID == StoreIDs.proLifetime {
-                        await MainActor.run {
-                            self.isPro = transaction.revocationDate == nil
-                            self.defaults.set(self.isPro, forKey: Self.cacheKey)
-                        }
-                    }
-                    await transaction.finish()
+                await MainActor.run {
+                    self.isPro = isPro
+                    self.defaults.set(isPro, forKey: Self.cacheKey)
                 }
             }
         }
     }
+}
+
+@MainActor
+protocol ProPurchaseStateStoring {
+    func currentIsPro() async -> Bool
+    func proPurchaseUpdates() -> AsyncStream<Bool>
 }

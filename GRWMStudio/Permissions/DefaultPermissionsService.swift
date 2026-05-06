@@ -11,6 +11,10 @@ public struct DefaultPermissionsService: PermissionsService {
     /// Current camera permission state.
     public func cameraStatus() async -> AppPermissionStatus {
         #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugCameraDenied") {
+            return .denied
+        }
+
         if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
             return .granted
         }
@@ -29,6 +33,10 @@ public struct DefaultPermissionsService: PermissionsService {
     /// Current microphone permission state.
     public func micStatus() async -> AppPermissionStatus {
         #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugMicDenied") {
+            return .denied
+        }
+
         if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
             return .granted
         }
@@ -59,6 +67,10 @@ public struct DefaultPermissionsService: PermissionsService {
     /// Current photo-library add-only permission state.
     public func photosAddStatus() async -> AppPermissionStatus {
         #if DEBUG
+        if DebugRuntimeFlags.contains("-GRWMDebugPhotosDenied") {
+            return .denied
+        }
+
         if DebugRuntimeFlags.contains("-GRWMDebugAppShell") {
             return .granted
         }

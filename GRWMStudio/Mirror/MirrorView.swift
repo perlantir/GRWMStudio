@@ -219,6 +219,7 @@ private extension MirrorView {
                     .tracking(DH.tracking(.headline))
                     .foregroundStyle(DH.ink)
                     .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("mirror-permission-title")
             }
         }
         .contentShape(RoundedRectangle(cornerRadius: DH.Radius.bigCard))
@@ -229,6 +230,7 @@ private extension MirrorView {
         .accessibilityAddTraits(.isButton)
         .accessibilityLabel(L10n.string("mirror.permission.accessibility_label"))
         .accessibilityHint(L10n.string("mirror.permission.accessibility_hint"))
+        .accessibilityIdentifier("mirror-permission-card")
     }
 
     func updateNoFaceTip(for visible: Bool) {

@@ -38,7 +38,8 @@ final class MirrorLipViewModelTests: XCTestCase {
 
         XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
         XCTAssertEqual(mock.imageParameters.filter { $0.gameObject == "lips" && $0.parameter == "s_texColor" }.count, 1)
-        XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" }.count, 1)
+        XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" && !$0.value }.count, 1)
+        XCTAssertEqual(mock.boolParameters.filter { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value }.count, 1)
         XCTAssertTrue(mock.vectorParameters.filter { $0.gameObject == "lips" && $0.parameter == "u_color" }.isEmpty)
         XCTAssertEqual(viewModel.selectedShadeID(for: .lips), berry.id)
     }

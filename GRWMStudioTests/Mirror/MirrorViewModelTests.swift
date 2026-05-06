@@ -74,6 +74,9 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: effect.id, shade: shade, isPro: false))
         XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
         XCTAssertEqual(mock.switches.last?.slot, EffectSlot.skin.rawValue)
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "enabled" && !$0.value })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && !$0.value })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyelashes" && $0.parameter == "enabled" && !$0.value })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "lips" && $0.parameter == "s_texColor" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && $0.value })
     }
@@ -135,8 +138,17 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(mock.switches.filter { $0.slot == EffectSlot.skin.rawValue }.count, 1)
         XCTAssertTrue(mock.vectorParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "u_color" })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "s_texColor" })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "enabled" && $0.value })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && $0.value })
         XCTAssertTrue(mock.imageParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "s_texColor" })
+    }
+
+    func testEyeSubCategoriesDefaultToNoneShadeIDs() {
+        let viewModel = MirrorViewModel()
+
+        XCTAssertEqual(viewModel.selectedEyeShadeID(for: .shadow), "eyeshadow.none")
+        XCTAssertEqual(viewModel.selectedEyeShadeID(for: .liner), "eyeliner.none")
+        XCTAssertEqual(viewModel.selectedEyeShadeID(for: .lashes), "eyelashes.none")
     }
 
     func testProEyeShadeWithoutEntitlementSetsLicenseError() async throws {
@@ -222,6 +234,35 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.selections[.lips])
         XCTAssertNil(controller.loadedEffects[.lips])
         XCTAssertNil(mock.switches.last?.path)
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "lips" && $0.parameter == "enabled" && !$0.value })
+    }
+
+    func testClearEyesDisablesAllSharedEyeNodes() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        try await controller.bootstrap(licenseKey: "test-license")
+
+        let viewModel = MirrorViewModel(controller: controller)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        let shadow = try XCTUnwrap(Shade.eyeshadowShades.first(where: { $0.id == "eyeshadow.pink" }))
+        let liner = try XCTUnwrap(Shade.eyelinerShades.first(where: { $0.id == "eyeliner.classic" }))
+        let lashes = try XCTUnwrap(Shade.eyelashShades.first(where: { $0.id == "eyelashes.natural" }))
+
+        viewModel.eyesSubCategory = .shadow
+        await viewModel.selectShade(in: .eyes, shade: shadow)
+        viewModel.eyesSubCategory = .liner
+        await viewModel.selectShade(in: .eyes, shade: liner)
+        viewModel.eyesSubCategory = .lashes
+        await viewModel.selectShade(in: .eyes, shade: lashes)
+
+        await viewModel.clear(slot: .eyes)
+
+        XCTAssertNil(viewModel.selections[.eyes])
+        XCTAssertTrue(viewModel.eyeSelections.isEmpty)
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "enabled" && !$0.value })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && !$0.value })
+        XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyelashes" && $0.parameter == "enabled" && !$0.value })
     }
 
     func testFaceVisibilityStreamUpdatesFaceDetectedState() async throws {

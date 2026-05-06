@@ -55,6 +55,54 @@ final class MirrorPermissionsStub: PermissionsService, @unchecked Sendable {
     }
 }
 
+final class VariableMirrorPermissionsStub: PermissionsService, @unchecked Sendable {
+    var camera: AppPermissionStatus
+    var mic: AppPermissionStatus
+    var photos: AppPermissionStatus
+
+    init(
+        camera: AppPermissionStatus,
+        mic: AppPermissionStatus = .granted,
+        photos: AppPermissionStatus = .granted
+    ) {
+        self.camera = camera
+        self.mic = mic
+        self.photos = photos
+    }
+
+    func cameraStatus() async -> AppPermissionStatus {
+        camera
+    }
+
+    func requestCamera() async -> AppPermissionStatus {
+        camera
+    }
+
+    func micStatus() async -> AppPermissionStatus {
+        mic
+    }
+
+    func requestMic() async -> AppPermissionStatus {
+        mic
+    }
+
+    func photosAddStatus() async -> AppPermissionStatus {
+        photos
+    }
+
+    func requestPhotosAdd() async -> AppPermissionStatus {
+        photos
+    }
+
+    func notificationsStatus() async -> AppPermissionStatus {
+        .denied
+    }
+
+    func requestNotifications() async -> AppPermissionStatus {
+        .denied
+    }
+}
+
 @MainActor
 final class MirrorMockDeepARClient: DeepARClient {
     struct Switch: Equatable {

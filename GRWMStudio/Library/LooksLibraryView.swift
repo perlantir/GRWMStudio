@@ -192,6 +192,7 @@ struct LooksLibraryView: View {
             }
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("look-card-\(look.id)")
     }
 
     private func favoriteButton(for look: LookPreset, viewModel: LooksLibraryViewModel) -> some View {

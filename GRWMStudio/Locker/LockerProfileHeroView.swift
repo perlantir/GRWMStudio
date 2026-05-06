@@ -18,6 +18,7 @@ struct LockerProfileHeroView: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(L10n.string("settings.title"))
                 .accessibilityHint(L10n.string("locker.profile.settings_hint"))
+                .accessibilityIdentifier("locker-settings-button")
 
                 Spacer()
             }

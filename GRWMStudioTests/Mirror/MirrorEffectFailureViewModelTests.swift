@@ -24,6 +24,39 @@ final class MirrorEffectFailureViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.selectedShadeID(for: .lips))
     }
 
+    func testRetryLastSelectionWrapperRepeatsFailedShadeLoad() async {
+        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
+
+        await viewModel.selectShade(in: .lips, shade: missingEffectShade)
+        viewModel.pendingFullScreenError = nil
+        await viewModel.retryLastSelection()
+
+        XCTAssertEqual(viewModel.pendingFullScreenError, .effectFail)
+    }
+
+    func testDismissEffectFailureBannerOnlyClearsEffectFailure() {
+        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
+
+        viewModel.pendingFullScreenError = .license
+        viewModel.dismissEffectFailureBanner()
+        XCTAssertEqual(viewModel.pendingFullScreenError, .license)
+
+        viewModel.pendingFullScreenError = .effectFail
+        viewModel.dismissEffectFailureBanner()
+        XCTAssertNil(viewModel.pendingFullScreenError)
+    }
+
+    func testRepeatedEffectFailuresEscalateToFailedState() async {
+        let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false)
+
+        await viewModel.selectShade(in: .lips, shade: missingEffectShade)
+        await viewModel.selectShade(in: .lips, shade: missingEffectShade)
+        await viewModel.selectShade(in: .lips, shade: missingEffectShade)
+
+        XCTAssertEqual(viewModel.state, .failed(.effectFail))
+        XCTAssertEqual(viewModel.pendingFullScreenError, .effectFail)
+    }
+
     func testPickDifferentLookNotificationCanCoexistWithEffectFailureState() async throws {
         let notificationCenter = NotificationCenter()
         let viewModel = MirrorViewModel(usesSimulatorPlaceholder: false, notificationCenter: notificationCenter)

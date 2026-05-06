@@ -41,6 +41,7 @@ final class ShadeTests: XCTestCase {
         XCTAssertEqual(
             Shade.eyeshadowShades.map(\.id),
             [
+                "eyeshadow.none",
                 "eyeshadow.pink",
                 "eyeshadow.purple",
                 "eyeshadow.gold",
@@ -51,7 +52,10 @@ final class ShadeTests: XCTestCase {
         )
         XCTAssertTrue(Shade.eyeshadowShades.allSatisfy { !$0.isPro })
 
-        let pink = Shade.eyeshadowShades[0]
+        XCTAssertTrue(Shade.eyeshadowShades[0].parameters.contains { $0.ref == "eyeshadowEnabled" && $0.value == .enabled(false) })
+
+        let pink = Shade.eyeshadowShades[1]
+        XCTAssertTrue(pink.parameters.contains { $0.ref == "eyeshadowEnabled" && $0.value == .enabled(true) })
         XCTAssertTrue(pink.parameters.contains { $0.ref == "eyeshadowColor" })
         XCTAssertTrue(pink.parameters.contains { $0.ref == "eyeshadowMask" && $0.value == .texture("eyeshadow_basic") })
     }
@@ -111,15 +115,28 @@ final class ShadeTests: XCTestCase {
     }
 
     func testEyeTexturesStayOnTheirDeepARSourceMeshes() throws {
-        try assertTexture("eyeliner_classic.png", matchesSource: "smooth.png")
-        try assertTexture("eyeliner_winged.png", matchesSource: "luxe.png")
-        try assertTexture("eyeliner_double_flick.png", matchesSource: "luxe.png")
-        try assertTexture("eyelashes_natural.png", matchesSource: "sexy.png")
-        try assertTexture("eyelashes_doll.png", matchesSource: "gorgeous.png")
-        try assertTexture("eyelashes_drama.png", matchesSource: "gorgeous.png")
+        try TextureAssertions.assertTexture("eyeliner_winged.png", matchesSource: "luxe.png")
+        try TextureAssertions.assertTexture("eyeliner_double_flick.png", matchesSource: "luxe.png")
+        try TextureAssertions.assertTexture("eyelashes_natural.png", matchesSource: "sexy.png")
+        try TextureAssertions.assertTexture("eyelashes_doll.png", matchesSource: "gorgeous.png")
+        try TextureAssertions.assertTexture("eyelashes_drama.png", matchesSource: "gorgeous.png")
 
-        try assertTexture("eyeliner_winged.png", doesNotMatchSource: "gorgeous.png")
-        try assertTexture("eyelashes_drama.png", doesNotMatchSource: "luxe.png")
+        try TextureAssertions.assertTexture("eyeliner_winged.png", doesNotMatchSource: "gorgeous.png")
+        try TextureAssertions.assertTexture("eyelashes_drama.png", doesNotMatchSource: "luxe.png")
+    }
+
+    func testClassicEyelinerMaskKeepsSourceSizeButDropsOpaqueBackground() throws {
+        let textureSize = try TextureAssertions.imageSize("eyeliner_classic.png")
+        XCTAssertEqual(textureSize, try TextureAssertions.sourceImageSize("smooth.png"))
+        XCTAssertNotEqual(
+            try TextureAssertions.textureData("eyeliner_classic.png"),
+            try TextureAssertions.sourceTextureData("smooth.png"),
+            "Classic eyeliner intentionally removes the source texture's opaque white background."
+        )
+
+        let alphaBounds = try XCTUnwrap(TextureAssertions.alphaBounds("eyeliner_classic.png"))
+        XCTAssertLessThan(alphaBounds.width, textureSize.width)
+        XCTAssertLessThan(alphaBounds.height, textureSize.height)
     }
 
     func testBrowShadesAreFreeAndCarryNaturalShapeParameters() {
@@ -190,38 +207,4 @@ final class ShadeTests: XCTestCase {
         )
     }
 
-    private func assertTexture(_ textureName: String, matchesSource sourceName: String) throws {
-        XCTAssertEqual(
-            try textureData(textureName),
-            try sourceTextureData(sourceName),
-            "\(textureName) must preserve the DeepAR source UV layout from \(sourceName)."
-        )
-    }
-
-    private func assertTexture(_ textureName: String, doesNotMatchSource sourceName: String) throws {
-        XCTAssertNotEqual(
-            try textureData(textureName),
-            try sourceTextureData(sourceName),
-            "\(textureName) is mapped to the wrong DeepAR face region source texture."
-        )
-    }
-
-    private func textureData(_ filename: String) throws -> Data {
-        try Data(contentsOf: repoRoot.appendingPathComponent("GRWMStudio/Resources/Effects/textures/\(filename)"))
-    }
-
-    private func sourceTextureData(_ filename: String) throws -> Data {
-        try Data(contentsOf: repoRoot.appendingPathComponent(sourceTexturePath(filename)))
-    }
-
-    private var repoRoot: URL {
-        URL(fileURLWithPath: #filePath)
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-            .deletingLastPathComponent()
-    }
-
-    private func sourceTexturePath(_ filename: String) -> String {
-        "GRWMStudio/Resources/Effects/_source/Free.v1.3/baseBeauty.deeparproj/resources/\(filename)"
-    }
 }

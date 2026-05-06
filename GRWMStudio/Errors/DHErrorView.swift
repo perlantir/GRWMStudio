@@ -135,6 +135,7 @@ struct DHErrorView: View {
         VStack(spacing: 10) {
             ErrorActionButton(
                 title: variant.ctaLabel,
+                identifier: "error-primary-\(variant.rawValue)",
                 style: .primary(hero: tone.hero, deep: tone.deep),
                 action: onCTA
             )
@@ -142,6 +143,7 @@ struct DHErrorView: View {
             if showsAlt {
                 ErrorActionButton(
                     title: variant.altLabel,
+                    identifier: "error-alt-\(variant.rawValue)",
                     style: .ghost(deep: tone.deep),
                     action: onAlt
                 )
@@ -158,6 +160,7 @@ struct DHErrorView: View {
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
             .background(DH.ink.opacity(0.08), in: Capsule())
+            .accessibilityIdentifier("error-chip-\(variant.rawValue)")
     }
 
     private var isDebugBuild: Bool {
@@ -176,6 +179,7 @@ private struct ErrorActionButton: View {
     }
 
     let title: String
+    let identifier: String
     let style: Style
     let action: () -> Void
 
@@ -235,6 +239,7 @@ private struct ErrorActionButton: View {
                 .dhAnimation(.quickPop, value: pressed)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier(identifier)
         .simultaneousGesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in pressed = true }

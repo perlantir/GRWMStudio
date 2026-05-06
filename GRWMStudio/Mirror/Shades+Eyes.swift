@@ -9,6 +9,14 @@ private struct EyeColorOption {
 
 extension Shade {
     static let eyeshadowShades: [Shade] = [
+        Shade(
+            id: "eyeshadow.none",
+            name: "None",
+            swatchColor: DH.cream,
+            effectID: "baseBeauty",
+            parameters: [EffectParam(ref: "eyeshadowEnabled", value: .enabled(false))],
+            isPro: false
+        ),
         eyeshadow(id: "eyeshadow.pink", name: "Pink", swatchColor: Color(hex: 0xFF8CCB), rgba: RGBA(1.00, 0.34, 0.67, 0.72)),
         eyeshadow(id: "eyeshadow.purple", name: "Purple", swatchColor: Color(hex: 0xA77DFF), rgba: RGBA(0.64, 0.42, 1.00, 0.70)),
         eyeshadow(id: "eyeshadow.gold", name: "Gold", swatchColor: Color(hex: 0xFFD66B), rgba: RGBA(1.00, 0.74, 0.18, 0.62)),
@@ -77,6 +85,7 @@ extension Shade {
             swatchColor: swatchColor,
             effectID: "baseBeauty",
             parameters: [
+                EffectParam(ref: "eyeshadowEnabled", value: .enabled(true)),
                 EffectParam(ref: "eyeshadowColor", value: .color(rgba)),
                 EffectParam(ref: "eyeshadowMask", value: .texture("eyeshadow_basic"))
             ],

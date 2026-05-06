@@ -111,7 +111,7 @@
             "color": "#FFFFFF",
             "isPro": false,
             "parameters": [
-              { "kind": "bool", "ref": "eyelinerEnabled", "value": 0 }
+              { "kind": "bool", "ref": "eyeshadowEnabled", "value": 0 }
             ]
           },
           {
@@ -121,7 +121,7 @@
             "isPro": false,
             "parameters": [
               { "kind": "color", "ref": "eyeshadowColor", "rgba": [1.0, 0.561, 0.722, 1.0] },
-              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+              { "kind": "bool", "ref": "eyeshadowEnabled", "value": 1 }
             ]
           },
           {
@@ -131,7 +131,7 @@
             "isPro": false,
             "parameters": [
               { "kind": "color", "ref": "eyeshadowColor", "rgba": [0.788, 0.659, 1.0, 1.0] },
-              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+              { "kind": "bool", "ref": "eyeshadowEnabled", "value": 1 }
             ]
           },
           {
@@ -141,7 +141,7 @@
             "isPro": false,
             "parameters": [
               { "kind": "color", "ref": "eyeshadowColor", "rgba": [1.0, 0.839, 0.42, 1.0] },
-              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+              { "kind": "bool", "ref": "eyeshadowEnabled", "value": 1 }
             ]
           },
           {
@@ -151,7 +151,7 @@
             "isPro": true,
             "parameters": [
               { "kind": "color", "ref": "eyeshadowColor", "rgba": [0.227, 0.227, 0.29, 1.0] },
-              { "kind": "bool", "ref": "eyelinerEnabled", "value": 1 }
+              { "kind": "bool", "ref": "eyeshadowEnabled", "value": 1 }
             ]
           }
         ]

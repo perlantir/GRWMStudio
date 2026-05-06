@@ -53,6 +53,12 @@ public enum EffectParameterMap {
         component: "MeshRenderer",
         parameter: "s_texColor"
     )
+    /// Eyeshadow enabled-state parameter.
+    public static let eyeshadowEnabled = EffectParameter(
+        nodeName: "eyeshadow",
+        component: "",
+        parameter: "enabled"
+    )
     /// Eyeliner texture parameter.
     public static let eyelinerTexture = EffectParameter(
         nodeName: "eyeliner",
@@ -164,6 +170,7 @@ public enum EffectParameterMap {
         "lutAmount": lutAmount,
         "eyeshadowColor": eyeshadowColor,
         "eyeshadowMask": eyeshadowMask,
+        "eyeshadowEnabled": eyeshadowEnabled,
         "eyelinerTexture": eyelinerTexture,
         "eyelinerColor": eyelinerColor,
         "eyelinerEnabled": eyelinerEnabled,

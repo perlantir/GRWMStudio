@@ -53,6 +53,7 @@ struct LookDetailView: View {
                 )
                 .padding(.horizontal, 18)
                 .padding(.bottom, 28)
+                .accessibilityIdentifier("look-detail-primary-action")
             }
 
             if showTutorial {

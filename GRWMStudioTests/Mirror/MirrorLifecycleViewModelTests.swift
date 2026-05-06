@@ -5,6 +5,105 @@ import XCTest
 
 @MainActor
 final class MirrorLifecycleViewModelTests: XCTestCase {
+    func testRefreshCameraAuthorizationRestartsAfterGrantAndClearsDeniedError() async throws {
+        let permissions = VariableMirrorPermissionsStub(camera: .notDetermined)
+        let viewModel = MirrorViewModel(licenseLoader: { "test-license" }, usesSimulatorPlaceholder: true)
+        let environment = AppEnvironment(permissions: permissions)
+
+        await viewModel.start(env: environment)
+        XCTAssertEqual(viewModel.state, .needsPermission)
+
+        permissions.camera = .denied
+        await viewModel.refreshCameraAuthorization()
+        XCTAssertEqual(viewModel.state, .needsPermission)
+        XCTAssertEqual(viewModel.pendingFullScreenError, .camDenied)
+
+        permissions.camera = .granted
+        await viewModel.refreshCameraAuthorization()
+
+        XCTAssertEqual(viewModel.state, .running)
+        XCTAssertNil(viewModel.pendingFullScreenError)
+    }
+
+    func testRefreshCameraAuthorizationWithoutEnvironmentIsNoOp() async {
+        let viewModel = MirrorViewModel(licenseLoader: { "test-license" }, usesSimulatorPlaceholder: true)
+
+        await viewModel.refreshCameraAuthorization()
+
+        XCTAssertEqual(viewModel.state, .idle)
+    }
+
+    func testInactiveScenePhaseDoesNotChangeRunningMirror() async {
+        let viewModel = MirrorViewModel(licenseLoader: { "test-license" }, usesSimulatorPlaceholder: true)
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+
+        await viewModel.handleScenePhase(.inactive)
+
+        XCTAssertEqual(viewModel.state, .running)
+    }
+
+    func testPauseFromRunningStopsCameraAndClearsPreviewState() async throws {
+        let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
+        let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))
+        let viewModel = MirrorViewModel(
+            controller: controller,
+            licenseLoader: { "test-license" },
+            usesSimulatorPlaceholder: false
+        )
+
+        await viewModel.start(env: AppEnvironment(permissions: MirrorPermissionsStub(camera: .granted)))
+        viewModel.pendingPreviewAsset = .photo(UIImage())
+        viewModel.previewRouteID = UUID()
+
+        viewModel.pause()
+        try await Task.sleep(for: .milliseconds(20))
+
+        XCTAssertEqual(viewModel.state, .idle)
+        XCTAssertNil(viewModel.pendingPreviewAsset)
+        XCTAssertNil(viewModel.previewRouteID)
+        XCTAssertEqual(controller.state, .ready)
+    }
+
+    func testSampleFaceLoaderMarksFaceVisibleWhenAvailable() async {
+        let viewModel = MirrorViewModel(
+            licenseLoader: { "test-license" },
+            usesSimulatorPlaceholder: true,
+            sampleFaceLoader: { true }
+        )
+
+        await viewModel.useSampleFaceIfAvailable()
+
+        XCTAssertTrue(viewModel.isFaceDetected)
+    }
+
+    func testSampleFaceLoaderFalseLeavesFaceHidden() async {
+        let viewModel = MirrorViewModel(
+            licenseLoader: { "test-license" },
+            usesSimulatorPlaceholder: true,
+            sampleFaceLoader: { false }
+        )
+
+        await viewModel.useSampleFaceIfAvailable()
+
+        XCTAssertFalse(viewModel.isFaceDetected)
+    }
+
+    func testRetryLastCaptureFailureNoOpsWithoutFailureKind() async {
+        let viewModel = MirrorViewModel(licenseLoader: { "test-license" }, usesSimulatorPlaceholder: true)
+
+        await viewModel.retryLastCaptureFailure()
+
+        XCTAssertNil(viewModel.pendingFullScreenError)
+    }
+
+    func testEscalateEffectFailureTransitionsToFailedState() {
+        let viewModel = MirrorViewModel(licenseLoader: { "test-license" }, usesSimulatorPlaceholder: true)
+
+        viewModel.escalateEffectFailure()
+
+        XCTAssertEqual(viewModel.state, .failed(.effectFail))
+    }
+
     func testQuickForegroundKeepsTextureCacheAndResumesWithoutRebootstrap() async throws {
         let mock = MirrorMockDeepARClient(autoInitialize: true, autoSwitchEffect: true)
         let controller = DeepARController(clientFactory: { mock }, bootstrapTimeout: .seconds(1))

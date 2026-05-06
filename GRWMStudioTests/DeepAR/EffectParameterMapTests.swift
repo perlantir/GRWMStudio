@@ -12,6 +12,7 @@ final class EffectParameterMapTests: XCTestCase {
             "lutAmount",
             "eyeshadowColor",
             "eyeshadowMask",
+            "eyeshadowEnabled",
             "eyelinerTexture",
             "eyelinerColor",
             "eyelinerEnabled",
@@ -37,6 +38,7 @@ final class EffectParameterMapTests: XCTestCase {
         XCTAssertEqual(EffectParameterMap.foundationColor.nodeName, "face_makeup")
         XCTAssertEqual(EffectParameterMap.foundationAmount.parameter, "softAmount")
         XCTAssertEqual(EffectParameterMap.eyeshadowColor.nodeName, "eyeshadow")
+        XCTAssertEqual(EffectParameterMap.eyeshadowEnabled.parameter, "enabled")
         XCTAssertEqual(EffectParameterMap.eyelinerTexture.nodeName, "eyeliner")
         XCTAssertEqual(EffectParameterMap.eyelinerColor.parameter, "u_color")
         XCTAssertEqual(EffectParameterMap.eyelashesTexture.nodeName, "eyelashes")

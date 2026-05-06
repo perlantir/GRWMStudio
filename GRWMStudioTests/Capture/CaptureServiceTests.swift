@@ -111,6 +111,20 @@ final class CaptureServiceTests: XCTestCase {
         XCTAssertTrue(records.isEmpty)
     }
 
+    func testCaptureServiceErrorDescriptionsCoverAllCases() {
+        XCTAssertEqual(CaptureServiceError.jpegEncodingFailed.errorDescription, "JPEG encoding failed")
+        XCTAssertEqual(
+            CaptureServiceError.videoFileMissing("/tmp/missing.mp4").errorDescription,
+            "Video file missing: /tmp/missing.mp4"
+        )
+        XCTAssertEqual(CaptureServiceError.debugForcedFailure.errorDescription, "Debug forced save failure")
+        XCTAssertEqual(CaptureServiceError.shadeEncodingFailed.errorDescription, "Shade metadata encoding failed")
+        XCTAssertEqual(CaptureServiceError.lockerAtLimit.errorDescription, "Locker is full")
+        XCTAssertEqual(CaptureServiceError.copyFailed.errorDescription, "Capture copy failed")
+        XCTAssertEqual(CaptureServiceError.contextFailed.errorDescription, "Capture persistence failed")
+        XCTAssertEqual(CaptureServiceError.capacityExceeded.errorDescription, "Device is out of storage")
+    }
+
     private func testImage() -> UIImage {
         UIGraphicsImageRenderer(size: CGSize(width: 8, height: 8)).image { context in
             UIColor.red.setFill()

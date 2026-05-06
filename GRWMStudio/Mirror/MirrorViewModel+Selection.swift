@@ -41,6 +41,7 @@ extension MirrorViewModel {
             selections[slot] = SlotSelection(effectID: effect.id, shade: shade, isPro: isPro)
             resetEffectFailureCounter()
         } catch {
+            recordEffectFailure()
             pendingFullScreenError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
         }
@@ -84,6 +85,7 @@ extension MirrorViewModel {
             }
             resetEffectFailureCounter()
         } catch {
+            recordEffectFailure()
             pendingFullScreenError = .effectFail
             Logger.mirror.error("selectShade failed: \(error.localizedDescription, privacy: .public)")
         }
@@ -113,6 +115,7 @@ extension MirrorViewModel {
             appliedParameterValues.removeAll()
             try await controller.loadEffect(baseEffect, slot: .skin)
             sharedBeautyEffectLoaded = true
+            await resetAllSharedBeautyParameters()
             return
         }
 
@@ -154,6 +157,7 @@ extension MirrorViewModel {
     }
 
     func clear(slot: EffectSlot) async {
+        await resetSharedBeautyParameters(for: slot)
         if !shouldSkipControllerCallsForSimulator {
             await controller.clearEffect(slot: slot)
         }
@@ -181,7 +185,7 @@ extension MirrorViewModel {
 
         switch subCategory {
         case .shadow:
-            return nil
+            return "eyeshadow.none"
         case .liner:
             return "eyeliner.none"
         case .lashes:
@@ -324,14 +328,14 @@ extension MirrorViewModel {
         await controller.setTexture(image, on: parameter)
     }
 
-    private func setBlendshape(_ value: Float, on parameter: EffectParameter) async {
+    func setBlendshape(_ value: Float, on parameter: EffectParameter) async {
         guard shouldApply(.blendshape(value), on: parameter) else {
             return
         }
         await controller.setBlendshape(value, on: parameter)
     }
 
-    private func setEnabled(_ enabled: Bool, on parameter: EffectParameter) async {
+    func setEnabled(_ enabled: Bool, on parameter: EffectParameter) async {
         guard shouldApply(.enabled(enabled), on: parameter) else {
             return
         }

@@ -7,31 +7,27 @@ import SwiftData
 final class LooksLibraryViewModel {
     private(set) var sections: [LookSection] = []
     private(set) var favorites: Set<String> = []
-    private let modelContext: ModelContext
+    @ObservationIgnored
+    private let favoriteStore: any FavoriteLookStoring
 
     init(_ modelContext: ModelContext) {
-        self.modelContext = modelContext
+        self.favoriteStore = SwiftDataFavoriteLookStore(modelContext: modelContext)
+        buildSections()
+        reloadFavorites()
+    }
+
+    init(favoriteStore: any FavoriteLookStoring) {
+        self.favoriteStore = favoriteStore
         buildSections()
         reloadFavorites()
     }
 
     func reloadFavorites() {
-        let descriptor = FetchDescriptor<FavoriteLook>()
-        let records = (try? modelContext.fetch(descriptor)) ?? []
-        favorites = Set(records.map(\.lookID))
+        favorites = favoriteStore.loadFavoriteLookIDs()
     }
 
     func toggleFavorite(lookID: String) {
-        let descriptor = FetchDescriptor<FavoriteLook>()
-        let existing = ((try? modelContext.fetch(descriptor)) ?? []).filter { $0.lookID == lookID }
-
-        if existing.isEmpty {
-            modelContext.insert(FavoriteLook(lookID: lookID))
-        } else {
-            existing.forEach { modelContext.delete($0) }
-        }
-
-        try? modelContext.save()
+        favoriteStore.toggleFavorite(lookID: lookID)
         reloadFavorites()
     }
 
@@ -49,7 +45,11 @@ final class LooksLibraryViewModel {
             return
         }
 
-        sections = [
+        sections = Self.curatedSections()
+    }
+
+    static func curatedSections() -> [LookSection] {
+        [
             LookSection(
                 titleKey: "looks.section.everyday.title",
                 subtitleKey: "looks.section.everyday.subtitle",
