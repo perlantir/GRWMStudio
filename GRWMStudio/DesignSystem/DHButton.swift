@@ -132,6 +132,7 @@ struct DHButton: View {
 
     var body: some View {
         Button {
+            DHAudio.shared.play(.tapSoft)
             DHHaptics.shared.fire(.tap)
             action()
         } label: {

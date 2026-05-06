@@ -47,6 +47,16 @@ jobs:
         run: ./Scripts/lint.sh
       - name: Check localization
         run: ./Scripts/check-localization.sh
+      - name: Audit hardcoded colors
+        run: ./Scripts/audit-hardcoded-colors.sh
+      - name: Audit hardcoded fonts
+        run: ./Scripts/audit-hardcoded-fonts.sh
+      - name: Audit third-party SDKs
+        run: ./Scripts/audit-third-party-sdks.sh
+      - name: Audit tracking SDK markers
+        run: ./Scripts/audit-tracking-strings.sh
+      - name: Audit contrast
+        run: ./Scripts/audit-contrast.swift
       - name: Verify DeepAR isolation
         run: ./Scripts/verify-deepar-isolation.sh
       - name: Build

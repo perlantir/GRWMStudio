@@ -35,6 +35,8 @@ final class LockerViewModel {
 
     func delete(_ capture: SavedCapture) {
         let url = captureURL(capture)
+        DHAudio.shared.play(.lockerDelete)
+        DHHaptics.shared.fire(.heavy)
         modelContext.delete(capture)
         try? modelContext.save()
         try? FileManager.default.removeItem(at: url)

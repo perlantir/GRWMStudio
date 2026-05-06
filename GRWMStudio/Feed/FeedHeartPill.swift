@@ -15,6 +15,7 @@ struct FeedHeartPill: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
                 bouncing = false
             }
+            DHAudio.shared.play(.heart)
             DHHaptics.shared.fire(.tap)
             action()
         } label: {

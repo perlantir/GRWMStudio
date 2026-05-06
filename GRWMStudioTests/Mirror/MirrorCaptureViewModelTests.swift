@@ -203,7 +203,7 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         XCTAssertFalse(video.didStart)
     }
 
-    func testFreeRecordingAutoStopsAtEightSeconds() async throws {
+    func testFreeRecordingContinuesPastFormerEightSecondCap() async throws {
         var now = Date()
         let video = MockVideoRecordingCoordinator()
         let viewModel = runningViewModel(
@@ -219,17 +219,16 @@ final class MirrorCaptureViewModelTests: XCTestCase {
 
         try await Task.sleep(for: .milliseconds(150))
 
-        XCTAssertTrue(video.didFinish)
-        XCTAssertNotNil(viewModel.previewRouteID)
-        XCTAssertEqual(viewModel.captureMode, .idle)
-        guard case .video(let url) = viewModel.pendingPreviewAsset else {
-            XCTFail("Expected recorded video asset")
-            return
+        XCTAssertFalse(video.didFinish)
+        XCTAssertNil(viewModel.previewRouteID)
+        if case .videoRecording(let secondsElapsed) = viewModel.captureMode {
+            XCTAssertEqual(secondsElapsed, 8.2, accuracy: 0.01)
+        } else {
+            XCTFail("Expected recording to continue until the user stops it")
         }
-        XCTAssertEqual(url, video.outputURL)
     }
 
-    func testProRecordingContinuesPastEightSecondsUntilFifteenSecondCap() async throws {
+    func testProRecordingContinuesPastFormerFifteenSecondCapUntilUserStops() async throws {
         var now = Date()
         let video = MockVideoRecordingCoordinator()
         let viewModel = runningViewModel(
@@ -255,6 +254,15 @@ final class MirrorCaptureViewModelTests: XCTestCase {
         now = now.addingTimeInterval(6.0)
 
         try await Task.sleep(for: .milliseconds(150))
+
+        XCTAssertFalse(video.didFinish)
+        if case .videoRecording(let secondsElapsed) = viewModel.captureMode {
+            XCTAssertEqual(secondsElapsed, 15.2, accuracy: 0.01)
+        } else {
+            XCTFail("Expected recording to continue until the user stops it")
+        }
+
+        _ = await viewModel.endVideoFlow(force: false)
 
         XCTAssertTrue(video.didFinish)
         XCTAssertEqual(viewModel.captureMode, .idle)

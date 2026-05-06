@@ -229,6 +229,7 @@ extension MirrorViewModel {
             activeCaptureMode = .videoRecording(secondsElapsed: 0)
             lastCaptureFailureKind = nil
             lastCaptureEvent = nil
+            Sounds.recordStart.play()
             Logger.mirror.info("Capture event: videoRecording started")
             startRecordingTimer()
         } catch {
@@ -265,6 +266,7 @@ extension MirrorViewModel {
             lastCaptureEvent = .videoCapture(duration: elapsed)
             pendingPreviewAsset = .video(url)
             previewRouteID = UUID()
+            Sounds.recordStop.play()
 
             Logger.mirror.info("Capture event: videoCapture duration=\(elapsed, privacy: .public)")
             return url
@@ -294,12 +296,6 @@ extension MirrorViewModel {
 
         let elapsed = currentRecordingElapsed
         activeCaptureMode = .videoRecording(secondsElapsed: elapsed)
-
-        guard elapsed >= recordingCapDuration else {
-            return
-        }
-
-        _ = await endVideoFlow(force: true)
     }
 
     private var currentRecordingElapsed: TimeInterval {
@@ -308,10 +304,6 @@ extension MirrorViewModel {
         }
 
         return max(0, currentDate().timeIntervalSince(recordingStart))
-    }
-
-    private var recordingCapDuration: TimeInterval {
-        entitlements.isPro ? 15.0 : 8.0
     }
 
     private func cleanupFailedRecording() {

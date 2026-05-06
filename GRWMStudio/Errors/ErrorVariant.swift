@@ -98,7 +98,7 @@ enum ErrorVariant: Hashable, Identifiable, CaseIterable {
                     .overlay(Circle().stroke(.white, lineWidth: 2.5))
 
                 Text("👑")
-                    .font(.system(size: 14))
+                    .font(DH.font(.bodyEmphasis))
             }
         case .noFace:
             StickerFlower(size: 24, petal: DH.pinkLight, stroke: .white, strokeWidth: 2.5)

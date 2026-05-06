@@ -46,6 +46,7 @@ struct DHErrorView: View {
         }
         .preferredColorScheme(.light)
         .onAppear {
+            DHAudio.shared.play(.errorSoft)
             DHHaptics.shared.fire(.errorSoft)
         }
     }
@@ -97,7 +98,7 @@ struct DHErrorView: View {
                         .shadow(color: tone.deep.opacity(0.22), radius: 14, x: 0, y: 14)
 
                     Text(variant.emoji)
-                        .font(.system(size: 80))
+                        .font(DH.font(.display1))
                 }
 
                 variant.sticker
@@ -108,15 +109,16 @@ struct DHErrorView: View {
 
             VStack(spacing: 12) {
                 Text(variant.title)
-                    .font(.custom("Fredoka-Bold", size: 24))
-                    .tracking(-0.24)
+                    .font(DH.font(.headline))
+                    .tracking(DH.tracking(.headline))
                     .foregroundStyle(DH.ink)
                     .multilineTextAlignment(.center)
                     .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Text(variant.sub)
-                    .font(.custom("Quicksand-Medium", size: 14))
+                    .font(DH.font(.body))
+                    .tracking(DH.tracking(.body))
                     .foregroundStyle(DH.ink.opacity(0.7))
                     .multilineTextAlignment(.center)
                     .lineSpacing(6)
@@ -150,8 +152,8 @@ struct DHErrorView: View {
 
     private var errorChip: some View {
         Text(variant.chipTitle)
-            .font(.custom("Fredoka-Bold", size: 9.5))
-            .tracking(1.14)
+            .font(DH.font(.microLabel))
+            .tracking(DH.tracking(.microLabel))
             .foregroundStyle(DH.ink.opacity(0.55))
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
@@ -208,6 +210,7 @@ private struct ErrorActionButton: View {
 
     var body: some View {
         Button {
+            DHAudio.shared.play(.tapSoft)
             DHHaptics.shared.fire(.pop)
             action()
         } label: {

@@ -52,6 +52,7 @@ struct DHPaywallView: View {
             }
         }
         .task {
+            DHAudio.shared.play(.paywallReveal)
             _ = ProEntitlementsHolder.shared
             await viewModel.loadProducts()
         }
@@ -71,7 +72,7 @@ struct DHPaywallView: View {
             stops: [
                 .init(color: DH.pinkDeep, location: 0),
                 .init(color: DH.lavenderDeep, location: 0.56),
-                .init(color: Color(red: 0.353, green: 0.063, blue: 0.6), location: 1)
+                .init(color: DH.lavenderDeep, location: 1)
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -140,7 +141,8 @@ struct DHPaywallView: View {
     private var heroBlock: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("paywall.title_prefix")
-                .font(.custom("Fredoka-Bold", size: 48))
+                .font(DH.font(.display2))
+                .tracking(DH.tracking(.display2))
                 .foregroundStyle(.white)
                 .shadow(color: .black.opacity(0.22), radius: 0, x: 0, y: 4)
 

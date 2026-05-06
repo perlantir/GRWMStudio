@@ -28,6 +28,7 @@ struct DHChip: View {
 
     var body: some View {
         Button {
+            DHAudio.shared.play(.tapHard)
             DHHaptics.shared.fire(.pop)
             action()
         } label: {

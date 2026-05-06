@@ -34,6 +34,7 @@ targets:
         excludes:
           - "**/.gitkeep"
           - "Resources/Info.plist"
+          - "Resources/Audio/**"
           - "Resources/Effects/**"
           - "Resources/Effects/_source/**"
       - path: GRWMStudio/Resources/Effects/baseBeauty.deepar
@@ -196,6 +197,106 @@ targets:
           copyFiles:
             destination: resources
             subpath: Effects/thumbnails
+      - path: GRWMStudio/Resources/Audio/tapSoft.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/tapHard.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/shutter.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/countdownTick.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/countdownFinal.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/saved.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/recordStart.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/recordStop.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/errorSoft.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/lockerSwipe.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/lockerDelete.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/paywallReveal.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/sparkle1.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/sparkle2.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/sparkle3.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/confettiPop.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/swooshIn.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/swooshOut.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/heart.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
+      - path: GRWMStudio/Resources/Audio/magic.mp3
+        buildPhase:
+          copyFiles:
+            destination: resources
+            subpath: Audio
     dependencies:
       - package: DeepAR
     info:

@@ -140,7 +140,8 @@ struct DHParentHoldView: View {
 
     private var counter: some View {
         Text(String(format: "%.1fs", secondsElapsed))
-            .font(.custom("Fredoka-Bold", size: 42))
+            .font(DH.font(.display2))
+            .tracking(DH.tracking(.display2))
             .foregroundStyle(DH.pinkDeep)
             .accessibilityLabel(L10n.format("parent_gate.hold.seconds", secondsElapsed.formatted(.number.precision(.fractionLength(1)))))
     }

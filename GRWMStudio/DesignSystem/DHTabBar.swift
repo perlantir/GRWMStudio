@@ -91,6 +91,7 @@ struct DHTabBar: View {
 
     private func tabButton(_ tab: DHTab) -> some View {
         Button {
+            DHAudio.shared.play(.tapSoft)
             DHHaptics.shared.fire(.tap)
             selected = tab
         } label: {
@@ -144,6 +145,7 @@ struct DHTabBar: View {
 
     private var fabButton: some View {
         Button {
+            DHAudio.shared.play(.tapHard)
             DHHaptics.shared.fire(.pop)
             onFABTap()
         } label: {

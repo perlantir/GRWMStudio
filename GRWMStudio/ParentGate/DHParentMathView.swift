@@ -124,7 +124,7 @@ struct DHParentMathView: View {
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
-                        .background(Color(red: 1, green: 0.9, blue: 0.93), in: RoundedRectangle(cornerRadius: 12))
+                        .background(DH.pinkPaper, in: RoundedRectangle(cornerRadius: 12))
                         .padding(.top, 10)
                     }
 

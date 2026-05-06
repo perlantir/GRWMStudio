@@ -193,7 +193,7 @@ private struct FaceMock: View {
             hair
 
             Ellipse()
-                .fill(Color(hex: 0xFFD4B8))
+                .fill(DH.pinkLight.opacity(0.72))
                 .frame(width: 188, height: 218)
                 .overlay {
                     faceDetails

@@ -16,6 +16,7 @@ struct AnyShape: Shape {
 
 struct DHSkeleton: View {
     let shape: AnyShape
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var phase: CGFloat = -1
 
     var body: some View {
@@ -28,7 +29,12 @@ struct DHSkeleton: View {
                 )
             )
             .onAppear {
-                withAnimation(.linear(duration: 1.4).repeatForever(autoreverses: false)) {
+                guard !reduceMotion else {
+                    phase = 0
+                    return
+                }
+
+                withAnimation(DHAnim.progress.animation.repeatForever(autoreverses: false)) {
                     phase = 1
                 }
             }
@@ -40,6 +46,7 @@ struct DHSpinner: View {
     var size: CGFloat = 48
     var lineWidth: CGFloat = 6
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var rotation: Double = 0
 
     var body: some View {
@@ -58,10 +65,15 @@ struct DHSpinner: View {
                 .rotationEffect(.degrees(rotation))
 
             Text("✨")
-                .font(.system(size: size * 0.38))
+                .font(DH.font(.headline))
         }
         .onAppear {
-            withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
+            guard !reduceMotion else {
+                rotation = 0
+                return
+            }
+
+            withAnimation(DHAnim.progress.animation.repeatForever(autoreverses: false)) {
                 rotation = 360
             }
         }

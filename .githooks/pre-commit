@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+./Scripts/check-localization.sh
+./Scripts/audit-hardcoded-colors.sh
+./Scripts/audit-hardcoded-fonts.sh
+./Scripts/audit-third-party-sdks.sh
+./Scripts/audit-tracking-strings.sh
+./Scripts/audit-contrast.swift
+./Scripts/verify-deepar-isolation.sh
