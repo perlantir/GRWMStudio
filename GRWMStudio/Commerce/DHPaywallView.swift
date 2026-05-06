@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DHPaywallView: View {
+    @Environment(\.rootCoordinator) private var coordinator
     let source: RootCoordinator.PaywallSource
     let onDismiss: () -> Void
 
@@ -11,28 +12,22 @@ struct DHPaywallView: View {
         ZStack {
             backgroundLayer
             sparkleLayer
-
             VStack(spacing: 0) {
                 topBar
                 heroBlock
                     .padding(.horizontal, 24)
                     .padding(.top, 26)
-
                 featureList
                     .padding(.horizontal, 18)
                     .padding(.top, 22)
-
                 priceBanner
                     .padding(.horizontal, 18)
                     .padding(.top, 14)
-
                 Spacer(minLength: 0)
-
                 ctaBlock
                     .padding(.horizontal, 18)
-                    .padding(.bottom, 46)
+                    .padding(.bottom, 34)
             }
-
             if case .error(let message) = viewModel.phase {
                 PaywallErrorToast(message: message)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -40,12 +35,10 @@ struct DHPaywallView: View {
                     .padding(.bottom, 168)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-
             if showConfetti {
                 ConfettiOverlay()
                     .transition(.opacity)
             }
-
             if viewModel.phase == .success {
                 SuccessSplash()
                     .transition(.opacity)
@@ -249,7 +242,33 @@ struct DHPaywallView: View {
                 .tracking(DH.tracking(.caption))
                 .foregroundStyle(.white.opacity(0.72))
                 .multilineTextAlignment(.center)
+
+            HStack(spacing: 18) {
+                legalLink(
+                    title: L10n.string("settings.about.privacy_policy"),
+                    url: "https://grwmstudio.app/privacy"
+                )
+                legalLink(
+                    title: L10n.string("settings.about.terms"),
+                    url: "https://grwmstudio.app/terms"
+                )
+            }
+            .padding(.top, 4)
         }
+    }
+
+    private func legalLink(title: String, url: String) -> some View {
+        Button(title) {
+            guard let destination = URL(string: url) else {
+                return
+            }
+            coordinator.startParentGate(intent: .privacyDeepLink(destination))
+        }
+        .buttonStyle(.plain)
+        .font(DH.font(.caption))
+        .tracking(DH.tracking(.caption))
+        .foregroundStyle(.white.opacity(0.86))
+        .underline()
     }
 }
 

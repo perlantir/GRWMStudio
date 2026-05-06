@@ -4,11 +4,9 @@ import SwiftData
 import SwiftUI
 
 struct RootContainer: View {
-    @Environment(\.appEnvironment) private var env
-    @Environment(\.modelContext) private var modelContext
-    @Environment(\.rootCoordinator) private var coordinator
-    @State private var isSharingPreview = false
-    @State private var previewShareItems: [Any] = []
+    @Environment(\.appEnvironment) var env
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.rootCoordinator) var coordinator
 
     var body: some View {
         @Bindable var coordinator = coordinator
@@ -37,10 +35,6 @@ struct RootContainer: View {
                     coordinator.dismissPaywall()
                 }
             )
-        }
-        .sheet(isPresented: $isSharingPreview) {
-            ActivityShareSheet(items: previewShareItems)
-                .ignoresSafeArea()
         }
         .onReceive(NotificationCenter.default.publisher(for: .retrySave)) { _ in
             guard let asset = coordinator.previewAsset else {
@@ -163,106 +157,6 @@ struct RootContainer: View {
             )
             .zIndex(20)
             .transition(.opacity)
-        }
-    }
-
-    private func previewView(for asset: CapturedAsset) -> some View {
-        PreviewPlaceholderView(
-            asset: asset,
-            lookName: coordinator.previewLookName,
-            onSave: {
-                await savePreview(asset: asset)
-            },
-            onShare: {
-                sharePreview(asset)
-            },
-            onDiscard: {
-                discardPreviewAssetAndReturnToMirror()
-            }
-        )
-    }
-
-    private func savePreview(asset: CapturedAsset) async {
-        guard StorageMonitor.canSave else {
-            coordinator.presentError(.lowStorage)
-            return
-        }
-
-        let service = CaptureSaveService(modelContext)
-        do {
-            _ = try await service.save(
-                asset: asset,
-                lookName: coordinator.previewLookName,
-                shadeIDs: coordinator.previewShadeIDs
-            )
-
-            if SettingsPreferences.saveToPhotos {
-                do {
-                    try await PhotoLibrarySaver().save(asset: asset)
-                    coordinator.showToast(L10n.string("root.toast.saved_locker_and_photos"))
-                } catch {
-                    coordinator.showToast(L10n.string("root.toast.saved_locker_photos_permission"))
-                }
-            }
-
-            coordinator.dismissPreviewSaved()
-        } catch CaptureServiceError.capacityExceeded {
-            coordinator.presentError(.lowStorage)
-        } catch CaptureServiceError.lockerAtLimit {
-            coordinator.startParentGate(intent: .paywall(source: .lockerLimit))
-        } catch {
-            coordinator.presentError(.saveFail)
-        }
-    }
-
-    private func discardPreviewAssetAndReturnToMirror() {
-        if case .video(let url) = coordinator.previewAsset {
-            try? FileManager.default.removeItem(at: url)
-        }
-        coordinator.dismissPreview()
-    }
-
-    private func sharePreview(_ asset: CapturedAsset) {
-        guard !SettingsPreferences.blockShareExtensions else {
-            coordinator.showToast(L10n.string("save_share.sharing_blocked"))
-            return
-        }
-
-        switch asset {
-        case .photo(let image):
-            previewShareItems = [image]
-        case .video(let url):
-            previewShareItems = [url]
-        }
-        isSharingPreview = true
-    }
-
-    private func resolveInitialRoute() {
-        #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugAppShell") {
-            coordinator.route = .app
-            return
-        }
-
-        if ProcessInfo.processInfo.arguments.contains("-GRWMDebugOnboardingFlow") {
-            return
-        }
-        #endif
-
-        if env.onboarding.hasCompletedOnboarding {
-            coordinator.route = .app
-        } else if coordinator.route == .app {
-            coordinator.route = .onboardingSplash
-        }
-    }
-
-    private func loadEffectCatalog() async {
-        do {
-            _ = try await EffectCatalog.shared.load()
-            Logger.deepAR.info("Effect catalog loaded")
-        } catch {
-            Logger.deepAR.error("Catalog load failed: \(error.localizedDescription)")
-            coordinator.presentError(.effectFail)
         }
     }
 }

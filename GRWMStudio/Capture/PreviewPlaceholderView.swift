@@ -27,7 +27,7 @@ struct PreviewPlaceholderView: View {
     let asset: CapturedAsset
     let lookName: String?
     let onSave: @MainActor () async -> Void
-    let onShare: @MainActor () -> Void
+    let onExportToPhotos: @MainActor () -> Void
     let onDiscard: @MainActor () -> Void
 
     @State private var viewModel: PreviewViewModel
@@ -37,13 +37,13 @@ struct PreviewPlaceholderView: View {
         asset: CapturedAsset,
         lookName: String? = nil,
         onSave: @escaping @MainActor () async -> Void = {},
-        onShare: @escaping @MainActor () -> Void = {},
+        onExportToPhotos: @escaping @MainActor () -> Void = {},
         onDiscard: @escaping @MainActor () -> Void
     ) {
         self.asset = asset
         self.lookName = lookName
         self.onSave = onSave
-        self.onShare = onShare
+        self.onExportToPhotos = onExportToPhotos
         self.onDiscard = onDiscard
         _viewModel = State(initialValue: PreviewViewModel(asset: asset, lookName: lookName))
     }
@@ -212,14 +212,14 @@ struct PreviewPlaceholderView: View {
             .accessibilityLabel(L10n.string("preview.save.accessibility_label"))
 
             DHButton(
-                title: L10n.string("common.share"),
+                title: L10n.string("save_share.camera_roll"),
                 kind: .ghost,
                 size: .lg,
-                leadingIcon: AnyView(Image(systemName: "square.and.arrow.up")),
-                action: onShare
+                leadingIcon: AnyView(Image(systemName: "photo.on.rectangle")),
+                action: onExportToPhotos
             )
             .frame(width: 142)
-            .accessibilityLabel(L10n.string("common.share"))
+            .accessibilityLabel(L10n.string("save_share.camera_roll"))
         }
         .padding(.horizontal, 18)
         .padding(.bottom, 54)

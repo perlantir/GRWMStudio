@@ -31,6 +31,20 @@ struct PurchasesSection: View {
                 divider
 
                 SettingsRow(
+                    icon: "arrow.clockwise.circle.fill",
+                    iconBackground: DH.pinkLight,
+                    title: L10n.string("paywall.restore"),
+                    trailing: {
+                        chevron
+                    },
+                    onTap: {
+                        onParentGatedIntent(.paywall(source: .settings))
+                    }
+                )
+
+                divider
+
+                SettingsRow(
                     icon: "arrow.uturn.backward.circle.fill",
                     iconBackground: DH.lavender,
                     title: L10n.string("settings.purchases.refund"),
@@ -47,6 +61,20 @@ struct PurchasesSection: View {
                     iconBackground: DH.pink,
                     title: L10n.string("settings.account.studio_pro"),
                     subtitle: L10n.string("settings.account.pro_locked"),
+                    trailing: {
+                        chevron
+                    },
+                    onTap: {
+                        onParentGatedIntent(.paywall(source: .settings))
+                    }
+                )
+
+                divider
+
+                SettingsRow(
+                    icon: "arrow.clockwise.circle.fill",
+                    iconBackground: DH.pinkLight,
+                    title: L10n.string("paywall.restore"),
                     trailing: {
                         chevron
                     },

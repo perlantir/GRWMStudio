@@ -4,17 +4,13 @@ import UIKit
 struct SaveShareView: View {
     @Environment(\.appEnvironment) private var env
     @Environment(\.rootCoordinator) private var coordinator
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let capture: SavedCapture
     let captureURL: URL
     let onDone: () -> Void
 
-    @State private var sharePayload: SharePayload?
     @State private var thumbnail: UIImage?
     @State private var errorMessage: String?
-    @State private var lockerOnlyToastVisible = false
     @State private var presentedError: ErrorVariant?
-    @State private var lockerOnlyToastTask: Task<Void, Never>?
 
     var body: some View {
         ZStack {
@@ -29,16 +25,7 @@ struct SaveShareView: View {
 
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     shareButton(L10n.string("save_share.camera_roll"), systemName: "photo.on.rectangle", fill: DH.pink) {
-                        saveToCameraRoll()
-                    }
-                    shareButton(L10n.string("save_share.messages"), systemName: "message.fill", fill: DH.butter) {
-                        presentShareSheet()
-                    }
-                    shareButton(L10n.string("save_share.email"), systemName: "envelope.fill", fill: DH.lavender) {
-                        presentShareSheet()
-                    }
-                    shareButton(L10n.string("save_share.more"), systemName: "ellipsis", fill: DH.mint) {
-                        presentShareSheet()
+                        gateSaveToCameraRoll()
                     }
                 }
                 .padding(.horizontal, 18)
@@ -47,13 +34,6 @@ struct SaveShareView: View {
                     .padding(.horizontal, 18)
 
                 Spacer()
-            }
-
-            if lockerOnlyToastVisible {
-                ToastView(message: L10n.string("save_share.locker_only_toast"))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                    .padding(.bottom, 118)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
             if let presentedError {
@@ -74,9 +54,6 @@ struct SaveShareView: View {
                 .zIndex(10)
             }
         }
-        .sheet(item: $sharePayload) { payload in
-            ActivityShareSheet(items: payload.items)
-        }
         .alert(L10n.string("save_share.error.title"), isPresented: errorAlertBinding) {
             Button(L10n.string("common.ok"), role: .cancel) {}
         } message: {
@@ -84,12 +61,6 @@ struct SaveShareView: View {
         }
         .task {
             thumbnail = await ThumbnailLoader.shared.load(url: captureURL, kind: capture.kind)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .keepInsideGRWM)) { _ in
-            showLockerOnlyToast()
-        }
-        .onDisappear {
-            lockerOnlyToastTask?.cancel()
         }
     }
 
@@ -168,70 +139,43 @@ struct SaveShareView: View {
         .buttonStyle(.plain)
     }
 
-    private func presentShareSheet() {
-        guard !SettingsPreferences.blockShareExtensions else {
-            errorMessage = L10n.string("save_share.sharing_blocked")
-            return
-        }
-
-        if let image = photoImage {
-            sharePayload = SharePayload(items: [image])
-        } else {
-            sharePayload = SharePayload(items: [captureURL])
+    private func gateSaveToCameraRoll() {
+        coordinator.startParentGate(intent: .saveToPhotos) {
+            await saveToCameraRoll()
         }
     }
 
-    private func saveToCameraRoll() {
-        Task { @MainActor in
-            let status = await env.permissions.photosAddStatus()
+    private func saveToCameraRoll() async {
+        let status = await env.permissions.photosAddStatus()
 
-            switch status {
-            case .denied, .restricted:
+        switch status {
+        case .denied, .restricted:
+            presentedError = .photoDenied
+            return
+        case .notDetermined:
+            let requested = await env.permissions.requestPhotosAdd()
+            guard requested == .granted else {
                 presentedError = .photoDenied
                 return
-            case .notDetermined:
-                let requested = await env.permissions.requestPhotosAdd()
-                guard requested == .granted else {
-                    presentedError = .photoDenied
-                    return
-                }
-            case .granted:
-                break
             }
-
-            do {
-                if let image = photoImage {
-                    try await PhotoLibrarySaver().save(asset: .photo(image))
-                } else {
-                    try await PhotoLibrarySaver().save(asset: .video(captureURL))
-                }
-                DHHaptics.shared.fire(.saved)
-                Sounds.confetti.play()
-            } catch {
-                if case .some(.photoAccessDenied) = error as? PreviewSaveError {
-                    presentedError = .photoDenied
-                } else {
-                    errorMessage = (error as? LocalizedError)?.errorDescription ?? L10n.string("save_share.photos_error")
-                }
-            }
-        }
-    }
-
-    private func showLockerOnlyToast() {
-        lockerOnlyToastTask?.cancel()
-
-        withAnimation(DHAnim.respecting(.heroEmerge, reduceMotion: reduceMotion)) {
-            lockerOnlyToastVisible = true
+        case .granted:
+            break
         }
 
-        lockerOnlyToastTask = Task { @MainActor in
-            try? await Task.sleep(for: .seconds(2.4))
-            guard !Task.isCancelled else {
-                return
+        do {
+            if let image = photoImage {
+                try await PhotoLibrarySaver().save(asset: .photo(image))
+            } else {
+                try await PhotoLibrarySaver().save(asset: .video(captureURL))
             }
-
-            withAnimation(DHAnim.respecting(.quickFade, reduceMotion: reduceMotion)) {
-                lockerOnlyToastVisible = false
+            DHHaptics.shared.fire(.saved)
+            Sounds.confetti.play()
+            coordinator.showToast(L10n.string("root.toast.saved_photos"))
+        } catch {
+            if case .some(.photoAccessDenied) = error as? PreviewSaveError {
+                presentedError = .photoDenied
+            } else {
+                errorMessage = (error as? LocalizedError)?.errorDescription ?? L10n.string("save_share.photos_error")
             }
         }
     }
@@ -253,9 +197,4 @@ struct SaveShareView: View {
             }
         )
     }
-}
-
-private struct SharePayload: Identifiable {
-    let id = UUID()
-    let items: [Any]
 }

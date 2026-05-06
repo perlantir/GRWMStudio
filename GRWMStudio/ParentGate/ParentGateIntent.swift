@@ -4,6 +4,7 @@ enum ParentGateIntent: Hashable, Identifiable {
     case paywall(source: RootCoordinator.PaywallSource)
     case manageSubscription
     case privacyDeepLink(URL)
+    case saveToPhotos
     case deleteAllData
 
     var id: String {
@@ -14,6 +15,8 @@ enum ParentGateIntent: Hashable, Identifiable {
             "manage-subscription"
         case .privacyDeepLink(let url):
             "privacy-\(url.absoluteString)"
+        case .saveToPhotos:
+            "save-to-photos"
         case .deleteAllData:
             "delete-all-data"
         }

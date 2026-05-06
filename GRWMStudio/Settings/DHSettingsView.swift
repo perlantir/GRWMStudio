@@ -260,20 +260,6 @@ private struct SettingsPrivacySection: View {
                     DHToggle(isOn: $viewModel.saveToPhotos)
                 }
             )
-
-            SettingsDivider()
-
-            SettingsRow(
-                icon: "square.and.arrow.up.fill",
-                iconBackground: DH.lavender,
-                title: L10n.string("settings.privacy.block_share_extensions"),
-                subtitle: viewModel.blockShareExtensions
-                    ? L10n.string("settings.privacy.share_stays_inside")
-                    : L10n.string("settings.privacy.share_sheet_enabled"),
-                trailing: {
-                    DHToggle(isOn: $viewModel.blockShareExtensions)
-                }
-            )
         }
     }
 }

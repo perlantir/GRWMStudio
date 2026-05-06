@@ -56,6 +56,21 @@ final class RootCoordinatorTests: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
 
+    func testSaveToPhotosRunsAuthorizedActionAfterParentGatePasses() async {
+        let coordinator = RootCoordinator()
+        var didRun = false
+
+        coordinator.startParentGate(intent: .saveToPhotos) {
+            didRun = true
+        }
+
+        coordinator.parentGatePassed(.saveToPhotos)
+        await Task.yield()
+
+        XCTAssertTrue(didRun)
+        XCTAssertNil(coordinator.presentedParentGate)
+    }
+
     func testPresentErrorUsesFullScreenPresentationState() {
         let coordinator = RootCoordinator()
 

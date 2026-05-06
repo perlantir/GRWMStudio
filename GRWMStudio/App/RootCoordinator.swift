@@ -61,6 +61,7 @@ final class RootCoordinator {
     @ObservationIgnored private let notificationCenter: NotificationCenter
     @ObservationIgnored private let currentDate: @MainActor () -> Date
     @ObservationIgnored private var lastDeepLinkAt: Date = .distantPast
+    @ObservationIgnored private var pendingAuthorizedAction: (@MainActor () async -> Void)?
     @ObservationIgnored private var toastTask: Task<Void, Never>?
 
     init(
@@ -154,12 +155,17 @@ final class RootCoordinator {
         }
     }
 
-    func startParentGate(intent: ParentGateIntent) {
+    func startParentGate(
+        intent: ParentGateIntent,
+        authorizedAction: (@MainActor () async -> Void)? = nil
+    ) {
+        pendingAuthorizedAction = authorizedAction
         presentedParentGate = intent
     }
 
     func dismissParentGate() {
         presentedParentGate = nil
+        pendingAuthorizedAction = nil
     }
 
     func parentGatePassed(_ intent: ParentGateIntent) {
@@ -176,8 +182,16 @@ final class RootCoordinator {
                 failureMessage: "Couldn't open the App Store. Try later."
             )
         case .privacyDeepLink(let url):
+            pendingAuthorizedAction = nil
             openExternalURL(url, failureMessage: "Couldn't open that link.")
+        case .saveToPhotos:
+            let action = pendingAuthorizedAction
+            pendingAuthorizedAction = nil
+            Task { @MainActor in
+                await action?()
+            }
         case .deleteAllData:
+            pendingAuthorizedAction = nil
             notificationCenter.post(name: .deleteAllRequested, object: nil)
         }
     }
