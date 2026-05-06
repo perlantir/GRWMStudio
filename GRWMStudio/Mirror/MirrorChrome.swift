@@ -7,7 +7,7 @@ enum MirrorChrome {
         onReset: @escaping @MainActor () -> Void
     ) -> some View {
         HStack(alignment: .center) {
-            GRWMLogo(layout: .row, size: .lg)
+            GRWMLogo(layout: .stack, size: .md)
                 .fixedSize(horizontal: true, vertical: true)
                 .frame(width: 190, height: 54)
                 .background {

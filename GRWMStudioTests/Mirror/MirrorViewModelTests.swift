@@ -74,6 +74,8 @@ final class MirrorViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selections[.lips], SlotSelection(effectID: effect.id, shade: shade, isPro: false))
         XCTAssertEqual(controller.loadedEffects[.skin], "baseBeauty")
         XCTAssertEqual(mock.switches.last?.slot, EffectSlot.skin.rawValue)
+        XCTAssertFalse(mock.boolParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "enabled" })
+        XCTAssertFalse(mock.floatParameters.contains { $0.gameObject == "PostprocessLUT" && $0.parameter == "lutAmount" })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeshadow" && $0.parameter == "enabled" && !$0.value })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyeliner" && $0.parameter == "enabled" && !$0.value })
         XCTAssertTrue(mock.boolParameters.contains { $0.gameObject == "eyelashes" && $0.parameter == "enabled" && !$0.value })

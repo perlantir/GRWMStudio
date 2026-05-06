@@ -5,7 +5,6 @@ extension MirrorViewModel {
         }
 
         await resetFoundationParameters()
-        await resetBaseLUTParameters()
         await resetEnabledParameters([
             "eyeshadowEnabled",
             "eyelinerEnabled",
@@ -26,7 +25,6 @@ extension MirrorViewModel {
             await resetFoundationParameters()
         case .base:
             await resetFoundationParameters()
-            await resetBaseLUTParameters()
         case .eyes:
             await resetEnabledParameters(["eyeshadowEnabled", "eyelinerEnabled", "eyelashesEnabled"])
         case .brows:
@@ -45,16 +43,6 @@ extension MirrorViewModel {
             return
         }
         await setBlendshape(0, on: foundationAmount)
-    }
-
-    private func resetBaseLUTParameters() async {
-        if let lutEnabled = EffectParameterMap.resolve("lutEnabled") {
-            await setEnabled(false, on: lutEnabled)
-        }
-
-        if let lutAmount = EffectParameterMap.resolve("lutAmount") {
-            await setBlendshape(0, on: lutAmount)
-        }
     }
 
     private func resetEnabledParameters(_ refs: [String]) async {
