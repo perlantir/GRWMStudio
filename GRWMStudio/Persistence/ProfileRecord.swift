@@ -12,6 +12,7 @@ final class SavedCapture {
     var appliedShadesJSON: String
     var name: String
     var hearts: Int
+    var savedToFeedAt: Date?
 
     init(
         id: UUID = UUID(),
@@ -21,7 +22,8 @@ final class SavedCapture {
         appliedLookID: String? = nil,
         appliedShadesJSON: String = "{}",
         name: String,
-        hearts: Int = 0
+        hearts: Int = 0,
+        savedToFeedAt: Date? = nil
     ) {
         self.id = id
         self.createdAt = createdAt
@@ -31,10 +33,15 @@ final class SavedCapture {
         self.appliedShadesJSON = appliedShadesJSON
         self.name = name
         self.hearts = hearts
+        self.savedToFeedAt = savedToFeedAt
     }
 
     var kind: Kind {
         Kind(rawValue: kindRaw) ?? .photo
+    }
+
+    var isSavedToFeed: Bool {
+        savedToFeedAt != nil
     }
 
     enum Kind: String {

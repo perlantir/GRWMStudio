@@ -7,13 +7,11 @@ final class LooksLibraryViewModelTests: XCTestCase {
         let viewModel = LooksLibraryViewModel(favoriteStore: FakeFavoriteLookStore())
 
         XCTAssertEqual(viewModel.sections.map(\.titleKey), [
-            "looks.section.everyday.title",
-            "looks.section.party.title",
-            "looks.section.pro.title"
+            "looks.section.creator.title"
         ])
-        XCTAssertEqual(viewModel.sections.map { $0.looks.count }, [2, 2, 4])
+        XCTAssertEqual(viewModel.sections.map { $0.looks.count }, [2])
         XCTAssertEqual(viewModel.sections.flatMap(\.looks).map(\.id), Looks.all.map(\.id))
-        XCTAssertEqual(LooksLibraryViewModel.curatedSections().count, 3)
+        XCTAssertEqual(LooksLibraryViewModel.curatedSections().count, 1)
     }
 
     func testToggleFavoriteAddsAndRemovesRecord() {

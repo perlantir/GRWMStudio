@@ -2284,13 +2284,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Double tap to open this look."
+            "value" : "Double tap to open this saved creation."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Double tap to open this look."
+            "value" : "Double tap to open this saved creation."
           }
         }
       }
@@ -2312,18 +2312,162 @@
         }
       }
     },
-    "feed.empty.subtitle" : {
+    "feed.capture.metadata" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New inspiration will pop in here soon."
+            "value" : "%1$@ - %2$@"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "New inspiration will pop in here soon."
+            "value" : "%1$@ - %2$@"
+          }
+        }
+      }
+    },
+    "feed.capture.photo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Photo"
+          }
+        }
+      }
+    },
+    "feed.capture.video" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        }
+      }
+    },
+    "feed.day.accessibility_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$lld saved"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$lld saved"
+          }
+        }
+      }
+    },
+    "feed.day.all" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "All"
+          }
+        }
+      }
+    },
+    "feed.day.empty.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pick All, or save something new from the mirror."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pick All, or save something new from the mirror."
+          }
+        }
+      }
+    },
+    "feed.day.empty.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing saved here yet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Nothing saved here yet"
+          }
+        }
+      }
+    },
+    "feed.day.today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "feed.delete.accessibility_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delete %@"
+          }
+        }
+      }
+    },
+    "feed.empty.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save a photo or video from the mirror and it will land here for your week."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Save a photo or video from the mirror and it will land here for your week."
           }
         }
       }
@@ -2333,13 +2477,29 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No looks yet"
+            "value" : "No feed saves yet"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "No looks yet"
+            "value" : "No feed saves yet"
+          }
+        }
+      }
+    },
+    "feed.empty.cta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Mirror"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open Mirror"
           }
         }
       }
@@ -2349,13 +2509,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "TRENDING NOW"
+            "value" : "MY CREATIONS"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "TRENDING NOW"
+            "value" : "MY CREATIONS"
           }
         }
       }
@@ -2721,13 +2881,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Glow Feed"
+            "value" : "My Feed"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Glow Feed"
+            "value" : "My Feed"
           }
         }
       }
@@ -4016,6 +4176,38 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "CURATED LOOKS"
+          }
+        }
+      }
+    },
+    "looks.section.creator.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap one and it opens the mirror with the full look applied."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tap one and it opens the mirror with the full look applied."
+          }
+        }
+      }
+    },
+    "looks.section.creator.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creator Looks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Creator Looks"
           }
         }
       }
@@ -7097,13 +7289,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save to Locker"
+            "value" : "Save to Feed"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Save to Locker"
+            "value" : "Save to Feed"
           }
         }
       }
@@ -7114,13 +7306,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save to Locker"
+            "value" : "Save to Feed"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Save to Locker"
+            "value" : "Save to Feed"
           }
         }
       }
@@ -7418,13 +7610,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Saved to your Locker and Photos."
+            "value" : "Saved to your Feed and Photos."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Saved to your Locker and Photos."
+            "value" : "Saved to your Feed and Photos."
           }
         }
       }
@@ -7435,13 +7627,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Saved to your Locker. Turn on Photos access to save there too."
+            "value" : "Saved to your Feed. Turn on Photos access to save there too."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Saved to your Locker. Turn on Photos access to save there too."
+            "value" : "Saved to your Feed. Turn on Photos access to save there too."
           }
         }
       }

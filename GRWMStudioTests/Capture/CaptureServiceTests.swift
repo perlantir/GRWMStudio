@@ -53,7 +53,8 @@ final class CaptureServiceTests: XCTestCase {
 
     func testSavePhotoCreatesJPEGFileAndSwiftDataRecord() async throws {
         let container = try makeInMemoryContainer()
-        let service = CaptureSaveService(container.mainContext)
+        let savedAt = Date(timeIntervalSinceReferenceDate: 100)
+        let service = CaptureSaveService(container.mainContext, currentDate: { savedAt })
 
         let record = try await service.save(
             asset: .photo(testImage()),
@@ -64,6 +65,9 @@ final class CaptureServiceTests: XCTestCase {
         defer { try? FileManager.default.removeItem(at: fileURL) }
 
         XCTAssertEqual(record.kind, .photo)
+        XCTAssertEqual(record.createdAt, savedAt)
+        XCTAssertEqual(record.savedToFeedAt, savedAt)
+        XCTAssertTrue(record.isSavedToFeed)
         XCTAssertEqual(record.name, "Sunday Best")
         XCTAssertEqual(record.appliedLookID, "Sunday Best")
         XCTAssertEqual(record.mediaPath, record.id.uuidString + ".jpg")
@@ -87,12 +91,30 @@ final class CaptureServiceTests: XCTestCase {
         defer { try? FileManager.default.removeItem(at: fileURL) }
 
         XCTAssertEqual(record.kind, .video)
-        XCTAssertEqual(record.name, "Custom mix")
+        XCTAssertEqual(record.name, "Custom Mix")
+        XCTAssertNotNil(record.savedToFeedAt)
         XCTAssertEqual(record.mediaPath, record.id.uuidString + ".mp4")
         XCTAssertTrue(FileManager.default.fileExists(atPath: sourceURL.path))
         XCTAssertTrue(FileManager.default.fileExists(atPath: fileURL.path))
         XCTAssertEqual(try Data(contentsOf: fileURL), Data([0, 1, 2, 3, 4]))
         XCTAssertEqual(try decodedShadeIDs(from: record), ["brow.black"])
+    }
+
+    func testSaveCanCreateLockerOnlyRecordWhenRequested() async throws {
+        let container = try makeInMemoryContainer()
+        let service = CaptureSaveService(container.mainContext)
+
+        let record = try await service.save(
+            asset: .photo(testImage()),
+            lookName: nil,
+            shadeIDs: [],
+            saveToFeed: false
+        )
+        let fileURL = URL.documentsCapturesURL.appendingPathComponent(record.mediaPath)
+        defer { try? FileManager.default.removeItem(at: fileURL) }
+
+        XCTAssertFalse(record.isSavedToFeed)
+        XCTAssertNil(record.savedToFeedAt)
     }
 
     func testSaveVideoMissingSourceThrows() async throws {

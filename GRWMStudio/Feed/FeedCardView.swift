@@ -1,86 +1,116 @@
 import SwiftUI
+import UIKit
 
 struct FeedCardView: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    let item: FeedItem
-    let favorited: Bool
-    let onHeart: () -> Void
+    let capture: SavedCapture
+    let url: URL
+    let metadata: String
+    let onDelete: () -> Void
 
-    var body: some View {
-        ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: 22)
-                .fill(item.palette.card)
-                .chunkyShadow(.md(deep: item.palette.deep), shape: RoundedRectangle(cornerRadius: 22))
+    @State private var thumbnail: UIImage?
 
-            cardBody
-        }
-        .frame(height: item.cardHeight.points)
-        .clipShape(RoundedRectangle(cornerRadius: 22))
+    private var cardHeight: CGFloat {
+        capture.kind == .video ? 238 : 208
     }
 
-    private var cardBody: some View {
-        ZStack(alignment: .bottomTrailing) {
-            VStack {
-                Spacer()
-                Image(systemName: "face.smiling.inverse")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: item.cardHeight.points * 0.44)
-                    .foregroundStyle(item.palette.deep.opacity(0.82))
-                    .padding(.bottom, 18)
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            RoundedRectangle(cornerRadius: 22)
+                .fill(DH.pinkPaper)
+                .chunkyShadow(.md(deep: DH.pink), shape: RoundedRectangle(cornerRadius: 22))
+
+            media
+
+            if capture.kind == .video {
+                Image(systemName: "play.fill")
+                    .font(.system(size: 13, weight: .heavy))
+                    .foregroundStyle(.white)
+                    .frame(width: 30, height: 30)
+                    .background(DH.pinkDeep, in: Circle())
+                    .padding(10)
             }
 
+            VStack {
+                Spacer()
+                footer
+            }
+
+            deleteButton
+                .padding(10)
+                .offset(x: capture.kind == .video ? -38 : 0)
+        }
+        .frame(height: cardHeight)
+        .clipShape(RoundedRectangle(cornerRadius: 22))
+        .task {
+            thumbnail = await ThumbnailLoader.shared.load(url: url, kind: capture.kind)
+        }
+    }
+
+    @ViewBuilder
+    private var media: some View {
+        if let thumbnail {
+            Image(uiImage: thumbnail)
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
             LinearGradient(
-                colors: [.clear, item.palette.deep.opacity(0.88)],
+                colors: [DH.pinkLight, DH.pinkPaper, DH.cream],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .overlay {
+                VStack(spacing: 8) {
+                    Image(systemName: capture.kind == .video ? "video.fill" : "photo.fill")
+                        .font(.system(size: 26, weight: .heavy))
+                    Text(capture.kind == .video ? "feed.capture.video" : "feed.capture.photo")
+                        .font(DH.font(.microLabel))
+                        .tracking(DH.tracking(.microLabel))
+                }
+                .foregroundStyle(DH.pinkDeep)
+            }
+        }
+    }
+
+    private var footer: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(verbatim: capture.name)
+                .font(DH.font(.buttonLarge))
+                .tracking(DH.tracking(.buttonLarge))
+                .foregroundStyle(.white)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
+                .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
+
+            Text(verbatim: metadata)
+                .font(DH.font(.caption))
+                .tracking(dynamicTypeSize.isAccessibilitySize ? 0 : DH.tracking(.caption))
+                .foregroundStyle(.white.opacity(0.9))
+                .lineLimit(2)
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 42)
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            LinearGradient(
+                colors: [.clear, DH.ink.opacity(0.78)],
                 startPoint: .top,
                 endPoint: .bottom
             )
+        )
+    }
 
-            VStack(alignment: .leading, spacing: 4) {
-                Spacer()
-
-                Text(verbatim: item.localizedDisplayTitle)
-                    .font(DH.font(.buttonLarge))
-                    .tracking(DH.tracking(.buttonLarge))
-                    .foregroundStyle(.white)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
-                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
-
-                Text(verbatim: item.localizedTagline)
-                    .font(DH.font(.bodyEmphasis))
-                    .tracking(DH.tracking(.bodyEmphasis))
-                    .foregroundStyle(.white.opacity(0.9))
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
-                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
-
-                HStack(spacing: 6) {
-                    Image(systemName: favorited ? "heart.fill" : "heart")
-                        .font(.system(size: 12, weight: .heavy))
-
-                        Text("\(item.hearts + (favorited ? 1 : 0))")
-                            .font(DH.font(.caption))
-                            .tracking(DH.tracking(.caption))
-                }
+    private var deleteButton: some View {
+        Button(action: onDelete) {
+            Image(systemName: "trash.fill")
+                .font(.system(size: 11, weight: .heavy))
                 .foregroundStyle(.white)
-            }
-            .padding(.horizontal, 12)
-            .padding(.bottom, 10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-
-            FeedHeartPill(favorited: favorited, action: onHeart)
-                .padding(10)
-
-            if item.hot {
-                Text("feed.hot")
-                    .font(DH.font(.microLabel))
-                    .tracking(DH.tracking(.microLabel))
-                    .foregroundStyle(DH.ink)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 6)
-                    .background(DH.butter, in: Capsule())
-                    .chunkyShadow(.sm(deep: DH.butterDeep), shape: Capsule())
-                    .padding(10)
-            }
+                .frame(width: 30, height: 30)
+                .background(DH.recRedDeep, in: Circle())
+                .overlay(Circle().stroke(.white, lineWidth: 2))
         }
+        .buttonStyle(.plain)
+        .accessibilityLabel(L10n.format("feed.delete.accessibility_label", capture.name))
     }
 }

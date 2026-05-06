@@ -63,18 +63,7 @@ struct AppShell: View {
                 }
             )
         case .feed:
-            DHFeedView(
-                onTryLook: { look in
-                    Task { @MainActor in
-                        guard routeToPaywallIfNeeded(for: look) else {
-                            selected = .mirror
-                            return
-                        }
-                        await mirrorViewModel.selectLook(look)
-                        selected = .mirror
-                    }
-                }
-            )
+            DHFeedView()
         case .locker:
             LockerView()
         }

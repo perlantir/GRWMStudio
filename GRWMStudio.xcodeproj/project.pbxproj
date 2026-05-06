@@ -255,6 +255,7 @@
 		D9519663EB21A4D7D3AE2AAC /* LockerView+States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E82F11E9622EFE729A8E19 /* LockerView+States.swift */; };
 		D9D98AF53A48AF09809E96C2 /* OnboardingStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F2635EC159BE740ED08A5B /* OnboardingStateTests.swift */; };
 		DA1A5E58CC40E2706A08B246 /* FilterCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D0C686C76CB7AEC9ACC8DE /* FilterCategoryTests.swift */; };
+		DA2CBD53C67C5B19118E8C1B /* FeedViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F265E8209DF957FE5631628E /* FeedViewModelTests.swift */; };
 		DA55E6417580B1611745B07D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F646E912EEE5AA431A778FF /* LaunchScreen.storyboard */; };
 		DAE610C70DE2E31DB5C43A7C /* PermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836AF9B238A751CB43B7643C /* PermissionsService.swift */; };
 		DB019EED88C74056CAF05474 /* LookCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F63B486ECE6BA89110159F /* LookCopy.swift */; };
@@ -317,6 +318,18 @@
 		27A8AFE2CAD17C74429B000C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = Effects/luts;
+			dstSubfolderSpec = 7;
+			files = (
+				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
+				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
+				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
 			dstPath = Effects;
 			dstSubfolderSpec = 7;
 			files = (
@@ -327,7 +340,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55C0C51020105DF8215B6E87 /* CopyFiles */ = {
+		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/thumbnails;
+			dstSubfolderSpec = 7;
+			files = (
+				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
+				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
+				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
+				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
+				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
+				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
+				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
+				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
+				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Effects/textures;
+			dstSubfolderSpec = 7;
+			files = (
+				982C8EE5A5C711635F382AED /* blush_mask.png in CopyFiles */,
+				9BFE821DADE7DC109CCB0A75 /* brows_natural.png in CopyFiles */,
+				E3A28A70055DE0D59E4C5E6C /* eyelashes_doll.png in CopyFiles */,
+				C3B16D6FBE113D25D9C3D470 /* eyelashes_drama.png in CopyFiles */,
+				0D00171D0CF9553190798188 /* eyelashes_natural.png in CopyFiles */,
+				E85099929E6688B19E0DB0E3 /* eyelashes_none.png in CopyFiles */,
+				1C23C7AA8E7836697B388667 /* eyeliner_classic.png in CopyFiles */,
+				E579A26DEE4F300DEA6E4270 /* eyeliner_double_flick.png in CopyFiles */,
+				79F595E03C1BC8032A2BB98D /* eyeliner_none.png in CopyFiles */,
+				A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */,
+				38B4C99A41B3D7ADC7EF8042 /* eyeshadow_basic.png in CopyFiles */,
+				60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */,
+				53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */,
+				ABFD6743A207E5DCECFFACE1 /* lips_gloss.png in CopyFiles */,
+				CD92DE08C4C84E90F3E4AE8B /* lips_matte.png in CopyFiles */,
+				7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11C208F764B56B1CC794199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Audio;
@@ -353,61 +409,6 @@
 				FEDBA0E16C1ADB331A8FA857 /* swooshOut.mp3 in CopyFiles */,
 				2E03D30DE46426E586632441 /* tapHard.mp3 in CopyFiles */,
 				A493BCD3C58B3EFB2CA2275B /* tapSoft.mp3 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5636A5E3EE25C7DA09823075 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/textures;
-			dstSubfolderSpec = 7;
-			files = (
-				982C8EE5A5C711635F382AED /* blush_mask.png in CopyFiles */,
-				9BFE821DADE7DC109CCB0A75 /* brows_natural.png in CopyFiles */,
-				E3A28A70055DE0D59E4C5E6C /* eyelashes_doll.png in CopyFiles */,
-				C3B16D6FBE113D25D9C3D470 /* eyelashes_drama.png in CopyFiles */,
-				0D00171D0CF9553190798188 /* eyelashes_natural.png in CopyFiles */,
-				E85099929E6688B19E0DB0E3 /* eyelashes_none.png in CopyFiles */,
-				1C23C7AA8E7836697B388667 /* eyeliner_classic.png in CopyFiles */,
-				E579A26DEE4F300DEA6E4270 /* eyeliner_double_flick.png in CopyFiles */,
-				79F595E03C1BC8032A2BB98D /* eyeliner_none.png in CopyFiles */,
-				A3C0F02AF7A19A820ACECD87 /* eyeliner_winged.png in CopyFiles */,
-				38B4C99A41B3D7ADC7EF8042 /* eyeshadow_basic.png in CopyFiles */,
-				60194801A42F133914C531F1 /* eyeshadow_smokey.png in CopyFiles */,
-				53C5B97BD6CE013CAF3765F3 /* lips_glitter.png in CopyFiles */,
-				ABFD6743A207E5DCECFFACE1 /* lips_gloss.png in CopyFiles */,
-				CD92DE08C4C84E90F3E4AE8B /* lips_matte.png in CopyFiles */,
-				7C18D4C4A3DB3C9D38FBF4D9 /* lips_satin.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C0DFAC007E059A34EDDA7486 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/luts;
-			dstSubfolderSpec = 7;
-			files = (
-				949D8F5474E191E2746C8690 /* lut_glam.png in CopyFiles */,
-				D0FCC04C1D9359EEE5CEF1BB /* lut_glow.png in CopyFiles */,
-				124E0061C0BC2740A19E8154 /* lut_soft.png in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C11C208F764B56B1CC794199 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Effects/thumbnails;
-			dstSubfolderSpec = 7;
-			files = (
-				23BE82819F1EA5FCAEA579A3 /* baseBeauty.png in CopyFiles */,
-				E9ED7EAB2EE43A474B465C19 /* brows.png in CopyFiles */,
-				41FDA5E2783FBEA4A39BDC7F /* cheeks.png in CopyFiles */,
-				25C963199F15B3F99A0F4192 /* eyeliner.png in CopyFiles */,
-				BEA2F8AD291B3C4A500EA223 /* lipstick.png in CopyFiles */,
-				46AEC870F14F8D776E6C09ED /* look_legacy01.png in CopyFiles */,
-				527CD9015B410166A7A8A6DB /* look_legacy02.png in CopyFiles */,
-				8C7D85770B6CB8FC2EAD7D1D /* noFilter.png in CopyFiles */,
-				0DDA242CB976D64552C4703E /* shadow.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +689,7 @@
 		EE2663A27ACE4D94801D60A9 /* HitTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitTargetTests.swift; sourceTree = "<group>"; };
 		EFD478D6519859F13DA7E7F4 /* SettingsPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferencesTests.swift; sourceTree = "<group>"; };
 		F143517F73BA13CC0064E64F /* MathChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathChip.swift; sourceTree = "<group>"; };
+		F265E8209DF957FE5631628E /* FeedViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTests.swift; sourceTree = "<group>"; };
 		F333FE39A1635227746A3AD9 /* StorageMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageMonitor.swift; sourceTree = "<group>"; };
 		F48A7C0F04A427BCAE34739C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F4964CC102ACFA92C4227787 /* swooshIn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swooshIn.mp3; sourceTree = "<group>"; };
@@ -893,6 +895,7 @@
 				426070FBFC91C3C0E7A8C38C /* Commerce */,
 				D2F6467826E99E8C1A10F2B5 /* DeepAR */,
 				0A3AC64F1C029DD5373D4683 /* DesignSystem */,
+				C47F2069307D587A8F71FFF4 /* Feed */,
 				EFD92FD5B7356C323A516402 /* Library */,
 				BD6F6D733CE8FA90E94315C9 /* Locker */,
 				D37CFD7D5B6C385F4FB5D846 /* Mirror */,
@@ -1216,6 +1219,14 @@
 				C6215AC72E40BFE2797CB9FF /* LockerViewModelTests.swift */,
 			);
 			path = Locker;
+			sourceTree = "<group>";
+		};
+		C47F2069307D587A8F71FFF4 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				F265E8209DF957FE5631628E /* FeedViewModelTests.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		C8B6541297AEB4751E9B45B6 /* UX */ = {
@@ -1570,6 +1581,7 @@
 				2553F93440BF12F3280B5F54 /* EffectCatalogTests.swift in Sources */,
 				B5D3D7E630ACCF82D4F1F937 /* EffectParameterMapTests.swift in Sources */,
 				A69DE0B5548EDE21177AE7DC /* EffectTextureCacheTests.swift in Sources */,
+				DA2CBD53C67C5B19118E8C1B /* FeedViewModelTests.swift in Sources */,
 				DA1A5E58CC40E2706A08B246 /* FilterCategoryTests.swift in Sources */,
 				EAA01F75F8F118959E11F95B /* GRWMStudioTests.swift in Sources */,
 				0D5517A0D0DE015D97C93B3D /* HitTargetTests.swift in Sources */,

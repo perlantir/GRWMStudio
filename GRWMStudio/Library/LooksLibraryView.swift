@@ -5,7 +5,6 @@ struct LooksLibraryView: View {
     @Environment(ProEntitlements.self) var entitlements
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: LooksLibraryViewModel?
-    @State private var selectedLook: LookPreset?
 
     let onTryLookFromGrid: @MainActor (LookPreset) -> Void
 
@@ -79,24 +78,6 @@ struct LooksLibraryView: View {
             }
             viewModel?.reloadFavorites()
         }
-        .fullScreenCover(item: $selectedLook) { look in
-            if let viewModel {
-                LookDetailView(
-                    look: look,
-                    isFavorited: viewModel.isFavorited(look.id),
-                    onToggleFavorite: {
-                        viewModel.toggleFavorite(lookID: look.id)
-                    },
-                    onTryItOn: {
-                        selectedLook = nil
-                        onTryLookFromGrid(look)
-                    },
-                    onDismiss: {
-                        selectedLook = nil
-                    }
-                )
-            }
-        }
     }
 
     private var header: some View {
@@ -164,7 +145,7 @@ struct LooksLibraryView: View {
 
     private func lookCard(_ look: LookPreset, viewModel: LooksLibraryViewModel) -> some View {
         Button {
-            selectedLook = look
+            onTryLookFromGrid(look)
         } label: {
             VStack(spacing: 0) {
                 ZStack(alignment: .topTrailing) {

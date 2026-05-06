@@ -1,32 +1,33 @@
 import SwiftUI
 
 struct FeedMosaic: View {
-    let items: [FeedItem]
-    let onTap: (FeedItem) -> Void
-    let onHeart: (FeedItem) -> Void
-    let isFavorited: (String) -> Bool
+    let captures: [SavedCapture]
+    let captureURL: (SavedCapture) -> URL
+    let metadata: (SavedCapture) -> String
+    let onTap: (SavedCapture) -> Void
+    let onDelete: (SavedCapture) -> Void
 
     var body: some View {
-        let columns = splitItems()
+        let columns = splitCaptures()
 
         HStack(alignment: .top, spacing: 12) {
             LazyVStack(spacing: 12) {
-                ForEach(columns.left) { item in
-                    card(for: item)
+                ForEach(columns.left) { capture in
+                    card(for: capture)
                 }
             }
 
             LazyVStack(spacing: 12) {
-                ForEach(columns.right) { item in
-                    card(for: item)
+                ForEach(columns.right) { capture in
+                    card(for: capture)
                 }
             }
             .padding(.top, 24)
         }
     }
 
-    private func splitItems() -> (left: [FeedItem], right: [FeedItem]) {
-        items.enumerated().reduce(into: ([FeedItem](), [FeedItem]())) { result, pair in
+    private func splitCaptures() -> (left: [SavedCapture], right: [SavedCapture]) {
+        captures.enumerated().reduce(into: ([SavedCapture](), [SavedCapture]())) { result, pair in
             if pair.offset.isMultiple(of: 2) {
                 result.0.append(pair.element)
             } else {
@@ -35,15 +36,16 @@ struct FeedMosaic: View {
         }
     }
 
-    private func card(for item: FeedItem) -> some View {
+    private func card(for capture: SavedCapture) -> some View {
         FeedCardView(
-            item: item,
-            favorited: isFavorited(item.lookID),
-            onHeart: { onHeart(item) }
+            capture: capture,
+            url: captureURL(capture),
+            metadata: metadata(capture),
+            onDelete: { onDelete(capture) }
         )
-        .onTapGesture { onTap(item) }
+        .onTapGesture { onTap(capture) }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(L10n.format("feed.card.accessibility_label", item.localizedDisplayTitle, item.hearts))
+        .accessibilityLabel(capture.name)
         .accessibilityHint(L10n.string("feed.card.accessibility_hint"))
     }
 }

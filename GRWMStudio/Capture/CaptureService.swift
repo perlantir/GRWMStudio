@@ -52,13 +52,24 @@ public actor CaptureService {
 final class CaptureSaveService {
     private let modelContext: ModelContext
     private let fileManager: FileManager
+    private let currentDate: @MainActor () -> Date
 
-    init(_ modelContext: ModelContext, fileManager: FileManager = .default) {
+    init(
+        _ modelContext: ModelContext,
+        fileManager: FileManager = .default,
+        currentDate: @escaping @MainActor () -> Date = Date.init
+    ) {
         self.modelContext = modelContext
         self.fileManager = fileManager
+        self.currentDate = currentDate
     }
 
-    func save(asset: CapturedAsset, lookName: String?, shadeIDs: [String]) async throws -> SavedCapture {
+    func save(
+        asset: CapturedAsset,
+        lookName: String?,
+        shadeIDs: [String],
+        saveToFeed: Bool = true
+    ) async throws -> SavedCapture {
         if ProcessInfo.processInfo.shouldForceSaveFailure {
             throw CaptureServiceError.contextFailed
         }
@@ -69,16 +80,19 @@ final class CaptureSaveService {
         }
 
         let id = UUID()
+        let savedAt = currentDate()
         let directory = try captureDirectory()
         let storedFile = try writeAssetFile(asset, id: id, directory: directory)
 
         let record = SavedCapture(
             id: id,
+            createdAt: savedAt,
             mediaPath: storedFile.url.lastPathComponent,
             kindRaw: storedFile.kind.rawValue,
             appliedLookID: lookName,
             appliedShadesJSON: try encodedShadeIDs(shadeIDs),
-            name: lookName ?? "Custom mix"
+            name: lookName ?? L10n.string("common.custom_mix"),
+            savedToFeedAt: saveToFeed ? savedAt : nil
         )
 
         try persist(record)
