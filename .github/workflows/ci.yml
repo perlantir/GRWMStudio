@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: macos-15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,23 +49,48 @@ jobs:
         run: ./Scripts/check-localization.sh
       - name: Verify DeepAR isolation
         run: ./Scripts/verify-deepar-isolation.sh
-      - name: Build & Test
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -scheme GRWMStudio \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }},OS=latest" \
+            2>&1 | tee xcodebuild-build.log | xcbeautify
+      - name: Unit tests
         run: |
           set -o pipefail
           xcodebuild test \
             -scheme GRWMStudio \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }},OS=latest" \
-            -resultBundlePath TestResults.xcresult \
-            2>&1 | tee xcodebuild.log | xcbeautify
-      - name: Upload xcodebuild log
+            -only-testing:GRWMStudioTests \
+            -enableCodeCoverage YES \
+            -resultBundlePath UnitTestResults.xcresult \
+            2>&1 | tee xcodebuild-unit.log | xcbeautify
+      - name: UI smoke tests
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -scheme GRWMStudio \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.name }},OS=latest" \
+            -only-testing:GRWMStudioUITests/GRWMStudioUITests/testLaunches \
+            -only-testing:GRWMStudioUITests/AccessibilityUITests/testKeyControlsMeetMinimum44PointHitTargets \
+            -resultBundlePath UISmokeTestResults.xcresult \
+            2>&1 | tee xcodebuild-ui-smoke.log | xcbeautify
+      - name: Upload xcodebuild logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: xcodebuild-log
-          path: xcodebuild.log
-      - name: Upload test results
+          name: xcodebuild-logs
+          path: xcodebuild-*.log
+      - name: Upload unit test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: TestResults.xcresult
+          name: unit-test-results
+          path: UnitTestResults.xcresult
+      - name: Upload UI smoke test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-smoke-test-results
+          path: UISmokeTestResults.xcresult
